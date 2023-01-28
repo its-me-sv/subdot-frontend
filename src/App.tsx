@@ -9,17 +9,33 @@ import ChatPage from "./pages/chat";
 import ReputationPage from "./pages/reputation";
 import ErrorPage from "./pages/error";
 
+// providers
+import {useAppContext} from "./contexts";
+
 interface AppProps {}
 
 const App: React.FC<AppProps> = () => {
+  const {loggedIn} = useAppContext();
   return (
     <HashRouter>
       <Routes>
         <Route path="/" element={<LoginPage />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/profile/:id" element={<ProfilePage />} />
-        <Route path="/chat" element={<ChatPage />} />
-        <Route path="/rp" element={<ReputationPage />} />
+        <Route 
+          path="/home" 
+          element={loggedIn ? <HomePage /> : <Navigate to="/" />} 
+        />
+        <Route 
+          path="/profile/:id" 
+          element={loggedIn ? <ProfilePage /> : <Navigate to="/" />} 
+        />
+        <Route 
+          path="/chat" 
+          element={loggedIn ? <ChatPage /> : <Navigate to="/" />} 
+        />
+        <Route 
+          path="/rp" 
+          element={loggedIn ? <ReputationPage /> : <Navigate to="/" />} 
+        />
         <Route path="/*" element={<ErrorPage />} />
       </Routes>
     </HashRouter>
