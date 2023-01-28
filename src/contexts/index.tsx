@@ -5,17 +5,23 @@ interface AppContextInterface {
   showTerms: boolean;
   menuOpen: boolean;
   settingsOpen: boolean;
+  language: number;
+  dark: boolean;
   setLoggedIn?: React.Dispatch<React.SetStateAction<boolean>>;
   setShowTerms?: React.Dispatch<React.SetStateAction<boolean>>;
   setMenuOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   setSettingsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  setLanguage?: React.Dispatch<React.SetStateAction<number>>;
+  setDark?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const defaultState: AppContextInterface = {
     loggedIn: false,
     showTerms: false,
     menuOpen: false,
-    settingsOpen: false
+    settingsOpen: false,
+    language: 0,
+    dark: false
 };
 
 export const AppContext = createContext<AppContextInterface>(defaultState);
@@ -27,13 +33,17 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
     const [showTerms, setShowTerms] = useState<boolean>(defaultState.showTerms);
     const [menuOpen, setMenuOpen] = useState<boolean>(defaultState.menuOpen);
     const [settingsOpen, setSettingsOpen] = useState<boolean>(defaultState.settingsOpen);
+    const [language, setLanguage] = useState<number>(defaultState.language);
+    const [dark, setDark] = useState<boolean>(defaultState.dark);
 
     return (
         <AppContext.Provider value={{
             loggedIn,setLoggedIn,
             showTerms, setShowTerms,
             menuOpen, setMenuOpen,
-            settingsOpen, setSettingsOpen
+            settingsOpen, setSettingsOpen,
+            language, setLanguage,
+            dark, setDark
         }}>
             {children}
         </AppContext.Provider>

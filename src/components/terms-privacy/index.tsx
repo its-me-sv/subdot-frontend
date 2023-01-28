@@ -15,9 +15,9 @@ const TermsPolicies: React.FC<TermsPoliciesProps> = () => {
         <Container>
             <Box>
                 <CloseIcon onClick={() => setShowTerms!(false)}>X</CloseIcon>
-                <Title>Terms & Conditions</Title>
+                <Title>TERMS & CONDITIONS</Title>
                 <Content>{loremIpsum}</Content>
-                <Title>Privacy & Policies</Title>
+                <Title>PRIVACY & POLICIES</Title>
                 <Content>{loremIpsum}</Content>
             </Box>
         </Container>
