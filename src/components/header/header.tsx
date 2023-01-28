@@ -3,6 +3,8 @@ import {useNavigate} from "react-router-dom";
 
 import {Container, HomeLogo, MenuLogo} from "./styles";
 
+import Explore from "../explore";
+
 interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = () => {
@@ -14,8 +16,8 @@ const Header: React.FC<HeaderProps> = () => {
 
     return (
       <Container>
-        <HomeLogo  onClick={goHome} />
-        <span>explore</span>
+        <HomeLogo onClick={goHome} />
+        <Explore />
         <MenuLogo alt="pp" src={require("./temp.jpg")} />
       </Container>
     );

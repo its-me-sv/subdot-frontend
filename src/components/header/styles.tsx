@@ -12,7 +12,7 @@ export const Container = styled.div`
 
 export const HomeLogo = styled.img.attrs({
   alt: "home",
-  src: require("./logo.png"),
+  src: require("../../assets/logo_small.png"),
 })`
     height: 2.8rem;
     width: auto;
