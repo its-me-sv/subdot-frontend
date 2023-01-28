@@ -11,6 +11,7 @@ import ErrorPage from "./pages/error";
 
 // components
 import TermsPolicies from "./components/terms-privacy";
+import Header from "./components/header/header";
 
 // providers
 import {useAppContext} from "./contexts";
@@ -24,6 +25,7 @@ const App: React.FC<AppProps> = () => {
     <div>
       {showTerms && <TermsPolicies />}
       <HashRouter>
+        {loggedIn && <Header />}  
         <Routes>
           <Route
             path="/"
