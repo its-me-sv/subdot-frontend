@@ -8,6 +8,7 @@ interface AppContextInterface {
   language: number;
   dark: boolean;
   advertMenuOpen: boolean;
+  explore: string;
   setLoggedIn?: React.Dispatch<React.SetStateAction<boolean>>;
   setShowTerms?: React.Dispatch<React.SetStateAction<boolean>>;
   setMenuOpen?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,6 +16,7 @@ interface AppContextInterface {
   setLanguage?: React.Dispatch<React.SetStateAction<number>>;
   setDark?: React.Dispatch<React.SetStateAction<boolean>>;
   setAdvertMenuOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  setExplore?: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const defaultState: AppContextInterface = {
@@ -24,7 +26,8 @@ const defaultState: AppContextInterface = {
     settingsOpen: false,
     language: 0,
     dark: false,
-    advertMenuOpen: false
+    advertMenuOpen: false,
+    explore: ""
 };
 
 export const AppContext = createContext<AppContextInterface>(defaultState);
@@ -39,6 +42,7 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
     const [language, setLanguage] = useState<number>(defaultState.language);
     const [dark, setDark] = useState<boolean>(defaultState.dark);
     const [advertMenuOpen, setAdvertMenuOpen] = useState<boolean>(defaultState.advertMenuOpen);
+    const [explore, setExplore] = useState<string>(defaultState.explore);
 
     return (
         <AppContext.Provider value={{
@@ -48,7 +52,8 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
             settingsOpen, setSettingsOpen,
             language, setLanguage,
             dark, setDark,
-            advertMenuOpen, setAdvertMenuOpen
+            advertMenuOpen, setAdvertMenuOpen,
+            explore, setExplore
         }}>
             {children}
         </AppContext.Provider>

@@ -25,5 +25,6 @@ export const Input = styled.input`
   font-family: Inter;
   font-size: 1.4rem;
   background-color: #f5f4f9;
+  color: #1a1a1a;
   width: 30vw;
 `;

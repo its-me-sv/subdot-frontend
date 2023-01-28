@@ -1,6 +1,8 @@
 import React from "react";
 import {HashRouter, Route, Routes, Navigate} from "react-router-dom";
 
+import './index.css';
+
 // pages
 import LoginPage from "./pages/login";
 import HomePage from "./pages/home";
@@ -13,6 +15,7 @@ import ErrorPage from "./pages/error";
 import TermsPolicies from "./components/terms-privacy";
 import Settings from "./components/settings";
 import Advertise from "./components/advertise";
+import Results from "./components/results";
 import Header from "./components/header/header";
 
 // providers
@@ -21,15 +24,16 @@ import {useAppContext} from "./contexts";
 interface AppProps {}
 
 const App: React.FC<AppProps> = () => {
-  const {loggedIn, showTerms, settingsOpen, advertMenuOpen} = useAppContext();
+  const {loggedIn, showTerms, settingsOpen, advertMenuOpen, explore} = useAppContext();
   
   return (
-    <div>
+    <div className="app-container">
       {showTerms && <TermsPolicies />}
       {settingsOpen && <Settings />}
       {advertMenuOpen && <Advertise />}
       <HashRouter>
-        {loggedIn && <Header />}  
+        {loggedIn && <Header />}
+        {loggedIn && explore.length > 0 && <Results />}
         <Routes>
           <Route
             path="/"
