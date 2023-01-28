@@ -1,12 +1,46 @@
 import React from "react";
 
+import {Box, Container, CloseIcon, Title} from "../terms-privacy/styles";
+import {LoginButton as Button} from "../../pages/login/styles";
+import {InputContainer, InputLabel, Input, InputsForm} from "./styles";
+
+import {useAppContext} from "../../contexts";
+
 interface AdvertiseProps {}
 
 const Advertise: React.FC<AdvertiseProps> = () => {
+    const {setAdvertMenuOpen} = useAppContext();
+
     return (
-        <div>
-            Advertise
-        </div>
+      <Container>
+        <Box>
+          <CloseIcon onClick={() => setAdvertMenuOpen!(false)}>X</CloseIcon>
+          <Title>ADVERTISE</Title>
+          <InputsForm>
+            <InputContainer>
+                <InputLabel>TITLE</InputLabel>
+                <Input type="text" placeholder="Add title goes here" />
+            </InputContainer>
+            <InputContainer>
+                <InputLabel>DURATION</InputLabel>
+                <Input type="number" placeholder="Duration in hours" />
+            </InputContainer>
+            <InputContainer>
+                <InputLabel>LINK</InputLabel>
+                <Input type="text" placeholder="Link to navigate" />
+            </InputContainer>
+            <InputContainer>
+                <InputLabel>PICTURE</InputLabel>
+                <Input type="text" placeholder="Link to picture" />
+            </InputContainer>
+            <InputContainer>
+                <InputLabel>COST</InputLabel>
+                <Input type="number" placeholder="Estimated cost" readOnly />
+            </InputContainer>
+          </InputsForm>
+          <Button>POST ADVERTISEMENT</Button>
+        </Box>
+      </Container>
     );
 };
 

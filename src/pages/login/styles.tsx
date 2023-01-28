@@ -43,6 +43,7 @@ export const LoginButton = styled.span`
   ${BoxShadowDark}
   padding: 0.7rem;
   border-radius: 0.14rem;
+  text-align: center;
   cursor: pointer;
   &:hover {
     opacity: 0.84;
