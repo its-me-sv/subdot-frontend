@@ -12,6 +12,7 @@ import ErrorPage from "./pages/error";
 // components
 import TermsPolicies from "./components/terms-privacy";
 import Settings from "./components/settings";
+import Advertise from "./components/advertise";
 import Header from "./components/header/header";
 
 // providers
@@ -20,12 +21,13 @@ import {useAppContext} from "./contexts";
 interface AppProps {}
 
 const App: React.FC<AppProps> = () => {
-  const {loggedIn, showTerms, settingsOpen} = useAppContext();
+  const {loggedIn, showTerms, settingsOpen, advertMenuOpen} = useAppContext();
   
   return (
     <div>
       {showTerms && <TermsPolicies />}
       {settingsOpen && <Settings />}
+      {advertMenuOpen && <Advertise />}
       <HashRouter>
         {loggedIn && <Header />}  
         <Routes>

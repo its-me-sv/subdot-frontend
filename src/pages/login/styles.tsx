@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {BoxShadow} from "../../utils/styles";
+import {BoxShadow, BoxShadowDark} from "../../utils/styles";
 
 export const Container = styled.div`
   display: grid;
@@ -40,7 +40,7 @@ export const Caption = styled.span`
 export const LoginButton = styled.span`
   font-family: Inter;
   color: #f5f4f9;
-  background-color: #1a1a1a;
+  ${BoxShadowDark}
   padding: 0.7rem;
   border-radius: 0.14rem;
   cursor: pointer;

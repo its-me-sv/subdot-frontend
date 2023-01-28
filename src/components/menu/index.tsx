@@ -12,7 +12,8 @@ const Menu: React.FC<MenuProps> = () => {
     const navigate = useNavigate();
     const {
         setMenuOpen, setShowTerms, 
-        setLoggedIn, setSettingsOpen
+        setLoggedIn, setSettingsOpen,
+        setAdvertMenuOpen
     } = useAppContext();
 
     const closeMenu = () => {
@@ -39,6 +40,11 @@ const Menu: React.FC<MenuProps> = () => {
         closeMenu();
     };
 
+    const openAdvertise = () => {
+        setAdvertMenuOpen!(true);
+        closeMenu();
+    };
+
     return (
       <Container>
         <MenuLogo 
@@ -50,7 +56,7 @@ const Menu: React.FC<MenuProps> = () => {
         <MenuItem onClick={openSettings}>SETTINGS</MenuItem>
         <MenuItem onClick={showTerms}>TERMS</MenuItem>
         <MenuItem onClick={showTerms}>POLICIES</MenuItem>
-        <MenuItem>ADVERTISE</MenuItem>
+        <MenuItem onClick={openAdvertise}>ADVERTISE</MenuItem>
         <MenuItem onClick={logout}>LOG OUT</MenuItem>
       </Container>
     );
