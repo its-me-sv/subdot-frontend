@@ -19,7 +19,10 @@ const App: React.FC<AppProps> = () => {
   return (
     <HashRouter>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
+        <Route 
+          path="/" 
+          element={!loggedIn ? <LoginPage /> : <Navigate to="/home" />} 
+        />
         <Route 
           path="/home" 
           element={loggedIn ? <HomePage /> : <Navigate to="/" />} 
