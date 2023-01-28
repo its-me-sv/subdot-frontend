@@ -3,7 +3,8 @@ import {BoxShadow} from "../../utils/styles";
 
 export const Container = styled.div`
   position: absolute;
-  background-color: #1a1a1a;
+  background-color: white;
+  opacity: 0.8;
   width: 100vw;
   height: 100vh;
   z-index: 999;

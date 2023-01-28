@@ -26,4 +26,8 @@ export const MenuLogo = styled.img`
   height: 3rem;
   width: 3rem;
   border-radius: 50%;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.5;
+  }
 `;
