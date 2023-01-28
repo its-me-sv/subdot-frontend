@@ -16,7 +16,7 @@ interface LoginPageProps {}
 
 const LoginPage: React.FC<LoginPageProps> = () => {
   const navigate = useNavigate();
-  const {setLoggedIn} = useAppContext();
+  const {setLoggedIn, setShowTerms} = useAppContext();
   
   const onLogin = () => {
     setLoggedIn!(true);
@@ -34,7 +34,9 @@ const LoginPage: React.FC<LoginPageProps> = () => {
           </LoginButton>
         </LoginForm>
       </div>
-      <Footer>Terms and Conditions | Privacy and Policy</Footer>
+      <Footer onClick={() => setShowTerms!(true)}>
+        Terms and Conditions | Privacy and Policy
+      </Footer>
     </Container>
   );
 };

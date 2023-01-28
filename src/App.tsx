@@ -9,39 +9,46 @@ import ChatPage from "./pages/chat";
 import ReputationPage from "./pages/reputation";
 import ErrorPage from "./pages/error";
 
+// components
+import TermsPolicies from "./components/terms-privacy";
+
 // providers
 import {useAppContext} from "./contexts";
 
 interface AppProps {}
 
 const App: React.FC<AppProps> = () => {
-  const {loggedIn} = useAppContext();
+  const {loggedIn, showTerms} = useAppContext();
+  
   return (
-    <HashRouter>
-      <Routes>
-        <Route 
-          path="/" 
-          element={!loggedIn ? <LoginPage /> : <Navigate to="/home" />} 
-        />
-        <Route 
-          path="/home" 
-          element={loggedIn ? <HomePage /> : <Navigate to="/" />} 
-        />
-        <Route 
-          path="/profile/:id" 
-          element={loggedIn ? <ProfilePage /> : <Navigate to="/" />} 
-        />
-        <Route 
-          path="/chat" 
-          element={loggedIn ? <ChatPage /> : <Navigate to="/" />} 
-        />
-        <Route 
-          path="/rp" 
-          element={loggedIn ? <ReputationPage /> : <Navigate to="/" />} 
-        />
-        <Route path="/*" element={<ErrorPage />} />
-      </Routes>
-    </HashRouter>
+    <div>
+      {showTerms && <TermsPolicies />}
+      <HashRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={!loggedIn ? <LoginPage /> : <Navigate to="/home" />}
+          />
+          <Route
+            path="/home"
+            element={loggedIn ? <HomePage /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/profile/:id"
+            element={loggedIn ? <ProfilePage /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/chat"
+            element={loggedIn ? <ChatPage /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/rp"
+            element={loggedIn ? <ReputationPage /> : <Navigate to="/" />}
+          />
+          <Route path="/*" element={<ErrorPage />} />
+        </Routes>
+      </HashRouter>
+    </div>
   );
 }
 

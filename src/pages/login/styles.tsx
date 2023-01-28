@@ -46,7 +46,6 @@ export const LoginButton = styled.span`
   cursor: pointer;
   &:hover {
     opacity: 0.84;
-    text-decoration: underline;
   }
 `;
 
@@ -60,6 +59,5 @@ export const Footer = styled.span`
   cursor: pointer;
   &:hover {
     opacity: 0.84;
-    text-decoration: underline;
   }
 `;
