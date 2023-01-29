@@ -27,7 +27,7 @@ const App: React.FC<AppProps> = () => {
   const {loggedIn, showTerms, settingsOpen, advertMenuOpen, explore} = useAppContext();
   
   return (
-    <div className="app-container">
+    <div className={loggedIn ? "app-container" : ""}>
       {showTerms && <TermsPolicies />}
       {settingsOpen && <Settings />}
       {advertMenuOpen && <Advertise />}

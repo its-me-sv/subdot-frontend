@@ -1,12 +1,20 @@
 import React from "react";
 
+import {Container} from './styles';
+
+import FriendsCommunites from "../../components/friends-communities";
+import Posts from "../../components/posts";
+import RPAdvert from "../../components/rp-advert";
+
 interface HomePageProps {}
 
 const HomePage: React.FC<HomePageProps> = () => {
   return (
-    <div>
-      <h1>HOME PAGE</h1>
-    </div>
+    <Container>
+      <FriendsCommunites />
+      <Posts />
+      <RPAdvert />
+    </Container>
   );
 };
 

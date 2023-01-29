@@ -2,12 +2,11 @@ import styled from "styled-components";
 import {BoxShadow} from "../../utils/styles";
 
 export const Container = styled.div`
-  position: absolute;
+  /* position: absolute; */
   z-index: 999;
   background-color: black;
   opacity: 0.7;
   width: 100vw;
-  height: 92vh;
   display: flex;
   flex-direction: column;
 `;
