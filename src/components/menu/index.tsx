@@ -50,7 +50,7 @@ const Menu: React.FC<MenuProps> = () => {
         <MenuLogo 
             onClick={closeMenu} 
             alt="menu" 
-            src={require("../header/temp.jpg")} 
+            src={require("../../assets/temp.jpg")} 
         />
         <MenuItem onClick={takeToProfile}>PROFILE</MenuItem>
         <MenuItem onClick={openSettings}>SETTINGS</MenuItem>

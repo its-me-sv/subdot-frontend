@@ -19,7 +19,7 @@ const Peek: React.FC<PeekProps> = ({id}) => {
           <CloseIcon onClick={() => setPeek!("")}>X</CloseIcon>
           <ProfilePicture
             alt={`pp of ${id}`}
-            src={require("../header/temp.jpg")}
+            src={require("../../assets/temp.jpg")}
           />
           <JoinedDate>Member since May 11, 2002</JoinedDate>
           <Details>

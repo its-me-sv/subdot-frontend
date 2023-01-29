@@ -29,7 +29,7 @@ const Header: React.FC<HeaderProps> = () => {
         <MenuLogo 
           onClick={openMenu}
           alt="menu" 
-          src={require("./temp.jpg")} 
+          src={require("../../assets/temp.jpg")} 
         />
         {menuOpen && <Menu />}
       </Container>

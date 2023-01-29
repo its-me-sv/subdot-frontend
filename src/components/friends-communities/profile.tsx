@@ -16,19 +16,19 @@ const SectionProfile: React.FC<SectionProfileProps> = ({id}) => {
     const {setPeek} = useAppContext();
 
     return (
-        <ProfileContainer onClick={() => setPeek!(id)}>
-            <ProfileDetails>
-                <ProfilePicture 
-                    alt={`pp of ${id}`} 
-                    src={require("../header/temp.jpg")} 
-                />
-                <ProfileInfo>
-                    <ProfileName>{id}</ProfileName>
-                    <ProfileStatusText>Status text</ProfileStatusText>
-                </ProfileInfo>
-            </ProfileDetails>
-            {/* <HrLn /> */}
-        </ProfileContainer>
+      <ProfileContainer onClick={() => setPeek!(id)}>
+        <ProfileDetails>
+          <ProfilePicture
+            alt={`pp of ${id}`}
+            src={require("../../assets/temp.jpg")}
+          />
+          <ProfileInfo>
+            <ProfileName>{id}</ProfileName>
+            <ProfileStatusText>Status text</ProfileStatusText>
+          </ProfileInfo>
+        </ProfileDetails>
+        {/* <HrLn /> */}
+      </ProfileContainer>
     );
 };
 

@@ -1,12 +1,18 @@
 import React from "react";
 
+import {Container} from "../friends-communities/styles";
+
+import Advert from "./advert";
+import RP from "./rp";
+
 interface RPAdvertProps {}
 
 const RPAdvert: React.FC<RPAdvertProps> = () => {
     return (
-        <div>
-            RP & Advertisements
-        </div>
+        <Container>
+            <RP />
+            <Advert />
+        </Container>
     );
 };
 

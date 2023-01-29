@@ -24,10 +24,10 @@ export const Button = styled.span<{bgColor: string}>`
   }
 `;
 
-// export const HrLn = styled.div`
-//   height: 1px;
-//   width: 90%;
-//   align-self: center;
-//   border-bottom: 1px solid #1a1a1a;
-//   opacity: 0.84;
-// `;
+export const HrLn = styled.div`
+  height: 1px;
+  width: 100%;
+  align-self: center;
+  border-bottom: 1px solid #1a1a1a;
+  opacity: 0.84;
+`;
