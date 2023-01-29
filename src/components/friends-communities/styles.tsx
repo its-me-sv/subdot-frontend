@@ -13,7 +13,7 @@ export const Section = styled.div`
 
 export const SectionTitle = styled.span`
     font-family: Inter;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     opacity: 0.84;
     color: #1a1a1a;
 `;
