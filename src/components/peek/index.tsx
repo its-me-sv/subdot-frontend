@@ -32,6 +32,10 @@ const Peek: React.FC<PeekProps> = ({id}) => {
           </Details>
           <MetaDetails>
             <MetaInfo>
+              <Content>42</Content>
+              <Section>RP</Section>
+            </MetaInfo>
+            <MetaInfo>
               <Content>52</Content>
               <Section>FOLLOWERS</Section>
             </MetaInfo>

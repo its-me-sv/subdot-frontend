@@ -3,6 +3,8 @@ import React from "react";
 import {Container, StickyButton} from "./styles";
 import {Button} from "../../utils/styles";
 
+import Post from "./post";
+
 interface PostsProps {}
 
 const Posts: React.FC<PostsProps> = () => {
@@ -11,7 +13,7 @@ const Posts: React.FC<PostsProps> = () => {
         <StickyButton>
           <Button bgColor="#353132">SHARE A POST</Button>
         </StickyButton>
-        Posts
+        {new Array(7).fill(0).map((_, __) => <Post />)}
       </Container>
     );
 };
