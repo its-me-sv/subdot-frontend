@@ -16,6 +16,7 @@ import TermsPolicies from "./components/terms-privacy";
 import Settings from "./components/settings";
 import Advertise from "./components/advertise";
 import Results from "./components/results";
+import Peek from "./components/peek";
 import Header from "./components/header/header";
 
 // providers
@@ -24,7 +25,11 @@ import {useAppContext} from "./contexts";
 interface AppProps {}
 
 const App: React.FC<AppProps> = () => {
-  const {loggedIn, showTerms, settingsOpen, advertMenuOpen, explore} = useAppContext();
+  const {
+    loggedIn, showTerms, 
+    settingsOpen, advertMenuOpen, 
+    explore, peek
+  } = useAppContext();
   
   return (
     <div className={loggedIn ? "app-container" : ""}>
@@ -34,6 +39,7 @@ const App: React.FC<AppProps> = () => {
       <HashRouter>
         {loggedIn && <Header />}
         {loggedIn && explore.length > 0 && <Results />}
+        {loggedIn && peek.length >0 && <Peek id={peek} />}
         <Routes>
           <Route
             path="/"

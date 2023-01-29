@@ -1,14 +1,22 @@
 import React from "react";
 
-import {ProfileContainer,  ProfileDetails, ProfileInfo, ProfileName, ProfilePicture, ProfileStatusText} from './styles';
+import {
+    ProfileContainer,  ProfileDetails, 
+    ProfileInfo, ProfileName, 
+    ProfilePicture, ProfileStatusText
+} from './styles';
+
+import {useAppContext} from "../../contexts";
 
 interface SectionProfileProps {
     id: string;
 }
 
 const SectionProfile: React.FC<SectionProfileProps> = ({id}) => {
+    const {setPeek} = useAppContext();
+
     return (
-        <ProfileContainer>
+        <ProfileContainer onClick={() => setPeek!(id)}>
             <ProfileDetails>
                 <ProfilePicture 
                     alt={`pp of ${id}`} 
