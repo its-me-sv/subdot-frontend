@@ -1,7 +1,7 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
 
-import {Container, HomeLogo, MenuLogo} from "./styles";
+import {Container, Footer, HomeLogo, MenuLogo} from "./styles";
 
 import Explore from "../explore";
 import Menu from "../menu";
@@ -26,11 +26,14 @@ const Header: React.FC<HeaderProps> = () => {
       <Container>
         <HomeLogo onClick={goHome} />
         <Explore />
-        <MenuLogo 
-          onClick={openMenu}
-          alt="menu" 
-          src={require("../../assets/temp.jpg")} 
-        />
+        <Footer>
+          <span>42 RP & 23$</span>
+          <MenuLogo 
+            onClick={openMenu}
+            alt="menu" 
+            src={require("../../assets/temp.jpg")} 
+          />
+        </Footer>
         {menuOpen && <Menu />}
       </Container>
     );

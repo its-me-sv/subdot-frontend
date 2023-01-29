@@ -6,8 +6,7 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.4rem;
-    padding-top: 0.2rem;
+    padding: 0.2rem;
 `;
 
 export const HomeLogo = styled.img.attrs({
@@ -29,5 +28,15 @@ export const MenuLogo = styled.img`
   cursor: pointer;
   &:hover {
     opacity: 0.5;
+  }
+`;
+
+export const Footer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  span {
+    font-family: Inter;
+    font-size: 1.2rem;
   }
 `;

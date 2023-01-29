@@ -10,8 +10,9 @@ export const Container = styled.div`
     top: 0px;
     right: 0px;
     gap: 0.42rem;
-    padding: 0.2rem 0.4rem 0.42rem 1rem;
+    padding: 0.2rem 0.2rem 0.42rem 1rem;
     border-bottom-left-radius: 0.42rem;
+    z-index: 998;
 `;
 
 export const MenuItem = styled.span`
