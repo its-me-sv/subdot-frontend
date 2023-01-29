@@ -1,14 +1,18 @@
 import React from "react";
 
-import {Container} from "./styles";
+import {Container, StickyButton} from "./styles";
+import {Button} from "../../utils/styles";
 
 interface PostsProps {}
 
 const Posts: React.FC<PostsProps> = () => {
     return (
-        <Container>
-            Posts
-        </Container>
+      <Container>
+        <StickyButton>
+          <Button bgColor="#353132">SHARE A POST</Button>
+        </StickyButton>
+        Posts
+      </Container>
     );
 };
 
