@@ -1,6 +1,14 @@
 import styled from "styled-components";
 import {BoxShadow} from "../../utils/styles";
 
+export const Container = styled.div`
+  padding: 0.5rem;
+  display: grid;
+  margin: 0.42rem;
+  border-radius: 0.14rem;
+  ${BoxShadow};
+`;
+
 export const AdvertContainer = styled.div`
     display: flex;
     justify-content: center;
@@ -32,7 +40,7 @@ export const RPTitle = styled.span`
     font-family: Inter;
     align-self: center;
     font-color: #1a1a1a;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     opacity: 0.84;
 `;
 

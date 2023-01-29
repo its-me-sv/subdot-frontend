@@ -1,6 +1,6 @@
 import React from "react";
 
-import {Container} from "../friends-communities/styles";
+import {Container} from "./styles";
 
 import Advert from "./advert";
 import RP from "./rp";

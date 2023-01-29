@@ -1,19 +1,23 @@
 import styled from "styled-components";
-import { BoxShadow } from "../../utils/styles";
+import {BoxShadow} from "../../utils/styles";
 
 export const Container = styled.div`
-    padding: 0.5rem 0.25rem 0.5rem 0.5rem;
     display: grid;
 `;
 
 export const Section = styled.div`
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  margin: 0.42rem;
+  border-radius: 0.14rem;
+  padding: 0rem 0.42rem;
+  padding-bottom: 0.42rem;
+  ${BoxShadow};
 `;
 
 export const SectionTitle = styled.span`
     font-family: Inter;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     opacity: 0.84;
     color: #1a1a1a;
 `;
