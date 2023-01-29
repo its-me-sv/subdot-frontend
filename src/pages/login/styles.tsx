@@ -50,10 +50,23 @@ export const LoginButton = styled.span`
   }
 `;
 
-export const Footer = styled.span`
+export const Footer1 = styled.span`
   position: absolute;
   bottom: 0.7rem;
   left: 0.7rem;
+  font-family: Inter;
+  color: #1a1a1a;
+  font-size: 1rem;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.84;
+  }
+`;
+
+export const Footer2 = styled.span`
+  position: absolute;
+  bottom: 0.7rem;
+  right: 0.7rem;
   font-family: Inter;
   color: #1a1a1a;
   font-size: 1rem;

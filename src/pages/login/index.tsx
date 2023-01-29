@@ -7,7 +7,8 @@ import {
   Title, 
   LoginButton,
   Caption,
-  Footer
+  Footer1,
+  Footer2
 } from "./styles";
 
 import {useAppContext} from "../../contexts";
@@ -16,7 +17,7 @@ interface LoginPageProps {}
 
 const LoginPage: React.FC<LoginPageProps> = () => {
   const navigate = useNavigate();
-  const {setLoggedIn, setShowTerms} = useAppContext();
+  const {setLoggedIn, setShowTerms, setSettingsOpen} = useAppContext();
   
   const onLogin = () => {
     setLoggedIn!(true);
@@ -34,9 +35,12 @@ const LoginPage: React.FC<LoginPageProps> = () => {
           </LoginButton>
         </LoginForm>
       </div>
-      <Footer onClick={() => setShowTerms!(true)}>
+      <Footer1 onClick={() => setShowTerms!(true)}>
         Terms and Conditions | Privacy and Policy
-      </Footer>
+      </Footer1>
+      <Footer2 onClick={() => setSettingsOpen!(true)}>
+        Settings
+      </Footer2>
     </Container>
   );
 };
