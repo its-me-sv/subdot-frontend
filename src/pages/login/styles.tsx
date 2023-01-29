@@ -37,19 +37,6 @@ export const Caption = styled.span`
   font-size: 1.4rem;
 `;
 
-export const LoginButton = styled.span`
-  font-family: Inter;
-  color: #f5f4f9;
-  ${BoxShadowDark}
-  padding: 0.7rem;
-  border-radius: 0.14rem;
-  text-align: center;
-  cursor: pointer;
-  &:hover {
-    opacity: 0.84;
-  }
-`;
-
 export const Footer1 = styled.span`
   position: absolute;
   bottom: 0.7rem;

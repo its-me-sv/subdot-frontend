@@ -24,7 +24,7 @@ export const Input = styled.input`
   font-family: Inter;
   outline: none;
   border: none;
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   text-align: center;
   border-radius: 0.14rem;
   ${BoxShadow}

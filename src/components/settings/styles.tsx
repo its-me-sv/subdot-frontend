@@ -5,12 +5,12 @@ export const SelectLang = styled.select`
   border-radius: 0.14rem;
   ${BoxShadow}
   z-index: 998;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-family: Inter;
   text-align: center;
   cursor: pointer;
   opacity: 0.84;
-  width: 7rem;
+  width: 8rem;
 `;
 
 export const ItemsContainer = styled.div`

@@ -5,11 +5,11 @@ import {
   Container, 
   LoginForm, 
   Title, 
-  LoginButton,
   Caption,
   Footer1,
   Footer2
 } from "./styles";
+import {Button} from "../../utils/styles";
 
 import {useAppContext} from "../../contexts";
 
@@ -30,17 +30,15 @@ const LoginPage: React.FC<LoginPageProps> = () => {
         <LoginForm>
           <Title>Subdot</Title>
           <Caption>Bringing power back to the people</Caption>
-          <LoginButton onClick={onLogin}>
+          <Button onClick={onLogin} bgColor="#1a1a1a">
             CONNECT WALLET
-          </LoginButton>
+          </Button>
         </LoginForm>
       </div>
       <Footer1 onClick={() => setShowTerms!(true)}>
         Terms and Conditions | Privacy and Policy
       </Footer1>
-      <Footer2 onClick={() => setSettingsOpen!(true)}>
-        Settings
-      </Footer2>
+      <Footer2 onClick={() => setSettingsOpen!(true)}>Settings</Footer2>
     </Container>
   );
 };
