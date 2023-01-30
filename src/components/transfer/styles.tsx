@@ -5,7 +5,7 @@ export const Title = styled.span`
     font-size: 1.2rem;
     align-self: center;
     color: #1a1a1a;
-    margin-bottom: 0.42rem;
+    margin-bottom: 1rem;
 `;
 
 export const Footer = styled.div`

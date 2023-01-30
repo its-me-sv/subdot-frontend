@@ -16,7 +16,7 @@ interface PostProps {}
 
 const Post: React.FC<PostProps> = () => {
     const navigate = useNavigate();
-    const {setCommentId} = useAppContext();
+    const {setCommentId, setTransferId} = useAppContext();
 
     return (
         <PostContainer>
@@ -52,7 +52,7 @@ const Post: React.FC<PostProps> = () => {
                     />
                     <span>1.1m</span>
                 </FooterItem>
-                <FooterItem>
+                <FooterItem onClick={() => setTransferId!("<Dark Knight />")}>
                     <img 
                         alt="tip"
                         src={require("../../assets/icons/tip.png")} 
