@@ -4,8 +4,11 @@ import {BoxShadow} from "../../utils/styles";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: 1.4rem;
+  height: 90vh;
   overflow-y: scroll;
-  margin: 0.42rem;
+  padding: 1rem;
 `;
 
 export const StickyButton = styled.div`
@@ -20,6 +23,7 @@ export const PostContainer = styled.div`
   width: 36vw;
   gap: 0.42rem;
   padding: 0.42rem;
+  border-radius: 0.14rem;
   ${BoxShadow}
 `;
 

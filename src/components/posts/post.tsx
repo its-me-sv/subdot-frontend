@@ -24,7 +24,7 @@ const Post: React.FC<PostProps> = () => {
             <PostImage 
                 alt="content" 
                 src={require("../../assets/content_temp.jpg")} 
-            />
+                />
             <PostFooter>
                 <FooterItem>
                     <img 

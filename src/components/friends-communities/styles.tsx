@@ -12,6 +12,8 @@ export const Section = styled.div`
   border-radius: 0.14rem;
   padding: 0rem 0.42rem;
   padding-bottom: 0.42rem;
+  margin-right: 0rem;
+  margin-bottom: 0rem;
   ${BoxShadow};
 `;
 
