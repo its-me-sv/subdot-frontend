@@ -16,7 +16,7 @@ const RP: React.FC<RPProps> = () => {
         <RPContainer>
             <RPTitle>REPUTATION RANKING</RPTitle>
             <div>
-                {new Array(7).fill(0).map((v, i) => (
+                {new Array(5).fill(0).map((v, i) => (
                     <RPItem onClick={() => setPeek!("Suraj Vijayan")}>
                         <span>#{i+1} Suraj Vijayan</span>
                         <span>- 200 RP</span>

@@ -8,13 +8,12 @@ export const Container = styled.div`
 export const Section = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0.42rem;
+  margin: 0.14rem;
   border-radius: 0.14rem;
   padding: 0rem 0.42rem;
   padding-bottom: 0.42rem;
   margin-right: 0rem;
   margin-bottom: 0rem;
-  ${BoxShadow};
 `;
 
 export const SectionTitle = styled.span`

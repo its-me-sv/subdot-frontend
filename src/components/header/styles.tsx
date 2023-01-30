@@ -7,6 +7,7 @@ export const Container = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 0.2rem;
+    z-index: 900;
 `;
 
 export const HomeLogo = styled.img.attrs({

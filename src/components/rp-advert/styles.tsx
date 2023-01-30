@@ -4,9 +4,8 @@ import {BoxShadow} from "../../utils/styles";
 export const Container = styled.div`
   padding: 0.5rem;
   display: grid;
-  margin: 0.42rem;
+  margin: 0.14rem;
   border-radius: 0.14rem;
-  ${BoxShadow};
 `;
 
 export const AdvertContainer = styled.div`
