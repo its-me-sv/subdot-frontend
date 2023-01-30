@@ -95,3 +95,13 @@ export const FooterItem = styled.div`
     opacity: 0.5;
   }
 `;
+
+export const PostDescription = styled.textarea`
+  font-family: Inter;
+  outline: none;
+  border: none;
+  font-size: 1.2rem;
+  border-radius: 0.14rem;
+  resize: none;
+  ${BoxShadow}d
+`;

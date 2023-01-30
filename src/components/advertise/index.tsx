@@ -31,7 +31,7 @@ const Advertise: React.FC<AdvertiseProps> = () => {
             </InputContainer>
             <InputContainer>
               <InputLabel>PICTURE</InputLabel>
-              <Input type="text" placeholder="Link to picture" />
+              <Input type="text" placeholder="Address of picture" />
             </InputContainer>
             <InputContainer>
               <InputLabel>COST</InputLabel>
