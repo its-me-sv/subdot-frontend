@@ -17,6 +17,7 @@ import Settings from "./components/settings";
 import Advertise from "./components/advertise";
 import Results from "./components/results";
 import Peek from "./components/peek";
+import Transfer from "./components/transfer";
 import Header from "./components/header/header";
 
 // providers
@@ -29,7 +30,8 @@ const App: React.FC<AppProps> = () => {
   const {
     loggedIn, showTerms, 
     settingsOpen, advertMenuOpen, 
-    explore, peek, commentId
+    explore, peek, 
+    commentId, transferId
   } = useAppContext();
   
   return (
@@ -44,6 +46,7 @@ const App: React.FC<AppProps> = () => {
             {explore.length > 0 && <Results />}
             {peek.length > 0 && <Peek id={peek} />}
             {commentId.length > 0 && <Comments postId={commentId} />}
+            {transferId.length > 0 && <Transfer accountId={transferId} />}
           </>
         )}
         <Routes>
