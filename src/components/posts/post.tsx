@@ -1,14 +1,26 @@
 import React from "react";
 import {format} from "timeago.js";
+import {useNavigate} from "react-router-dom";
 
-import {FooterItem, PostContainer, PostContent, PostFooter, PostHeader, PostHeaderRight, PostImage, PostTime, PostUsername} from './styles';
+import {
+    FooterItem, PostContainer, 
+    PostContent, PostFooter, 
+    PostHeader, PostHeaderRight, 
+    PostImage, PostTime, 
+    PostUsername
+} from './styles';
+
+import {useAppContext} from "../../contexts";
 
 interface PostProps {}
 
 const Post: React.FC<PostProps> = () => {
+    const navigate = useNavigate();
+    const {setCommentId} = useAppContext();
+
     return (
         <PostContainer>
-            <PostHeader>
+            <PostHeader onClick={() => navigate("/profile/suraj")}>
                 <img 
                     alt="pp"
                     src={require("../../assets/temp.jpg")} 
@@ -33,7 +45,7 @@ const Post: React.FC<PostProps> = () => {
                     />
                     <span>1.1m</span>
                 </FooterItem>
-                <FooterItem>
+                <FooterItem onClick={() => setCommentId!("123")}>
                     <img 
                         alt="comment" 
                         src={require("../../assets/icons/comment.png")} 

@@ -21,6 +21,7 @@ import Header from "./components/header/header";
 
 // providers
 import {useAppContext} from "./contexts";
+import Comments from "./components/comments";
 
 interface AppProps {}
 
@@ -28,7 +29,7 @@ const App: React.FC<AppProps> = () => {
   const {
     loggedIn, showTerms, 
     settingsOpen, advertMenuOpen, 
-    explore, peek
+    explore, peek, commentId
   } = useAppContext();
   
   return (
@@ -37,9 +38,14 @@ const App: React.FC<AppProps> = () => {
       {settingsOpen && <Settings />}
       {advertMenuOpen && <Advertise />}
       <HashRouter>
-        {loggedIn && <Header />}
-        {loggedIn && explore.length > 0 && <Results />}
-        {loggedIn && peek.length >0 && <Peek id={peek} />}
+        {loggedIn && (
+          <>
+            <Header />
+            {explore.length > 0 && <Results />}
+            {peek.length > 0 && <Peek id={peek} />}
+            {commentId.length > 0 && <Comments postId={commentId} />}
+          </>
+        )}
         <Routes>
           <Route
             path="/"

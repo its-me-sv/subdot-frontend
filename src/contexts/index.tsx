@@ -10,6 +10,7 @@ interface AppContextInterface {
   advertMenuOpen: boolean;
   explore: string;
   peek: string;
+  commentId: string;
   resetAppContext?: () => void;
   setLoggedIn?: React.Dispatch<React.SetStateAction<boolean>>;
   setShowTerms?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -20,6 +21,7 @@ interface AppContextInterface {
   setAdvertMenuOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   setExplore?: React.Dispatch<React.SetStateAction<string>>;
   setPeek?: React.Dispatch<React.SetStateAction<string>>;
+  setCommentId?: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const defaultState: AppContextInterface = {
@@ -31,7 +33,8 @@ const defaultState: AppContextInterface = {
     dark: false,
     advertMenuOpen: false,
     explore: "",
-    peek: ""
+    peek: "",
+    commentId: ""
 };
 
 export const AppContext = createContext<AppContextInterface>(defaultState);
@@ -48,6 +51,7 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
     const [advertMenuOpen, setAdvertMenuOpen] = useState<boolean>(defaultState.advertMenuOpen);
     const [explore, setExplore] = useState<string>(defaultState.explore);
     const [peek, setPeek] = useState<string>(defaultState.peek);
+    const [commentId, setCommentId] = useState<string>(defaultState.commentId);
 
     const resetAppContext = () => {
         setShowTerms!(false);
@@ -56,6 +60,7 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
         setAdvertMenuOpen!(false);
         setExplore!("");
         setPeek!("");
+        setCommentId!("");
     };
 
     return (
@@ -69,7 +74,8 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
             advertMenuOpen, setAdvertMenuOpen,
             explore, setExplore,
             peek, setPeek,
-            resetAppContext
+            resetAppContext,
+            commentId, setCommentId
         }}>
             {children}
         </AppContext.Provider>
