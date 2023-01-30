@@ -2,7 +2,7 @@ import React from "react";
 
 import {Container, SearchIcon, Input} from "./styles";
 
-import {useAppContext} from "../../contexts";
+import {useAppContext} from "../../contexts/app";
 
 interface ExploreProps {}
 

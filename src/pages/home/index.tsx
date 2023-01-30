@@ -6,7 +6,7 @@ import FriendsCommunites from "../../components/friends-communities";
 import Posts from "../../components/posts";
 import RPAdvert from "../../components/rp-advert";
 
-import {useAppContext} from "../../contexts";
+import {useAppContext} from "../../contexts/app";
 
 interface HomePageProps {}
 

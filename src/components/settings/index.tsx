@@ -5,7 +5,7 @@ import {SelectLang, ItemTitle, Item, ItemsContainer} from "./styles";
 
 import {THEMES, LANGUAGES} from './data';
 
-import {useAppContext} from "../../contexts";
+import {useAppContext} from "../../contexts/app";
 
 interface SettingsProps {}
 

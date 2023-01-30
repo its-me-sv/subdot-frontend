@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 
 import {Container, ItemsContainer, Item} from "./styles";
 
-import {useAppContext} from "../../contexts";
+import {useAppContext} from "../../contexts/app";
 
 interface ResultsProps {}
 

@@ -6,7 +6,7 @@ import {Container, Footer, HomeLogo, MenuLogo} from "./styles";
 import Explore from "../explore";
 import Menu from "../menu";
 
-import {useAppContext} from "../../contexts";
+import {useAppContext} from "../../contexts/app";
 
 interface HeaderProps {}
 

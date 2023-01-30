@@ -3,7 +3,7 @@ import React from "react";
 import {Container, Box, CloseIcon} from "../terms-privacy/styles";
 import {InputContainer, InputLabel, Input} from "../advertise/styles";
 
-import {useAppContext} from "../../contexts";
+import {useAppContext} from "../../contexts/app";
 import {Button} from "../../utils/styles";
 import {Title, Footer} from "./styles";
 

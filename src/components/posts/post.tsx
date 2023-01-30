@@ -10,7 +10,7 @@ import {
     PostUsername
 } from './styles';
 
-import {useAppContext} from "../../contexts";
+import {useAppContext} from "../../contexts/app";
 
 interface PostProps {}
 

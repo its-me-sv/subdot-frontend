@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {Container, MenuItem} from "./styles";
 import {MenuLogo} from "../header/styles";
 
-import {useAppContext} from "../../contexts";
+import {useAppContext} from "../../contexts/app";
 
 interface MenuProps {}
 

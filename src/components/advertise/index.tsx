@@ -4,7 +4,7 @@ import {Box, Container, CloseIcon, Title} from "../terms-privacy/styles";
 import {Button} from "../../utils/styles";
 import {InputContainer, InputLabel, Input, InputsForm} from "./styles";
 
-import {useAppContext} from "../../contexts";
+import {useAppContext} from "../../contexts/app";
 
 interface AdvertiseProps {}
 

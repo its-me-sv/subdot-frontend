@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {Container, Box, CloseIcon} from '../terms-privacy/styles';
 import {JoinedDate, ProfilePicture, Section, Detail, Content, Details, MetaDetails, MetaInfo, Footer} from "./styles";
 
-import {useAppContext} from "../../contexts";
+import {useAppContext} from "../../contexts/app";
 import {Button} from "../../utils/styles";
 
 interface PeekProps {

@@ -11,7 +11,7 @@ import {
 } from "./styles";
 import {Button} from "../../utils/styles";
 
-import {useAppContext} from "../../contexts";
+import {useAppContext} from "../../contexts/app";
 
 interface LoginPageProps {}
 

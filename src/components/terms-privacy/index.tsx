@@ -4,7 +4,7 @@ import {loremIpsum} from "./data";
 
 import {Container, CloseIcon, Box, Title, Content} from './styles';
 
-import {useAppContext} from "../../contexts";
+import {useAppContext} from "../../contexts/app";
 
 interface TermsPoliciesProps {}
 

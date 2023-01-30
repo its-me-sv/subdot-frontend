@@ -6,7 +6,7 @@ import {
     ProfilePicture, ProfileStatusText
 } from './styles';
 
-import {useAppContext} from "../../contexts";
+import {useAppContext} from "../../contexts/app";
 
 interface SectionProfileProps {
     id: string;
