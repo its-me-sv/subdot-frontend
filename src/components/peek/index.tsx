@@ -1,4 +1,5 @@
 import React from "react";
+import {useNavigate} from "react-router-dom";
 
 import {Container, Box, CloseIcon} from '../terms-privacy/styles';
 import {JoinedDate, ProfilePicture, Section, Detail, Content, Details, MetaDetails, MetaInfo, Footer} from "./styles";
@@ -11,7 +12,8 @@ interface PeekProps {
 }
 
 const Peek: React.FC<PeekProps> = ({id}) => {
-    const {setPeek} = useAppContext();
+    const navigate = useNavigate();
+    const {setPeek, setTransferId} = useAppContext();
 
     return (
       <Container>
@@ -49,9 +51,18 @@ const Peek: React.FC<PeekProps> = ({id}) => {
             </MetaInfo>
           </MetaDetails>
           <Footer>
-            <Button bgColor="#0072bb">MESSAGE</Button>
-            <Button bgColor="#005e20">TRANSFER $</Button>
-            <Button bgColor="#353132">VIEW PROFILE</Button>
+            <Button 
+              bgColor="#0072bb" 
+              onClick={() => navigate(`/chat?user=${id}`)}
+            >MESSAGE</Button>
+            <Button 
+              bgColor="#005e20"
+              onClick={() => setTransferId!(id)}
+            >TRANSFER $</Button>
+            <Button 
+              bgColor="#353132"
+              onClick={() => navigate(`/profile/${id}`)}
+            >VIEW PROFILE</Button>
           </Footer>
         </Box>
       </Container>

@@ -2,10 +2,8 @@ import styled from "styled-components";
 import {BoxShadow} from "../../utils/styles";
 
 export const Container = styled.div`
-  /* position: absolute; */
   z-index: 999;
-  background-color: black;
-  opacity: 0.7;
+  background-color: rgba(0, 0, 0, 0.5);
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -25,7 +23,7 @@ export const Item = styled.span`
   font-family: Inter;
   font-size: 1.8rem;
   padding: 0.7rem;
-  border-radius: 0.42rem;
+  border-radius: 0.14rem;
   cursor: pointer;
   ${BoxShadow}
 `;
