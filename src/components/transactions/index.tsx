@@ -1,13 +1,28 @@
 import React from "react";
 
-import {Container} from "../terms-privacy/styles";
+import {Container, Box, CloseIcon, Title} from "../terms-privacy/styles";
+import {TransactionsHolder} from "./styles";
+
+import Transaction from "./transaction";
+
+import {useAppContext} from "../../contexts/app";
 
 interface TransactionProps {}
 
 const Transactions: React.FC<TransactionProps> = () => {
+    const {setTxOpen} = useAppContext();
+
     return (
         <Container>
-            Transactions
+            <Box>
+                <CloseIcon onClick={() => setTxOpen!(false)} >X</CloseIcon>
+                <Title>TRANSACTIONS</Title>
+                <TransactionsHolder>
+                    {new Array(42).fill(7).map(() => (
+                        <Transaction />
+                    ))}
+                </TransactionsHolder>
+            </Box>
         </Container>
     );
 };
