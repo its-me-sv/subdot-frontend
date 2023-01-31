@@ -19,6 +19,7 @@ import Results from "../components/results";
 import Peek from "../components/peek";
 import Transfer from "../components/transfer";
 import NewPost from "../components/posts/new";
+import Transactions from "../components/transactions";
 import Header from "../components/header/header";
 
 // providers
@@ -33,7 +34,7 @@ const App: React.FC<AppProps> = () => {
     settingsOpen, advertMenuOpen, 
     explore, peek, 
     commentId, transferId,
-    postMenuOpen
+    postMenuOpen, txOpen
   } = useAppContext();
   
   return (
@@ -50,6 +51,7 @@ const App: React.FC<AppProps> = () => {
             {commentId.length > 0 && <Comments postId={commentId} />}
             {transferId.length > 0 && <Transfer accountId={transferId} />}
             {postMenuOpen && <NewPost />}
+            {txOpen && <Transactions />}
           </>
         )}
         <Routes>

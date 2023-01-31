@@ -13,6 +13,7 @@ interface AppContextInterface {
   commentId: string;
   transferId: string;
   postMenuOpen: boolean;
+  txOpen: boolean;
   resetAppContext?: () => void;
   setLoggedIn?: React.Dispatch<React.SetStateAction<boolean>>;
   setShowTerms?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -26,6 +27,7 @@ interface AppContextInterface {
   setCommentId?: React.Dispatch<React.SetStateAction<string>>;
   setTransferId?: React.Dispatch<React.SetStateAction<string>>;
   setPostMenuOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  setTxOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const defaultState: AppContextInterface = {
@@ -40,7 +42,8 @@ const defaultState: AppContextInterface = {
     peek: "",
     commentId: "",
     transferId: "",
-    postMenuOpen: false
+    postMenuOpen: false,
+    txOpen: false
 };
 
 export const AppContext = createContext<AppContextInterface>(defaultState);
@@ -60,6 +63,7 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
     const [commentId, setCommentId] = useState<string>(defaultState.commentId);
     const [transferId, setTransferId] = useState<string>(defaultState.transferId);
     const [postMenuOpen, setPostMenuOpen] = useState<boolean>(defaultState.postMenuOpen);
+    const [txOpen, setTxOpen] = useState<boolean>(defaultState.txOpen);
 
     const resetAppContext = () => {
         setShowTerms!(false);
@@ -71,6 +75,7 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
         setCommentId!("");
         setTransferId!("");
         setPostMenuOpen!(false);
+        setTxOpen!(false);
     };
 
     return (
@@ -87,7 +92,8 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
             resetAppContext,
             commentId, setCommentId,
             transferId, setTransferId,
-            postMenuOpen, setPostMenuOpen
+            postMenuOpen, setPostMenuOpen,
+            txOpen, setTxOpen
         }}>
             {children}
         </AppContext.Provider>

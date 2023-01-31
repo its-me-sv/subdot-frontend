@@ -13,7 +13,7 @@ const Menu: React.FC<MenuProps> = () => {
     const {
         setMenuOpen, setShowTerms, 
         setLoggedIn, setSettingsOpen,
-        setAdvertMenuOpen
+        setAdvertMenuOpen, setTxOpen
     } = useAppContext();
 
     const closeMenu = () => {
@@ -45,6 +45,11 @@ const Menu: React.FC<MenuProps> = () => {
         closeMenu();
     };
 
+    const openTransactions = () => {
+        setTxOpen!(true);
+        closeMenu();
+    };
+
     return (
       <Container>
         <MenuLogo 
@@ -53,6 +58,7 @@ const Menu: React.FC<MenuProps> = () => {
             src={require("../../assets/temp.jpg")} 
         />
         <MenuItem onClick={takeToProfile}>PROFILE</MenuItem>
+        <MenuItem onClick={openTransactions}>TRANSACTIONS</MenuItem>
         <MenuItem onClick={openSettings}>SETTINGS</MenuItem>
         <MenuItem onClick={showTerms}>TERMS</MenuItem>
         <MenuItem onClick={showTerms}>POLICIES</MenuItem>
