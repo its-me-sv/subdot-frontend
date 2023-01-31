@@ -1,12 +1,18 @@
 import React from "react";
 
+import {Container} from "./styles";
+
+import Info from "./info";
+import Board from "./board";
+
 interface ReputationPageProps {}
 
 const ReputationPage: React.FC<ReputationPageProps> = () => {
   return (
-    <div>
-      <h1>REPUTATION PAGE</h1>
-    </div>
+    <Container>
+      <Board />
+      <Info />
+    </Container>
   );
 };
 
