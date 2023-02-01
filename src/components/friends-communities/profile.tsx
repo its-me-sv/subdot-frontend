@@ -10,13 +10,14 @@ import {useAppContext} from "../../contexts/app";
 
 interface SectionProfileProps {
     id: string;
+    hover?: boolean;
 }
 
-const SectionProfile: React.FC<SectionProfileProps> = ({id}) => {
+const SectionProfile: React.FC<SectionProfileProps> = ({id, hover}) => {
     const {setPeek} = useAppContext();
 
     return (
-      <ProfileContainer onClick={() => setPeek!(id)}>
+      <ProfileContainer onClick={() => setPeek!(id)} hover={hover} >
         <ProfileDetails>
           <ProfilePicture
             alt={`pp of ${id}`}

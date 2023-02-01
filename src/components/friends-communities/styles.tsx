@@ -32,7 +32,7 @@ export const SectionProfiles = styled.div`
   overflow-y: scroll;
 `;
 
-export const ProfileContainer = styled.div`
+export const ProfileContainer = styled.div<{ hover?: Boolean }>`
   cursor: pointer;
   margin: 0 0.3rem;
   display: flex;
@@ -43,6 +43,12 @@ export const ProfileContainer = styled.div`
     border-radius: 0.14rem;
     ${BoxShadow}
   }
+  ${(props) =>
+    props?.hover &&
+    `
+    border-radius: 0.14rem;
+    ${BoxShadow}
+  `}
 `;
 
 export const ProfileDetails = styled.div`

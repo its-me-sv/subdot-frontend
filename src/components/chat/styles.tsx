@@ -2,8 +2,9 @@ import styled from "styled-components";
 import {BoxShadow} from "../../utils/styles";
 
 export const Container = styled.div`
-  display: grid;
-  grid-template-rows: 9fr 1fr;
+  display: flex;
+  flex-direction: column;
+  height: 92vh;
   padding: 0.42rem 0rem;
   border-right: 1px solid #1a1a1a;
 `;
@@ -37,9 +38,11 @@ export const MessagesContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.42rem;
-  max-height: 82vh;
+  height: 84vh;
   overflow-y: scroll;
   margin-right: 0.14rem;
+  margin-top: 0.42rem;
+  padding-left: 0.84rem;
 `;
 
 export const Message = styled.div`
