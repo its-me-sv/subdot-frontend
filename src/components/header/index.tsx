@@ -12,7 +12,7 @@ interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = () => {
     const navigate = useNavigate();
-    const {setMenuOpen, menuOpen} = useAppContext();
+    const {setMenuOpen, menuOpen, dark} = useAppContext();
 
     const goHome = () => {
       navigate("/home");
@@ -23,7 +23,7 @@ const Header: React.FC<HeaderProps> = () => {
     };
 
     return (
-      <Container>
+      <Container dark={dark}>
         <HomeLogo onClick={goHome} />
         <Explore />
         <Footer>

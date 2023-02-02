@@ -1,13 +1,16 @@
 import styled from "styled-components";
-import {BoxShadow} from "../../utils/styles";
+import {BoxShadow, BoxShadowDark} from "../../utils/styles";
 
-export const Container = styled.div`
-    ${BoxShadow}
+export const Container = styled.div<{dark: boolean;}>`
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0.2rem;
     z-index: 900;
+    ${BoxShadow}
+    ${props => props.dark && `
+      ${BoxShadowDark}
+    `}
 `;
 
 export const HomeLogo = styled.img.attrs({

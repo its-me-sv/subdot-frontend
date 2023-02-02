@@ -43,9 +43,9 @@ export const Title = styled.span`
 
 export const Caption = styled.span<{ dark: boolean }>`
   font-family: Inter;
-  color: #1a1a1a;
   opacity: 0.9;
   font-size: 1.4rem;
+  color: #1a1a1a;
   ${props => props.dark && `
     color: #f5f4f9;
   `}

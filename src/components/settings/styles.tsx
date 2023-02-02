@@ -1,9 +1,8 @@
 import styled from "styled-components";
-import {BoxShadow} from "../../utils/styles";
+import {BoxShadow, BoxShadowDark} from "../../utils/styles";
 
-export const SelectLang = styled.select`
+export const SelectLang = styled.select<{ dark: boolean }>`
   border-radius: 0.14rem;
-  ${BoxShadow}
   z-index: 998;
   font-size: 1.4rem;
   font-family: Inter;
@@ -11,6 +10,14 @@ export const SelectLang = styled.select`
   cursor: pointer;
   opacity: 0.84;
   width: 8rem;
+  color: #1a1a1a;
+  ${BoxShadow}
+  ${(props) =>
+    props.dark &&
+    `
+      ${BoxShadowDark}
+      color: #f5f4f9;
+  `}
 `;
 
 export const ItemsContainer = styled.div`
@@ -27,7 +34,13 @@ export const Item = styled.div`
   width: 14rem;
 `;
 
-export const ItemTitle = styled.span`
+export const ItemTitle = styled.span<{ dark: boolean }>`
   font-family: Inter;
   font-size: 1rem;
+  color: #1a1a1a;
+  ${(props) =>
+    props.dark &&
+    `
+    color: #f5f4f9;
+  `}
 `;

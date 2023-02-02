@@ -22,12 +22,15 @@ const Settings: React.FC<SettingsProps> = () => {
     return (
       <Container dark={dark}>
         <Box dark={dark}>
-          <CloseIcon onClick={() => setSettingsOpen!(false)} dark={dark}>X</CloseIcon>
+          <CloseIcon onClick={() => setSettingsOpen!(false)} dark={dark}>
+            X
+          </CloseIcon>
           <Title dark={dark}>{title[language]}</Title>
           <ItemsContainer>
             <Item>
-              <ItemTitle>{theme[language]}</ItemTitle>
+              <ItemTitle dark={dark}>{theme[language]}</ItemTitle>
               <SelectLang
+                dark={dark}
                 value={dark ? themes[1] : themes[0]}
                 onChange={handleThemeChange}
               >
@@ -39,8 +42,12 @@ const Settings: React.FC<SettingsProps> = () => {
               </SelectLang>
             </Item>
             <Item>
-              <ItemTitle>{lang[language]}</ItemTitle>
-              <SelectLang value={language} onChange={handleLanguageChange}>
+              <ItemTitle dark={dark}>{lang[language]}</ItemTitle>
+              <SelectLang
+                dark={dark}
+                value={language}
+                onChange={handleLanguageChange}
+              >
                 {languages.map((val, idx) => (
                   <option key={val} value={idx}>
                     {val}

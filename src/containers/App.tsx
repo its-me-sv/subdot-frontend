@@ -20,7 +20,7 @@ import Peek from "../components/peek";
 import Transfer from "../components/transfer";
 import NewPost from "../components/posts/new";
 import Transactions from "../components/transactions";
-import Header from "../components/header/header";
+import Header from "../components/header";
 
 // providers
 import {useAppContext} from "../contexts/app";
