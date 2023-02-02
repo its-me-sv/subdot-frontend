@@ -2,6 +2,10 @@ import React from "react";
 
 import {Container, Box, CloseIcon} from "../terms-privacy/styles";
 import {InputContainer, InputLabel, Input} from "../advertise/styles";
+import {
+  recPrfx, amount,
+  amtPh, transfer
+} from "../../translations/transactions";
 
 import {useAppContext} from "../../contexts/app";
 import {Button} from "../../utils/styles";
@@ -12,19 +16,21 @@ interface TransferProps {
 }
 
 const Transfer: React.FC<TransferProps> = ({accountId}) => {
-    const {setTransferId} = useAppContext();
+    const {setTransferId, language} = useAppContext();
 
     return (
       <Container>
         <Box>
           <CloseIcon onClick={() => setTransferId!("")}>X</CloseIcon>
-          <Title>Transfer amount to {accountId}</Title>
+          <Title>
+            {recPrfx[language]} {accountId}
+          </Title>
           <InputContainer>
-            <InputLabel>AMOUNT</InputLabel>
-            <Input type="number" placeholder="Amount to transfer" />
+            <InputLabel>{amount[language]}</InputLabel>
+            <Input type="number" placeholder={amtPh[language]} />
           </InputContainer>
           <Footer>
-            <Button bgColor="#0072bb">TRANSFER</Button>
+            <Button bgColor="#0072bb">{transfer[language]}</Button>
           </Footer>
         </Box>
       </Container>

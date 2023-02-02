@@ -2,6 +2,7 @@ import React from "react";
 
 import {Container, Box, CloseIcon, Title} from "../terms-privacy/styles";
 import {CommentsHolder} from "./styles";
+import {title} from "../../translations/comments";
 
 import Comment from "./comment";
 import CommentInput from "./input";
@@ -13,13 +14,13 @@ interface CommentsProps {
 }
 
 const Comments: React.FC<CommentsProps> = () => {
-    const {setCommentId} = useAppContext();
+    const {setCommentId, language} = useAppContext();
 
     return (
         <Container>
             <Box>
                 <CloseIcon onClick={() => setCommentId!("")}>X</CloseIcon>
-                <Title>COMMENTS</Title>
+                <Title>{title[language]}</Title>
                 <CommentsHolder>
                     {new Array(42).fill(0).map((_) => (
                         <Comment />
