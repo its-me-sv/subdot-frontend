@@ -8,6 +8,7 @@ import {
     Meta, MetaItem,
     Username
 } from "./styles";
+import {memSce, meta, footer} from "../../translations/peek";
 
 import {useAppContext} from "../../contexts/app";
 
@@ -17,40 +18,40 @@ interface ProfileSideViewProps {
 
 const ProfileSideView: React.FC<ProfileSideViewProps> = ({id}) => {
   const navigate = useNavigate();
-  const {setTransferId} = useAppContext();
+  const {setTransferId, language} = useAppContext();
 
   return (
     <Container>
       <img alt="pp" src={require("../../assets/temp.jpg")} />
       <Username>{"<Dark Knight />"}</Username>
-      <Joined>Member since May 11, 2002</Joined>
+      <Joined>{memSce[language]} May 11, 2002</Joined>
       <Status>The night is darkest just before the dawn</Status>
       <Meta>
         <MetaItem>
           <span>173</span>
-          <span>REPUTATION</span>
+          <span>{meta.reputation[language]}</span>
         </MetaItem>
         <MetaItem>
           <span>14</span>
-          <span>POSTS</span>
+          <span>{meta.posts[language]}</span>
         </MetaItem>
         <MetaItem>
           <span>52</span>
-          <span>FOLLOWERS</span>
+          <span>{meta.followers[language]}</span>
         </MetaItem>
         <MetaItem>
           <span>76</span>
-          <span>FOLLOWING</span>
+          <span>{meta.following[language]}</span>
         </MetaItem>
       </Meta>
       <Footer>
         <Button bgColor="#0072bb" onClick={() => navigate(`/chat?user=${id}`)}>
-          MESSAGE
+          {footer.msg[language]}
         </Button>
         <Button bgColor="#005e20" onClick={() => setTransferId!(id)}>
-          TRANSFER $
+          {footer.transfer[language]} $
         </Button>
-        <Button bgColor="#1a1a1a">FOLLOW</Button>
+        <Button bgColor="#1a1a1a">{footer.follow[language]}</Button>
       </Footer>
     </Container>
   );

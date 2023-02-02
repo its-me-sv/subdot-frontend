@@ -43,6 +43,13 @@ export const meta = {
         "पदों",
         "PUBLICACIONES",
         "DES POSTES"
+    ],
+    reputation: [
+        "REPUTATION",
+        "名声",
+        "प्रतिष्ठा",
+        "REPUTACIÓN",
+        "RÉPUTATION"
     ]
 };
 
@@ -67,5 +74,12 @@ export const footer = {
         "प्रोफ़ाइल देखें",
         "VER PERFIL",
         "VOIR LE PROFIL"
+    ],
+    follow: [
+        "FOLLOW",
+        "跟随",
+        "का पालन करें",
+        "SEGUIR",
+        "SUIVRE"
     ]
 };
