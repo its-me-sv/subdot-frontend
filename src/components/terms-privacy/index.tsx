@@ -1,6 +1,6 @@
 import React from "react";
 
-import {loremIpsum} from "./data";
+import {loremIpsum} from "../../data/terms-privacy";
 
 import {Container, CloseIcon, Box, Title, Content} from './styles';
 

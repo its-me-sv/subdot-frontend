@@ -3,7 +3,7 @@ import React, {ChangeEvent} from "react";
 import {Container, Title, CloseIcon, Box} from "../terms-privacy/styles";
 import {SelectLang, ItemTitle, Item, ItemsContainer} from "./styles";
 
-import {THEMES, LANGUAGES} from './data';
+import {themes, languages} from '../../data/settings';
 
 import {useAppContext} from "../../contexts/app";
 
@@ -13,7 +13,7 @@ const Settings: React.FC<SettingsProps> = () => {
     const {setSettingsOpen, setDark, setLanguage, dark, language} = useAppContext();
 
     const handleThemeChange = (event: ChangeEvent<HTMLSelectElement>) =>
-      setDark!(event.target.value === "Dark");
+      setDark!(event.target.value === "1");
 
     const handleLanguageChange = (event: ChangeEvent<HTMLSelectElement>) =>
       setLanguage!(Number(event.target.value));
@@ -27,8 +27,8 @@ const Settings: React.FC<SettingsProps> = () => {
             <Item>
                 <ItemTitle>THEME</ItemTitle>
                 <SelectLang value={dark?"Dark":"Light"} onChange={handleThemeChange}>
-                    {THEMES.map((val, idx) => (
-                        <option key={val} value={idx}>
+                    {themes.map((val, idx) => (
+                        <option key={val} value={idx.toString()}>
                             {val}
                         </option>
                     ))}
@@ -36,8 +36,8 @@ const Settings: React.FC<SettingsProps> = () => {
             </Item>
             <Item>
                 <ItemTitle>LANGUAGE</ItemTitle>  
-                <SelectLang value={LANGUAGES[language]} onChange={handleLanguageChange}>
-                    {LANGUAGES.map((val, idx) => (
+                <SelectLang value={languages[language]} onChange={handleLanguageChange}>
+                    {languages.map((val, idx) => (
                         <option key={val} value={idx}>
                             {val}
                         </option>
