@@ -10,7 +10,7 @@ export const BoxShadowDark = css`
   background-color: #1a1a1a;
 `;
 
-export const Button = styled.span<{bgColor: string}>`
+export const Button = styled.span<{bgColor: string; dark?: boolean;}>`
   font-family: Inter;
   color: #f5f4f9;
   ${BoxShadow}
@@ -22,6 +22,9 @@ export const Button = styled.span<{bgColor: string}>`
   &:hover {
     opacity: 0.84;
   }
+  ${props => props.dark && `
+    color: #1a1a1a;
+  `}
 `;
 
 export const HrLn = styled.div`

@@ -1,7 +1,6 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
 
-
 import {
   Container, 
   LoginForm, 
@@ -41,12 +40,18 @@ const LoginPage: React.FC<LoginPageProps> = () => {
         <LoginForm dark={dark}>
           <Title>{title[language]}</Title>
           <Caption dark={dark}>{caption[language]}</Caption>
-          <Button onClick={onLogin} bgColor="#1a1a1a">
+          <Button 
+            onClick={onLogin} 
+            bgColor={dark ? "#f5f4f9" : "#1a1a1a"}
+            dark={dark}
+          >
             {button[language]}
           </Button>
         </LoginForm>
       </div>
-      <Footer1 onClick={() => setShowTerms!(true)} dark={dark}>{footer[language]}</Footer1>
+      <Footer1 onClick={() => setShowTerms!(true)} dark={dark}>
+        {footer[language]}
+      </Footer1>
       <Footer2 onClick={() => setSettingsOpen!(true)} dark={dark}>
         {settings[language]}
       </Footer2>
