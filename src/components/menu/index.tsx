@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 
 import {Container, MenuItem} from "./styles";
 import {MenuLogo} from "../header/styles";
+import {menu} from "../../translations/header";
 
 import {useAppContext} from "../../contexts/app";
 
@@ -13,7 +14,8 @@ const Menu: React.FC<MenuProps> = () => {
     const {
         setMenuOpen, setShowTerms, 
         setLoggedIn, setSettingsOpen,
-        setAdvertMenuOpen, setTxOpen
+        setAdvertMenuOpen, setTxOpen,
+        language
     } = useAppContext();
 
     const closeMenu = () => {
@@ -57,13 +59,13 @@ const Menu: React.FC<MenuProps> = () => {
             alt="menu" 
             src={require("../../assets/temp.jpg")} 
         />
-        <MenuItem onClick={takeToProfile}>PROFILE</MenuItem>
-        <MenuItem onClick={openTransactions}>TRANSACTIONS</MenuItem>
-        <MenuItem onClick={openSettings}>SETTINGS</MenuItem>
-        <MenuItem onClick={showTerms}>TERMS</MenuItem>
-        <MenuItem onClick={showTerms}>POLICIES</MenuItem>
-        <MenuItem onClick={openAdvertise}>ADVERTISE</MenuItem>
-        <MenuItem onClick={logout}>LOG OUT</MenuItem>
+        <MenuItem onClick={takeToProfile}>{menu.profile[language]}</MenuItem>
+        <MenuItem onClick={openTransactions}>{menu.transactions[language]}</MenuItem>
+        <MenuItem onClick={openSettings}>{menu.settings[language]}</MenuItem>
+        <MenuItem onClick={showTerms}>{menu.terms[language]}</MenuItem>
+        <MenuItem onClick={showTerms}>{menu.policies[language]}</MenuItem>
+        <MenuItem onClick={openAdvertise}>{menu.advertise[language]}</MenuItem>
+        <MenuItem onClick={logout}>{menu.logout[language]}</MenuItem>
       </Container>
     );
 };
