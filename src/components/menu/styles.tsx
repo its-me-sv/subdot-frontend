@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import {BoxShadow} from "../../utils/styles";
+import {BoxShadow, BoxShadowDark} from "../../utils/styles";
 
-export const Container = styled.div`
-    ${BoxShadow}
+export const Container = styled.div<{dark: boolean;}>`
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -13,16 +12,23 @@ export const Container = styled.div`
     padding: 0.2rem 0.2rem 0.42rem 1rem;
     border-bottom-left-radius: 0.42rem;
     z-index: 998;
+    ${BoxShadow}
+    ${props => props.dark && `
+      ${BoxShadowDark}
+    `}
 `;
 
-export const MenuItem = styled.span`
+export const MenuItem = styled.span<{dark: boolean;}>`
   font-family: Inter;
   font-size: 1.4rem;
-  color: #1a1a1a;
   opacity: 0.9;
   cursor: pointer;
   &:hover {
     opacity: 0.5;
     text-decoration: underline;
   }
+  color: #1a1a1a;
+  ${props => props.dark && `
+    color: #f5f4f9;
+  `}
 `;

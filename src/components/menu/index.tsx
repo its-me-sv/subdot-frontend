@@ -15,7 +15,7 @@ const Menu: React.FC<MenuProps> = () => {
         setMenuOpen, setShowTerms, 
         setLoggedIn, setSettingsOpen,
         setAdvertMenuOpen, setTxOpen,
-        language
+        language, dark
     } = useAppContext();
 
     const closeMenu = () => {
@@ -53,19 +53,19 @@ const Menu: React.FC<MenuProps> = () => {
     };
 
     return (
-      <Container>
+      <Container dark={dark}>
         <MenuLogo 
             onClick={closeMenu} 
             alt="menu" 
             src={require("../../assets/temp.jpg")} 
         />
-        <MenuItem onClick={takeToProfile}>{menu.profile[language]}</MenuItem>
-        <MenuItem onClick={openTransactions}>{menu.transactions[language]}</MenuItem>
-        <MenuItem onClick={openSettings}>{menu.settings[language]}</MenuItem>
-        <MenuItem onClick={showTerms}>{menu.terms[language]}</MenuItem>
-        <MenuItem onClick={showTerms}>{menu.policies[language]}</MenuItem>
-        <MenuItem onClick={openAdvertise}>{menu.advertise[language]}</MenuItem>
-        <MenuItem onClick={logout}>{menu.logout[language]}</MenuItem>
+        <MenuItem dark={dark} onClick={takeToProfile}>{menu.profile[language]}</MenuItem>
+        <MenuItem dark={dark} onClick={openTransactions}>{menu.transactions[language]}</MenuItem>
+        <MenuItem dark={dark} onClick={openSettings}>{menu.settings[language]}</MenuItem>
+        <MenuItem dark={dark} onClick={showTerms}>{menu.terms[language]}</MenuItem>
+        <MenuItem dark={dark} onClick={showTerms}>{menu.policies[language]}</MenuItem>
+        <MenuItem dark={dark} onClick={openAdvertise}>{menu.advertise[language]}</MenuItem>
+        <MenuItem dark={dark} onClick={logout}>{menu.logout[language]}</MenuItem>
       </Container>
     );
 };
