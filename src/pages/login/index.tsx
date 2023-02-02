@@ -26,7 +26,8 @@ const LoginPage: React.FC<LoginPageProps> = () => {
   const navigate = useNavigate();
   const {
     setLoggedIn, setShowTerms, 
-    setSettingsOpen, language
+    setSettingsOpen, language,
+    dark
   } = useAppContext();
   
   const onLogin = () => {
@@ -35,20 +36,18 @@ const LoginPage: React.FC<LoginPageProps> = () => {
   };
 
   return (
-    <Container>
+    <Container dark={dark}>
       <div>
-        <LoginForm>
+        <LoginForm dark={dark}>
           <Title>{title[language]}</Title>
-          <Caption>{caption[language]}</Caption>
+          <Caption dark={dark}>{caption[language]}</Caption>
           <Button onClick={onLogin} bgColor="#1a1a1a">
             {button[language]}
           </Button>
         </LoginForm>
       </div>
-      <Footer1 onClick={() => setShowTerms!(true)}>
-        {footer[language]}
-      </Footer1>
-      <Footer2 onClick={() => setSettingsOpen!(true)}>
+      <Footer1 onClick={() => setShowTerms!(true)} dark={dark}>{footer[language]}</Footer1>
+      <Footer2 onClick={() => setSettingsOpen!(true)} dark={dark}>
         {settings[language]}
       </Footer2>
     </Container>

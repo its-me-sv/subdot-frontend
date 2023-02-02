@@ -14,7 +14,7 @@ const Settings: React.FC<SettingsProps> = () => {
     const {setSettingsOpen, setDark, setLanguage, dark, language} = useAppContext();
 
     const handleThemeChange = (event: ChangeEvent<HTMLSelectElement>) =>
-      setDark!(event.target.value === "1");
+      setDark!(event.target.value === "🌑");
 
     const handleLanguageChange = (event: ChangeEvent<HTMLSelectElement>) => 
       setLanguage!(Number(event.target.value));
@@ -28,11 +28,11 @@ const Settings: React.FC<SettingsProps> = () => {
             <Item>
               <ItemTitle>{theme[language]}</ItemTitle>
               <SelectLang
-                value={dark ? "Dark" : "Light"}
+                value={dark ? themes[1] : themes[0]}
                 onChange={handleThemeChange}
               >
                 {themes.map((val, idx) => (
-                  <option key={val} value={idx.toString()}>
+                  <option key={val} value={val}>
                     {val}
                   </option>
                 ))}
