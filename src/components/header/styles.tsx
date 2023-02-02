@@ -35,7 +35,7 @@ export const MenuLogo = styled.img`
   }
 `;
 
-export const Footer = styled.div`
+export const Footer = styled.div<{ dark: boolean }>`
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -43,4 +43,10 @@ export const Footer = styled.div`
     font-family: Inter;
     font-size: 1.2rem;
   }
+  color: #1a1a1a;
+  ${(props) =>
+    props.dark &&
+    `
+    color: #f5f4f9;
+  `}
 `;

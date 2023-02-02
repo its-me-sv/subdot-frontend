@@ -26,7 +26,7 @@ const Header: React.FC<HeaderProps> = () => {
       <Container dark={dark}>
         <HomeLogo onClick={goHome} />
         <Explore />
-        <Footer>
+        <Footer dark={dark}>
           <span>42 RP & 23$</span>
           <MenuLogo 
             onClick={openMenu}
