@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 
 import {Button} from "../../utils/styles";
 import {RPContainer, RPItem, RPTitle} from "./styles";
+import {title, detail} from "../../translations/rp";
 
 import {useAppContext} from "../../contexts/app";
 
@@ -10,11 +11,11 @@ interface RPProps {}
 
 const RP: React.FC<RPProps> = () => {
     const navigate = useNavigate();
-    const {setPeek} = useAppContext();
+    const {setPeek, language} = useAppContext();
 
     return (
         <RPContainer>
-            <RPTitle>REPUTATION RANKING</RPTitle>
+            <RPTitle>{title[language]}</RPTitle>
             <div>
                 {new Array(5).fill(0).map((v, i) => (
                     <RPItem onClick={() => setPeek!("Suraj Vijayan")}>
@@ -24,7 +25,7 @@ const RP: React.FC<RPProps> = () => {
                 ))}
             </div>
             <Button bgColor="#1a1a1a" onClick={() => navigate("/rp")}>
-                VIEW MORE
+                {detail[language]}
             </Button>
         </RPContainer>
     );

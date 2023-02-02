@@ -1,32 +1,37 @@
 import React from "react";
 
 import {InfoBox, InfoBoxTitle, InfoContent, InfoItem} from "./styles";
+import {info} from "../../translations/rp";
+
+import {useAppContext} from "../../contexts/app";
 
 interface InfoProps {}
 
 const Info: React.FC<InfoProps> = () => {
+    const {language} = useAppContext();
+
     return (
         <InfoBox>
-            <InfoBoxTitle>CRITERION</InfoBoxTitle>
+            <InfoBoxTitle>{info.title[language]}</InfoBoxTitle>
             <InfoContent>
                 <InfoItem>
-                    <span>ACTION</span>
+                    <span>{info.action[language]}</span>
                     <span>RP</span>
                 </InfoItem>
                 <InfoItem>
-                    <span>Every 5 Post</span>
+                    <span>{info.post[language]}</span>
                     <span>7</span>
                 </InfoItem>
                 <InfoItem>
-                    <span>Per Tip given</span>
+                    <span>{info.tip[language]}</span>
                     <span>2</span>
                 </InfoItem>
                 <InfoItem>
-                    <span>Every 100th like (rec)</span>
+                    <span>{info.like[language]}</span>
                     <span>5</span>
                 </InfoItem>
                 <InfoItem>
-                    <span>Per 10 Followers</span>
+                    <span>{info.followers[language]}</span>
                     <span>3</span>
                 </InfoItem>
             </InfoContent>

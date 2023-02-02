@@ -38,6 +38,7 @@ export const RPContainer = styled.div`
 export const RPTitle = styled.span`
     font-family: Inter;
     align-self: center;
+    text-align: center;
     font-color: #1a1a1a;
     font-size: 1.6rem;
     opacity: 0.84;
