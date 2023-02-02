@@ -10,18 +10,18 @@ import {useAppContext} from "../../contexts/app";
 interface TermsPoliciesProps {}
 
 const TermsPolicies: React.FC<TermsPoliciesProps> = () => {
-    const {setShowTerms, language} = useAppContext();
+    const {setShowTerms, language, dark} = useAppContext();
     
     return (
-        <Container>
-            <Box>
-                <CloseIcon onClick={() => setShowTerms!(false)}>X</CloseIcon>
-                <Title>{terms[language]}</Title>
-                <Content>{loremIpsum}</Content>
-                <Title>{privacy[language]}</Title>
-                <Content>{loremIpsum}</Content>
-            </Box>
-        </Container>
+      <Container dark={dark}>
+        <Box dark={dark}>
+          <CloseIcon onClick={() => setShowTerms!(false)} dark={dark}>X</CloseIcon>
+          <Title dark={dark}>{terms[language]}</Title>
+          <Content dark={dark}>{loremIpsum}</Content>
+          <Title dark={dark}>{privacy[language]}</Title>
+          <Content dark={dark}>{loremIpsum}</Content>
+        </Box>
+      </Container>
     );
 };
 

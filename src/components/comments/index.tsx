@@ -14,21 +14,21 @@ interface CommentsProps {
 }
 
 const Comments: React.FC<CommentsProps> = () => {
-    const {setCommentId, language} = useAppContext();
+    const {setCommentId, language, dark} = useAppContext();
 
     return (
-        <Container>
-            <Box>
-                <CloseIcon onClick={() => setCommentId!("")}>X</CloseIcon>
-                <Title>{title[language]}</Title>
-                <CommentsHolder>
-                    {new Array(42).fill(0).map((_) => (
-                        <Comment />
-                    ))}
-                </CommentsHolder>
-                <CommentInput />
-            </Box>
-        </Container>
+      <Container dark={dark}>
+        <Box dark={dark}>
+          <CloseIcon onClick={() => setCommentId!("")} dark={dark}>X</CloseIcon>
+          <Title dark={dark}>{title[language]}</Title>
+          <CommentsHolder>
+            {new Array(42).fill(0).map((_) => (
+              <Comment />
+            ))}
+          </CommentsHolder>
+          <CommentInput />
+        </Box>
+      </Container>
     );
 };
 

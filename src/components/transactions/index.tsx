@@ -11,20 +11,20 @@ import {useAppContext} from "../../contexts/app";
 interface TransactionProps {}
 
 const Transactions: React.FC<TransactionProps> = () => {
-    const {setTxOpen, language} = useAppContext();
+    const {setTxOpen, language, dark} = useAppContext();
 
     return (
-        <Container>
-            <Box>
-                <CloseIcon onClick={() => setTxOpen!(false)} >X</CloseIcon>
-                <Title>{title[language]}</Title>
-                <TransactionsHolder>
-                    {new Array(42).fill(7).map(() => (
-                        <Transaction />
-                    ))}
-                </TransactionsHolder>
-            </Box>
-        </Container>
+      <Container dark={dark}>
+        <Box dark={dark}>
+          <CloseIcon onClick={() => setTxOpen!(false)} dark={dark}>X</CloseIcon>
+          <Title dark={dark}>{title[language]}</Title>
+          <TransactionsHolder>
+            {new Array(42).fill(7).map(() => (
+              <Transaction />
+            ))}
+          </TransactionsHolder>
+        </Box>
+      </Container>
     );
 };
 

@@ -17,12 +17,14 @@ interface PeekProps {
 
 const Peek: React.FC<PeekProps> = ({id}) => {
     const navigate = useNavigate();
-    const {setPeek, setTransferId, language} = useAppContext();
+    const {setPeek, setTransferId, language, dark} = useAppContext();
 
     return (
-      <Container>
-        <Box>
-          <CloseIcon onClick={() => setPeek!("")}>X</CloseIcon>
+      <Container dark={dark}>
+        <Box dark={dark}>
+          <CloseIcon onClick={() => setPeek!("")} dark={dark}>
+            X
+          </CloseIcon>
           <ProfilePicture
             alt={`pp of ${id}`}
             src={require("../../assets/temp.jpg")}

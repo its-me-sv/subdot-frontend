@@ -1,17 +1,22 @@
 import styled from "styled-components";
-import {BoxShadow} from "../../utils/styles";
+import {BoxShadow, BoxShadowDark} from "../../utils/styles";
 
-export const Container = styled.div`
+export const Container = styled.div<{ dark: boolean }>`
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.5);
   width: 100vw;
   height: 100vh;
   z-index: 999;
   display: grid;
   place-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  ${(props) =>
+    props.dark &&
+    `
+    background-color: rgba(255, 255, 255, 0.5);
+  `}
 `;
 
-export const Box = styled.div`
+export const Box = styled.div<{ dark: boolean }>`
   max-width: 42rem;
   max-height: 35rem;
   font-family: Inter;
@@ -20,21 +25,38 @@ export const Box = styled.div`
   border-radius: 0.14rem;
   padding: 0.4rem 0.7rem;
   ${BoxShadow};
+  ${(props) =>
+    props.dark &&
+    `
+    ${BoxShadowDark}
+  `}
 `;
 
-export const CloseIcon = styled.span`
+export const CloseIcon = styled.span<{ dark: boolean }>`
   cursor: pointer;
   align-self: flex-end;
+  color: #1a1a1a;
+  ${props => props.dark && `
+    color: #f5f4f9;
+  `}
 `;
 
-export const Title = styled.span`
+export const Title = styled.span<{ dark: boolean }>`
     margin-bottom: 1rem;
     text-align: center;
     font-size: 1.4rem;
+    color: #1a1a1a;
+    ${props => props.dark && `
+      color: #f5f4f9;
+    `}
 `;
 
-export const Content = styled.span`
+export const Content = styled.span<{ dark: boolean }>`
   margin-bottom: 1rem;
   max-height: 18rem;
   overflow-y: scroll;
+  color: #1a1a1a;
+  ${props => props.dark && `
+    color: #f5f4f9;
+  `}
 `;

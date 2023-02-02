@@ -18,13 +18,13 @@ import {useAppContext} from "../../contexts/app";
 interface AdvertiseProps {}
 
 const Advertise: React.FC<AdvertiseProps> = () => {
-    const {setAdvertMenuOpen, language} = useAppContext();
+    const {setAdvertMenuOpen, language, dark} = useAppContext();
 
     return (
-      <Container>
-        <Box>
-          <CloseIcon onClick={() => setAdvertMenuOpen!(false)}>X</CloseIcon>
-          <Title>{title[language]}</Title>
+      <Container dark={dark}>
+        <Box dark={dark}>
+          <CloseIcon onClick={() => setAdvertMenuOpen!(false)} dark={dark}>X</CloseIcon>
+          <Title dark={dark}>{title[language]}</Title>
           <InputsForm>
             <InputContainer>
               <InputLabel>{name[language]}</InputLabel>

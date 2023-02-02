@@ -20,10 +20,10 @@ const Settings: React.FC<SettingsProps> = () => {
       setLanguage!(Number(event.target.value));
 
     return (
-      <Container>
-        <Box>
-          <CloseIcon onClick={() => setSettingsOpen!(false)}>X</CloseIcon>
-          <Title>{title[language]}</Title>
+      <Container dark={dark}>
+        <Box dark={dark}>
+          <CloseIcon onClick={() => setSettingsOpen!(false)} dark={dark}>X</CloseIcon>
+          <Title dark={dark}>{title[language]}</Title>
           <ItemsContainer>
             <Item>
               <ItemTitle>{theme[language]}</ItemTitle>

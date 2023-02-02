@@ -22,13 +22,13 @@ import {useAppContext} from "../../contexts/app";
 interface NewPostProps {}
 
 const NewPost: React.FC<NewPostProps> = () => {
-    const {setPostMenuOpen, language} = useAppContext();
+    const {setPostMenuOpen, language, dark} = useAppContext();
 
     return (
-      <Container>
-        <Box>
-          <CloseIcon onClick={() => setPostMenuOpen!(false)}>X</CloseIcon>
-          <Title>{newPost[language]}</Title>
+      <Container dark={dark}>
+        <Box dark={dark}>
+          <CloseIcon onClick={() => setPostMenuOpen!(false)} dark={dark}>X</CloseIcon>
+          <Title dark={dark}>{newPost[language]}</Title>
           <InputsForm>
             <InputLabel>{desc[language]}</InputLabel>
             <PostDescription rows={4} placeholder={descPh[language]} />

@@ -16,12 +16,14 @@ interface TransferProps {
 }
 
 const Transfer: React.FC<TransferProps> = ({accountId}) => {
-    const {setTransferId, language} = useAppContext();
+    const {setTransferId, language, dark} = useAppContext();
 
     return (
-      <Container>
-        <Box>
-          <CloseIcon onClick={() => setTransferId!("")}>X</CloseIcon>
+      <Container dark={dark}>
+        <Box dark={dark}>
+          <CloseIcon onClick={() => setTransferId!("")} dark={dark}>
+            X
+          </CloseIcon>
           <Title>
             {recPrfx[language]} {accountId}
           </Title>
