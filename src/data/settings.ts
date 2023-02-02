@@ -5,5 +5,5 @@ export const languages: Array<string> = [
 ];
 
 export const themes: Array<string> = [
-    "Light", "Dark"
+    "☀️", "🌑"
 ];
