@@ -1,6 +1,7 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
 
+
 import {
   Container, 
   LoginForm, 
@@ -11,13 +12,22 @@ import {
 } from "./styles";
 import {Button} from "../../utils/styles";
 
+import {
+  title, caption, 
+  button, footer, 
+  settings
+} from "../../translations/login";
+
 import {useAppContext} from "../../contexts/app";
 
 interface LoginPageProps {}
 
 const LoginPage: React.FC<LoginPageProps> = () => {
   const navigate = useNavigate();
-  const {setLoggedIn, setShowTerms, setSettingsOpen} = useAppContext();
+  const {
+    setLoggedIn, setShowTerms, 
+    setSettingsOpen, language
+  } = useAppContext();
   
   const onLogin = () => {
     setLoggedIn!(true);
@@ -28,17 +38,19 @@ const LoginPage: React.FC<LoginPageProps> = () => {
     <Container>
       <div>
         <LoginForm>
-          <Title>Subdot</Title>
-          <Caption>Bringing power back to the people</Caption>
+          <Title>{title[language]}</Title>
+          <Caption>{caption[language]}</Caption>
           <Button onClick={onLogin} bgColor="#1a1a1a">
-            CONNECT WALLET
+            {button[language]}
           </Button>
         </LoginForm>
       </div>
       <Footer1 onClick={() => setShowTerms!(true)}>
-        Terms and Conditions | Privacy and Policy
+        {footer[language]}
       </Footer1>
-      <Footer2 onClick={() => setSettingsOpen!(true)}>Settings</Footer2>
+      <Footer2 onClick={() => setSettingsOpen!(true)}>
+        {settings[language]}
+      </Footer2>
     </Container>
   );
 };

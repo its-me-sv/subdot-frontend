@@ -15,8 +15,10 @@ const Settings: React.FC<SettingsProps> = () => {
     const handleThemeChange = (event: ChangeEvent<HTMLSelectElement>) =>
       setDark!(event.target.value === "1");
 
-    const handleLanguageChange = (event: ChangeEvent<HTMLSelectElement>) =>
+    const handleLanguageChange = (event: ChangeEvent<HTMLSelectElement>) => {
+      console.log(Number(event.target.value));
       setLanguage!(Number(event.target.value));
+    }
 
     return (
       <Container>
@@ -36,7 +38,7 @@ const Settings: React.FC<SettingsProps> = () => {
             </Item>
             <Item>
                 <ItemTitle>LANGUAGE</ItemTitle>  
-                <SelectLang value={languages[language]} onChange={handleLanguageChange}>
+                <SelectLang value={language} onChange={handleLanguageChange}>
                     {languages.map((val, idx) => (
                         <option key={val} value={idx}>
                             {val}
