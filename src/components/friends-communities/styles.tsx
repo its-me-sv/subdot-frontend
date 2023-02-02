@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {BoxShadow} from "../../utils/styles";
+import {BoxShadow, BoxShadowDark} from "../../utils/styles";
 
 export const Container = styled.div`
     display: grid;
@@ -37,7 +37,7 @@ export const SectionProfiles = styled.div`
   overflow-y: scroll;
 `;
 
-export const ProfileContainer = styled.div<{ hover?: Boolean }>`
+export const ProfileContainer = styled.div<{ hover?: boolean; dark: boolean }>`
   cursor: pointer;
   margin: 0 0.3rem;
   display: flex;
@@ -47,12 +47,14 @@ export const ProfileContainer = styled.div<{ hover?: Boolean }>`
   &:hover {
     border-radius: 0.14rem;
     ${BoxShadow}
+    ${props => props.dark && `${BoxShadowDark}`}
   }
   ${(props) =>
     props?.hover &&
     `
     border-radius: 0.14rem;
     ${BoxShadow}
+    ${props.dark && `${BoxShadowDark}`}
   `}
 `;
 
