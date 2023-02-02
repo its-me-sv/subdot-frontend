@@ -3,6 +3,10 @@ import {useNavigate} from "react-router-dom";
 
 import {Container, Box, CloseIcon} from '../terms-privacy/styles';
 import {JoinedDate, ProfilePicture, Section, Detail, Content, Details, MetaDetails, MetaInfo, Footer} from "./styles";
+import {
+  memSce, username,
+  name, meta, footer
+} from "../../translations/peek";
 
 import {useAppContext} from "../../contexts/app";
 import {Button} from "../../utils/styles";
@@ -13,7 +17,7 @@ interface PeekProps {
 
 const Peek: React.FC<PeekProps> = ({id}) => {
     const navigate = useNavigate();
-    const {setPeek, setTransferId} = useAppContext();
+    const {setPeek, setTransferId, language} = useAppContext();
 
     return (
       <Container>
@@ -23,13 +27,13 @@ const Peek: React.FC<PeekProps> = ({id}) => {
             alt={`pp of ${id}`}
             src={require("../../assets/temp.jpg")}
           />
-          <JoinedDate>Member since May 11, 2002</JoinedDate>
+          <JoinedDate>{memSce[language]} May 11, 2002</JoinedDate>
           <Details>
-            <Section>USERNAME</Section>
+            <Section>{username[language]}</Section>
             <Detail type="text" value={"<Dark Knight />"} readOnly />
           </Details>
           <Details>
-            <Section>NAME</Section>
+            <Section>{name[language]}</Section>
             <Detail type="text" value={"Suraj Vijayan"} readOnly />
           </Details>
           <MetaDetails>
@@ -39,30 +43,33 @@ const Peek: React.FC<PeekProps> = ({id}) => {
             </MetaInfo>
             <MetaInfo>
               <Content>52</Content>
-              <Section>FOLLOWERS</Section>
+              <Section>{meta.followers[language]}</Section>
             </MetaInfo>
             <MetaInfo>
               <Content>76</Content>
-              <Section>FOLLOWING</Section>
+              <Section>{meta.following[language]}</Section>
             </MetaInfo>
             <MetaInfo>
               <Content>14</Content>
-              <Section>POSTS</Section>
+              <Section>{meta.posts[language]}</Section>
             </MetaInfo>
           </MetaDetails>
           <Footer>
-            <Button 
-              bgColor="#0072bb" 
+            <Button
+              bgColor="#0072bb"
               onClick={() => navigate(`/chat?user=${id}`)}
-            >MESSAGE</Button>
-            <Button 
-              bgColor="#005e20"
-              onClick={() => setTransferId!(id)}
-            >TRANSFER $</Button>
-            <Button 
+            >
+              {footer.msg[language]}
+            </Button>
+            <Button bgColor="#005e20" onClick={() => setTransferId!(id)}>
+              {footer.transfer[language]} $
+            </Button>
+            <Button
               bgColor="#353132"
               onClick={() => navigate(`/profile/${id}`)}
-            >VIEW PROFILE</Button>
+            >
+              {footer.profile[language]}
+            </Button>
           </Footer>
         </Box>
       </Container>
