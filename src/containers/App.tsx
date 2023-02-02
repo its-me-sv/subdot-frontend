@@ -41,11 +41,11 @@ const App: React.FC<AppProps> = () => {
     <div className={loggedIn ? "app-container" : ""}>
       {showTerms && <TermsPolicies />}
       {settingsOpen && <Settings />}
-      {advertMenuOpen && <Advertise />}
       <HashRouter>
         {loggedIn && (
           <>
             <Header />
+            {advertMenuOpen && <Advertise />}
             {explore.length > 0 && <Results />}
             {peek.length > 0 && <Peek id={peek} />}
             {commentId.length > 0 && <Comments postId={commentId} />}
