@@ -2,6 +2,7 @@ import React from "react";
 
 import {Container, StickyButton} from "./styles";
 import {Button} from "../../utils/styles";
+import {share} from "../../translations/posts";
 
 import Post from "./post";
 
@@ -10,7 +11,7 @@ import {useAppContext} from "../../contexts/app";
 interface PostsProps {}
 
 const Posts: React.FC<PostsProps> = () => {
-    const {setPostMenuOpen} = useAppContext();
+    const {setPostMenuOpen, language} = useAppContext();
     
     return (
       <Container>
@@ -18,7 +19,7 @@ const Posts: React.FC<PostsProps> = () => {
           <Button 
             bgColor="#353132"
             onClick={() => setPostMenuOpen!(true)}
-          >SHARE A POST</Button>
+          >{share[language]}</Button>
         </StickyButton>
         {new Array(7).fill(0).map((_, __) => <Post />)}
       </Container>

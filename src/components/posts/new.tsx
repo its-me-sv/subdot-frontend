@@ -9,6 +9,11 @@ import {
     InputLabel, Input
 } from "../advertise/styles";
 import {PostDescription} from "./styles";
+import {
+  newPost, desc,
+  descPh, pict,
+  pictPh, post
+} from "../../translations/posts";
 
 import {Button} from "../../utils/styles";
 
@@ -17,22 +22,22 @@ import {useAppContext} from "../../contexts/app";
 interface NewPostProps {}
 
 const NewPost: React.FC<NewPostProps> = () => {
-    const {setPostMenuOpen} = useAppContext();
+    const {setPostMenuOpen, language} = useAppContext();
 
     return (
       <Container>
         <Box>
           <CloseIcon onClick={() => setPostMenuOpen!(false)}>X</CloseIcon>
-          <Title>NEW POST</Title>
+          <Title>{newPost[language]}</Title>
           <InputsForm>
-            <InputLabel>DESCRIPTION</InputLabel>
-            <PostDescription rows={4} />
+            <InputLabel>{desc[language]}</InputLabel>
+            <PostDescription rows={4} placeholder={descPh[language]} />
             <InputContainer>
-              <InputLabel>PICTURE</InputLabel>
-              <Input type="text" placeholder="Address of picture" />
+              <InputLabel>{pict[language]}</InputLabel>
+              <Input type="text" placeholder={pictPh[language]} />
             </InputContainer>
           </InputsForm>
-          <Button bgColor="#1a1a1a">POST</Button>
+          <Button bgColor="#1a1a1a">{post[language]}</Button>
         </Box>
       </Container>
     );

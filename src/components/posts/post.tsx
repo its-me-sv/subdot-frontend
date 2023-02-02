@@ -9,6 +9,7 @@ import {
     PostImage, PostTime, 
     PostUsername
 } from './styles';
+import {posted} from "../../translations/posts";
 
 import {useAppContext} from "../../contexts/app";
 
@@ -16,7 +17,10 @@ interface PostProps {}
 
 const Post: React.FC<PostProps> = () => {
     const navigate = useNavigate();
-    const {setCommentId, setTransferId} = useAppContext();
+    const {
+        setCommentId, setTransferId,
+        language
+    } = useAppContext();
 
     return (
         <PostContainer>
@@ -27,7 +31,7 @@ const Post: React.FC<PostProps> = () => {
                 />
                 <PostHeaderRight>
                     <PostUsername>{"<Dark Knight />"}</PostUsername>
-                    <PostTime>posted {format(new Date(2002, 4, 11))}</PostTime>
+                    <PostTime>{posted[language]} {format(new Date(2002, 4, 11))}</PostTime>
                 </PostHeaderRight>
             </PostHeader>
             <PostContent>
