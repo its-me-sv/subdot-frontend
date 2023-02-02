@@ -14,7 +14,7 @@ interface SectionProfileProps {
 }
 
 const SectionProfile: React.FC<SectionProfileProps> = ({id, hover}) => {
-    const {setPeek} = useAppContext();
+    const {setPeek, dark} = useAppContext();
 
     return (
       <ProfileContainer onClick={() => setPeek!(id)} hover={hover} >
@@ -24,8 +24,8 @@ const SectionProfile: React.FC<SectionProfileProps> = ({id, hover}) => {
             src={require("../../assets/temp.jpg")}
           />
           <ProfileInfo>
-            <ProfileName>{id}</ProfileName>
-            <ProfileStatusText>Status text</ProfileStatusText>
+            <ProfileName dark={dark}>{id}</ProfileName>
+            <ProfileStatusText dark={dark}>Status text</ProfileStatusText>
           </ProfileInfo>
         </ProfileDetails>
         {/* <HrLn /> */}

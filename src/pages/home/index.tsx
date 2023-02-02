@@ -11,14 +11,14 @@ import {useAppContext} from "../../contexts/app";
 interface HomePageProps {}
 
 const HomePage: React.FC<HomePageProps> = () => {
-  const {resetAppContext} = useAppContext();
+  const {resetAppContext, dark} = useAppContext();
 
   useEffect(() => {
     return () => resetAppContext!();
   }, []);
 
   return (
-    <Container>
+    <Container dark={dark}>
       <FriendsCommunites />
       <Posts />
       <RPAdvert />

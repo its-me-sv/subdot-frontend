@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.div<{ dark: boolean }>`
   display: grid;
   grid-template-columns: 2fr 8fr 3fr;
   grid-template-rows: 1fr;
+  background-color: #f5f4f9;
+  ${props => props.dark && `
+    background-color: #1a1a1a;
+  `}
 `;

@@ -16,11 +16,16 @@ export const Section = styled.div`
   margin-bottom: 0rem;
 `;
 
-export const SectionTitle = styled.span`
-    font-family: Inter;
-    font-size: 1.6rem;
-    opacity: 0.84;
-    color: #1a1a1a;
+export const SectionTitle = styled.span<{ dark: boolean }>`
+  font-family: Inter;
+  font-size: 1.6rem;
+  opacity: 0.84;
+  color: #1a1a1a;
+  ${(props) =>
+    props.dark &&
+    `
+    color: #f5f4f9;
+  `}
 `;
 
 export const SectionProfiles = styled.div`
@@ -67,14 +72,20 @@ export const ProfileInfo = styled.div`
     flex-direction: column;
 `;
 
-export const ProfileName = styled.span`
+export const ProfileName = styled.span<{dark: boolean;}>`
   font-family: Inter;
   font-size: 1.2rem;
   color: #1a1a1a;
+  ${props => props.dark && `
+    color: #f5f4f9;
+  `}
 `;
 
-export const ProfileStatusText = styled.span`
+export const ProfileStatusText = styled.span<{dark: boolean;}>`
   font-family: Inter;
   font-size: 1rem;
   color: #1a1a1a;
+  ${props => props.dark && `
+    color: #f5f4f9;
+  `}
 `;

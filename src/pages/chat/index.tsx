@@ -6,15 +6,19 @@ import FriendsCommunites from "../../components/friends-communities";
 import AdvertSideView from "../../components/advert-sideview";
 import Chat from "../../components/chat";
 
+import {useAppContext} from "../../contexts/app";
+
 interface ChatPageProps {}
 
 const ChatPage: React.FC<ChatPageProps> = () => {
+    const {dark} = useAppContext();
+    
     return (
-        <Container>
-            <FriendsCommunites />
-            <Chat />
-            <AdvertSideView />
-        </Container>
+      <Container dark={dark}>
+        <FriendsCommunites />
+        <Chat />
+        <AdvertSideView />
+      </Container>
     );
 };
 
