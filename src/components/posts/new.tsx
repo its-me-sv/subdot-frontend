@@ -33,13 +33,15 @@ const NewPost: React.FC<NewPostProps> = () => {
           <Title dark={dark}>{newPost[language]}</Title>
           <InputsForm>
             <InputLabel dark={dark}>{desc[language]}</InputLabel>
-            <PostDescription rows={4} placeholder={descPh[language]} />
+            <PostDescription dark={dark} rows={4} placeholder={descPh[language]} />
             <InputContainer>
               <InputLabel dark={dark}>{pict[language]}</InputLabel>
               <Input dark={dark} type="text" placeholder={pictPh[language]} />
             </InputContainer>
           </InputsForm>
-          <Button bgColor="#1a1a1a">{post[language]}</Button>
+          <Button bgColor={dark ? "#f5f4f9" : "#1a1a1a"} dark={dark}>
+            {post[language]}
+          </Button>
         </Box>
       </Container>
     );

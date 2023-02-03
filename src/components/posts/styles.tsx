@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {BoxShadow} from "../../utils/styles";
+import {BoxShadow, BoxShadowDark} from "../../utils/styles";
 
 export const Container = styled.div`
   display: flex;
@@ -96,12 +96,17 @@ export const FooterItem = styled.div`
   }
 `;
 
-export const PostDescription = styled.textarea`
+export const PostDescription = styled.textarea<{dark: boolean;}>`
   font-family: Inter;
   outline: none;
   border: none;
   font-size: 1.2rem;
   border-radius: 0.14rem;
   resize: none;
-  ${BoxShadow}d
+  color: #1a1a1a;
+  ${BoxShadow}
+  ${props => props.dark && `
+    color: #f5f4f9;
+    ${BoxShadowDark}
+  `}
 `;
