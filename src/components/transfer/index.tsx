@@ -24,7 +24,7 @@ const Transfer: React.FC<TransferProps> = ({accountId}) => {
           <CloseIcon onClick={() => setTransferId!("")} dark={dark}>
             X
           </CloseIcon>
-          <Title>
+          <Title dark={dark}>
             {recPrfx[language]} {accountId}
           </Title>
           <InputContainer>
