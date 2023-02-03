@@ -1,17 +1,19 @@
 import styled from "styled-components";
-import {BoxShadow} from "../../utils/styles";
+import {BoxShadow, BoxShadowDark} from "../../utils/styles";
 
-export const Container = styled.div`
+export const Container = styled.div<{dark: boolean;}>`
   display: flex;
   flex-direction: column;
   height: 92vh;
   padding: 0.42rem 0rem;
   border-right: 1px solid #1a1a1a;
+  ${props => props.dark && `
+    border-right: 1px solid #f5f4f9;
+  `}
 `;
 
-export const InputContainer = styled.div`
+export const InputContainer = styled.div<{ dark: boolean }>`
   display: flex;
-  ${BoxShadow}
   margin: 0.42rem;
   gap: 0.3rem;
   padding: 0.14rem;
@@ -19,19 +21,28 @@ export const InputContainer = styled.div`
   img {
     width: 2.1rem;
     align-self: center;
+    ${(props) => props.dark && `filter: invert(100%);`}
   }
-    textarea,
-    textarea::placeholder {
-        width: 95%;
-        resize: none;
-        outline: none;
-        border: none;
-        font-family: Inter;
-        border-radius: 0.14rem;
-        font-size: 1.2rem;
-        color: #1a1a1a;
-        background-color: #d7d7d7;
-    }
+  ${BoxShadow}
+  ${(props) => props.dark && `${BoxShadowDark}`}
+  textarea,
+  textarea::placeholder {
+    width: 95%;
+    resize: none;
+    outline: none;
+    border: none;
+    font-family: Inter;
+    border-radius: 0.14rem;
+    font-size: 1.2rem;
+    color: #1a1a1a;
+    background-color: #d7d7d7;
+    ${(props) =>
+      props.dark &&
+      `
+    background-color: #625e5e;
+    color: #d7d7d7;
+  `}
+  }
 `;
 
 export const MessagesContainer = styled.div`
@@ -45,15 +56,13 @@ export const MessagesContainer = styled.div`
   padding-left: 0.84rem;
 `;
 
-export const Message = styled.div`
+export const Message = styled.div<{ dark: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 0.42rem;
   font-family: Inter;
   font-size: 1.2rem;
-  color: #1a1a1a;
   margin-right: 0.24rem;
-  background-color: #d7d7d7;
   border-radius: 0.14rem;
   padding: 0.14rem;
   max-width: 21vw;
@@ -61,4 +70,12 @@ export const Message = styled.div`
     align-self: flex-end;
     font-size: 0.84rem;
   }
+  color: #1a1a1a;
+  background-color: #d7d7d7;
+  ${(props) =>
+    props.dark &&
+    `
+    background-color: #625e5e;
+    color: #d7d7d7;
+  `}
 `;

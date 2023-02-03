@@ -8,10 +8,10 @@ import {useAppContext} from "../../contexts/app";
 interface MessageInputProps {}
 
 const MessageInput: React.FC<MessageInputProps> = () => {
-    const {language} = useAppContext();
+    const {language, dark} = useAppContext();
 
     return (
-        <InputContainer>
+        <InputContainer dark={dark}>
             <textarea placeholder={msgPh[language]} />
             <img alt="send" src={require("../../assets/icons/send.png")} />
         </InputContainer>
