@@ -19,22 +19,22 @@ const Post: React.FC<PostProps> = () => {
     const navigate = useNavigate();
     const {
         setCommentId, setTransferId,
-        language
+        language, dark
     } = useAppContext();
 
     return (
-        <PostContainer>
+        <PostContainer dark={dark}>
             <PostHeader onClick={() => navigate("/profile/suraj")}>
                 <img 
                     alt="pp"
                     src={require("../../assets/temp.jpg")} 
                 />
-                <PostHeaderRight>
+                <PostHeaderRight dark={dark}>
                     <PostUsername>{"<Dark Knight />"}</PostUsername>
                     <PostTime>{posted[language]} {format(new Date(2002, 4, 11))}</PostTime>
                 </PostHeaderRight>
             </PostHeader>
-            <PostContent>
+            <PostContent dark={dark}>
                 Hi there friends. I just took a picture with an stray dog
             </PostContent>
             <PostImage 
@@ -42,21 +42,21 @@ const Post: React.FC<PostProps> = () => {
                 src={require("../../assets/content_temp.jpg")} 
                 />
             <PostFooter>
-                <FooterItem>
+                <FooterItem dark={dark}>
                     <img 
                         alt="like" 
                         src={require("../../assets/icons/like.png")} 
                     />
                     <span>1.1m</span>
                 </FooterItem>
-                <FooterItem onClick={() => setCommentId!("123")}>
+                <FooterItem dark={dark} onClick={() => setCommentId!("123")}>
                     <img 
                         alt="comment" 
                         src={require("../../assets/icons/comment.png")} 
                     />
                     <span>1.1m</span>
                 </FooterItem>
-                <FooterItem onClick={() => setTransferId!("<Dark Knight />")}>
+                <FooterItem dark={dark} onClick={() => setTransferId!("<Dark Knight />")}>
                     <img 
                         alt="tip"
                         src={require("../../assets/icons/tip.png")} 

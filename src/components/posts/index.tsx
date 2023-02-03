@@ -11,17 +11,22 @@ import {useAppContext} from "../../contexts/app";
 interface PostsProps {}
 
 const Posts: React.FC<PostsProps> = () => {
-    const {setPostMenuOpen, language} = useAppContext();
+    const {setPostMenuOpen, language, dark} = useAppContext();
     
     return (
       <Container>
         <StickyButton>
-          <Button 
-            bgColor="#353132"
+          <Button
+            bgColor={dark ? "#f5f4f9" : "#1a1a1a"}
+            dark={dark}
             onClick={() => setPostMenuOpen!(true)}
-          >{share[language]}</Button>
+          >
+            {share[language]}
+          </Button>
         </StickyButton>
-        {new Array(7).fill(0).map((_, __) => <Post />)}
+        {new Array(7).fill(0).map((_, __) => (
+          <Post />
+        ))}
       </Container>
     );
 };

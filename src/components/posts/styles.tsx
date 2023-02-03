@@ -17,7 +17,7 @@ export const StickyButton = styled.div`
     position: absolute;
 `;
 
-export const PostContainer = styled.div`
+export const PostContainer = styled.div<{dark: boolean;}>`
   display: flex;
   flex-direction: column;
   width: 36vw;
@@ -25,6 +25,9 @@ export const PostContainer = styled.div`
   padding: 0.42rem;
   border-radius: 0.14rem;
   ${BoxShadow}
+  ${props => props.dark && `
+    ${BoxShadowDark}
+  `}
 `;
 
 export const PostHeader = styled.div`
@@ -43,27 +46,31 @@ export const PostHeader = styled.div`
   }
 `;
 
-export const PostHeaderRight = styled.div`
+export const PostHeaderRight = styled.div<{dark: boolean;}>`
   display: flex;
   flex-direction: column;
+  font-family: Inter;
+  color: #1a1a1a;
+  ${props => props.dark && `
+    color: #f5f4f9;
+  `}
 `;
 
 export const PostUsername = styled.span`
-  font-family: Inter;
   font-size: 1.2rem;
-  color: #1a1a1a;
 `;
 
 export const PostTime = styled.span`
-  font-family: Inter;
-  color: #1a1a1a;
   opacity: 0.9;
 `;
 
-export const PostContent = styled.span`
+export const PostContent = styled.span<{dark: boolean;}>`
   font-family: Inter;
   font-size: 1.2rem;
   color: #1a1a1a;
+  ${props => props.dark && `
+    color: #f5f4f9;
+  `}
 `;
 
 export const PostImage = styled.img`
@@ -76,7 +83,7 @@ export const PostFooter = styled.div`
   justify-content: space-between;
 `;
 
-export const FooterItem = styled.div`
+export const FooterItem = styled.div<{dark: boolean;}>`
   display: flex;
   align-items: center;
   gap: 0.14rem;
@@ -84,12 +91,18 @@ export const FooterItem = styled.div`
   img {
     width: 2.1rem;
     height: 2.1rem;
+    ${props => props.dark && `
+      filter: invert(100%);
+    `}
   }
   span {
     font-family: Inter;
-    color: #1a1a1a;
     font-size: 1.2rem;
     opacity: 0.9;
+    color: #1a1a1a;
+    ${props => props.dark && `
+      color: #f5f4f9;
+    `}
   }
   &:hover {
     opacity: 0.5;
