@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {HashRouter, Route, Routes, Navigate} from "react-router-dom";
 
 import '../../index.css';
@@ -20,6 +20,7 @@ import Peek from "../../components/peek";
 import Transfer from "../../components/transfer";
 import NewPost from "../../components/posts/new";
 import Transactions from "../../components/transactions";
+import Loader from "../../components/loader";
 import Header from "../../components/header";
 
 // providers
@@ -34,11 +35,19 @@ const App: React.FC<AppProps> = () => {
     settingsOpen, advertMenuOpen, 
     explore, peek, 
     commentId, transferId,
-    postMenuOpen, txOpen
+    postMenuOpen, txOpen,
+    loading, setLoading
   } = useAppContext();
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading!(false);
+    }, 3000);
+  }, []);
   
   return (
     <div className={loggedIn ? "app-container" : ""}>
+      {loading && <Loader />}
       {showTerms && <TermsPolicies />}
       {settingsOpen && <Settings />}
       <HashRouter>

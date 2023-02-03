@@ -14,6 +14,7 @@ interface AppContextInterface {
   transferId: string;
   postMenuOpen: boolean;
   txOpen: boolean;
+  loading: boolean;
   resetAppContext?: () => void;
   setLoggedIn?: React.Dispatch<React.SetStateAction<boolean>>;
   setShowTerms?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -28,6 +29,7 @@ interface AppContextInterface {
   setTransferId?: React.Dispatch<React.SetStateAction<string>>;
   setPostMenuOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   setTxOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  setLoading?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const defaultState: AppContextInterface = {
@@ -43,7 +45,8 @@ const defaultState: AppContextInterface = {
     commentId: "",
     transferId: "",
     postMenuOpen: false,
-    txOpen: false
+    txOpen: false,
+    loading: true
 };
 
 export const AppContext = createContext<AppContextInterface>(defaultState);
@@ -64,6 +67,7 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
     const [transferId, setTransferId] = useState<string>(defaultState.transferId);
     const [postMenuOpen, setPostMenuOpen] = useState<boolean>(defaultState.postMenuOpen);
     const [txOpen, setTxOpen] = useState<boolean>(defaultState.txOpen);
+    const [loading, setLoading] = useState<boolean>(defaultState.loading);
 
     const resetAppContext = () => {
         setShowTerms!(false);
@@ -93,7 +97,8 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
             commentId, setCommentId,
             transferId, setTransferId,
             postMenuOpen, setPostMenuOpen,
-            txOpen, setTxOpen
+            txOpen, setTxOpen,
+            loading, setLoading
         }}>
             {children}
         </AppContext.Provider>
