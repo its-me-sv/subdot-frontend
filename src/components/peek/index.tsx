@@ -29,31 +29,36 @@ const Peek: React.FC<PeekProps> = ({id}) => {
             alt={`pp of ${id}`}
             src={require("../../assets/temp.jpg")}
           />
-          <JoinedDate>{memSce[language]} May 11, 2002</JoinedDate>
+          <JoinedDate dark={dark}>{memSce[language]} May 11, 2002</JoinedDate>
           <Details>
-            <Section>{username[language]}</Section>
-            <Detail type="text" value={"<Dark Knight />"} readOnly />
+            <Section dark={dark}>{username[language]}</Section>
+            <Detail
+              dark={dark}
+              type="text"
+              value={"<Dark Knight />"}
+              readOnly
+            />
           </Details>
           <Details>
-            <Section>{name[language]}</Section>
-            <Detail type="text" value={"Suraj Vijayan"} readOnly />
+            <Section dark={dark}>{name[language]}</Section>
+            <Detail dark={dark} type="text" value={"Suraj Vijayan"} readOnly />
           </Details>
           <MetaDetails>
             <MetaInfo>
-              <Content>42</Content>
-              <Section>RP</Section>
+              <Content dark={dark}>42</Content>
+              <Section dark={dark}>RP</Section>
             </MetaInfo>
             <MetaInfo>
-              <Content>52</Content>
-              <Section>{meta.followers[language]}</Section>
+              <Content dark={dark}>52</Content>
+              <Section dark={dark}>{meta.followers[language]}</Section>
             </MetaInfo>
             <MetaInfo>
-              <Content>76</Content>
-              <Section>{meta.following[language]}</Section>
+              <Content dark={dark}>76</Content>
+              <Section dark={dark}>{meta.following[language]}</Section>
             </MetaInfo>
             <MetaInfo>
-              <Content>14</Content>
-              <Section>{meta.posts[language]}</Section>
+              <Content dark={dark}>14</Content>
+              <Section dark={dark}>{meta.posts[language]}</Section>
             </MetaInfo>
           </MetaDetails>
           <Footer>
@@ -67,7 +72,8 @@ const Peek: React.FC<PeekProps> = ({id}) => {
               {footer.transfer[language]} $
             </Button>
             <Button
-              bgColor="#353132"
+              bgColor={dark ? "#f5f4f9" : "#1a1a1a"}
+              dark={dark}
               onClick={() => navigate(`/profile/${id}`)}
             >
               {footer.profile[language]}

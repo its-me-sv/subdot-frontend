@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {BoxShadow} from "../../utils/styles";
+import {BoxShadow, BoxShadowDark} from "../../utils/styles";
 
 export const ProfilePicture = styled.img`
     width: 7rem;
@@ -8,11 +8,14 @@ export const ProfilePicture = styled.img`
     align-self: center;
 `;
 
-export const JoinedDate = styled.span`
+export const JoinedDate = styled.span<{dark: boolean;}>`
     font-family: Inter;
     font-size: 0.8rem;
-    color: #1a1a1a;
     align-self: flex-end;
+    color: #1a1a1a;
+    ${props => props.dark && `
+      color: #f5f4f9;
+    `}
 `;
 
 export const Details = styled.div`
@@ -24,31 +27,41 @@ export const Details = styled.div`
     margin-top: 1rem;
 `;
 
-export const Detail = styled.input`
+export const Detail = styled.input<{dark: boolean;}>`
   font-family: Inter;
   outline: none;
   border: none;
   font-size: 1.4rem;
   text-align: center;
   border-radius: 0.14rem;
-  color: #1a1a1a;
   opacity: 0.9;
   padding: 0.42rem 0;
+  color: #1a1a1a;
   ${BoxShadow}
+  ${props => props.dark && `
+    color: #f5f4f9;
+    ${BoxShadowDark}
+  `}
 `;
 
-export const Section = styled.span`
+export const Section = styled.span<{dark: boolean;}>`
     font-family: Inter;
     font-size: 1.2rem;
     opacity: 0.9;
     color: #1a1a1a;
+    ${props => props.dark && `
+      color: #f5f4f9;
+    `}
 `;
 
-export const Content = styled.span`
+export const Content = styled.span<{dark: boolean;}>`
     font-family: Inter;
     font-size: 1.6rem;
     opacity: 0.9;
     color: #1a1a1a;
+    ${props => props.dark && `
+      color: #f5f4f9;
+    `}
 `;
 
 export const MetaDetails = styled.div`
