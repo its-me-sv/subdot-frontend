@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import {Container} from '../home/styles';
 
@@ -11,7 +11,11 @@ import {useAppContext} from "../../contexts/app";
 interface ProfilePageProps {}
 
 const ProfilePage: React.FC<ProfilePageProps> = () => {
-  const {dark} = useAppContext();
+  const {dark, resetAppContext} = useAppContext();
+
+  useEffect(() => {
+    return () => resetAppContext!();
+  }, []);
 
   return (
     <Container dark={dark}>
