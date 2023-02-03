@@ -1,36 +1,35 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    padding: 0 0.42rem;
-    align-items: center;
-    justify-content: center;
-    gap: 1.4rem;
-    img {
-        width: 8.4rem;
-        height: 8.4rem;
-        border-radius: 50%;
-    }
+export const Container = styled.div<{dark: boolean;}>`
+  display: flex;
+  flex-direction: column;
+  padding: 0 0.42rem;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4rem;
+  font-family: Inter;
+  img {
+    width: 8.4rem;
+    height: 8.4rem;
+    border-radius: 50%;
+  }
+  color: #1a1a1a;
+  ${props => props.dark && `color: #f5f4f9;`}
 `;
 
 export const Username = styled.span`
-  font-family: Inter;
   font-size: 1.6rem;
   text-align: center;
-  color: #1a1a1a;
 `;
 
 export const Joined = styled.span`
-  font-family: Inter;
-  color: #1a1a1a;
+  /* font-family: Inter;
+  color: #1a1a1a; */
 `;
 
 export const Status = styled.span`
-    font-family: Inter;
     font-size: 1.2rem;
     text-align: center;
-    color: #1a1a1a;
 `;
 
 export const Meta = styled.div`
@@ -39,14 +38,15 @@ export const Meta = styled.div`
     gap: 1rem;
 `;
 
-export const MetaItem = styled.div`
+export const MetaItem = styled.div<{dark: boolean;}>`
   display: flex;
   flex-direction: column;
   align-items: center;
   span {
     font-family: Inter;
-    color: #1a1a1a;
     font-size: 1.2rem;
+    color: #1a1a1a;
+    ${props => props.dark && `color: #f5f4f9;`}
   }
   span:first-child {
     font-size: 1.6rem;

@@ -18,28 +18,28 @@ interface ProfileSideViewProps {
 
 const ProfileSideView: React.FC<ProfileSideViewProps> = ({id}) => {
   const navigate = useNavigate();
-  const {setTransferId, language} = useAppContext();
+  const {setTransferId, language, dark} = useAppContext();
 
   return (
-    <Container>
+    <Container dark={dark}>
       <img alt="pp" src={require("../../assets/temp.jpg")} />
       <Username>{"<Dark Knight />"}</Username>
       <Joined>{memSce[language]} May 11, 2002</Joined>
       <Status>The night is darkest just before the dawn</Status>
       <Meta>
-        <MetaItem>
+        <MetaItem dark={dark}>
           <span>173</span>
           <span>{meta.reputation[language]}</span>
         </MetaItem>
-        <MetaItem>
+        <MetaItem dark={dark}>
           <span>14</span>
           <span>{meta.posts[language]}</span>
         </MetaItem>
-        <MetaItem>
+        <MetaItem dark={dark}>
           <span>52</span>
           <span>{meta.followers[language]}</span>
         </MetaItem>
-        <MetaItem>
+        <MetaItem dark={dark}>
           <span>76</span>
           <span>{meta.following[language]}</span>
         </MetaItem>
@@ -51,7 +51,10 @@ const ProfileSideView: React.FC<ProfileSideViewProps> = ({id}) => {
         <Button bgColor="#005e20" onClick={() => setTransferId!(id)}>
           {footer.transfer[language]} $
         </Button>
-        <Button bgColor="#1a1a1a">{footer.follow[language]}</Button>
+        <Button 
+          bgColor={dark ? "#f5f4f9" : "#1a1a1a"}
+          dark={dark}
+        >{footer.follow[language]}</Button>
       </Footer>
     </Container>
   );
