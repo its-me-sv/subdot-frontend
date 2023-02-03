@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {BoxShadow} from "../../utils/styles";
+import {BoxShadow, BoxShadowDark} from "../../utils/styles";
 
 export const TransactionsHolder = styled.div`
     display: flex;
@@ -12,7 +12,7 @@ export const TransactionsHolder = styled.div`
     margin-bottom: 0.42rem;
 `;
 
-export const TransactionContainer = styled.div`
+export const TransactionContainer = styled.div<{dark: boolean;}>`
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
     align-items: center;
@@ -28,24 +28,31 @@ export const TransactionContainer = styled.div`
         }
     }
     &:hover {
-        ${BoxShadow}
+      ${BoxShadow}
+      ${props => props.dark && `${BoxShadowDark}`}
     }
 `;
 
-export const Meta = styled.div`
+export const Meta = styled.div<{dark: boolean;}>`
   display: flex;
   flex-direction: column;
   span {
     font-family: Inter;
     color: #1a1a1a;
+    ${props => props.dark && `
+      color: #f5f4f9;
+    `}
   }
   span:first-child {
     font-size: 1.2rem;
   }
 `;
 
-export const Amount = styled.span`
+export const Amount = styled.span<{dark: boolean;}>`
     font-family: Inter;
     font-size: 1.2rem;
     color: #1a1a1a;
+    ${props => props.dark && `
+      color: #f5f4f9;
+    `}
 `;
