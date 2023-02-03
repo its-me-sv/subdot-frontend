@@ -28,8 +28,8 @@ const Transfer: React.FC<TransferProps> = ({accountId}) => {
             {recPrfx[language]} {accountId}
           </Title>
           <InputContainer>
-            <InputLabel>{amount[language]}</InputLabel>
-            <Input type="number" placeholder={amtPh[language]} />
+            <InputLabel dark={dark}>{amount[language]}</InputLabel>
+            <Input dark={dark} type="number" placeholder={amtPh[language]} />
           </InputContainer>
           <Footer>
             <Button bgColor="#0072bb">{transfer[language]}</Button>

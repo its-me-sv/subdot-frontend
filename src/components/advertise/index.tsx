@@ -23,31 +23,35 @@ const Advertise: React.FC<AdvertiseProps> = () => {
     return (
       <Container dark={dark}>
         <Box dark={dark}>
-          <CloseIcon onClick={() => setAdvertMenuOpen!(false)} dark={dark}>X</CloseIcon>
+          <CloseIcon onClick={() => setAdvertMenuOpen!(false)} dark={dark}>
+            X
+          </CloseIcon>
           <Title dark={dark}>{title[language]}</Title>
           <InputsForm>
             <InputContainer>
-              <InputLabel>{name[language]}</InputLabel>
-              <Input type="text" placeholder={namePh[language]} />
+              <InputLabel dark={dark}>{name[language]}</InputLabel>
+              <Input dark={dark} type="text" placeholder={namePh[language]} />
             </InputContainer>
             <InputContainer>
-              <InputLabel>{duration[language]}</InputLabel>
-              <Input type="number" placeholder={durationPh[language]} />
+              <InputLabel dark={dark}>{duration[language]}</InputLabel>
+              <Input dark={dark} type="number" placeholder={durationPh[language]} />
             </InputContainer>
             <InputContainer>
-              <InputLabel>{link[language]}</InputLabel>
-              <Input type="text" placeholder={linkPh[language]} />
+              <InputLabel dark={dark}>{link[language]}</InputLabel>
+              <Input dark={dark} type="text" placeholder={linkPh[language]} />
             </InputContainer>
             <InputContainer>
-              <InputLabel>{pict[language]}</InputLabel>
-              <Input type="text" placeholder={pictPh[language]} />
+              <InputLabel dark={dark}>{pict[language]}</InputLabel>
+              <Input dark={dark} type="text" placeholder={pictPh[language]} />
             </InputContainer>
             <InputContainer>
-              <InputLabel>{cost[language]}</InputLabel>
-              <Input type="number" placeholder={costPh[language]} readOnly />
+              <InputLabel dark={dark}>{cost[language]}</InputLabel>
+              <Input dark={dark} type="number" placeholder={costPh[language]} readOnly />
             </InputContainer>
           </InputsForm>
-          <Button bgColor="#1a1a1a">{postAdvert[language]}</Button>
+          <Button bgColor={dark ? "#f5f4f9" : "#1a1a1a"} dark={dark}>
+            {postAdvert[language]}
+          </Button>
         </Box>
       </Container>
     );
