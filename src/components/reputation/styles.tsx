@@ -1,9 +1,13 @@
 import styled from "styled-components";
-import {BoxShadow} from "../../utils/styles";
+import {BoxShadow, BoxShadowDark} from "../../utils/styles";
 
-export const Container = styled.div`
+export const Container = styled.div<{dark: boolean;}>`
     display: grid;
     grid-template-columns: 5fr 1fr;
+    background-color: #f5f4f9;
+    ${props => props.dark && `
+        background-color: #1a1a1a;
+    `}
 `;
 
 export const InfoBox = styled.div`
@@ -15,10 +19,13 @@ export const InfoBox = styled.div`
     margin: 0rem 0.42rem;
 `;
 
-export const InfoBoxTitle = styled.span`
+export const InfoBoxTitle = styled.span<{dark: boolean;}>`
   font-family: Inter;
   font-size: 1.4rem;
   color: #1a1a1a;
+  ${props => props.dark && `
+    color: #f5f4f9;
+  `}
 `;
 
 export const InfoContent = styled.span`
@@ -27,7 +34,7 @@ export const InfoContent = styled.span`
     gap: 0.14rem;
 `;
 
-export const InfoItem = styled.div`
+export const InfoItem = styled.div<{dark: boolean;}>`
     display: flex;
     justify-content: space-between;
     gap: 0.42rem;
@@ -35,6 +42,9 @@ export const InfoItem = styled.div`
         font-family: Inter;
         font-size: 1.2rem;
         color: #1a1a1a;
+        ${props => props.dark && `
+            color: #f5f4f9;
+        `}
     }
 `;
 
@@ -47,8 +57,7 @@ export const BoardContainer = styled.div`
     padding: 1rem;
 `;
 
-export const UserContainer = styled.div`
-    ${BoxShadow}
+export const UserContainer = styled.div<{dark: boolean;}>`
     border-radius: 0.14rem;
     display: flex;
     flex-direction: column;
@@ -57,6 +66,8 @@ export const UserContainer = styled.div`
     padding: 1.2rem;
     gap: 0.7rem;
     cursor: pointer;
+    ${BoxShadow}
+    ${props => props.dark && `${BoxShadowDark}`}
     img {
         width: 6rem;
         height: 6rem;
@@ -66,6 +77,7 @@ export const UserContainer = styled.div`
         font-family: Inter;
         font-size: 1.2rem;
         color: #1a1a1a;
+        ${props => props.dark && `color: #f5f4f9;`}
     }
     &:hover {
         opacity: 0.5;

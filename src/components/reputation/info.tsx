@@ -8,29 +8,29 @@ import {useAppContext} from "../../contexts/app";
 interface InfoProps {}
 
 const Info: React.FC<InfoProps> = () => {
-    const {language} = useAppContext();
+    const {language, dark} = useAppContext();
 
     return (
         <InfoBox>
-            <InfoBoxTitle>{info.title[language]}</InfoBoxTitle>
+            <InfoBoxTitle dark={dark}>{info.title[language]}</InfoBoxTitle>
             <InfoContent>
-                <InfoItem>
+                <InfoItem dark={dark}>
                     <span>{info.action[language]}</span>
                     <span>RP</span>
                 </InfoItem>
-                <InfoItem>
+                <InfoItem dark={dark}>
                     <span>{info.post[language]}</span>
                     <span>7</span>
                 </InfoItem>
-                <InfoItem>
+                <InfoItem dark={dark}>
                     <span>{info.tip[language]}</span>
                     <span>2</span>
                 </InfoItem>
-                <InfoItem>
+                <InfoItem dark={dark}>
                     <span>{info.like[language]}</span>
                     <span>5</span>
                 </InfoItem>
-                <InfoItem>
+                <InfoItem dark={dark}>
                     <span>{info.followers[language]}</span>
                     <span>3</span>
                 </InfoItem>
