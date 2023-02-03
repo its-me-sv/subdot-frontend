@@ -9,7 +9,7 @@ interface ResultsProps {}
 
 const Results: React.FC<ResultsProps> = () => {
     const naviagte = useNavigate();
-    const {explore, setExplore} = useAppContext();
+    const {explore, setExplore, dark} = useAppContext();
 
     const handlePress = () => {
         naviagte(`/profile/${explore}`);
@@ -17,10 +17,10 @@ const Results: React.FC<ResultsProps> = () => {
     };
 
     return (
-        <Container>
+        <Container dark={dark}>
             <ItemsContainer>
                 {(new Array(42)).fill(0).map(() => (
-                    <Item onClick={handlePress}>{explore}</Item>
+                    <Item dark={dark} onClick={handlePress}>{explore}</Item>
                 ))}
             </ItemsContainer>
         </Container>
