@@ -9,12 +9,14 @@ import {useAppContext} from "../../contexts/app";
 interface CommentInputProps {}
 
 const CommentInput: React.FC<CommentInputProps> = () => {
-    const {language} = useAppContext();
+    const {language, dark} = useAppContext();
 
     return (
-      <CommentFooter>
+      <CommentFooter dark={dark}>
         <textarea rows={2} placeholder={cmtPh[language]} />
-        <Button bgColor="#1a1a1a">{pstCmt[language]}</Button>
+        <Button bgColor={dark ? "#f5f4f9" : "#1a1a1a"} dark={dark}>
+          {pstCmt[language]}
+        </Button>
       </CommentFooter>
     );
 };

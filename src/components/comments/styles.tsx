@@ -24,14 +24,21 @@ export const CommentContainer = styled.div`
     align-items: flex-start;
 `;
 
-export const CommentHolder = styled.div`
+export const CommentHolder = styled.div<{ dark: boolean }>`
   display: flex;
   flex-direction: column;
   width: 35rem;
   margin-right: 0.24rem;
-  background-color: #d7d7d7;
   border-radius: 0.14rem;
   padding: 0.14rem;
+  background-color: #d7d7d7;
+  color: #1a1a1a;
+  ${(props) =>
+    props.dark &&
+    `
+    background-color: #625e5e;
+    color: #d7d7d7;
+  `}
 `;
 
 export const CommentTime = styled.span`
@@ -42,10 +49,9 @@ export const CommentTime = styled.span`
 export const CommentText = styled.span`
     font-family: Inter;
     font-size: 1.2rem;
-    color: #1a1a1a;
 `;
 
-export const CommentFooter = styled.div`
+export const CommentFooter = styled.div<{ dark: boolean }>`
   display: grid;
   grid-template-columns: 4fr 1fr;
   gap: 0.42rem;
@@ -61,5 +67,11 @@ export const CommentFooter = styled.div`
     font-size: 1.2rem;
     color: #1a1a1a;
     background-color: #d7d7d7;
+    ${(props) =>
+      props.dark &&
+      `
+      background-color: #625e5e;
+      color: #d7d7d7;
+    `}
   }
 `;
