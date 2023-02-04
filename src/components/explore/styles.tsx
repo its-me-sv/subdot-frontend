@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import {BoxShadow, BoxShadowDark} from "../../utils/styles";
+import searchIcon from "../../assets/icons/search.png";
 
 export const Container = styled.div<{dark: boolean;}>`
   padding: 0.3rem 0.6rem;
@@ -14,7 +15,7 @@ export const Container = styled.div<{dark: boolean;}>`
 
 export const SearchIcon = styled.img.attrs({
     alt: "search",
-    src: require("../../assets/icons/search.png")
+    src: searchIcon
 })<{dark: boolean;}>`
   height: 1.8rem;
   width: auto;

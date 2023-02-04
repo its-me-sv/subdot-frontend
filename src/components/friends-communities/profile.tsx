@@ -1,5 +1,7 @@
 import React from "react";
 
+import tempImg from "../../assets/temp.jpg";;
+
 import {
     ProfileContainer,  ProfileDetails, 
     ProfileInfo, ProfileName, 
@@ -21,7 +23,7 @@ const SectionProfile: React.FC<SectionProfileProps> = ({id, hover}) => {
         <ProfileDetails>
           <ProfilePicture
             alt={`pp of ${id}`}
-            src={require("../../assets/temp.jpg")}
+            src={tempImg}
           />
           <ProfileInfo>
             <ProfileName dark={dark}>{id}</ProfileName>

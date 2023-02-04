@@ -1,5 +1,6 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
+import tempImg from "../../assets/temp.jpg";
 
 import {Container, MenuItem} from "./styles";
 import {MenuLogo} from "../header/styles";
@@ -57,7 +58,7 @@ const Menu: React.FC<MenuProps> = () => {
         <MenuLogo 
             onClick={closeMenu} 
             alt="menu" 
-            src={require("../../assets/temp.jpg")} 
+            src={tempImg} 
         />
         <MenuItem dark={dark} onClick={takeToProfile}>{menu.profile[language]}</MenuItem>
         <MenuItem dark={dark} onClick={openTransactions}>{menu.transactions[language]}</MenuItem>

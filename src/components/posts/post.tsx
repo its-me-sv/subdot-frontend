@@ -1,6 +1,8 @@
 import React from "react";
 import {format} from "timeago.js";
 import {useNavigate} from "react-router-dom";
+import tempImg from "../../assets/temp.jpg";
+import contentImg from "../../assets/content_temp.jpg";
 
 import {
     FooterItem, PostContainer, 
@@ -9,6 +11,9 @@ import {
     PostImage, PostTime, 
     PostUsername
 } from './styles';
+import likeIcon from "../../assets/icons/like.png";
+import cmtIcon from "../../assets/icons/comment.png";
+import tipIcon from "../../assets/icons/tip.png";
 import {posted} from "../../translations/posts";
 
 import {useAppContext} from "../../contexts/app";
@@ -27,7 +32,7 @@ const Post: React.FC<PostProps> = () => {
             <PostHeader onClick={() => navigate("/profile/suraj")}>
                 <img 
                     alt="pp"
-                    src={require("../../assets/temp.jpg")} 
+                    src={tempImg} 
                 />
                 <PostHeaderRight dark={dark}>
                     <PostUsername>{"<Dark Knight />"}</PostUsername>
@@ -39,27 +44,27 @@ const Post: React.FC<PostProps> = () => {
             </PostContent>
             <PostImage 
                 alt="content" 
-                src={require("../../assets/content_temp.jpg")} 
+                src={contentImg} 
                 />
             <PostFooter>
                 <FooterItem dark={dark}>
                     <img 
                         alt="like" 
-                        src={require("../../assets/icons/like.png")} 
+                        src={likeIcon} 
                     />
                     <span>1.1m</span>
                 </FooterItem>
                 <FooterItem dark={dark} onClick={() => setCommentId!("123")}>
                     <img 
                         alt="comment" 
-                        src={require("../../assets/icons/comment.png")} 
+                        src={cmtIcon} 
                     />
                     <span>1.1m</span>
                 </FooterItem>
                 <FooterItem dark={dark} onClick={() => setTransferId!("<Dark Knight />")}>
                     <img 
                         alt="tip"
-                        src={require("../../assets/icons/tip.png")} 
+                        src={tipIcon} 
                     />
                 </FooterItem>
             </PostFooter>

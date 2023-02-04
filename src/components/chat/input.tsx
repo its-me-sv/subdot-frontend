@@ -1,4 +1,5 @@
 import React from "react";
+import sendIcon from "../../assets/icons/send.png";
 
 import {InputContainer} from "./styles";
 import {msgPh} from "../../translations/chat";
@@ -13,7 +14,7 @@ const MessageInput: React.FC<MessageInputProps> = () => {
     return (
         <InputContainer dark={dark}>
             <textarea placeholder={msgPh[language]} />
-            <img alt="send" src={require("../../assets/icons/send.png")} />
+            <img alt="send" src={sendIcon} />
         </InputContainer>
     );
 };

@@ -1,4 +1,5 @@
 import React from "react";
+import tempImg from "../../assets/temp.jpg";
 
 import {Container} from "./styles";
 import {AdvertImage} from "../rp-advert/styles";
@@ -12,10 +13,10 @@ const AdvertSideView: React.FC<AdvertSideViewProps> = () => {
     
     return (
       <Container>
-        <AdvertImage dark={dark} src={require("../../assets/temp.jpg")} />
-        <AdvertImage dark={dark} src={require("../../assets/temp.jpg")} />
-        <AdvertImage dark={dark} src={require("../../assets/temp.jpg")} />
-        <AdvertImage dark={dark} src={require("../../assets/temp.jpg")} />
+        <AdvertImage dark={dark} src={tempImg} />
+        <AdvertImage dark={dark} src={tempImg} />
+        <AdvertImage dark={dark} src={tempImg} />
+        <AdvertImage dark={dark} src={tempImg} />
       </Container>
     );
 };

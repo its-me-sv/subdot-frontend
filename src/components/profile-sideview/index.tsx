@@ -1,5 +1,6 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
+import tmpImg from "../../assets/temp.jpg";
 
 import {Button} from "../../utils/styles";
 import {
@@ -22,7 +23,7 @@ const ProfileSideView: React.FC<ProfileSideViewProps> = ({id}) => {
 
   return (
     <Container dark={dark}>
-      <img alt="pp" src={require("../../assets/temp.jpg")} />
+      <img alt="pp" src={tmpImg} />
       <Username>{"<Dark Knight />"}</Username>
       <Joined>{memSce[language]} May 11, 2002</Joined>
       <Status>The night is darkest just before the dawn</Status>

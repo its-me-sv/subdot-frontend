@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import {BoxShadow, BoxShadowDark} from "../../utils/styles";
+import logoSmall from "../../assets/logo_small.png";
 
 export const Container = styled.div<{dark: boolean;}>`
     display: flex;
@@ -15,7 +16,7 @@ export const Container = styled.div<{dark: boolean;}>`
 
 export const HomeLogo = styled.img.attrs({
   alt: "home",
-  src: require("../../assets/logo_small.png"),
+  src: logoSmall,
 })`
     height: 2.8rem;
     width: auto;

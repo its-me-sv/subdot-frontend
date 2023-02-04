@@ -1,4 +1,5 @@
 import React from "react";
+import tmpImg from "../../assets/temp.jpg";
 
 import {AdvertContainer, AdvertImage} from "./styles";
 
@@ -11,7 +12,7 @@ const Advert: React.FC<AdvertProps> = () => {
 
     return (
         <AdvertContainer>
-            <AdvertImage dark={dark} src={require("../../assets/temp.jpg")} />
+            <AdvertImage dark={dark} src={tmpImg} />
         </AdvertContainer>
     );
 };

@@ -1,5 +1,6 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
+import tempImg from "../../assets/temp.jpg";
 
 import {Container, Box, CloseIcon} from '../terms-privacy/styles';
 import {JoinedDate, ProfilePicture, Section, Detail, Content, Details, MetaDetails, MetaInfo, Footer} from "./styles";
@@ -27,7 +28,7 @@ const Peek: React.FC<PeekProps> = ({id}) => {
           </CloseIcon>
           <ProfilePicture
             alt={`pp of ${id}`}
-            src={require("../../assets/temp.jpg")}
+            src={tempImg}
           />
           <JoinedDate dark={dark}>{memSce[language]} May 11, 2002</JoinedDate>
           <Details>

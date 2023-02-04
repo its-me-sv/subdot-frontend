@@ -1,5 +1,6 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
+import tmpImg from "../../assets/temp.jpg";
 
 import {UserContainer} from "./styles";
 
@@ -13,7 +14,7 @@ const User: React.FC<UserProps> = () => {
 
     return (
       <UserContainer dark={dark} onClick={() => navigate("/profile/suraj")}>
-        <img alt="pp" src={require("../../assets/temp.jpg")} />
+        <img alt="pp" src={tmpImg} />
         <span>{"<Dark Knight />"}</span>
         <span>200 RP</span>
       </UserContainer>

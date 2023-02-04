@@ -1,6 +1,7 @@
 import React from "react";
 import {format} from "timeago.js";
 import {useNavigate} from "react-router-dom";
+import tempImg from "../../assets/temp.jpg";
 
 import {
     CommentContainer, CommentHolder, 
@@ -17,7 +18,7 @@ const Comment: React.FC<CommentProps> = () => {
 
     return (
         <CommentContainer>
-            <img onClick={() => navigate("/profile/dk")} alt="pp" src={require("../../assets/temp.jpg")} />
+            <img onClick={() => navigate("/profile/dk")} alt="pp" src={tempImg} />
             <CommentHolder dark={dark}>
                 <CommentTime>{format(new Date(2023, 0, 7))}</CommentTime>
                 <CommentText>Very nice picture</CommentText>

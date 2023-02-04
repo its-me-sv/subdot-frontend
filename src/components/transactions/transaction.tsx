@@ -1,6 +1,7 @@
 import React from "react";
 import {format} from "timeago.js";
 import {useNavigate} from "react-router-dom";
+import tmpImg from "../../assets/temp.jpg";
 
 import {Amount, Meta, TransactionContainer} from "./styles";
 
@@ -17,7 +18,7 @@ const Transaction: React.FC<TransactionProps> = () => {
         onClick={() => navigate("/profile/suraj")}
         dark={dark}
       >
-        <img alt="" src={require("../../assets/temp.jpg")} />
+        <img alt="" src={tmpImg} />
         <Meta dark={dark}>
           <span>{"<Dark Knight />"}</span>
           <span>{format(new Date(2023, 0, 28))}</span>

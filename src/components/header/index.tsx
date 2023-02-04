@@ -1,6 +1,8 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
 
+import tempImg from "../../assets/temp.jpg";
+
 import {Container, Footer, HomeLogo, MenuLogo} from "./styles";
 
 import Explore from "../explore";
@@ -31,7 +33,7 @@ const Header: React.FC<HeaderProps> = () => {
           <MenuLogo 
             onClick={openMenu}
             alt="menu" 
-            src={require("../../assets/temp.jpg")} 
+            src={tempImg} 
           />
         </Footer>
         {menuOpen && <Menu />}
