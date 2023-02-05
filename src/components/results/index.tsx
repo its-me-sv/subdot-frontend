@@ -1,5 +1,6 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
+import tempImg from "../../assets/temp.jpg";
 
 import {Container, ItemsContainer, Item} from "./styles";
 
@@ -20,7 +21,13 @@ const Results: React.FC<ResultsProps> = () => {
         <Container dark={dark}>
             <ItemsContainer>
                 {(new Array(42)).fill(0).map(() => (
-                    <Item dark={dark} onClick={handlePress}>{explore}</Item>
+                    <Item dark={dark} onClick={handlePress}>
+                        <img alt="" src={tempImg} />
+                        <div>
+                            <span>{`<Dark Knight /> - ${explore}`}</span>
+                            <span>Status text</span>
+                        </div>
+                    </Item>
                 ))}
             </ItemsContainer>
         </Container>

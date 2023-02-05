@@ -54,7 +54,7 @@ export const Title = styled.span<{ dark: boolean }>`
 export const Content = styled.span<{ dark: boolean }>`
   margin-bottom: 1rem;
   max-height: 18rem;
-  overflow-y: scroll;
+  overflow-y: auto;
   color: #1a1a1a;
   ${props => props.dark && `
     color: #f5f4f9;

@@ -16,7 +16,7 @@ export const ItemsContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 90vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   gap: 0.7rem;
   padding: 1rem 14rem;
@@ -24,11 +24,23 @@ export const ItemsContainer = styled.div`
 
 export const Item = styled.span<{dark: boolean;}>`
   font-family: Inter;
-  font-size: 1.8rem;
+  font-size: 1.2rem;
   padding: 0.7rem;
   border-radius: 0.14rem;
   cursor: pointer;
   color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  gap: 0.14rem;
+  div {
+    display: flex;
+    flex-direction: column;
+  }
+  img {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+  }
   ${BoxShadow}
   ${props => props.dark && `
     ${BoxShadowDark}

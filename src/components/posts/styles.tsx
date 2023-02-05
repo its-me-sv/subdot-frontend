@@ -7,7 +7,7 @@ export const Container = styled.div`
   align-items: center;
   gap: 1.4rem;
   height: 90vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   padding: 1rem;
 `;
 

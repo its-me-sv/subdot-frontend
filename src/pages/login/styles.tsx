@@ -30,35 +30,50 @@ export const LoginForm = styled.div<{ dark: boolean }>`
   padding-bottom: 1.2rem;
 `;
 
-export const AccountsContainer = styled.div<{ dark: boolean }>`
+export const AccountsContainer = styled.div`
   display: flex;
   flex-direction: column;
   max-height: 14rem;
   overflow-y: auto;
   margin-bottom: 0.42rem;
   padding-right: 0.42rem;
-  span {
-    font-family: Inter;
-    color: #1a1a1a;
-    align-self: flex-start;
-    ${(props) => props.dark && `color: #f5f4f9;`}
+`;
+
+export const Account = styled.div<{ dark: boolean }>`
+  display: flex;
+  align-items: center;
+  gap: 0.14rem;
+  cursor: pointer;
+  margin: 0.42rem;
+  padding: 0.42rem;
+  border-radius: 0.14rem;
+  img {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
   }
   div {
     display: flex;
     flex-direction: column;
-    span:first-child {
-      font-size: 1.2rem;
-    }
-    cursor: pointer;
-    &:hover {
-      opacity: 0.5;
-    }
-    margin: 0.14rem;
-    padding: 0.14rem;
-    border-radius: 0.14rem;
-    ${BoxShadow}
-    ${props => props.dark && `${BoxShadowDark}`}
   }
+  span {
+    font-family: Inter;
+    align-self: flex-start;
+  }
+  span:first-child {
+    font-size: 1.2rem;
+  }
+  &:hover {
+    opacity: 0.5;
+  }
+  ${BoxShadow}
+  color: #1a1a1a;
+  ${(props) =>
+    props.dark &&
+    `
+    ${BoxShadowDark}
+    color: #f5f4f9;
+  `}
 `;
 
 export const Title = styled.span`

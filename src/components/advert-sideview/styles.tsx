@@ -6,6 +6,6 @@ export const Container = styled.div`
     align-items: center;
     max-height: 92vh;
     gap: 1.2rem;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding-top: 0.42rem;
 `;

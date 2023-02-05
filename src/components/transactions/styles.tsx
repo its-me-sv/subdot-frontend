@@ -7,7 +7,7 @@ export const TransactionsHolder = styled.div`
     width: 21rem;
     max-height: 30rem;
     gap: 0.42rem;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding: 0.14rem 0.14rem;
     margin-bottom: 0.42rem;
 `;

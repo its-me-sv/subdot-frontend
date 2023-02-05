@@ -5,7 +5,7 @@ export const CommentsHolder = styled.div`
   flex-direction: column;
   gap: 0.42rem;
   height: 30rem;
-  overflow-y: scroll;
+  overflow-y: auto;
   margin-bottom: 0.42rem;
 `;
 

@@ -50,7 +50,7 @@ export const MessagesContainer = styled.div`
   flex-direction: column;
   gap: 0.42rem;
   height: 84vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   margin-right: 0.14rem;
   margin-top: 0.42rem;
   padding-left: 0.84rem;

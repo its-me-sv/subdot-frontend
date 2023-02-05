@@ -34,7 +34,7 @@ export const SectionProfiles = styled.div`
   height: 40vh;
   padding-top: 0.42rem;
   gap: 0.42rem;
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 
 export const ProfileContainer = styled.div<{ hover?: boolean; dark: boolean }>`

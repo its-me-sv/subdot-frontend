@@ -53,7 +53,7 @@ export const BoardContainer = styled.div`
     gap: 1.2rem;
     grid-template-columns: repeat(6, 1fr);
     max-height: 92vh;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding: 1rem;
 `;
 

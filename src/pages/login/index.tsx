@@ -9,7 +9,8 @@ import {
   Caption,
   Footer1,
   Footer2,
-  AccountsContainer
+  AccountsContainer,
+  Account
 } from "./styles";
 import {Button} from "../../utils/styles";
 
@@ -72,12 +73,22 @@ const LoginPage: React.FC<LoginPageProps> = () => {
           <Title>{title[language]}</Title>
           <Caption dark={dark}>{caption[language]}</Caption>
           {accounts.length > 0 ? (
-            <AccountsContainer dark={dark}>
+            <AccountsContainer>
               {accounts.map((acc) => (
-                <div key={acc.address} onClick={() => onAccountChoose(acc)}>
-                  <span>{acc.name}</span>
-                  <span>{acc.address}</span>
-                </div>
+                <Account
+                  dark={dark}
+                  key={acc.address}
+                  onClick={() => onAccountChoose(acc)}
+                >
+                  <img
+                    alt="pp"
+                    src={`https://api.dicebear.com/5.x/identicon/svg?seed=subdot${acc.address}`}
+                  />
+                  <div>
+                    <span>{acc.name}</span>
+                    <span>{acc.address}</span>
+                  </div>
+                </Account>
               ))}
             </AccountsContainer>
           ) : (
