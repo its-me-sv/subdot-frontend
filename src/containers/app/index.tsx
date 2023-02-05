@@ -41,9 +41,7 @@ const App: React.FC<AppProps> = () => {
   } = useAppContext();
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading!(false);
-    }, 3000);
+    setTimeout(() => setLoading!(false), 3000);
   }, []);
   
   return (
