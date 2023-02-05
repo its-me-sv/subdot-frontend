@@ -16,7 +16,7 @@ import {Button} from "../../utils/styles";
 import {
   title, caption, 
   button, footer, 
-  settings
+  settings, noAcc
 } from "../../translations/login";
 
 import {useAppContext} from "../../contexts/app";
@@ -42,7 +42,7 @@ const LoginPage: React.FC<LoginPageProps> = () => {
   const onWalletConnect = useCallback(async () => {
     const accounts = await getAllAccounts();
     if (!accounts.length) {
-      toast.error("No account found");
+      toast.error(noAcc[language]);
       return;
     }
     setAccounts(
@@ -51,7 +51,7 @@ const LoginPage: React.FC<LoginPageProps> = () => {
         name: v.meta.name || "No name",
       }))
     );
-  }, []);
+  }, [language]);
   
   const onAccountChoose = (account: WalletAccount) => {
     setAccount!(account);

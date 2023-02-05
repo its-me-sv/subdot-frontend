@@ -6,6 +6,14 @@ export const title: Array<string> = [
     "Souspoint"
 ];
 
+export const noAcc: Array<string> = [
+    "No account found",
+    "找不到帐号",
+    "कोई खाता नहीं मिला",
+    "No se encontró ninguna cuenta",
+    "Aucun compte trouvé"
+];
+
 export const caption: Array<string> = [
     "Bringing power back to the people",
     "把权力还给人民",
