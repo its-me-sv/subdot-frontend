@@ -1,5 +1,6 @@
 import React, {useEffect} from "react";
 import {HashRouter, Route, Routes, Navigate} from "react-router-dom";
+import {Toaster} from "react-hot-toast";
 
 import '../../index.css';
 
@@ -47,6 +48,7 @@ const App: React.FC<AppProps> = () => {
   
   return (
     <div className={loggedIn ? "app-container" : ""}>
+      <Toaster position="top-right" />
       {loading && <Loader />}
       {showTerms && <TermsPolicies />}
       {settingsOpen && <Settings />}
