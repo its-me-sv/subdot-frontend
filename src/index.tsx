@@ -6,6 +6,7 @@ import './index.css';
 import App from './containers/app';
 
 import {AppContextProvider} from './contexts/app';
+import {SubsocialContextProvider} from './subsocial';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -14,7 +15,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <AppContextProvider>
-      <App />
+      <SubsocialContextProvider>
+        <App />
+      </SubsocialContextProvider>
     </AppContextProvider>
   </React.StrictMode>
 );

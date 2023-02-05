@@ -3,6 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@polkadot/api": "^9.13.5",
+    "@polkadot/extension-dapp": "^0.44.8",
+    "@polkadot/extension-inject": "^0.44.8",
+    "@polkadot/ui-keyring": "^2.11.1",
+    "@polkadot/wasm-crypto": "^6.4.1",
+    "@subsocial/api": "^0.7.12",
+    "@subsocial/utils": "^0.7.12",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
