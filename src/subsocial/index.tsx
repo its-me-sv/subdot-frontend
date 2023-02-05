@@ -4,7 +4,9 @@ import {waitReady} from "@polkadot/wasm-crypto";
 import {Buffer} from "buffer";
 import toast from "react-hot-toast";
 
+import {ssConnect} from "../translations/toast";
 import {networkConfig, AUTH_HEADER} from "./config";
+import {useAppContext} from "../contexts/app";
 
 window.Buffer = Buffer;
 
@@ -25,6 +27,8 @@ export const useSubsocial = () => useContext(SubsocialContext);
 let requested = false;
 
 export const SubsocialContextProvider: React.FC<{children: ReactNode}> = ({children}) => {
+    const {language} = useAppContext();
+
     const [api, setApi] = useState<SubsocialApi | null>(defaultState.api);
     const [isReady, setIsReady] = useState<boolean>(defaultState.isReady);
 
@@ -40,9 +44,9 @@ export const SubsocialContextProvider: React.FC<{children: ReactNode}> = ({child
             });
         });
         toast.promise(ssPromise, {
-            loading: "Connecting to Subsocial",
-            success: "Successfully connected to Subsocial",
-            error: "Error when connecting to Subsocial"
+            loading: ssConnect.loading[language],
+            success: ssConnect.success[language],
+            error: ssConnect.error[language]
         });
     }, []);
 

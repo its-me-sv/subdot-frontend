@@ -1,4 +1,4 @@
-import { CreateSubsocialApiProps } from "@subsocial/api/types";
+import {CreateSubsocialApiProps} from "@subsocial/api/types";
 
 export const networkConfig: CreateSubsocialApiProps = {
     substrateNodeUrl: "wss://rco-para.subsocial.network",

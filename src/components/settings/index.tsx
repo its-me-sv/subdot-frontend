@@ -1,10 +1,12 @@
 import React, {ChangeEvent} from "react";
+import toast from "react-hot-toast";
 
 import {Container, Title, CloseIcon, Box} from "../terms-privacy/styles";
 import {SelectLang, ItemTitle, Item, ItemsContainer} from "./styles";
 
 import {themes, languages} from '../../data/settings';
 import {title, theme, lang} from "../../translations/settings";
+import {settings} from "../../translations/toast";
 
 import {useAppContext} from "../../contexts/app";
 
@@ -13,11 +15,15 @@ interface SettingsProps {}
 const Settings: React.FC<SettingsProps> = () => {
     const {setSettingsOpen, setDark, setLanguage, dark, language} = useAppContext();
 
-    const handleThemeChange = (event: ChangeEvent<HTMLSelectElement>) =>
+    const handleThemeChange = (event: ChangeEvent<HTMLSelectElement>) => {
+      toast(settings.theme[language], { icon: "✨" });
       setDark!(event.target.value === "🌑");
+    };
 
-    const handleLanguageChange = (event: ChangeEvent<HTMLSelectElement>) => 
+    const handleLanguageChange = (event: ChangeEvent<HTMLSelectElement>) => {
+      toast(settings.language[Number(event.target.value)], { icon: "📜" });
       setLanguage!(Number(event.target.value));
+    };
 
     return (
       <Container dark={dark}>
