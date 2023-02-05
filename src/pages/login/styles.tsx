@@ -16,18 +16,49 @@ export const Container = styled.div<{ dark: boolean }>`
 
 export const LoginForm = styled.div<{ dark: boolean }>`
   width: 36rem;
-  height: 21rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: 0.14rem;
-  gap: 1.8rem;
+  gap: 1.4rem;
   ${BoxShadow}
   ${(props) =>
     props.dark &&
     `
     ${BoxShadowDark}
   `}
+  padding-bottom: 1.2rem;
+`;
+
+export const AccountsContainer = styled.div<{ dark: boolean }>`
+  display: flex;
+  flex-direction: column;
+  max-height: 14rem;
+  overflow-y: auto;
+  margin-bottom: 0.42rem;
+  padding-right: 0.42rem;
+  span {
+    font-family: Inter;
+    color: #1a1a1a;
+    align-self: flex-start;
+    ${(props) => props.dark && `color: #f5f4f9;`}
+  }
+  div {
+    display: flex;
+    flex-direction: column;
+    span:first-child {
+      font-size: 1.2rem;
+    }
+    cursor: pointer;
+    &:hover {
+      opacity: 0.5;
+    }
+    margin: 0.14rem;
+    padding: 0.14rem;
+    border-radius: 0.14rem;
+    ${BoxShadow}
+    ${props => props.dark && `${BoxShadowDark}`}
+  }
 `;
 
 export const Title = styled.span`
