@@ -10,14 +10,16 @@ import {
   Footer1,
   Footer2,
   AccountsContainer,
-  Account
+  Account,
+  Caption2
 } from "./styles";
 import {Button} from "../../utils/styles";
 
 import {
   title, caption, 
   button, footer, 
-  settings, noAcc
+  settings, noAcc,
+  caption2
 } from "../../translations/login";
 
 import {useAppContext} from "../../contexts/app";
@@ -72,6 +74,7 @@ const LoginPage: React.FC<LoginPageProps> = () => {
         <LoginForm dark={dark}>
           <Title>{title[language]}</Title>
           <Caption dark={dark}>{caption[language]}</Caption>
+          <Caption2 dark={dark}>{caption2[language]}</Caption2>
           {accounts.length > 0 ? (
             <AccountsContainer>
               {accounts.map((acc) => (

@@ -35,7 +35,6 @@ export const AccountsContainer = styled.div`
   flex-direction: column;
   max-height: 14rem;
   overflow-y: auto;
-  margin-bottom: 0.42rem;
   padding-right: 0.42rem;
 `;
 
@@ -93,7 +92,19 @@ export const Caption = styled.span<{ dark: boolean }>`
   font-size: 1.4rem;
   color: #1a1a1a;
   ${props => props.dark && `
-    color: #f5f4f9;
+  color: #f5f4f9;
+  `}
+  `;
+
+export const Caption2 = styled.span<{ dark: boolean }>`
+  font-family: Inter;
+  opacity: 0.9;
+  font-size: 1.2rem;
+  color: #1a1a1a;
+  ${(props) =>
+    props.dark &&
+    `
+  color: #f5f4f9;
   `}
 `;
 

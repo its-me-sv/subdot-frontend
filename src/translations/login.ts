@@ -22,6 +22,14 @@ export const caption: Array<string> = [
     "Redonner le pouvoir au peuple",
 ];
 
+export const caption2: Array<string> = [
+    "Choose account",
+    "选择账户",
+    "खाता चुनें",
+    "Elegir cuenta",
+    "Choisissez un compte"
+];
+
 export const button: Array<string> = [
     "CONNECT WALLET",
     "连接钱包",
