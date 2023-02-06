@@ -54,7 +54,9 @@ export const getAllAccounts = async () => {
     );
     
     if (!isWeb3Injected) {
-        toast.error("Browser do not have any polkadot.js extension");
+        await toast.error("Browser do not have any polkadot.js extension");
+        window.alert("You are required to have the polkadot.js extension installed to use this dapp");
+        window.open("https://polkadot.js.org/extension/", "_blank");
         return [];
     }
 
