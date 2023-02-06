@@ -29,7 +29,7 @@ const Header: React.FC<HeaderProps> = () => {
         <HomeLogo onClick={goHome} />
         <Explore />
         <Footer dark={dark}>
-          <span>42 RP & 23$</span>
+          <span>42 RP</span>
           <MenuLogo 
             onClick={openMenu}
             alt="menu" 

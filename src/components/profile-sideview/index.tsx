@@ -4,17 +4,17 @@ import tmpImg from "../../assets/temp.jpg";
 
 import {Button} from "../../utils/styles";
 import {
-    Container, Footer, 
-    Joined, Status, 
-    Meta, MetaItem,
-    Username
+  Container, Footer, 
+  Joined, Status,
+  Meta, MetaItem,
+  Username, Name
 } from "./styles";
 import {memSce, meta, footer} from "../../translations/peek";
 
 import {useAppContext} from "../../contexts/app";
 
 interface ProfileSideViewProps {
-    id: string;
+  id: string;
 }
 
 const ProfileSideView: React.FC<ProfileSideViewProps> = ({id}) => {
@@ -25,6 +25,7 @@ const ProfileSideView: React.FC<ProfileSideViewProps> = ({id}) => {
     <Container dark={dark}>
       <img alt="pp" src={tmpImg} />
       <Username>{"<Dark Knight />"}</Username>
+      <Name>Suraj Vijayan</Name>
       <Joined>{memSce[language]} May 11, 2002</Joined>
       <Status>The night is darkest just before the dawn</Status>
       <Meta>

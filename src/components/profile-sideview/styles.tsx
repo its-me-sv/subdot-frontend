@@ -22,6 +22,11 @@ export const Username = styled.span`
   text-align: center;
 `;
 
+export const Name = styled.span`
+  font-size: 1.4rem;
+  text-align: center;
+`;
+
 export const Joined = styled.span`
   /* font-family: Inter;
   color: #1a1a1a; */
