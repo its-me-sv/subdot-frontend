@@ -1,5 +1,7 @@
 import React, {ReactNode, createContext, useContext, useState} from "react";
 
+import {WalletAccount} from "../utils/types";
+
 interface AppContextInterface {
   loggedIn: boolean;
   showTerms: boolean;
@@ -15,6 +17,7 @@ interface AppContextInterface {
   postMenuOpen: boolean;
   txOpen: boolean;
   loading: boolean;
+  newAccount: WalletAccount | null;
   resetAppContext?: () => void;
   setLoggedIn?: React.Dispatch<React.SetStateAction<boolean>>;
   setShowTerms?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -30,6 +33,7 @@ interface AppContextInterface {
   setPostMenuOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   setTxOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   setLoading?: React.Dispatch<React.SetStateAction<boolean>>;
+  setNewAccount?: React.Dispatch<React.SetStateAction<WalletAccount | null>>;
 }
 
 const defaultState: AppContextInterface = {
@@ -46,7 +50,8 @@ const defaultState: AppContextInterface = {
     transferId: "",
     postMenuOpen: false,
     txOpen: false,
-    loading: true
+    loading: true,
+    newAccount: null
 };
 
 export const AppContext = createContext<AppContextInterface>(defaultState);
@@ -68,6 +73,7 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
     const [postMenuOpen, setPostMenuOpen] = useState<boolean>(defaultState.postMenuOpen);
     const [txOpen, setTxOpen] = useState<boolean>(defaultState.txOpen);
     const [loading, setLoading] = useState<boolean>(defaultState.loading);
+    const [newAccount, setNewAccount] = useState<WalletAccount | null>(defaultState.newAccount);
 
     const resetAppContext = () => {
         setShowTerms!(false);
@@ -98,7 +104,8 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
             transferId, setTransferId,
             postMenuOpen, setPostMenuOpen,
             txOpen, setTxOpen,
-            loading, setLoading
+            loading, setLoading,
+            newAccount, setNewAccount
         }}>
             {children}
         </AppContext.Provider>

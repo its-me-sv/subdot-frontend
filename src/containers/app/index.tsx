@@ -22,6 +22,7 @@ import Transfer from "../../components/transfer";
 import NewPost from "../../components/posts/new";
 import Transactions from "../../components/transactions";
 import Loader from "../../components/loader";
+import NewAccount from "../../components/new-account";
 import Header from "../../components/header";
 
 // providers
@@ -37,7 +38,8 @@ const App: React.FC<AppProps> = () => {
     explore, peek, 
     commentId, transferId,
     postMenuOpen, txOpen,
-    loading, setLoading
+    loading, setLoading,
+    newAccount
   } = useAppContext();
 
   useEffect(() => {
@@ -48,6 +50,7 @@ const App: React.FC<AppProps> = () => {
     <div className={loggedIn ? "app-container" : ""}>
       <Toaster position="top-right" />
       {loading && <Loader />}
+      {newAccount !== null && <NewAccount account={newAccount} />}
       {showTerms && <TermsPolicies />}
       {settingsOpen && <Settings />}
       <HashRouter>

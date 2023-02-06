@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 
 import {User, WalletAccount} from "../utils/types";
 import {useSubsocial} from "../subsocial";
+import {useAppContext} from "./app";
 
 interface UserContextInterface {
   account: WalletAccount | null;
@@ -25,6 +26,7 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
     const [account, setAccount] = useState<WalletAccount | null>(defaultState.account);
     const [user, setUser] = useState<User | null>(defaultState.user);
     const {api} = useSubsocial();
+    const {setNewAccount} = useAppContext();
 
     const loginUser = async (account: WalletAccount, cb: () => void) => {
         const {address} = account;
@@ -36,6 +38,7 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
             cb();
         } else {
             toast.error("Account not found");
+            setNewAccount!(account);
         }
     };
 

@@ -27,6 +27,7 @@ import {useUserContext} from "../../contexts/user";
 
 import {getAllAccounts} from "../../subsocial/polkadot";
 import {WalletAccount} from "../../utils/types";
+import { DICE_BEAR } from "../../utils/constants";
 
 interface LoginPageProps {}
 
@@ -86,7 +87,7 @@ const LoginPage: React.FC<LoginPageProps> = () => {
                 >
                   <img
                     alt="pp"
-                    src={`https://api.dicebear.com/5.x/identicon/svg?seed=subdot${acc.address}`}
+                    src={`${DICE_BEAR}${acc.address}`}
                   />
                   <div>
                     <span>{acc.name}</span>
