@@ -39,7 +39,7 @@ const LoginPage: React.FC<LoginPageProps> = () => {
     setSettingsOpen, language,
     dark
   } = useAppContext();
-  const {setAccount} = useUserContext();
+  const {loginUser} = useUserContext();
   const [accounts, setAccounts] = useState<Array<WalletAccount>>([]);
   
   const onWalletConnect = useCallback(async () => {
@@ -57,9 +57,10 @@ const LoginPage: React.FC<LoginPageProps> = () => {
   }, [language]);
   
   const onAccountChoose = (account: WalletAccount) => {
-    setAccount!(account);
-    setLoggedIn!(true);
-    navigate("/home");
+    loginUser!(account, () => {
+      setLoggedIn!(true);
+      navigate("/home");
+    });
   };
 
   useEffect(() => {

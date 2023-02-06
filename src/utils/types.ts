@@ -25,4 +25,5 @@ export interface Web2User {
     username: string;
     name: string;
     reputation: number;
+    isCommunity: boolean;
 }
