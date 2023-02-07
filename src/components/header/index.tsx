@@ -9,12 +9,14 @@ import Explore from "../explore";
 import Menu from "../menu";
 
 import {useAppContext} from "../../contexts/app";
+import {useUserContext} from "../../contexts/user";
 
 interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = () => {
     const navigate = useNavigate();
     const {setMenuOpen, menuOpen, dark} = useAppContext();
+    const {user} = useUserContext();
 
     const goHome = () => {
       navigate("/home");
@@ -29,7 +31,7 @@ const Header: React.FC<HeaderProps> = () => {
         <HomeLogo onClick={goHome} />
         <Explore />
         <Footer dark={dark}>
-          <span>42 RP</span>
+          <span>{user?.reputation} RP</span>
           <MenuLogo 
             onClick={openMenu}
             alt="menu" 

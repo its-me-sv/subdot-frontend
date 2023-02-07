@@ -65,7 +65,8 @@ const NewAccount: React.FC<NewAccountProps> = ({account}) => {
           username,
           name,
           status,
-          picture: ""
+          picture: "",
+          reputation: 0
         };
         if (pp) {
           const ppId = await api.ipfs.saveFile(pp.file);

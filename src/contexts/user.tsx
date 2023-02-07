@@ -11,6 +11,7 @@ interface UserContextInterface {
   account: WalletAccount | null;
   user: User | null;
   loginUser?: (account: WalletAccount, cb: () => void) => void;
+  logoutUser?: () => void;
   setAccount?: React.Dispatch<React.SetStateAction<WalletAccount | null>>;
   setUser?: React.Dispatch<React.SetStateAction<User | null>>;
 }
@@ -28,7 +29,7 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
     const [account, setAccount] = useState<WalletAccount | null>(defaultState.account);
     const [user, setUser] = useState<User | null>(defaultState.user);
     const {api} = useSubsocial();
-    const {setNewAccount} = useAppContext();
+    const {setNewAccount, setLoggedIn} = useAppContext();
 
     const loginUser = async (account: WalletAccount, cb: () => void) => {
         if (!api) return;
@@ -47,11 +48,19 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
         }
     };
 
+    const logoutUser = () => {
+        setAccount(null);
+        setUser(null);
+        setLoggedIn!(false);
+        toast.success("Account logout success");
+    };
+
     return (
         <UserContext.Provider value={{
             account, setAccount,
             user, setUser,
-            loginUser
+            loginUser,
+            logoutUser
         }}>
             {children}
         </UserContext.Provider>

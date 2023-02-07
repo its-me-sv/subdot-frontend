@@ -7,6 +7,7 @@ import {MenuLogo} from "../header/styles";
 import {menu} from "../../translations/header";
 
 import {useAppContext} from "../../contexts/app";
+import {useUserContext} from "../../contexts/user";
 
 interface MenuProps {}
 
@@ -18,6 +19,7 @@ const Menu: React.FC<MenuProps> = () => {
         setAdvertMenuOpen, setTxOpen,
         language, dark
     } = useAppContext();
+    const {logoutUser} = useUserContext();
 
     const closeMenu = () => {
         setMenuOpen!(false);
@@ -29,7 +31,7 @@ const Menu: React.FC<MenuProps> = () => {
     };
 
     const logout = () => {
-        setLoggedIn!(false);
+        logoutUser!();
         closeMenu();
     };
 
