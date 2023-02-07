@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 
@@ -15,6 +15,7 @@ interface BoardProps {}
 const Board: React.FC<BoardProps> = () => {
     const [users, setUsers] = useState<Array<TopRPUser>>([]);
     const [over, setOver] = useState<boolean>(false);
+    const fetched = useRef<boolean>(false);
     const {dark} = useAppContext();
 
     const fetchData = () => {
@@ -32,6 +33,8 @@ const Board: React.FC<BoardProps> = () => {
     };
 
     useEffect(() => {
+        if (fetched.current) return;
+        fetched.current = true;
         fetchData();
     }, []);
     

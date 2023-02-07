@@ -35,6 +35,11 @@ const Menu: React.FC<MenuProps> = () => {
         closeMenu();
     };
 
+    const takeToRP = () => {
+      navigate("/rp");
+      closeMenu();
+    };
+
     const takeToProfile = () => {
         navigate("/profile/dark-knight");
         closeMenu();
@@ -62,6 +67,9 @@ const Menu: React.FC<MenuProps> = () => {
           alt="menu"
           src={getImage(user?.picture ?? "")}
         />
+        <MenuItem dark={dark} onClick={takeToRP}>
+          RP BOARD
+        </MenuItem>
         <MenuItem dark={dark} onClick={takeToProfile}>
           {menu.profile[language]}
         </MenuItem>

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import {useNavigate} from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
@@ -17,8 +17,11 @@ const RP: React.FC<RPProps> = () => {
     const navigate = useNavigate();
     const {setPeek, language, dark} = useAppContext();
     const [users, setUsers] = useState<Array<TopRPUser>>([]);
+    const fetched = useRef<boolean>(false);
 
     useEffect(() => {
+      if (fetched.current) return;
+      fetched.current = true;
       const rpPromise = axios.get(`${REST_API}/user/rp-5`);
       toast.promise(rpPromise, {
         loading: "Fetching top RP accounts",
