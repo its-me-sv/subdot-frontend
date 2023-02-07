@@ -57,7 +57,7 @@ const App: React.FC<AppProps> = () => {
           <>
             <Header />
             {advertMenuOpen && <Advertise />}
-            {explore.length > 0 && <Results />}
+            {explore.length > 2 && <Results />}
             {peek.length > 0 && <Peek id={peek} />}
             {commentId.length > 0 && <Comments postId={commentId} />}
             {transferId.length > 0 && <Transfer accountId={transferId} />}

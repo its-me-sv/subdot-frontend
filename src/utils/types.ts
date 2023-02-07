@@ -28,3 +28,9 @@ export interface Web2User {
     reputation: number;
     isCommunity: boolean;
 }
+
+export interface ExploreResult {
+    accountId: string;
+    username: string;
+    name: string;
+}
