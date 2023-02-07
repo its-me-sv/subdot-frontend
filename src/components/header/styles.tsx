@@ -43,6 +43,10 @@ export const Footer = styled.div<{ dark: boolean }>`
   span {
     font-family: Inter;
     font-size: 1.2rem;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.5;
+    }
   }
   color: #1a1a1a;
   ${(props) =>

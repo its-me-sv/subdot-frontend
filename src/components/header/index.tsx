@@ -21,6 +21,10 @@ const Header: React.FC<HeaderProps> = () => {
       navigate("/home");
     };
 
+    const goToRP = () => {
+      navigate("/rp");
+    };
+
     const openMenu = () => {
       setMenuOpen!(true);
     };
@@ -30,7 +34,10 @@ const Header: React.FC<HeaderProps> = () => {
         <HomeLogo onClick={goHome} />
         <Explore />
         <Footer dark={dark}>
-          <span>{user?.reputation} RP</span>
+          <span 
+            onClick={goToRP}
+            title="Your reputation score"
+          >{user?.reputation} RP</span>
           <MenuLogo 
             onClick={openMenu}
             alt="menu" 
