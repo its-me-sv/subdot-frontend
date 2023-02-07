@@ -1,6 +1,5 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
-import tempImg from "../../assets/temp.jpg";
 
 import {Container, MenuItem} from "./styles";
 import {MenuLogo} from "../header/styles";
@@ -19,7 +18,7 @@ const Menu: React.FC<MenuProps> = () => {
         setAdvertMenuOpen, setTxOpen,
         language, dark
     } = useAppContext();
-    const {logoutUser} = useUserContext();
+    const {logoutUser, user} = useUserContext();
 
     const closeMenu = () => {
         setMenuOpen!(false);
@@ -57,18 +56,28 @@ const Menu: React.FC<MenuProps> = () => {
 
     return (
       <Container dark={dark}>
-        <MenuLogo 
-            onClick={closeMenu} 
-            alt="menu" 
-            src={tempImg} 
-        />
-        <MenuItem dark={dark} onClick={takeToProfile}>{menu.profile[language]}</MenuItem>
-        <MenuItem dark={dark} onClick={openTransactions}>{menu.transactions[language]}</MenuItem>
-        <MenuItem dark={dark} onClick={openSettings}>{menu.settings[language]}</MenuItem>
-        <MenuItem dark={dark} onClick={showTerms}>{menu.terms[language]}</MenuItem>
-        <MenuItem dark={dark} onClick={showTerms}>{menu.policies[language]}</MenuItem>
-        <MenuItem dark={dark} onClick={openAdvertise}>{menu.advertise[language]}</MenuItem>
-        <MenuItem dark={dark} onClick={logout}>{menu.logout[language]}</MenuItem>
+        <MenuLogo onClick={closeMenu} alt="menu" src={user?.picture ?? ""} />
+        <MenuItem dark={dark} onClick={takeToProfile}>
+          {menu.profile[language]}
+        </MenuItem>
+        <MenuItem dark={dark} onClick={openTransactions}>
+          {menu.transactions[language]}
+        </MenuItem>
+        <MenuItem dark={dark} onClick={openSettings}>
+          {menu.settings[language]}
+        </MenuItem>
+        <MenuItem dark={dark} onClick={showTerms}>
+          {menu.terms[language]}
+        </MenuItem>
+        <MenuItem dark={dark} onClick={showTerms}>
+          {menu.policies[language]}
+        </MenuItem>
+        <MenuItem dark={dark} onClick={openAdvertise}>
+          {menu.advertise[language]}
+        </MenuItem>
+        <MenuItem dark={dark} onClick={logout}>
+          {menu.logout[language]}
+        </MenuItem>
       </Container>
     );
 };
