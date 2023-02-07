@@ -52,6 +52,7 @@ export const BoardContainer = styled.div`
     display: grid;
     gap: 1.2rem;
     grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     max-height: 92vh;
     overflow-y: auto;
     padding: 1rem;
@@ -83,3 +84,5 @@ export const UserContainer = styled.div<{dark: boolean;}>`
         opacity: 0.5;
     }
 `;
+
+export const FetchButton = styled.div``;

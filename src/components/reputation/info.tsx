@@ -34,6 +34,10 @@ const Info: React.FC<InfoProps> = () => {
                     <span>{info.followers[language]}</span>
                     <span>3</span>
                 </InfoItem>
+                <InfoItem dark={dark}>
+                    <span>Account creation</span>
+                    <span>1</span>
+                </InfoItem>
             </InfoContent>
         </InfoBox>
     );
