@@ -34,3 +34,9 @@ export interface ExploreResult {
     username: string;
     name: string;
 }
+
+export interface TopRPUser {
+    accountId: string;
+    username: string;
+    reputation: number;
+}
