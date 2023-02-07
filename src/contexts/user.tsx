@@ -1,9 +1,11 @@
 import React, {createContext, useContext, ReactNode, useState} from "react";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 import {User, WalletAccount} from "../utils/types";
 import {useSubsocial} from "../subsocial";
 import {useAppContext} from "./app";
+import { REST_API } from "../utils/constants";
 
 interface UserContextInterface {
   account: WalletAccount | null;
@@ -29,16 +31,21 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
     const {setNewAccount} = useAppContext();
 
     const loginUser = async (account: WalletAccount, cb: () => void) => {
+        if (!api) return;
         const {address} = account;
-        const profile = await api?.base.findProfileSpace(address);
+        const {presence} = (await axios.get(`${REST_API}/user/account/${address}`))
+          .data;
+        if (!presence) {
+            toast.error("Account not found");
+            setNewAccount!(account);
+            return;
+        }
+        const profile = await api.base.findProfileSpace(address);
         if (profile?.content) {
             console.log(profile.content);
             setUser(profile.content as unknown as User);
             toast.success("Login success");
             cb();
-        } else {
-            toast.error("Account not found");
-            setNewAccount!(account);
         }
     };
 

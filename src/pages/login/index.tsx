@@ -49,12 +49,7 @@ const LoginPage: React.FC<LoginPageProps> = () => {
       toast.error(noAcc[language]);
       return;
     }
-    setAccounts(
-      accounts.map((v) => ({
-        address: v.address,
-        name: v.meta.name || "No name",
-      }))
-    );
+    setAccounts(accounts);
   }, [language]);
   
   const onAccountChoose = (account: WalletAccount) => {
