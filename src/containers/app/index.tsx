@@ -45,12 +45,11 @@ const App: React.FC<AppProps> = () => {
   useEffect(() => {
     setTimeout(() => setLoading!(false), 3000);
   }, []);
-  
+
   return (
     <div className={loggedIn ? "app-container" : ""}>
       <Toaster position="top-right" />
       {loading && <Loader />}
-      {newAccount !== null && <NewAccount account={newAccount} />}
       {showTerms && <TermsPolicies />}
       {settingsOpen && <Settings />}
       <HashRouter>
@@ -66,6 +65,7 @@ const App: React.FC<AppProps> = () => {
             {txOpen && <Transactions />}
           </>
         )}
+        {newAccount !== null && <NewAccount account={newAccount} />}
         <Suspense fallback={<Loader />}>
           <Routes>
             <Route
