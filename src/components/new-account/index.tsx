@@ -35,6 +35,7 @@ const NewAccount: React.FC<NewAccountProps> = ({account}) => {
         e.preventDefault();
         if (!e.target.files) return;
         let file = e.target.files[0];
+        if (file.size > 4404019) return toast.error("File too big");
         let reader = new FileReader();
         reader.onloadend = () => {
             setPp({
@@ -87,6 +88,10 @@ const NewAccount: React.FC<NewAccountProps> = ({account}) => {
           getTxEventIds(profileTx)
           .then(() => {
             setUser!(newUser);
+            axios.post(`${REST_API}/user/new-account`, {
+              ...newUser,
+              accountId: account.address
+            });
             resolve(true);
           })
           .catch(() => reject());

@@ -41,7 +41,6 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
         }
         const profile = await api.base.findProfileSpace(address);
         if (profile?.content) {
-            console.log(profile.content);
             setUser(profile.content as unknown as User);
             toast.success("Login success");
             cb();
