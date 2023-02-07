@@ -8,7 +8,7 @@ import { useSubsocial } from "../../subsocial";
 import { name as name1, username as username1 } from "../../translations/peek";
 import { DICE_BEAR, REST_API } from "../../utils/constants";
 import { Button } from "../../utils/styles";
-import {getSigner, logTransaction} from "../../subsocial/polkadot";
+import {getTxEventIds, getSigner} from "../../subsocial/polkadot";
 
 import {User, WalletAccount} from "../../utils/types";
 import { ProfilePicture, Footer, Details, Section, Detail } from "../peek/styles";
@@ -58,11 +58,11 @@ const NewAccount: React.FC<NewAccountProps> = ({account}) => {
           username,
           name,
           status,
-          picture: `${DICE_BEAR}${account.address}`
+          picture: ""
         };
         if (pp) {
-            const ppId = await api.ipfs.saveFile(pp.file);
-            newUser.picture = ppId;
+          const ppId = await api.ipfs.saveFile(pp.file);
+          newUser.picture = ppId;
         }
         const cid = await api.ipfs.saveContent({...newUser});
         const substrateApi = await api.substrateApi;
@@ -74,21 +74,13 @@ const NewAccount: React.FC<NewAccountProps> = ({account}) => {
           const signer = await getSigner(account.address);
           if (!signer) return reject();
           await spaceTx.signAsync(account.address, {signer});
-          await spaceTx.send(async (result: any) => {
-            const { status } = result;
-            if (!result || !status) return reject();
-            if (status.isFinalized) {
-              const spaceId = getNewIdsFromEvent(result)[0].toString();
-              const profileTx = substrateApi.tx.profiles.setProfile(spaceId);
-              await profileTx.signAsync(account.address, { signer });
-              await profileTx.send(async (result: any) => {
-                const { status } = result;
-                if (!result || !status) return reject();
-                if (status.isFinalized) 
-                return resolve(true);
-              });
-            }
-          });
+          const spaceTxIds = await getTxEventIds(spaceTx);
+          if (!spaceTxIds.length) return reject;
+          const profileTx = substrateApi.tx.profiles.setProfile(spaceTxIds[0]);
+          await profileTx.signAsync(account.address, { signer });
+          getTxEventIds(profileTx)
+          .then(() => resolve(true))
+          .catch(() => reject());
         });
         toast.promise(createProfilePromise, {
           loading: "Creating profile",

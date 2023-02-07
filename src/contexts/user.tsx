@@ -36,7 +36,6 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
         const {presence} = (await axios.get(`${REST_API}/user/account/${address}`))
           .data;
         if (!presence) {
-            toast.error("Account not found");
             setNewAccount!(account);
             return;
         }
