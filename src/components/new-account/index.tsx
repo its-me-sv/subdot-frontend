@@ -25,11 +25,26 @@ const NewAccount: React.FC<NewAccountProps> = ({account}) => {
     const [name, setName] = useState<string>(account.name);
     const [username, setUsername] = useState<string>("");
     const [inProgress, setInProgress] = useState<boolean>(false);
-    const [picture, setPicture] = useState<string>(`${DICE_BEAR}${account.address}`);
     const [status, setStaus] = useState<string>("Hi there I'm new to Subdot");
+    const [pp, setPp] = useState<{ file: File; preview: string } | null>(null);
     const {dark, setNewAccount, language, setLoggedIn} = useAppContext();
     const {api} = useSubsocial();
     const {setUser} = useUserContext();
+
+    const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+      e.preventDefault();
+      if (!e.target.files) return;
+      let file = e.target.files[0];
+      if (file.size > 4404019) return toast.error("File too big");
+      let reader = new FileReader();
+      reader.onloadend = () => {
+        setPp({
+          file,
+          preview: reader.result as string,
+        });
+      };
+      reader.readAsDataURL(file);
+    };
 
     const createAccount = async () => {
         if (!api) return;
@@ -50,9 +65,13 @@ const NewAccount: React.FC<NewAccountProps> = ({account}) => {
           username,
           name,
           status,
-          picture: picture || `${DICE_BEAR}${account.address}`,
+          picture: "",
           reputation: 0,
         };
+        if (pp) {
+          const ppId = await api.ipfs.saveFile(pp.file);
+          newUser.picture = ppId;
+        }
         const cid = await api.ipfs.saveContent({...newUser});
         const substrateApi = await api.substrateApi;
         const spaceTx = substrateApi.tx.spaces.createSpace(
@@ -98,7 +117,7 @@ const NewAccount: React.FC<NewAccountProps> = ({account}) => {
         <Box dark={dark}>
           <ProfilePicture
             alt={`${account.address.slice(5)} pp`}
-            src={picture || `${DICE_BEAR}${account.address}`}
+            src={pp !== null ? pp.preview : `${DICE_BEAR}${account.address}`}
           />
           <Details>
             <Section dark={dark}>{name1[language]}</Section>
@@ -134,10 +153,9 @@ const NewAccount: React.FC<NewAccountProps> = ({account}) => {
             <Section dark={dark}>PICTURE</Section>
             <Detail
               dark={dark}
-              type="text"
-              value={picture}
-              placeholder="Address of picture"
-              onChange={(e) => setPicture(e.target.value)}
+              type="file"
+              accept="image/png, image/jpeg"
+              onChange={handleImage}
             />
           </Details>
           <Footer>

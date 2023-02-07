@@ -8,6 +8,7 @@ import Menu from "../menu";
 
 import {useAppContext} from "../../contexts/app";
 import {useUserContext} from "../../contexts/user";
+import { getImage } from "../../utils/utils";
 
 interface HeaderProps {}
 
@@ -33,7 +34,7 @@ const Header: React.FC<HeaderProps> = () => {
           <MenuLogo 
             onClick={openMenu}
             alt="menu" 
-            src={user?.picture ?? ""} 
+            src={getImage(user?.picture ?? "")} 
           />
         </Footer>
         {menuOpen && <Menu />}

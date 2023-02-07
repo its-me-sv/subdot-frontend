@@ -7,6 +7,7 @@ import {menu} from "../../translations/header";
 
 import {useAppContext} from "../../contexts/app";
 import {useUserContext} from "../../contexts/user";
+import { getImage } from "../../utils/utils";
 
 interface MenuProps {}
 
@@ -56,7 +57,11 @@ const Menu: React.FC<MenuProps> = () => {
 
     return (
       <Container dark={dark}>
-        <MenuLogo onClick={closeMenu} alt="menu" src={user?.picture ?? ""} />
+        <MenuLogo
+          onClick={closeMenu}
+          alt="menu"
+          src={getImage(user?.picture ?? "")}
+        />
         <MenuItem dark={dark} onClick={takeToProfile}>
           {menu.profile[language]}
         </MenuItem>
