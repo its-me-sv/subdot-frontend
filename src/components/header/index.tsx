@@ -37,7 +37,7 @@ const Header: React.FC<HeaderProps> = () => {
           <span 
             onClick={goToRP}
             title="Your reputation score"
-          >{user?.reputation} RP</span>
+          >{user?.reputation || "--"} RP</span>
           <MenuLogo 
             onClick={openMenu}
             alt="menu" 

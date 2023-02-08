@@ -35,7 +35,7 @@ const User: React.FC<UserProps> = ({
       >
         <img alt="pp" src={getImage(picture)} />
         <span>{username}</span>
-        <span>{reputation} RP</span>
+        <span>{reputation || "--"} RP</span>
       </UserContainer>
     );
 };

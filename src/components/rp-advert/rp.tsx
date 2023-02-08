@@ -42,7 +42,7 @@ const RP: React.FC<RPProps> = () => {
               onClick={() => setPeek!(v.accountId)}
             >
               <span>#{i + 1} {v.username}</span>
-              <span>- {v.reputation} RP</span>
+              <span>- {v.reputation || "--"} RP</span>
             </RPItem>
           ))}
         </div>

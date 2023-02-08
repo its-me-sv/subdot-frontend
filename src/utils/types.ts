@@ -40,3 +40,9 @@ export interface TopRPUser {
     username: string;
     reputation: number;
 }
+
+export interface ProfileMeta {
+    followers: number;
+    following: number;
+    posts: number;
+}

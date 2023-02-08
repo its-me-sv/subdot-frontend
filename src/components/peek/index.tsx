@@ -12,7 +12,7 @@ import { DICE_BEAR } from "../../utils/constants";
 import { getImage } from "../../utils/utils";
 
 import {Button} from "../../utils/styles";
-import { User } from "../../utils/types";
+import { ProfileMeta, User } from "../../utils/types";
 
 import {useAppContext} from "../../contexts/app";
 import {useSubsocial} from "../../subsocial";
@@ -30,9 +30,16 @@ const defaultUser: User = {
   reputation: 0
 };
 
+const defaultMeta: ProfileMeta = {
+  followers: 0,
+  following: 0,
+  posts: 0
+};
+
 const Peek: React.FC<PeekProps> = ({id}) => {
     const navigate = useNavigate();
     const {setPeek, setTransferId, language, dark} = useAppContext();
+    const [userMeta, setUserMeta] = useState<ProfileMeta>(defaultMeta);
     const [user, setUser] = useState<User>({
       ...defaultUser,
       picture: `${DICE_BEAR}${id}`,
@@ -75,19 +82,19 @@ const Peek: React.FC<PeekProps> = ({id}) => {
           </Details>
           <MetaDetails>
             <MetaInfo>
-              <Content dark={dark}>{user.reputation}</Content>
+              <Content dark={dark}>{user.reputation || "--"}</Content>
               <Section dark={dark}>RP</Section>
             </MetaInfo>
             <MetaInfo>
-              <Content dark={dark}>52</Content>
+              <Content dark={dark}>{userMeta.followers || "--"}</Content>
               <Section dark={dark}>{meta.followers[language]}</Section>
             </MetaInfo>
             <MetaInfo>
-              <Content dark={dark}>76</Content>
+              <Content dark={dark}>{userMeta.following || "--"}</Content>
               <Section dark={dark}>{meta.following[language]}</Section>
             </MetaInfo>
             <MetaInfo>
-              <Content dark={dark}>14</Content>
+              <Content dark={dark}>{userMeta.posts || "--"}</Content>
               <Section dark={dark}>{meta.posts[language]}</Section>
             </MetaInfo>
           </MetaDetails>
