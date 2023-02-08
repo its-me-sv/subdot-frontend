@@ -15,7 +15,7 @@ interface HeaderProps {}
 const Header: React.FC<HeaderProps> = () => {
     const navigate = useNavigate();
     const {setMenuOpen, menuOpen, dark} = useAppContext();
-    const {user} = useUserContext();
+    const {user, reputation} = useUserContext();
 
     const goHome = () => {
       navigate("/home");
@@ -37,7 +37,7 @@ const Header: React.FC<HeaderProps> = () => {
           <span 
             onClick={goToRP}
             title="Your reputation score"
-          >{user?.reputation || "--"} RP</span>
+          >{reputation || "--"} RP</span>
           <MenuLogo 
             onClick={openMenu}
             alt="menu" 
