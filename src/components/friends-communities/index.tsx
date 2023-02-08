@@ -1,22 +1,18 @@
 import React from "react";
+import { useUserContext } from "../../contexts/user";
 
 import FrndCommSection from "./section";
 import {Container} from './styles';
-import {friends, communities} from "../../translations/frnds-comms";
-
-import {useAppContext} from "../../contexts/app";
-
-const dummyIds = new Array(42).fill("<Dark Knight />");
 
 interface FriendsCommunitiesProps {}
 
 const FriendsCommunites: React.FC<FriendsCommunitiesProps> = () => {
-    const {language} = useAppContext();
+    const {followers, following} = useUserContext();
 
     return (
         <Container>
-            <FrndCommSection title={friends[language]} ids={dummyIds} />
-            <FrndCommSection title={communities[language]} ids={dummyIds} />
+            <FrndCommSection title="FOLLOWERS" ids={followers} />
+            <FrndCommSection title="FOLLOWING" ids={following} />
         </Container>
     );
 };

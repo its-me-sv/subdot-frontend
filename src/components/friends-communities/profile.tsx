@@ -20,9 +20,7 @@ const SectionProfile: React.FC<SectionProfileProps> = ({id, hover}) => {
 
     return (
       <ProfileContainer
-        onClick={() =>
-          setPeek!("5GQoKXFndb3JJz1L8az4PGbUKMD3gK1hZGG1P5GxwbyiT7vj")
-        }
+        onClick={() => setPeek!(id)}
         hover={hover}
         dark={dark}
       >
