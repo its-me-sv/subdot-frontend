@@ -1,8 +1,12 @@
 import styled from "styled-components";
 import {BoxShadow, BoxShadowDark} from "../../utils/styles";
 
-export const Container = styled.div`
-    display: grid;
+export const Container = styled.div<{dark: boolean;}>`
+  display: grid;
+  border-right: 1px solid #1a1a1a;
+  ${props => props.dark && `
+    border-right: 1px solid #f5f4f9;
+  `}
 `;
 
 export const Section = styled.div`
@@ -28,13 +32,18 @@ export const SectionTitle = styled.span<{ dark: boolean }>`
   `}
 `;
 
-export const SectionProfiles = styled.div`
+export const SectionProfiles = styled.div<{ dark: boolean }>`
   display: flex;
   flex-direction: column;
   height: 40vh;
   padding-top: 0.42rem;
   gap: 0.42rem;
   overflow-y: auto;
+  span {
+    font-family: Inter;
+    color: #1a1a1a;
+    ${props => props.dark && `color #f5f4f9;`}
+  }
 `;
 
 export const ProfileContainer = styled.div<{ hover?: boolean; dark: boolean }>`
