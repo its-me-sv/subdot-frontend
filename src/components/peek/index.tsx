@@ -46,14 +46,26 @@ const Peek: React.FC<PeekProps> = ({id}) => {
     });
     const {api} = useSubsocial();
 
-    useEffect(() => {
+    const fetchData = async () => {
       if (!api) return;
-      api.base.findProfileSpace(id)
-      .then(profile => {
+      api.base.findProfileSpace(id).then((profile) => {
         if (!profile?.content) return;
         const userData = profile.content as unknown as User;
         setUser(userData);
       });
+      const substrateApi = await api.substrateApi;
+      const followers = await substrateApi.query.accountFollows.accountFollowers(id);
+      const following = await substrateApi.query.accountFollows.accountsFollowedByAccount(id);
+      const postIds = [];
+      setUserMeta({
+        followers: followers.length,
+        following: following.length,
+        posts: postIds.length
+      });
+    };
+
+    useEffect(() => {
+      fetchData();
     }, [api, id]);
 
     return (
