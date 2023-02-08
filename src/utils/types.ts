@@ -9,7 +9,6 @@ export interface User {
     name: string;
     status: string;
     picture: string;
-    reputation: number;
 }
 
 export interface Post {

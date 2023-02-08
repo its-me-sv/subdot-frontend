@@ -27,7 +27,6 @@ const defaultUser: User = {
   name: "-------",
   status: "-------",
   picture: "-------",
-  reputation: 0
 };
 
 const defaultMeta: ProfileMeta = {
@@ -48,15 +47,14 @@ const Peek: React.FC<PeekProps> = ({id}) => {
 
     const fetchData = async () => {
       if (!api) return;
-      api.base.findProfileSpace(id).then((profile) => {
-        if (!profile?.content) return;
-        const userData = profile.content as unknown as User;
-        setUser(userData);
-      });
+      const profile = await api.base.findProfileSpace(id);
+      if (!profile?.content) return;
+      const userData = profile.content as unknown as User;
+      setUser(userData);
       const substrateApi = await api.substrateApi;
-      const followers = await substrateApi.query.accountFollows.accountFollowers(id);
-      const following = await substrateApi.query.accountFollows.accountsFollowedByAccount(id);
-      const postIds = [];
+      const followers = await substrateApi.query.accountFollows.accountFollowers(profile.struct.id.toString());
+      const following = await substrateApi.query.accountFollows.accountsFollowedByAccount(profile.struct.id.toString());
+      const postIds = await api.blockchain.postIdsBySpaceId(profile.struct.id);
       setUserMeta({
         followers: followers.length,
         following: following.length,
@@ -94,7 +92,7 @@ const Peek: React.FC<PeekProps> = ({id}) => {
           </Details>
           <MetaDetails>
             <MetaInfo>
-              <Content dark={dark}>{user.reputation || "--"}</Content>
+              {/* <Content dark={dark}>{user.reputation || "--"}</Content> */}
               <Section dark={dark}>RP</Section>
             </MetaInfo>
             <MetaInfo>

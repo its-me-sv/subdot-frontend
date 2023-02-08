@@ -10,15 +10,29 @@ import { REST_API } from "../utils/constants";
 interface UserContextInterface {
   account: WalletAccount | null;
   user: User | null;
+  reputation: number;
+  followers: Array<string>;
+  following: Array<string>;
+  spaceId: number;
   loginUser?: (account: WalletAccount, cb: () => void) => void;
   logoutUser?: () => void;
   setAccount?: React.Dispatch<React.SetStateAction<WalletAccount | null>>;
   setUser?: React.Dispatch<React.SetStateAction<User | null>>;
+  setReputation?: React.Dispatch<React.SetStateAction<number>>;
+  setFollowers?: React.Dispatch<React.SetStateAction<Array<string>>>;
+  setFollowing?: React.Dispatch<React.SetStateAction<Array<string>>>;
+  setSpaceId?: React.Dispatch<React.SetStateAction<number>>;
+  followUser?: (id: string) => void;
+  unFollowUser?: (id: string) => void;
 }
 
 const defaultState: UserContextInterface = {
     account: null,
-    user: null
+    user: null,
+    reputation: 0,
+    followers: [],
+    following: [],
+    spaceId: 0
 };
 
 export const UserContext = createContext<UserContextInterface>(defaultState);
@@ -28,6 +42,10 @@ export const useUserContext = () => useContext(UserContext);
 export const UserContextProvider: React.FC<{children: ReactNode}> = ({children}) => {
     const [account, setAccount] = useState<WalletAccount | null>(defaultState.account);
     const [user, setUser] = useState<User | null>(defaultState.user);
+    const [reputation, setReputation] = useState<number>(defaultState.reputation);
+    const [followers, setFollowers] = useState<Array<string>>(defaultState.followers);
+    const [following, setFollowing] = useState<Array<string>>(defaultState.following);
+    const [spaceId, setSpaceId] = useState<number>(defaultState.spaceId);
     const {api} = useSubsocial();
     const {setNewAccount, setLoggedIn} = useAppContext();
 
@@ -38,21 +56,45 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
           .data;
         if (!presence) {
             setNewAccount!(account);
+            setReputation(1);
             return;
         }
         const profile = await api.base.findProfileSpace(address);
-        if (profile?.content) {
-            setUser(profile.content as unknown as User);
-            toast.success("Login success");
-            cb();
+        if (!profile?.content) {
+            toast.error("Error logging in");
+            return;
         }
+        const rep = await axios.get(`${REST_API}/user/user-rp/${address}`);
+        setReputation(rep.data);
+        setUser(profile.content as unknown as User);
+        const substrateApi = await api.substrateApi;
+        const accFollowers =
+          await substrateApi.query.accountFollows.accountFollowers(profile.struct.id.toString());
+        const accFollowing =
+          await substrateApi.query.accountFollows.accountsFollowedByAccount(profile.struct.id.toString());
+        setFollowers(accFollowers.toArray().map(x => x.toString()));
+        setFollowing(accFollowing.toArray().map(x => x.toString()));
+        toast.success("Login success");
+        cb();
     };
 
     const logoutUser = () => {
         setAccount(null);
         setUser(null);
         setLoggedIn!(false);
+        setReputation(0);
+        setFollowers([]);
+        setFollowing([]);
+        setSpaceId(0);
         toast.success("Account logout success");
+    };
+
+    const followUser = (id: string) => {
+        setFollowing([...following, id]);
+    };
+
+    const unFollowUser = (id: string) => {
+        setFollowing([...following.filter(v => v != id)]);
     };
 
     return (
@@ -60,7 +102,12 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
             account, setAccount,
             user, setUser,
             loginUser,
-            logoutUser
+            logoutUser,
+            reputation, setReputation,
+            followers, setFollowers,
+            following, setFollowing,
+            spaceId, setSpaceId,
+            followUser, unFollowUser
         }}>
             {children}
         </UserContext.Provider>
