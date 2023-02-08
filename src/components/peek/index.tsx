@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import tempImg from "../../assets/temp.jpg";
 
@@ -8,17 +8,46 @@ import {
   memSce, username,
   name, meta, footer
 } from "../../translations/peek";
+import { DICE_BEAR } from "../../utils/constants";
+import { getImage } from "../../utils/utils";
+
+import {Button} from "../../utils/styles";
+import { User } from "../../utils/types";
 
 import {useAppContext} from "../../contexts/app";
-import {Button} from "../../utils/styles";
+import {useSubsocial} from "../../subsocial";
 
 interface PeekProps {
-    id: string;
+  id: string;
 }
+
+const defaultUser: User = {
+  created: "2023-02-07T16:25:55.956Z",
+  username: "--------",
+  name: "-------",
+  status: "-------",
+  picture: "-------",
+  reputation: 0
+};
 
 const Peek: React.FC<PeekProps> = ({id}) => {
     const navigate = useNavigate();
     const {setPeek, setTransferId, language, dark} = useAppContext();
+    const [user, setUser] = useState<User>({
+      ...defaultUser,
+      picture: `${DICE_BEAR}${id}`,
+    });
+    const {api} = useSubsocial();
+
+    useEffect(() => {
+      if (!api) return;
+      api.base.findProfileSpace(id)
+      .then(profile => {
+        if (!profile?.content) return;
+        const userData = profile.content as unknown as User;
+        setUser(userData);
+      });
+    }, [api, id]);
 
     return (
       <Container dark={dark}>
@@ -28,25 +57,25 @@ const Peek: React.FC<PeekProps> = ({id}) => {
           </CloseIcon>
           <ProfilePicture
             alt={`pp of ${id}`}
-            src={tempImg}
+            src={getImage(user.picture)}
           />
-          <JoinedDate dark={dark}>{memSce[language]} May 11, 2002</JoinedDate>
+          <JoinedDate dark={dark}>{memSce[language]} {(new Date(user.created)).toDateString()}</JoinedDate>
           <Details>
             <Section dark={dark}>{username[language]}</Section>
             <Detail
               dark={dark}
               type="text"
-              value={"<Dark Knight />"}
+              value={user.username}
               readOnly
             />
           </Details>
           <Details>
             <Section dark={dark}>{name[language]}</Section>
-            <Detail dark={dark} type="text" value={"Suraj Vijayan"} readOnly />
+            <Detail dark={dark} type="text" value={user.name} readOnly />
           </Details>
           <MetaDetails>
             <MetaInfo>
-              <Content dark={dark}>42</Content>
+              <Content dark={dark}>{user.reputation}</Content>
               <Section dark={dark}>RP</Section>
             </MetaInfo>
             <MetaInfo>
@@ -65,7 +94,7 @@ const Peek: React.FC<PeekProps> = ({id}) => {
           <Footer>
             <Button
               bgColor="#0072bb"
-              onClick={() => navigate(`/chat?user=${id}`)}
+              onClick={() => navigate(`/chat?user=${user.username}`)}
             >
               {footer.msg[language]}
             </Button>
@@ -75,7 +104,7 @@ const Peek: React.FC<PeekProps> = ({id}) => {
             <Button
               bgColor={dark ? "#f5f4f9" : "#1a1a1a"}
               dark={dark}
-              onClick={() => navigate(`/profile/${id}`)}
+              onClick={() => navigate(`/profile/${user.username}`)}
             >
               {footer.profile[language]}
             </Button>

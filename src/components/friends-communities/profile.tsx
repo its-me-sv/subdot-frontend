@@ -19,12 +19,15 @@ const SectionProfile: React.FC<SectionProfileProps> = ({id, hover}) => {
     const {setPeek, dark} = useAppContext();
 
     return (
-      <ProfileContainer onClick={() => setPeek!(id)} hover={hover} dark={dark}>
+      <ProfileContainer
+        onClick={() =>
+          setPeek!("5GQoKXFndb3JJz1L8az4PGbUKMD3gK1hZGG1P5GxwbyiT7vj")
+        }
+        hover={hover}
+        dark={dark}
+      >
         <ProfileDetails>
-          <ProfilePicture
-            alt={`pp of ${id}`}
-            src={tempImg}
-          />
+          <ProfilePicture alt={`pp of ${id}`} src={tempImg} />
           <ProfileInfo>
             <ProfileName dark={dark}>{id}</ProfileName>
             <ProfileStatusText dark={dark}>Status text</ProfileStatusText>
