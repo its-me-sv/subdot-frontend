@@ -49,13 +49,14 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
     const {api} = useSubsocial();
     const {setNewAccount, setLoggedIn} = useAppContext();
 
-    const loginUser = async (account: WalletAccount, cb: () => void) => {
+    const loginUser = async (acc: WalletAccount, cb: () => void) => {
         if (!api) return;
-        const {address} = account;
+        const {address} = acc;
+        setAccount(acc);
         const {presence} = (await axios.get(`${REST_API}/user/account/${address}`))
           .data;
         if (!presence) {
-            setNewAccount!(account);
+            setNewAccount!(acc);
             setReputation(1);
             return;
         }
@@ -68,10 +69,8 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
         setReputation(rep.data);
         setUser(profile.content as unknown as User);
         const substrateApi = await api.substrateApi;
-        const accFollowers =
-          await substrateApi.query.accountFollows.accountFollowers(profile.struct.id.toString());
-        const accFollowing =
-          await substrateApi.query.accountFollows.accountsFollowedByAccount(profile.struct.id.toString());
+        const accFollowers = await substrateApi.query.accountFollows.accountFollowers(address);
+        const accFollowing = await substrateApi.query.accountFollows.accountsFollowedByAccount(address);
         setFollowers(accFollowers.toArray().map(x => x.toString()));
         setFollowing(accFollowing.toArray().map(x => x.toString()));
         toast.success("Login success");

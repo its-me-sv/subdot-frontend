@@ -29,7 +29,7 @@ const NewAccount: React.FC<NewAccountProps> = ({account}) => {
     const [pp, setPp] = useState<{ file: File; preview: string } | null>(null);
     const {dark, setNewAccount, language, setLoggedIn} = useAppContext();
     const {api} = useSubsocial();
-    const {setUser} = useUserContext();
+    const {setUser, setSpaceId} = useUserContext();
 
     const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
       e.preventDefault();
@@ -65,7 +65,7 @@ const NewAccount: React.FC<NewAccountProps> = ({account}) => {
           username,
           name,
           status,
-          picture: "",
+          picture: `${DICE_BEAR}${account.address}`,
         };
         if (pp) {
           const ppId = await api.ipfs.saveFile(pp.file);
@@ -82,7 +82,8 @@ const NewAccount: React.FC<NewAccountProps> = ({account}) => {
           if (!signer) return reject();
           await spaceTx.signAsync(account.address, {signer});
           const spaceTxIds = await getTxEventIds(spaceTx);
-          if (!spaceTxIds.length) return reject;
+          if (!spaceTxIds.length) return reject();
+          setSpaceId!(+spaceTxIds[0]);
           const profileTx = substrateApi.tx.profiles.setProfile(spaceTxIds[0]);
           await profileTx.signAsync(account.address, { signer });
           getTxEventIds(profileTx)
