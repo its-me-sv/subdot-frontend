@@ -15,7 +15,7 @@ const Menu: React.FC<MenuProps> = () => {
     const navigate = useNavigate();
     const {
         setMenuOpen, setShowTerms, 
-        setLoggedIn, setSettingsOpen,
+        setSettingsOpen,
         setAdvertMenuOpen, setTxOpen,
         language, dark
     } = useAppContext();

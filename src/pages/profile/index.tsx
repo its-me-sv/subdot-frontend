@@ -35,7 +35,6 @@ const ProfilePage: React.FC<ProfilePageProps> = () => {
 
   useEffect(() => {
     fetchData();
-    return () => resetAppContext!();
   }, [params]);
 
   return (
