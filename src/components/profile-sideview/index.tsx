@@ -42,7 +42,7 @@ const defaultMeta: ProfileMeta = {
 const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
   const navigate = useNavigate();
   const {setTransferId, language, dark} = useAppContext();
-  const {account: currAccount} = useUserContext();
+  const {account: currAccount, setUser: setCurrUser} = useUserContext();
   const {api} = useSubsocial();
   const [userMeta, setUserMeta] = useState<ProfileMeta>(defaultMeta);
   const [reputation, setReputation] = useState<number>(0);
@@ -72,16 +72,48 @@ const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
     });
   };
 
+  const updateUser = (
+    pict: string,
+    uuname: string,
+    uname: string,
+    ustatus: string
+  ) => {
+    setUser({
+      ...user,
+      picture: pict,
+      username: uuname,
+      name: uname,
+      status: ustatus,
+    });
+    setCurrUser!({
+      ...user,
+      picture: pict,
+      username: uuname,
+      name: uname,
+      status: ustatus,
+    });
+  };
+
   useEffect(() => {
     fetchData();
   }, [accountId, api]);
 
   return (
     <Container dark={dark}>
-      {editOpen && <ProfileEdit />}
+      {editOpen && (
+        <ProfileEdit
+          address={accountId as string}
+          picture={user.picture} 
+          username={user.username}
+          name={user.name}
+          status={user.status}
+          setter={updateUser}
+          onClose={() => setEditOpen(false)}
+        />
+      )}
       <img alt={`pp of ${accountId}`} src={getImage(user.picture)} />
-      <Username>{"<Dark Knight />"}</Username>
-      <Name>Suraj Vijayan</Name>
+      <Username>{user.username}</Username>
+      <Name>{user.name}</Name>
       <Joined>
         {memSce[language]} {new Date(user.created).toDateString()}
       </Joined>

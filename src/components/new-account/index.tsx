@@ -35,7 +35,7 @@ const NewAccount: React.FC<NewAccountProps> = ({account}) => {
       e.preventDefault();
       if (!e.target.files) return;
       let file = e.target.files[0];
-      if (file.size > 4404019) return toast.error("File too big");
+      if (file.size > 4404019) return toast.error("File too big. Max size 4MB");
       let reader = new FileReader();
       reader.onloadend = () => {
         setPp({

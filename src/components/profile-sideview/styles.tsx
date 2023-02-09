@@ -68,6 +68,9 @@ export const Footer = styled.div`
 export const ProfileEditContainer = styled.div<{dark: boolean}>`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  padding: 0.42rem;
+  gap: 0.42rem;
   height: 84%;
   width: 21%;
   position: fixed;
