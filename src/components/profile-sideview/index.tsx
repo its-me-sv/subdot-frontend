@@ -42,7 +42,7 @@ const defaultMeta: ProfileMeta = {
 const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
   const navigate = useNavigate();
   const {setTransferId, language, dark} = useAppContext();
-  const {account: currAccount, setUser: setCurrUser} = useUserContext();
+  const {account: currAccount} = useUserContext();
   const {api} = useSubsocial();
   const [userMeta, setUserMeta] = useState<ProfileMeta>(defaultMeta);
   const [reputation, setReputation] = useState<number>(0);
@@ -72,28 +72,6 @@ const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
     });
   };
 
-  const updateUser = (
-    pict: string,
-    uuname: string,
-    uname: string,
-    ustatus: string
-  ) => {
-    setUser({
-      ...user,
-      picture: pict,
-      username: uuname,
-      name: uname,
-      status: ustatus,
-    });
-    setCurrUser!({
-      ...user,
-      picture: pict,
-      username: uuname,
-      name: uname,
-      status: ustatus,
-    });
-  };
-
   useEffect(() => {
     fetchData();
   }, [accountId, api]);
@@ -103,11 +81,8 @@ const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
       {editOpen && (
         <ProfileEdit
           address={accountId as string}
-          picture={user.picture} 
-          username={user.username}
-          name={user.name}
-          status={user.status}
-          setter={updateUser}
+          original={user}
+          setter={setUser}
           onClose={() => setEditOpen(false)}
         />
       )}

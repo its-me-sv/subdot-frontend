@@ -71,10 +71,13 @@ export const ProfileEditContainer = styled.div<{dark: boolean}>`
   justify-content: center;
   padding: 0.42rem;
   gap: 0.42rem;
-  height: 84%;
+  height: 70%;
   width: 21%;
   position: fixed;
   z-index: 800;
+  input {
+    max-width: 60%;
+  }
   ${BoxShadow}
   ${(props) =>
     props.dark &&

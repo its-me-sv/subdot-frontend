@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 import toast from "react-hot-toast";
+import { IpfsContent } from "@subsocial/api/substrate/wrappers";
+import { useNavigate } from "react-router-dom";
 
 import { useAppContext } from "../../contexts/app";
 import { Button } from "../../utils/styles";
@@ -8,28 +10,31 @@ import { Footer, ProfilePicture, Details, Section, Detail} from "../peek/styles"
 import { ProfileEditContainer } from "./styles";
 
 import {name as name1, username as username1} from "../../translations/peek";
+import { useSubsocial } from "../../subsocial";
+import axios from "axios";
+import { REST_API } from "../../utils/constants";
+import { User } from "../../utils/types";
+import { useUserContext } from "../../contexts/user";
+import { getSigner, getTxEventIds } from "../../subsocial/polkadot";
 
 interface ProfileEditProps {
-  picture: string;
-  username: string;
-  name: string;
-  status: string;
+  original: User;
   address: string;
-  setter: (
-    pict: string,
-    uuname: string,
-    uname: string,
-    ustatus: string
-  ) => void;
+  setter: React.Dispatch<React.SetStateAction<User>>;
   onClose: () => void;
 }
 
-const ProfileEdit: React.FC<ProfileEditProps> = (props) => {
+const ProfileEdit: React.FC<ProfileEditProps> = ({
+    original, address, onClose, setter
+}) => {
+    const navigate = useNavigate();
     const {dark, language} = useAppContext();
-    const [picture, setPicture] = useState<string>(props.picture);
-    const [username, setUsername] = useState<string>(props.username);
-    const [name, setName] = useState<string>(props.name);
-    const [status, setStatus] = useState<string>(props.status);
+    const {setUser: setCurrUser, spaceId} = useUserContext();
+    const {api} = useSubsocial();
+    const [picture, setPicture] = useState<string>(original.picture);
+    const [username, setUsername] = useState<string>(original.username);
+    const [name, setName] = useState<string>(original.name);
+    const [status, setStatus] = useState<string>(original.status);
     const [pp, setPp] = useState<{ file: File; preview: string } | null>(null);
     const [inProgress, setInProgress] = useState<boolean>(false);
 
@@ -48,12 +53,74 @@ const ProfileEdit: React.FC<ProfileEditProps> = (props) => {
       reader.readAsDataURL(file);
     };
 
-    const handleUpdate = () => {};
+    const handleUpdate = async () => {
+        if (!api) return;
+        if (!name.length || !username.length || !status.length) {
+          return toast.error("Field(s) empty");
+        }
+        if (username.length > 10) return toast.error("Username too long");
+        if (status.length > 84) return toast.error("Status too long");
+        if (name.length > 42) return toast.error("Name too long");
+        if (/^[a-zA-Z0-9]+$/.test(username) === false)
+        return toast.error("Invalid username");
+        if (username !== original.username) {
+            const {presence} = (await axios.get(`${REST_API}/user/username/${username}`)).data;
+            if (presence) return toast.error("Username already in use");
+        }
+        
+        setInProgress(true);
+        let updatedUser: User = {
+            ...original,
+            picture,
+            name,
+            username,
+            status
+        };
+        if (pp) {
+            const ppId = await api.ipfs.saveFile(pp.file);
+            updatedUser.picture = ppId;
+        }
+        const cid = await api.ipfs.saveContent({...updatedUser});
+        const substrateApi = await api.substrateApi;
+        const spaceTx = substrateApi.tx.spaces.updateSpace(spaceId, {
+            content: IpfsContent(cid)
+        });
+        const updateProfilePromise = new Promise(async (resolve, reject) => {
+            const signer = await getSigner(address);
+            if (!signer) return reject();
+            await spaceTx.signAsync(address, {signer});
+            getTxEventIds(spaceTx)
+              .then(() => {
+                setCurrUser!(updatedUser);
+                setter(updatedUser);
+                axios.put(`${REST_API}/user/user-edit/${address}`, {
+                  username,
+                  name,
+                });
+                resolve(true);
+              })
+              .catch(() => reject());
+        });
+        toast.promise(updateProfilePromise, {
+          loading: "Updating profile",
+          success: "Profile has been updated successfully",
+          error: "Unable to update profile",
+        });
+        updateProfilePromise
+          .then(() => {
+            setInProgress(false);
+            if (username !== original.username) {
+                navigate(`/profile/${username}`);
+            }
+            onClose();
+          })
+          .finally(() => setInProgress(false));
+    };
 
     return (
       <ProfileEditContainer dark={dark}>
         <ProfilePicture
-          alt={`${props.address.slice(5)} pp`}
+          alt={`${address.slice(5)} pp`}
           src={pp !== null ? pp.preview : getImage(picture)}
         />
         <Details>
@@ -100,13 +167,13 @@ const ProfileEdit: React.FC<ProfileEditProps> = (props) => {
             <span>Account updation in progress</span>
           ) : (
             <>
-              <Button bgColor="#e15d5d" onClick={props.onClose}>
+              <Button bgColor="#e15d5d" onClick={onClose}>
                 CANCEL
               </Button>
               {((
-                name !== props.name ||
-                username !== props.username ||
-                status !== props.status ||
+                name !== original.name ||
+                username !== original.username ||
+                status !== original.status ||
                 pp !== null
               ) && (
                 <Button bgColor="#0072bb" onClick={handleUpdate}>

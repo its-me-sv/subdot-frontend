@@ -3,9 +3,9 @@ import {BoxShadow, BoxShadowDark} from "../../utils/styles";
 
 export const Container = styled.div<{dark: boolean;}>`
   display: grid;
-  border-right: 1px solid #1a1a1a;
+  border-right: 1px solid rgba(0, 0, 0, 0.5);
   ${props => props.dark && `
-    border-right: 1px solid #f5f4f9;
+    border-right: 1px solid rgba(255, 255, 255, 0.5);
   `}
 `;
 
