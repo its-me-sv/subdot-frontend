@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import {encodeAddress} from "@polkadot/util-crypto";
 
 import FrndCommSection from "./section";
 import {Container} from './styles';
@@ -34,8 +35,8 @@ const FriendsCommunites: React.FC<FriendsCommunitiesProps> = ({
         const substrateApi = await api.substrateApi;
         const followers = await substrateApi.query.accountFollows.accountFollowers(accountId);
         const following = await substrateApi.query.accountFollows.accountsFollowedByAccount(accountId); 
-        setFollowers(followers.toArray().map((x) => x.toString()));
-        setFollowing(following.toArray().map((x) => x.toString()));
+        setFollowers(followers.toArray().map((x) => encodeAddress(x, 42).toString()));
+        setFollowing(following.toArray().map((x) => encodeAddress(x, 42).toString()));
     };
 
     useEffect(() => {

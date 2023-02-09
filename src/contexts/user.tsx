@@ -1,6 +1,7 @@
 import React, {createContext, useContext, ReactNode, useState} from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
+import {encodeAddress} from "@polkadot/util-crypto";
 
 import {User, WalletAccount} from "../utils/types";
 import {useSubsocial} from "../subsocial";
@@ -61,20 +62,20 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
             setReputation(1);
             return;
         }
+        toast.success("Logging in shortly");
         const profile = await api.base.findProfileSpace(address);
         if (!profile?.content) {
             toast.error("Error logging in");
             return;
         }
-        toast.success("Logging in shortly");
         const rep = await axios.get(`${REST_API}/user/user-rp/${address}`);
         setReputation(rep.data);
         setUser(profile.content as unknown as User);
         const substrateApi = await api.substrateApi;
         const accFollowers = await substrateApi.query.accountFollows.accountFollowers(address);
         const accFollowing = await substrateApi.query.accountFollows.accountsFollowedByAccount(address);
-        setFollowers(accFollowers.toArray().map(x => x.toString()));
-        setFollowing(accFollowing.toArray().map(x => x.toString()));
+        setFollowers(accFollowers.toArray().map(x => encodeAddress(x, 42).toString()));
+        setFollowing(accFollowing.toArray().map(x => encodeAddress(x, 42).toString()));
         toast.success("Login success");
         cb();
     };
@@ -101,13 +102,13 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
             getTxEventIds(followTx)
             .then(() => {
                 toast.success("Account has been follwed");
-                axios.post(`${REST_API}/user/incr-rp/${id}/1`);
+                axios.put(`${REST_API}/user/incr-rp/${id}/1`);
                 resolve(true);
             })
             .catch(() => reject());
         });
         toast.promise(followPromise, {
-            loading: "Follwing user",
+            loading: "Following user",
             success: "User followed",
             error: "Couldn't follow user"
         });
@@ -133,7 +134,7 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
             .catch(() => reject());
         });
         toast.promise(unFollowPromise, {
-          loading: "Unfollwing user",
+          loading: "Unfollowing user",
           success: "User unfollowed",
           error: "Couldn't unfollow user",
         });
