@@ -1,16 +1,46 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 import FrndCommSection from "./section";
 import {Container} from './styles';
 
 import { useAppContext } from "../../contexts/app";
 import { useUserContext } from "../../contexts/user";
+import { useSubsocial } from "../../subsocial";
 
-interface FriendsCommunitiesProps {}
+interface FriendsCommunitiesProps {
+    accountId: string | undefined;
+}
 
-const FriendsCommunites: React.FC<FriendsCommunitiesProps> = () => {
-    const {followers, following} = useUserContext();
+const FriendsCommunites: React.FC<FriendsCommunitiesProps> = ({
+    accountId
+}) => {
     const {dark} = useAppContext();
+    const {api} = useSubsocial();
+    const {
+        account, 
+        followers: currFollowers, 
+        following: currFollowing
+    } = useUserContext();
+    const [followers, setFollowers] = useState<Array<string>>([]);
+    const [following, setFollowing] = useState<Array<string>>([]);
+
+    const fetchData = async () => {
+        if (!accountId || !account?.address || !api) return;
+        if (account.address === accountId) {
+            setFollowers(currFollowers);
+            setFollowing(currFollowing);
+            return;
+        }
+        const substrateApi = await api.substrateApi;
+        const followers = await substrateApi.query.accountFollows.accountFollowers(accountId);
+        const following = await substrateApi.query.accountFollows.accountsFollowedByAccount(accountId); 
+        setFollowers(followers.toArray().map((x) => x.toString()));
+        setFollowing(following.toArray().map((x) => x.toString()));
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, [api, accountId]);
 
     return (
         <Container dark={dark}>

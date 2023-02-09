@@ -20,7 +20,7 @@ const FrndCommSection: React.FC<FrndCommSectionProps> = ({
             <SectionTitle dark={dark}>{title}</SectionTitle>
             <SectionProfiles dark={dark}>
                 {ids.length === 0 && (
-                    <span>No accounts to show. Explore and add people to your network</span>
+                    <span>No accounts to show.</span>
                 )}
                 {ids.map((val) => (
                     <SectionProfile id={val} />

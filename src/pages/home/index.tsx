@@ -7,11 +7,13 @@ import Posts from "../../components/posts";
 import RPAdvert from "../../components/rp-advert";
 
 import {useAppContext} from "../../contexts/app";
+import {useUserContext} from "../../contexts/user";
 
 interface HomePageProps {}
 
 const HomePage: React.FC<HomePageProps> = () => {
   const {resetAppContext, dark} = useAppContext();
+  const {account} = useUserContext();
 
   useEffect(() => {
     return () => resetAppContext!();
@@ -19,7 +21,7 @@ const HomePage: React.FC<HomePageProps> = () => {
 
   return (
     <Container dark={dark}>
-      <FriendsCommunites />
+      <FriendsCommunites accountId={account?.address} />
       <Posts />
       <RPAdvert />
     </Container>
