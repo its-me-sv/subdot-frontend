@@ -114,26 +114,28 @@ const Peek: React.FC<PeekProps> = ({id}) => {
               <Section dark={dark}>{meta.posts[language]}</Section>
             </MetaInfo>
           </MetaDetails>
-          {account?.address !== id && (
-            <Footer>
-              <Button
-                bgColor="#0072bb"
-                onClick={() => navigate(`/chat?user=${user.username}`)}
-              >
-                {footer.msg[language]}
-              </Button>
-              <Button bgColor="#005e20" onClick={() => setTransferId!(id)}>
-                {footer.transfer[language]} $
-              </Button>
-              <Button
-                bgColor={dark ? "#f5f4f9" : "#1a1a1a"}
-                dark={dark}
-                onClick={() => navigate(`/profile/${user.username}`)}
-              >
-                {footer.profile[language]}
-              </Button>
-            </Footer>
-          )}
+          <Footer>
+            {account?.address !== id && (
+              <>
+                <Button
+                  bgColor="#0072bb"
+                  onClick={() => navigate(`/chat?user=${user.username}`)}
+                >
+                  {footer.msg[language]}
+                </Button>
+                <Button bgColor="#005e20" onClick={() => setTransferId!(id)}>
+                  {footer.transfer[language]} $
+                </Button>
+              </>
+            )}
+            <Button
+              bgColor={dark ? "#f5f4f9" : "#1a1a1a"}
+              dark={dark}
+              onClick={() => navigate(`/profile/${user.username}`)}
+            >
+              {footer.profile[language]}
+            </Button>
+          </Footer>
         </Box>
       </Container>
     );
