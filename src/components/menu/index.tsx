@@ -41,7 +41,7 @@ const Menu: React.FC<MenuProps> = () => {
     };
 
     const takeToProfile = () => {
-        navigate("/profile/dark-knight");
+        navigate(`/profile/${user?.username}`);
         closeMenu();
     };
 
