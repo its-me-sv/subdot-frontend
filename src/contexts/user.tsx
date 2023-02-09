@@ -6,6 +6,7 @@ import {User, WalletAccount} from "../utils/types";
 import {useSubsocial} from "../subsocial";
 import {useAppContext} from "./app";
 import { REST_API } from "../utils/constants";
+import { getSigner, getTxEventIds } from "../subsocial/polkadot";
 
 interface UserContextInterface {
   account: WalletAccount | null;
@@ -22,8 +23,8 @@ interface UserContextInterface {
   setFollowers?: React.Dispatch<React.SetStateAction<Array<string>>>;
   setFollowing?: React.Dispatch<React.SetStateAction<Array<string>>>;
   setSpaceId?: React.Dispatch<React.SetStateAction<number>>;
-  followUser?: (id: string) => void;
-  unFollowUser?: (id: string) => void;
+  followUser?: (id: string, cb: () => void) => void;
+  unFollowUser?: (id: string, cb: () => void) => void;
 }
 
 const defaultState: UserContextInterface = {
@@ -89,12 +90,57 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
         toast.success("Account logout success");
     };
 
-    const followUser = (id: string) => {
-        setFollowing([...following, id]);
+    const followUser = (id: string, cb: () => void) => {
+        if (!api || !account) return;
+        const followPromise = new Promise(async (resolve, reject) => {
+            const substrateApi = await api.blockchain.api;
+            const followTx = substrateApi.tx.accountFollows.followAccount(id);
+            const signer = await getSigner(account.address);
+            if (!signer) return reject();
+            await followTx.signAsync(account.address, { signer });
+            getTxEventIds(followTx)
+            .then(() => {
+                toast.success("Account has been follwed");
+                axios.post(`${REST_API}/user/incr-rp/${id}/1`);
+                resolve(true);
+            })
+            .catch(() => reject());
+        });
+        toast.promise(followPromise, {
+            loading: "Follwing user",
+            success: "User followed",
+            error: "Couldn't follow user"
+        });
+        followPromise.then(() => {
+            setFollowing([...following, id]);
+            cb();
+        });
     };
 
-    const unFollowUser = (id: string) => {
-        setFollowing([...following.filter(v => v != id)]);
+    const unFollowUser = (id: string, cb: () => void) => {
+        if (!api || !account) return;
+        const unFollowPromise = new Promise(async (resolve, reject) => {
+          const substrateApi = await api.blockchain.api;
+          const followTx = substrateApi.tx.accountFollows.unfollowAccount(id);
+          const signer = await getSigner(account.address);
+          if (!signer) return reject();
+          await followTx.signAsync(account.address, { signer });
+          getTxEventIds(followTx)
+            .then(() => {
+              toast.success("Account has been unfollwed");
+              resolve(true);
+            })
+            .catch(() => reject());
+        });
+        toast.promise(unFollowPromise, {
+          loading: "Unfollwing user",
+          success: "User unfollowed",
+          error: "Couldn't unfollow user",
+        });
+        unFollowPromise.then(() => {
+          setFollowing([...following.filter((v) => v != id)]);
+          cb();
+        });
     };
 
     return (

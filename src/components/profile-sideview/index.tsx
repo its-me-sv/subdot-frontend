@@ -42,7 +42,7 @@ const defaultMeta: ProfileMeta = {
 const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
   const navigate = useNavigate();
   const {setTransferId, language, dark} = useAppContext();
-  const {account: currAccount} = useUserContext();
+  const {account: currAccount, following, followUser, unFollowUser} = useUserContext();
   const {api} = useSubsocial();
   const [userMeta, setUserMeta] = useState<ProfileMeta>(defaultMeta);
   const [reputation, setReputation] = useState<number>(0);
@@ -70,6 +70,26 @@ const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
       following: following.length,
       posts: postIds.length,
     });
+  };
+
+  const handleFollow = () => {
+    if (!accountId) return;
+    if (following.includes(accountId) === false) {
+      followUser!(accountId, () => {
+        setUserMeta(prev => ({
+          ...prev,
+          followers: prev.followers + 1
+        }));
+        setReputation(prevRp => prevRp + 1);
+      });
+    } else {
+      unFollowUser!(accountId, () => {
+        setUserMeta((prev) => ({
+          ...prev,
+          followers: prev.followers - 1,
+        }));
+      });
+    }
   };
 
   useEffect(() => {
@@ -125,14 +145,19 @@ const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
           >
             {footer.transfer[language]} $
           </Button>
-          <Button bgColor={dark ? "#f5f4f9" : "#1a1a1a"} dark={dark}>
-            {footer.follow[language]}
+          <Button 
+            bgColor={dark ? "#f5f4f9" : "#1a1a1a"} dark={dark}
+            onClick={handleFollow}
+          >
+            {following.includes(accountId || "")
+              ? "UNFOLLOW"
+              : footer.follow[language]}
           </Button>
         </Footer>
       ) : (
         <Footer>
-          <Button 
-            bgColor={dark ? "#f5f4f9" : "#1a1a1a"} 
+          <Button
+            bgColor={dark ? "#f5f4f9" : "#1a1a1a"}
             dark={dark}
             onClick={() => setEditOpen(true)}
           >
