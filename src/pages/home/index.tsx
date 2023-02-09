@@ -22,7 +22,7 @@ const HomePage: React.FC<HomePageProps> = () => {
   return (
     <Container dark={dark}>
       <FriendsCommunites accountId={account?.address} />
-      <Posts />
+      <Posts accountId={account?.address} />
       <RPAdvert />
     </Container>
   );

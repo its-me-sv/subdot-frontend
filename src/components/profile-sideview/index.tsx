@@ -12,14 +12,16 @@ import {
 import {memSce, meta, footer} from "../../translations/peek";
 
 import {useAppContext} from "../../contexts/app";
+import { useUserContext } from "../../contexts/user";
 
 interface ProfileSideViewProps {
-  id: string;
+  accountId: string | undefined;
 }
 
-const ProfileSideView: React.FC<ProfileSideViewProps> = ({id}) => {
+const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
   const navigate = useNavigate();
   const {setTransferId, language, dark} = useAppContext();
+  const {account: currAccount} = useUserContext();
 
   return (
     <Container dark={dark}>
@@ -46,18 +48,31 @@ const ProfileSideView: React.FC<ProfileSideViewProps> = ({id}) => {
           <span>{meta.following[language]}</span>
         </MetaItem>
       </Meta>
-      <Footer>
-        <Button bgColor="#0072bb" onClick={() => navigate(`/chat?user=${id}`)}>
-          {footer.msg[language]}
-        </Button>
-        <Button bgColor="#005e20" onClick={() => setTransferId!(id)}>
-          {footer.transfer[language]} $
-        </Button>
-        <Button 
-          bgColor={dark ? "#f5f4f9" : "#1a1a1a"}
-          dark={dark}
-        >{footer.follow[language]}</Button>
-      </Footer>
+      {accountId !== currAccount?.address ? (
+        <Footer>
+          <Button
+            bgColor="#0072bb"
+            onClick={() => navigate(`/chat?user=${accountId}`)}
+          >
+            {footer.msg[language]}
+          </Button>
+          <Button
+            bgColor="#005e20"
+            onClick={() => setTransferId!(accountId as string)}
+          >
+            {footer.transfer[language]} $
+          </Button>
+          <Button bgColor={dark ? "#f5f4f9" : "#1a1a1a"} dark={dark}>
+            {footer.follow[language]}
+          </Button>
+        </Footer>
+      ) : (
+        <Footer>
+          <Button bgColor={dark ? "#f5f4f9" : "#1a1a1a"} dark={dark}>
+            EDIT
+          </Button>
+        </Footer>
+      )}
     </Container>
   );
 };

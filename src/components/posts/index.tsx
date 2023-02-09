@@ -8,9 +8,13 @@ import Post from "./post";
 
 import {useAppContext} from "../../contexts/app";
 
-interface PostsProps {}
+interface PostsProps {
+  accountId: string | undefined;
+}
 
-const Posts: React.FC<PostsProps> = () => {
+const Posts: React.FC<PostsProps> = ({
+  accountId
+}) => {
     const {setPostMenuOpen, language, dark} = useAppContext();
     
     return (
