@@ -13,7 +13,8 @@ import {
 import {memSce, meta, footer} from "../../translations/peek";
 
 import {useAppContext} from "../../contexts/app";
-import { useUserContext } from "../../contexts/user";
+import {useUserContext} from "../../contexts/user";
+import ProfileEdit from "./edit";
 
 import {User, ProfileMeta} from "../../utils/types";
 import { useSubsocial } from "../../subsocial";
@@ -49,6 +50,7 @@ const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
     ...defaultUser,
     picture: `${DICE_BEAR}${accountId}`,
   });
+  const [editOpen, setEditOpen] = useState<boolean>(false);
 
   const fetchData = async () => {
     if (!api || !accountId) return;
@@ -76,6 +78,7 @@ const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
 
   return (
     <Container dark={dark}>
+      {editOpen && <ProfileEdit />}
       <img alt={`pp of ${accountId}`} src={getImage(user.picture)} />
       <Username>{"<Dark Knight />"}</Username>
       <Name>Suraj Vijayan</Name>
@@ -121,7 +124,11 @@ const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
         </Footer>
       ) : (
         <Footer>
-          <Button bgColor={dark ? "#f5f4f9" : "#1a1a1a"} dark={dark}>
+          <Button 
+            bgColor={dark ? "#f5f4f9" : "#1a1a1a"} 
+            dark={dark}
+            onClick={() => setEditOpen(true)}
+          >
             EDIT
           </Button>
         </Footer>

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { BoxShadow, BoxShadowDark } from "../../utils/styles";
 
 export const Container = styled.div<{dark: boolean;}>`
   display: flex;
@@ -62,4 +63,19 @@ export const Footer = styled.div`
     display: flex;
     align-items: center;
     gap: 1.2rem;
+`;
+
+export const ProfileEditContainer = styled.div<{dark: boolean}>`
+  display: flex;
+  flex-direction: column;
+  height: 84%;
+  width: 21%;
+  position: fixed;
+  z-index: 800;
+  ${BoxShadow}
+  ${(props) =>
+    props.dark &&
+    `
+    ${BoxShadowDark}
+  `}
 `;
