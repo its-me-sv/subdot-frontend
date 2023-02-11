@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {format} from "timeago.js";
 import {useNavigate} from "react-router-dom";
-import tempImg from "../../assets/temp.jpg";
-import contentImg from "../../assets/content_temp.jpg";
+import {encodeAddress} from "@polkadot/util-crypto";
 
 import {
     FooterItem, PostContainer, 
@@ -17,9 +16,10 @@ import tipIcon from "../../assets/icons/tip.png";
 import {posted} from "../../translations/posts";
 
 import {useAppContext} from "../../contexts/app";
-import { UserPost, User } from "../../utils/types";
+import { UserPost, User, UserPostMeta } from "../../utils/types";
 import { DICE_BEAR } from "../../utils/constants";
 import { useSubsocial } from "../../subsocial";
+import { getImage } from "../../utils/utils";
 
 interface PostProps {
     postId: string;
@@ -30,6 +30,11 @@ const defaultPost: UserPost = {
     picture: "",
     summary: "",
     isShowMore: false
+};
+
+const defaultUserPostMeta: UserPostMeta = {
+    createdAt: Date.now(),
+    likes: 0
 };
 
 const defaultUser: User = {
@@ -49,9 +54,22 @@ const Post: React.FC<PostProps> = ({postId}) => {
     const {api} = useSubsocial();
     const [post, setPost] = useState<UserPost>(defaultPost);
     const [owner, setOwner] = useState<User>(defaultUser);
+    const [postMeta, setPostMeta] = useState<UserPostMeta>(defaultUserPostMeta);
 
     const fetchData = async () => {
         if (!api || !postId) return;
+        const post = await api.findPost({id: postId});
+        if (!post?.content) return;
+        setPost(post.content as unknown as UserPost);
+        setPostMeta({
+            likes: post.struct.upvotesCount,
+            createdAt: post.struct.createdAtTime
+        });
+        api.base.findProfileSpace(post.struct.createdByAccount)
+        .then(profile => {
+            if (!profile?.content) return;
+            setOwner(profile.content as unknown as User);
+        });
     };
 
     useEffect(() => {
@@ -59,47 +77,34 @@ const Post: React.FC<PostProps> = ({postId}) => {
     }, [api, postId]);
 
     return (
-        <PostContainer dark={dark}>
-            <PostHeader onClick={() => navigate("/profile/suraj")}>
-                <img 
-                    alt="pp"
-                    src={tempImg} 
-                />
-                <PostHeaderRight dark={dark}>
-                    <PostUsername>{"<Dark Knight />"}</PostUsername>
-                    <PostTime>{posted[language]} {format(new Date(2002, 4, 11))}</PostTime>
-                </PostHeaderRight>
-            </PostHeader>
-            <PostContent dark={dark}>
-                Hi there friends. I just took a picture with an stray dog
-            </PostContent>
-            <PostImage 
-                alt="content" 
-                src={contentImg} 
-                />
-            <PostFooter>
-                <FooterItem dark={dark}>
-                    <img 
-                        alt="like" 
-                        src={likeIcon} 
-                    />
-                    <span>1.1m</span>
-                </FooterItem>
-                <FooterItem dark={dark} onClick={() => setCommentId!("123")}>
-                    <img 
-                        alt="comment" 
-                        src={cmtIcon} 
-                    />
-                    <span>1.1m</span>
-                </FooterItem>
-                <FooterItem dark={dark} onClick={() => setTransferId!("<Dark Knight />")}>
-                    <img 
-                        alt="tip"
-                        src={tipIcon} 
-                    />
-                </FooterItem>
-            </PostFooter>
-        </PostContainer>
+      <PostContainer dark={dark}>
+        <PostHeader onClick={() => navigate(`/profile/${owner.username}`)}>
+          <img alt={`pp of ${owner.username}`} src={getImage(owner.picture)} />
+          <PostHeaderRight dark={dark}>
+            <PostUsername>{owner.username}</PostUsername>
+            <PostTime>
+              {posted[language]} {format(new Date(postMeta.createdAt))}
+            </PostTime>
+          </PostHeaderRight>
+        </PostHeader>
+        <PostContent dark={dark}>{post.description}</PostContent>
+        {post.picture.length > 0 && (
+          <PostImage alt="content" src={getImage(post.picture)} />
+        )}
+        <PostFooter>
+          <FooterItem dark={dark}>
+            <img alt="like" src={likeIcon} />
+            {postMeta.likes > 0 && <span>1.1m</span>}
+          </FooterItem>
+          <FooterItem dark={dark} onClick={() => setCommentId!("123")}>
+            <img alt="comment" src={cmtIcon} />
+            <span>1.1m</span>
+          </FooterItem>
+          <FooterItem dark={dark} onClick={() => setTransferId!(owner.username)}>
+            <img alt="tip" src={tipIcon} />
+          </FooterItem>
+        </PostFooter>
+      </PostContainer>
     );
 };
 

@@ -18,6 +18,11 @@ export interface UserPost {
     isShowMore: boolean;
 }
 
+export interface UserPostMeta {
+    createdAt: number;
+    likes: number
+}
+
 export interface Message {
     text: string;
 }
