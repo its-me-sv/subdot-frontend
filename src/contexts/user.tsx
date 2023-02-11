@@ -75,8 +75,8 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
         const substrateApi = await api.substrateApi;
         const accFollowers = await substrateApi.query.accountFollows.accountFollowers(address);
         const accFollowing = await substrateApi.query.accountFollows.accountsFollowedByAccount(address);
-        setFollowers(accFollowers.toArray().map(x => encodeAddress(x, 42).toString()));
-        setFollowing(accFollowing.toArray().map(x => encodeAddress(x, 42).toString()));
+        setFollowers(accFollowers.toArray().map(x => encodeAddress(x, 42)));
+        setFollowing(accFollowing.toArray().map(x => encodeAddress(x, 42)));
         toast.success("Login success");
         cb();
     };

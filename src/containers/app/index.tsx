@@ -36,7 +36,7 @@ const App: React.FC<AppProps> = () => {
     loggedIn, showTerms, 
     settingsOpen, advertMenuOpen, 
     explore, peek, 
-    commentsId, transferId,
+    comments, transferId,
     postMenuOpen, txOpen,
     loading, setLoading,
     newAccount
@@ -59,7 +59,7 @@ const App: React.FC<AppProps> = () => {
             {advertMenuOpen && <Advertise />}
             {explore.length > 2 && <Results />}
             {peek.length > 0 && <Peek id={peek} />}
-            {commentsId.length > 0 && <Comments cmtIds={commentsId} />}
+            {comments.length > 0 && <Comments cmts={comments} />}
             {transferId.length > 0 && <Transfer accountId={transferId} />}
             {postMenuOpen && <NewPost />}
             {txOpen && <Transactions />}

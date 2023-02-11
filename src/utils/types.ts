@@ -52,3 +52,10 @@ export interface ProfileMeta {
     following: number;
     posts: number;
 }
+
+export interface PostComment {
+    creator: string;
+    createdAt: number;
+    id: string;
+    body: string;
+}

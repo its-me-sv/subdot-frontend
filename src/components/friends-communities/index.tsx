@@ -35,8 +35,8 @@ const FriendsCommunites: React.FC<FriendsCommunitiesProps> = ({
         const substrateApi = await api.substrateApi;
         const followers = await substrateApi.query.accountFollows.accountFollowers(accountId);
         const following = await substrateApi.query.accountFollows.accountsFollowedByAccount(accountId); 
-        setFollowers(followers.toArray().map((x) => encodeAddress(x, 42).toString()));
-        setFollowing(following.toArray().map((x) => encodeAddress(x, 42).toString()));
+        setFollowers(followers.toArray().map((x) => encodeAddress(x, 42)));
+        setFollowing(following.toArray().map((x) => encodeAddress(x, 42)));
     };
 
     useEffect(() => {

@@ -20,7 +20,7 @@ import tipIcon from "../../assets/icons/tip.png";
 import {posted} from "../../translations/posts";
 
 import {useAppContext} from "../../contexts/app";
-import { UserPost, User, UserPostMeta } from "../../utils/types";
+import { UserPost, User, UserPostMeta, PostComment } from "../../utils/types";
 import { useSubsocial } from "../../subsocial";
 import { getImage } from "../../utils/utils";
 
@@ -36,7 +36,7 @@ interface PostProps {
 const Post: React.FC<PostProps> = ({postId}) => {
     const navigate = useNavigate();
     const {
-        setCommentId, setTransferId,
+        setComments: setCurrCmts, setTransferId,
         language, dark
     } = useAppContext();
     const {api} = useSubsocial();
@@ -45,7 +45,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
     const [owner, setOwner] = useState<User>(defaultUser);
     const [onwerId, setOwnerId] = useState<string>("");
     const [postMeta, setPostMeta] = useState<UserPostMeta>(defaultUserPostMeta);
-    const [commentsId, setCommentsId] = useState<Array<string>>([]);
+    const [comments, setComments] = useState<Array<PostComment>>([]);
     const [likedId, setLikeId] = useState<string>("0");
 
     const fetchData = async () => {
@@ -57,16 +57,20 @@ const Post: React.FC<PostProps> = ({postId}) => {
             likes: post.struct.upvotesCount,
             createdAt: post.struct.createdAtTime
         });
-        setOwnerId(encodeAddress(post.struct.ownerId, 42).toString());
+        setOwnerId(encodeAddress(post.struct.ownerId, 42));
         api.base.findProfileSpace(post.struct.createdByAccount)
         .then(profile => {
             if (!profile?.content) return;
             setOwner(profile.content as unknown as User);
         });
-        api.blockchain.getReplyIdsByPostId(idToBn(postId))
-        .then((cmtData) => {
-          setCommentsId(cmtData.map((v) => v.toString()));
-        });
+        const cmtIds = await api.blockchain.getReplyIdsByPostId(idToBn(postId));
+        const cmts = await api.findPublicPosts(cmtIds);
+        setComments(cmts.map(cmt => ({
+          creator: encodeAddress(cmt.struct.createdByAccount, 42),
+          createdAt: cmt.struct.createdAtTime,
+          id: cmt.struct.id,
+          body: cmt.content?.body || ""
+        })));
         api.blockchain.getReactionIdsByAccount(account.address, [postId])
         .then((reactData) => {
           setLikeId(reactData[0].toString());
@@ -144,18 +148,21 @@ const Post: React.FC<PostProps> = ({postId}) => {
         )}
         <PostFooter>
           <FooterItem dark={dark}>
-            <img 
-              alt="like" 
-              src={(likedId === "0") ? likeIcon : likedIcon}
-              onClick={toggleLike} 
+            <img
+              alt="like"
+              src={likedId === "0" ? likeIcon : likedIcon}
+              onClick={toggleLike}
             />
             {postMeta.likes > 0 && <span>{postMeta.likes}</span>}
           </FooterItem>
-          <FooterItem dark={dark} onClick={() => setCommentId!("123")}>
+          <FooterItem dark={dark} onClick={() => setCurrCmts!(comments)}>
             <img alt="comment" src={cmtIcon} />
-            {commentsId.length > 0 && <span>{commentsId.length}</span>}
+            {comments.length > 0 && <span>{comments.length}</span>}
           </FooterItem>
-          <FooterItem dark={dark} onClick={() => setTransferId!(owner.username)}>
+          <FooterItem
+            dark={dark}
+            onClick={() => setTransferId!(owner.username)}
+          >
             <img alt="tip" src={tipIcon} />
           </FooterItem>
         </PostFooter>

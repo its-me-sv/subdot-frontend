@@ -1,6 +1,6 @@
 import React, {ReactNode, createContext, useContext, useState} from "react";
 
-import {WalletAccount} from "../utils/types";
+import {PostComment, WalletAccount} from "../utils/types";
 
 interface AppContextInterface {
   loggedIn: boolean;
@@ -12,7 +12,7 @@ interface AppContextInterface {
   advertMenuOpen: boolean;
   explore: string;
   peek: string;
-  commentsId: Array<string>;
+  comments: Array<PostComment>;
   transferId: string;
   postMenuOpen: boolean;
   txOpen: boolean;
@@ -28,7 +28,7 @@ interface AppContextInterface {
   setAdvertMenuOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   setExplore?: React.Dispatch<React.SetStateAction<string>>;
   setPeek?: React.Dispatch<React.SetStateAction<string>>;
-  setCommentsId?: React.Dispatch<React.SetStateAction<Array<string>>>;
+  setComments?: React.Dispatch<React.SetStateAction<Array<PostComment>>>;
   setTransferId?: React.Dispatch<React.SetStateAction<string>>;
   setPostMenuOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   setTxOpen?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -46,7 +46,7 @@ const defaultState: AppContextInterface = {
     advertMenuOpen: false,
     explore: "",
     peek: "",
-    commentsId: [],
+    comments: [],
     transferId: "",
     postMenuOpen: false,
     txOpen: false,
@@ -68,7 +68,7 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
     const [advertMenuOpen, setAdvertMenuOpen] = useState<boolean>(defaultState.advertMenuOpen);
     const [explore, setExplore] = useState<string>(defaultState.explore);
     const [peek, setPeek] = useState<string>(defaultState.peek);
-    const [commentsId, setCommentsId] = useState<Array<string>>(defaultState.commentsId);
+    const [comments, setComments] = useState<Array<PostComment>>(defaultState.comments);
     const [transferId, setTransferId] = useState<string>(defaultState.transferId);
     const [postMenuOpen, setPostMenuOpen] = useState<boolean>(defaultState.postMenuOpen);
     const [txOpen, setTxOpen] = useState<boolean>(defaultState.txOpen);
@@ -82,7 +82,7 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
         setAdvertMenuOpen!(false);
         setExplore!("");
         setPeek!("");
-        setCommentsId!([]);
+        setComments!([]);
         setTransferId!("");
         setPostMenuOpen!(false);
         setTxOpen!(false);
@@ -100,7 +100,7 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
             explore, setExplore,
             peek, setPeek,
             resetAppContext,
-            commentsId, setCommentsId,
+            comments, setComments,
             transferId, setTransferId,
             postMenuOpen, setPostMenuOpen,
             txOpen, setTxOpen,
