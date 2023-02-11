@@ -92,11 +92,17 @@ export const ProfileName = styled.span<{dark: boolean;}>`
   `}
 `;
 
-export const ProfileStatusText = styled.span<{dark: boolean;}>`
+export const ProfileStatusText = styled.span<{ dark: boolean }>`
   font-family: Inter;
   font-size: 1rem;
   color: #1a1a1a;
-  ${props => props.dark && `
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 11rem;
+  text-overflow: ellipsis;
+  ${(props) =>
+    props.dark &&
+    `
     color: #f5f4f9;
   `}
 `;
