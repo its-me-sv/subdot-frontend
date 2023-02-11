@@ -79,14 +79,14 @@ const Menu: React.FC<MenuProps> = () => {
         <MenuItem dark={dark} onClick={openSettings}>
           {menu.settings[language]}
         </MenuItem>
+        <MenuItem dark={dark} onClick={openAdvertise}>
+          {menu.advertise[language]}
+        </MenuItem>
         <MenuItem dark={dark} onClick={showTerms}>
           {menu.terms[language]}
         </MenuItem>
         <MenuItem dark={dark} onClick={showTerms}>
           {menu.policies[language]}
-        </MenuItem>
-        <MenuItem dark={dark} onClick={openAdvertise}>
-          {menu.advertise[language]}
         </MenuItem>
         <MenuItem dark={dark} onClick={logout}>
           {menu.logout[language]}

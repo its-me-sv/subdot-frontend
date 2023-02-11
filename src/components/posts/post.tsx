@@ -40,7 +40,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
         language, dark
     } = useAppContext();
     const {api} = useSubsocial();
-    const {account} = useUserContext();
+    const {account, setReputation} = useUserContext();
     const [post, setPost] = useState<UserPost>(defaultPost);
     const [owner, setOwner] = useState<User>(defaultUser);
     const [onwerId, setOwnerId] = useState<string>("");
@@ -90,12 +90,15 @@ const Post: React.FC<PostProps> = ({postId}) => {
             ...prevMeta,
             likes: prevMeta.likes + 1
           }));
+          if (onwerId === account.address) {
+            setReputation!(prev => prev + 1);
+          }
           resolve(true);
         });
         toast.promise(likePromise, {
           success: "Post liked",
           error: "Unable to like post",
-          loading: "Liking post"
+          loading: "Adding like to post"
         });
       } else {
         const substrateApi = await api.blockchain.api;

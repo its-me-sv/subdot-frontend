@@ -12,7 +12,7 @@ interface AppContextInterface {
   advertMenuOpen: boolean;
   explore: string;
   peek: string;
-  commentId: string;
+  commentsId: Array<string>;
   transferId: string;
   postMenuOpen: boolean;
   txOpen: boolean;
@@ -28,7 +28,7 @@ interface AppContextInterface {
   setAdvertMenuOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   setExplore?: React.Dispatch<React.SetStateAction<string>>;
   setPeek?: React.Dispatch<React.SetStateAction<string>>;
-  setCommentId?: React.Dispatch<React.SetStateAction<string>>;
+  setCommentsId?: React.Dispatch<React.SetStateAction<Array<string>>>;
   setTransferId?: React.Dispatch<React.SetStateAction<string>>;
   setPostMenuOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   setTxOpen?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -46,7 +46,7 @@ const defaultState: AppContextInterface = {
     advertMenuOpen: false,
     explore: "",
     peek: "",
-    commentId: "",
+    commentsId: [],
     transferId: "",
     postMenuOpen: false,
     txOpen: false,
@@ -68,7 +68,7 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
     const [advertMenuOpen, setAdvertMenuOpen] = useState<boolean>(defaultState.advertMenuOpen);
     const [explore, setExplore] = useState<string>(defaultState.explore);
     const [peek, setPeek] = useState<string>(defaultState.peek);
-    const [commentId, setCommentId] = useState<string>(defaultState.commentId);
+    const [commentsId, setCommentsId] = useState<Array<string>>(defaultState.commentsId);
     const [transferId, setTransferId] = useState<string>(defaultState.transferId);
     const [postMenuOpen, setPostMenuOpen] = useState<boolean>(defaultState.postMenuOpen);
     const [txOpen, setTxOpen] = useState<boolean>(defaultState.txOpen);
@@ -82,7 +82,7 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
         setAdvertMenuOpen!(false);
         setExplore!("");
         setPeek!("");
-        setCommentId!("");
+        setCommentsId!([]);
         setTransferId!("");
         setPostMenuOpen!(false);
         setTxOpen!(false);
@@ -100,7 +100,7 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
             explore, setExplore,
             peek, setPeek,
             resetAppContext,
-            commentId, setCommentId,
+            commentsId, setCommentsId,
             transferId, setTransferId,
             postMenuOpen, setPostMenuOpen,
             txOpen, setTxOpen,

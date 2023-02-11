@@ -10,16 +10,16 @@ import CommentInput from "./input";
 import {useAppContext} from "../../contexts/app";
 
 interface CommentsProps {
-    postId: string;
+  cmtIds: Array<string>;
 }
 
 const Comments: React.FC<CommentsProps> = () => {
-    const {setCommentId, language, dark} = useAppContext();
+    const {setCommentsId, language, dark} = useAppContext();
 
     return (
       <Container dark={dark}>
         <Box dark={dark}>
-          <CloseIcon onClick={() => setCommentId!("")} dark={dark}>X</CloseIcon>
+          <CloseIcon onClick={() => setCommentsId!([])} dark={dark}>X</CloseIcon>
           <Title dark={dark}>{title[language]}</Title>
           <CommentsHolder>
             {new Array(42).fill(0).map((_) => (

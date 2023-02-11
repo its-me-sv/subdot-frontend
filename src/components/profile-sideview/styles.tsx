@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { BoxShadow, BoxShadowDark } from "../../utils/styles";
 
-export const Container = styled.div<{dark: boolean;}>`
+export const Container = styled.div<{ dark: boolean }>`
   display: flex;
   flex-direction: column;
   padding: 0 0.42rem;
@@ -15,7 +15,8 @@ export const Container = styled.div<{dark: boolean;}>`
     border-radius: 50%;
   }
   color: #1a1a1a;
-  ${props => props.dark && `color: #f5f4f9;`}
+  border-left: 0.3rem solid rgb(227, 224, 224);
+  ${(props) => props.dark && `color: #f5f4f9;`}
 `;
 
 export const Username = styled.span`

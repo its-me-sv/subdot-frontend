@@ -36,7 +36,7 @@ const App: React.FC<AppProps> = () => {
     loggedIn, showTerms, 
     settingsOpen, advertMenuOpen, 
     explore, peek, 
-    commentId, transferId,
+    commentsId, transferId,
     postMenuOpen, txOpen,
     loading, setLoading,
     newAccount
@@ -48,7 +48,7 @@ const App: React.FC<AppProps> = () => {
 
   return (
     <div className={loggedIn ? "app-container" : ""}>
-      <Toaster position="bottom-center" />
+      <Toaster position="top-center" />
       {loading && <Loader />}
       {showTerms && <TermsPolicies />}
       {settingsOpen && <Settings />}
@@ -59,7 +59,7 @@ const App: React.FC<AppProps> = () => {
             {advertMenuOpen && <Advertise />}
             {explore.length > 2 && <Results />}
             {peek.length > 0 && <Peek id={peek} />}
-            {commentId.length > 0 && <Comments postId={commentId} />}
+            {commentsId.length > 0 && <Comments cmtIds={commentsId} />}
             {transferId.length > 0 && <Transfer accountId={transferId} />}
             {postMenuOpen && <NewPost />}
             {txOpen && <Transactions />}
