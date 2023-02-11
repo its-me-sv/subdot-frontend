@@ -10,6 +10,7 @@ import {useAppContext} from "../../contexts/app";
 import { User } from "../../utils/types";
 import { getImage } from "../../utils/utils";
 import { useSubsocial } from "../../subsocial";
+import { DICE_BEAR } from "../../utils/constants";
 
 interface SectionProfileProps {
     id: string;
@@ -21,7 +22,7 @@ const defaultUser: User = {
   username: "--------",
   name: "-------",
   status: "-------",
-  picture: "-------",
+  picture: DICE_BEAR,
 };
 
 const SectionProfile: React.FC<SectionProfileProps> = ({id, hover}) => {

@@ -30,7 +30,7 @@ const defaultUser: User = {
   username: "--------",
   name: "-------",
   status: "-------",
-  picture: "-------",
+  picture: DICE_BEAR,
 };
 
 const defaultMeta: ProfileMeta = {
