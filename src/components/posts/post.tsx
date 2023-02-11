@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {format} from "timeago.js";
 import {useNavigate} from "react-router-dom";
+import { idToBn } from "@subsocial/utils";
 
 import {
     FooterItem, PostContainer, 
@@ -22,7 +23,7 @@ import { getImage } from "../../utils/utils";
 import {defaultUser, defaultPost, defaultUserPostMeta} from "./data";
 
 interface PostProps {
-    postId: string;
+  postId: string;
 }
 
 const Post: React.FC<PostProps> = ({postId}) => {
@@ -35,6 +36,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
     const [post, setPost] = useState<UserPost>(defaultPost);
     const [owner, setOwner] = useState<User>(defaultUser);
     const [postMeta, setPostMeta] = useState<UserPostMeta>(defaultUserPostMeta);
+    const [commentsId, setCommentsId] = useState<Array<string>>([]);
 
     const fetchData = async () => {
         if (!api || !postId) return;
@@ -49,6 +51,10 @@ const Post: React.FC<PostProps> = ({postId}) => {
         .then(profile => {
             if (!profile?.content) return;
             setOwner(profile.content as unknown as User);
+        });
+        api.blockchain.getReplyIdsByPostId(idToBn(postId))
+        .then((cmtData) => {
+          setCommentsId(cmtData.map((v) => v.toString()));
         });
     };
 
@@ -74,11 +80,11 @@ const Post: React.FC<PostProps> = ({postId}) => {
         <PostFooter>
           <FooterItem dark={dark}>
             <img alt="like" src={likeIcon} />
-            {postMeta.likes > 0 && <span>1.1m</span>}
+            {postMeta.likes > 0 && <span>{postMeta.likes}</span>}
           </FooterItem>
           <FooterItem dark={dark} onClick={() => setCommentId!("123")}>
             <img alt="comment" src={cmtIcon} />
-            <span>1.1m</span>
+            {commentsId.length > 0 && <span>{commentsId.length}</span>}
           </FooterItem>
           <FooterItem dark={dark} onClick={() => setTransferId!(owner.username)}>
             <img alt="tip" src={tipIcon} />

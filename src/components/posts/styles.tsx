@@ -69,6 +69,8 @@ export const PostContent = styled.span<{dark: boolean;}>`
   font-family: Inter;
   font-size: 1.2rem;
   color: #1a1a1a;
+  max-height: 14rem;
+  overflow-y: auto;
   ${props => props.dark && `
     color: #f5f4f9;
   `}
