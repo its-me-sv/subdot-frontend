@@ -20,24 +20,11 @@ import {User, ProfileMeta} from "../../utils/types";
 import { useSubsocial } from "../../subsocial";
 import { DICE_BEAR, REST_API } from "../../utils/constants";
 import { getImage } from "../../utils/utils";
+import { defaultUser, defaultMeta } from "./data";
 
 interface ProfileSideViewProps {
   accountId: string | undefined;
 }
-
-const defaultUser: User = {
-  created: "2023-02-07T16:25:55.956Z",
-  username: "--------",
-  name: "-------",
-  status: "-------",
-  picture: DICE_BEAR,
-};
-
-const defaultMeta: ProfileMeta = {
-  followers: 0,
-  following: 0,
-  posts: 0,
-};
 
 const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
   const navigate = useNavigate();

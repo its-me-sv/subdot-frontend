@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
 
 import {Container, Box, CloseIcon} from '../terms-privacy/styles';
 import {JoinedDate, ProfilePicture, Section, Detail, Content, Details, MetaDetails, MetaInfo, Footer} from "./styles";
@@ -12,29 +13,15 @@ import { getImage } from "../../utils/utils";
 
 import {Button} from "../../utils/styles";
 import { ProfileMeta, User } from "../../utils/types";
+import { defaultMeta, defaultUser } from "./data";
 
 import {useAppContext} from "../../contexts/app";
 import {useUserContext} from "../../contexts/user";
 import {useSubsocial} from "../../subsocial";
-import axios from "axios";
 
 interface PeekProps {
   id: string;
 }
-
-const defaultUser: User = {
-  created: "2023-02-07T16:25:55.956Z",
-  username: "--------",
-  name: "-------",
-  status: "-------",
-  picture: DICE_BEAR,
-};
-
-const defaultMeta: ProfileMeta = {
-  followers: 0,
-  following: 0,
-  posts: 0
-};
 
 const Peek: React.FC<PeekProps> = ({id}) => {
     const navigate = useNavigate();

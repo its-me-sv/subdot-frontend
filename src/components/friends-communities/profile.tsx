@@ -10,20 +10,14 @@ import {useAppContext} from "../../contexts/app";
 import { User } from "../../utils/types";
 import { getImage } from "../../utils/utils";
 import { useSubsocial } from "../../subsocial";
-import { DICE_BEAR } from "../../utils/constants";
+import { defaultUser } from "./data";
 
 interface SectionProfileProps {
     id: string;
     hover?: boolean;
 }
 
-const defaultUser: User = {
-  created: "2023-02-07T16:25:55.956Z",
-  username: "--------",
-  name: "-------",
-  status: "-------",
-  picture: DICE_BEAR,
-};
+
 
 const SectionProfile: React.FC<SectionProfileProps> = ({id, hover}) => {
     const {setPeek, dark} = useAppContext();
