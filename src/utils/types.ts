@@ -13,7 +13,9 @@ export interface User {
 
 export interface UserPost {
     description: string;
-    picture: string; 
+    picture: string;
+    summary: string;
+    isShowMore: boolean;
 }
 
 export interface Message {

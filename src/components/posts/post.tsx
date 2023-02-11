@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {format} from "timeago.js";
 import {useNavigate} from "react-router-dom";
 import tempImg from "../../assets/temp.jpg";
@@ -17,18 +17,46 @@ import tipIcon from "../../assets/icons/tip.png";
 import {posted} from "../../translations/posts";
 
 import {useAppContext} from "../../contexts/app";
-import { UserPost } from "../../utils/types";
+import { UserPost, User } from "../../utils/types";
+import { DICE_BEAR } from "../../utils/constants";
+import { useSubsocial } from "../../subsocial";
 
 interface PostProps {
     postId: string;
 }
 
-const Post: React.FC<PostProps> = () => {
+const defaultPost: UserPost = {
+    description: "",
+    picture: "",
+    summary: "",
+    isShowMore: false
+};
+
+const defaultUser: User = {
+  created: "2023-02-07T16:25:55.956Z",
+  username: "--------",
+  name: "-------",
+  status: "-------",
+  picture: DICE_BEAR,
+};
+
+const Post: React.FC<PostProps> = ({postId}) => {
     const navigate = useNavigate();
     const {
         setCommentId, setTransferId,
         language, dark
     } = useAppContext();
+    const {api} = useSubsocial();
+    const [post, setPost] = useState<UserPost>(defaultPost);
+    const [owner, setOwner] = useState<User>(defaultUser);
+
+    const fetchData = async () => {
+        if (!api || !postId) return;
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, [api, postId]);
 
     return (
         <PostContainer dark={dark}>
