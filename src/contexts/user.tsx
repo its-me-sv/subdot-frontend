@@ -68,6 +68,7 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
             toast.error("Error logging in");
             return;
         }
+        setSpaceId(+profile.struct.id.toString());
         const rep = await axios.get(`${REST_API}/user/user-rp/${address}`);
         setReputation(rep.data);
         setUser(profile.content as unknown as User);

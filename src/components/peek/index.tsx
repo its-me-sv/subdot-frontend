@@ -131,7 +131,10 @@ const Peek: React.FC<PeekProps> = ({id}) => {
             <Button
               bgColor={dark ? "#f5f4f9" : "#1a1a1a"}
               dark={dark}
-              onClick={() => navigate(`/profile/${user.username}`)}
+              onClick={() => {
+                navigate(`/profile/${user.username}`);
+                setPeek!("");
+              }}
             >
               {footer.profile[language]}
             </Button>

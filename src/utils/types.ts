@@ -11,9 +11,9 @@ export interface User {
     picture: string;
 }
 
-export interface Post {
+export interface UserPost {
     description: string;
-    picture?: string; 
+    picture: string; 
 }
 
 export interface Message {

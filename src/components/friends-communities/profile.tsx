@@ -49,11 +49,7 @@ const SectionProfile: React.FC<SectionProfileProps> = ({id, hover}) => {
           />
           <ProfileInfo>
             <ProfileName dark={dark}>{user.username}</ProfileName>
-            <ProfileStatusText dark={dark}>
-              {user.status}
-              {user.status}
-              {user.status}
-            </ProfileStatusText>
+            <ProfileStatusText dark={dark}>{user.status}</ProfileStatusText>
           </ProfileInfo>
         </ProfileDetails>
       </ProfileContainer>

@@ -14,7 +14,7 @@ const FrndCommSection: React.FC<FrndCommSectionProps> = ({
     title, ids
 }) => {
     const {dark} = useAppContext();
-
+    
     return (
         <Section>
             <SectionTitle dark={dark}>{title}</SectionTitle>
@@ -23,7 +23,7 @@ const FrndCommSection: React.FC<FrndCommSectionProps> = ({
                     <span>No accounts to show.</span>
                 )}
                 {ids.map((val) => (
-                    <SectionProfile id={val} />
+                    <SectionProfile key={val} id={val} />
                 ))}
             </SectionProfiles>
         </Section>

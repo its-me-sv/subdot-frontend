@@ -17,8 +17,11 @@ import tipIcon from "../../assets/icons/tip.png";
 import {posted} from "../../translations/posts";
 
 import {useAppContext} from "../../contexts/app";
+import { UserPost } from "../../utils/types";
 
-interface PostProps {}
+interface PostProps {
+    postId: string;
+}
 
 const Post: React.FC<PostProps> = () => {
     const navigate = useNavigate();
