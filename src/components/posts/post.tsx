@@ -11,6 +11,7 @@ import {
     PostUsername
 } from './styles';
 import likeIcon from "../../assets/icons/like.png";
+import likedIcon from "../../assets/icons/liked.png";
 import cmtIcon from "../../assets/icons/comment.png";
 import tipIcon from "../../assets/icons/tip.png";
 import {posted} from "../../translations/posts";
@@ -21,6 +22,7 @@ import { useSubsocial } from "../../subsocial";
 import { getImage } from "../../utils/utils";
 
 import {defaultUser, defaultPost, defaultUserPostMeta} from "./data";
+import { useUserContext } from "../../contexts/user";
 
 interface PostProps {
   postId: string;
@@ -33,13 +35,15 @@ const Post: React.FC<PostProps> = ({postId}) => {
         language, dark
     } = useAppContext();
     const {api} = useSubsocial();
+    const {account} = useUserContext();
     const [post, setPost] = useState<UserPost>(defaultPost);
     const [owner, setOwner] = useState<User>(defaultUser);
     const [postMeta, setPostMeta] = useState<UserPostMeta>(defaultUserPostMeta);
     const [commentsId, setCommentsId] = useState<Array<string>>([]);
+    const [likedId, setLikeId] = useState<string>("0");
 
     const fetchData = async () => {
-        if (!api || !postId) return;
+        if (!api || !postId || !account) return;
         const post = await api.findPost({id: postId});
         if (!post?.content) return;
         setPost(post.content as unknown as UserPost);
@@ -56,7 +60,13 @@ const Post: React.FC<PostProps> = ({postId}) => {
         .then((cmtData) => {
           setCommentsId(cmtData.map((v) => v.toString()));
         });
+        api.blockchain.getReactionIdsByAccount(account.address, [postId])
+        .then((reactData) => {
+          setLikeId(reactData[0].toString());
+        });
     };
+
+    const toggleLike = () => {};
 
     useEffect(() => {
         fetchData();
@@ -79,7 +89,11 @@ const Post: React.FC<PostProps> = ({postId}) => {
         )}
         <PostFooter>
           <FooterItem dark={dark}>
-            <img alt="like" src={likeIcon} />
+            <img 
+              alt="like" 
+              src={(likedId === "0") ? likeIcon : likedIcon}
+              onClick={toggleLike} 
+            />
             {postMeta.likes > 0 && <span>{postMeta.likes}</span>}
           </FooterItem>
           <FooterItem dark={dark} onClick={() => setCommentId!("123")}>
