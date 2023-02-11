@@ -1,7 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {format} from "timeago.js";
 import {useNavigate} from "react-router-dom";
+import { toast } from "react-hot-toast";
 import { idToBn } from "@subsocial/utils";
+import axios from "axios";
+import {encodeAddress} from "@polkadot/util-crypto";
 
 import {
     FooterItem, PostContainer, 
@@ -23,6 +26,8 @@ import { getImage } from "../../utils/utils";
 
 import {defaultUser, defaultPost, defaultUserPostMeta} from "./data";
 import { useUserContext } from "../../contexts/user";
+import { getSigner, getTxEventIds } from "../../subsocial/polkadot";
+import { REST_API } from "../../utils/constants";
 
 interface PostProps {
   postId: string;
@@ -38,6 +43,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
     const {account} = useUserContext();
     const [post, setPost] = useState<UserPost>(defaultPost);
     const [owner, setOwner] = useState<User>(defaultUser);
+    const [onwerId, setOwnerId] = useState<string>("");
     const [postMeta, setPostMeta] = useState<UserPostMeta>(defaultUserPostMeta);
     const [commentsId, setCommentsId] = useState<Array<string>>([]);
     const [likedId, setLikeId] = useState<string>("0");
@@ -51,6 +57,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
             likes: post.struct.upvotesCount,
             createdAt: post.struct.createdAtTime
         });
+        setOwnerId(encodeAddress(post.struct.ownerId, 42).toString());
         api.base.findProfileSpace(post.struct.createdByAccount)
         .then(profile => {
             if (!profile?.content) return;
@@ -66,7 +73,52 @@ const Post: React.FC<PostProps> = ({postId}) => {
         });
     };
 
-    const toggleLike = () => {};
+    const toggleLike = async () => {
+      if (!api || !postId || !account?.address) return;
+      if (likedId === "0") {
+        const substrateApi = await api.blockchain.api;
+        const likeTx = substrateApi.tx.reactions.createPostReaction(postId, "Upvote");
+        const likePromise = new Promise(async (resolve, reject) => {
+          const signer = await getSigner(account.address);
+          if (!signer) return reject();
+          await likeTx.signAsync(account.address, {signer});
+          const likeTxIds = await getTxEventIds(likeTx);
+          if (!likeTxIds) return reject();
+          setLikeId(likeTxIds[1]);
+          axios.put(`${REST_API}/user/incr-rp/${onwerId}/1`);
+          setPostMeta(prevMeta => ({
+            ...prevMeta,
+            likes: prevMeta.likes + 1
+          }));
+          resolve(true);
+        });
+        toast.promise(likePromise, {
+          success: "Post liked",
+          error: "Unable to like post",
+          loading: "Liking post"
+        });
+      } else {
+        const substrateApi = await api.blockchain.api;
+        const disLikeTx = substrateApi.tx.reactions.deletePostReaction(postId, likedId);
+        const disLikePromise = new Promise(async (resolve, reject) => {
+          const signer = await getSigner(account.address);
+          if (!signer) return reject();
+          await disLikeTx.signAsync(account.address, { signer });
+          await getTxEventIds(disLikeTx);
+          setLikeId("0");
+          setPostMeta((prevMeta) => ({
+            ...prevMeta,
+            likes: prevMeta.likes - 1,
+          }));
+          resolve(true);
+        });
+        toast.promise(disLikePromise, {
+          success: "Post like removed",
+          error: "Unable to remove post like",
+          loading: "Removing post like",
+        });
+      }
+    };
 
     useEffect(() => {
         fetchData();
