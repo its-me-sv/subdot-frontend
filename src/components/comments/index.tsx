@@ -8,21 +8,21 @@ import Comment from "./comment";
 import CommentInput from "./input";
 
 import {useAppContext} from "../../contexts/app";
-import { PostComment } from "../../utils/types";
 
-interface CommentsProps {
-  cmts: Array<PostComment>;
-}
+interface CommentsProps {}
 
-const Comments: React.FC<CommentsProps> = ({cmts}) => {
-    const {setComments, language, dark} = useAppContext();
+const Comments: React.FC<CommentsProps> = () => {
+    const {setCmtOpen, language, dark, comments: cmts, setComments} = useAppContext();
 
     return (
       <Container dark={dark}>
         <Box dark={dark}>
-          <CloseIcon onClick={() => setComments!([])} dark={dark}>
-            X
-          </CloseIcon>
+          <CloseIcon onClick={() => {
+            setComments!([]);
+            setCmtOpen!(false);
+          }} 
+            dark={dark}
+          >X</CloseIcon>
           <Title dark={dark}>{title[language]}</Title>
           <CommentsHolder>
             {cmts.length === 0 && <span>No commments yet.</span>}

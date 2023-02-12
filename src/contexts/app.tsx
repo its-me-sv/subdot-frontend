@@ -13,6 +13,7 @@ interface AppContextInterface {
   explore: string;
   peek: string;
   comments: Array<PostComment>;
+  cmtOpen: boolean;
   transferId: string;
   postMenuOpen: boolean;
   txOpen: boolean;
@@ -34,6 +35,7 @@ interface AppContextInterface {
   setTxOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   setLoading?: React.Dispatch<React.SetStateAction<boolean>>;
   setNewAccount?: React.Dispatch<React.SetStateAction<WalletAccount | null>>;
+  setCmtOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const defaultState: AppContextInterface = {
@@ -51,7 +53,8 @@ const defaultState: AppContextInterface = {
     postMenuOpen: false,
     txOpen: false,
     loading: true,
-    newAccount: null
+    newAccount: null,
+    cmtOpen: false
 };
 
 export const AppContext = createContext<AppContextInterface>(defaultState);
@@ -74,6 +77,7 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
     const [txOpen, setTxOpen] = useState<boolean>(defaultState.txOpen);
     const [loading, setLoading] = useState<boolean>(defaultState.loading);
     const [newAccount, setNewAccount] = useState<WalletAccount | null>(defaultState.newAccount);
+    const [cmtOpen, setCmtOpen] = useState<boolean>(defaultState.cmtOpen);
 
     const resetAppContext = () => {
         setShowTerms!(false);
@@ -86,6 +90,7 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
         setTransferId!("");
         setPostMenuOpen!(false);
         setTxOpen!(false);
+        setCmtOpen(false);
     };
 
     return (
@@ -105,7 +110,8 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
             postMenuOpen, setPostMenuOpen,
             txOpen, setTxOpen,
             loading, setLoading,
-            newAccount, setNewAccount
+            newAccount, setNewAccount,
+            cmtOpen, setCmtOpen
         }}>
             {children}
         </AppContext.Provider>

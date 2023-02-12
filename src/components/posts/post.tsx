@@ -37,7 +37,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
     const navigate = useNavigate();
     const {
         setComments: setCurrCmts, setTransferId,
-        language, dark
+        language, dark, setCmtOpen
     } = useAppContext();
     const {api} = useSubsocial();
     const {account, setReputation} = useUserContext();
@@ -65,12 +65,13 @@ const Post: React.FC<PostProps> = ({postId}) => {
         });
         const cmtIds = await api.blockchain.getReplyIdsByPostId(idToBn(postId));
         const cmts = await api.findPublicPosts(cmtIds);
-        setComments(cmts.map(cmt => ({
+        const prettyCmts = cmts.map((cmt) => ({
           creator: encodeAddress(cmt.struct.createdByAccount, 42),
           createdAt: cmt.struct.createdAtTime,
           id: cmt.struct.id,
-          body: cmt.content?.body || ""
-        })));
+          body: cmt.content?.body || "",
+        }));
+        setComments(prettyCmts);
         api.blockchain.getReactionIdsByAccount(account.address, [postId])
         .then((reactData) => {
           setLikeId(reactData[0].toString());
@@ -155,7 +156,10 @@ const Post: React.FC<PostProps> = ({postId}) => {
             />
             {postMeta.likes > 0 && <span>{postMeta.likes}</span>}
           </FooterItem>
-          <FooterItem dark={dark} onClick={() => setCurrCmts!(comments)}>
+          <FooterItem dark={dark} onClick={() => {
+            setCurrCmts!(comments);
+            setCmtOpen!(true);
+          }}>
             <img alt="comment" src={cmtIcon} />
             {comments.length > 0 && <span>{comments.length}</span>}
           </FooterItem>
