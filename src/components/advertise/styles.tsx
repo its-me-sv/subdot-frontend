@@ -6,6 +6,11 @@ export const InputsForm = styled.div`
     flex-direction: column;
     gap: 1rem;
     margin-bottom: 1rem;
+    img {
+      height: 12rem;
+      width: auto;
+      object-fit: contain;
+    }
 `;
 
 export const InputContainer = styled.div`

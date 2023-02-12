@@ -5,10 +5,10 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.4rem;
   height: 90vh;
   overflow-y: auto;
   padding: 1rem;
+  padding-bottom: 2.4rem;
 `;
 
 export const StickyButton = styled.div`
@@ -25,6 +25,7 @@ export const PostContainer = styled.div<{dark: boolean;}>`
   padding: 0.42rem;
   padding-bottom: 0.14rem;
   border-radius: 0.14rem;
+  margin-bottom: 1.2rem;
   ${BoxShadow}
   ${props => props.dark && `
     ${BoxShadowDark}
