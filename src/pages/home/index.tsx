@@ -13,7 +13,7 @@ interface HomePageProps {}
 
 const HomePage: React.FC<HomePageProps> = () => {
   const {resetAppContext, dark} = useAppContext();
-  const {account} = useUserContext();
+  const {account, spaceId} = useUserContext();
 
   useEffect(() => {
     return () => resetAppContext!();
@@ -22,7 +22,7 @@ const HomePage: React.FC<HomePageProps> = () => {
   return (
     <Container dark={dark}>
       <FriendsCommunites accountId={account?.address} />
-      <Posts accountId={account?.address} />
+      <Posts spcId={spaceId.toString()} />
       <RPAdvert />
     </Container>
   );
