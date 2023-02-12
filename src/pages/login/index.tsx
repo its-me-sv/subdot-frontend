@@ -59,12 +59,6 @@ const LoginPage: React.FC<LoginPageProps> = () => {
     });
   };
 
-  useEffect(() => {
-    if (tried) return;
-    tried = true;
-    onWalletConnect();
-  }, []);
-
   return (
     <Container dark={dark}>
       <div>

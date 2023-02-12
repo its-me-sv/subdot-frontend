@@ -62,23 +62,29 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
             setReputation(1);
             return;
         }
-        toast.success("Logging in shortly");
-        const profile = await api.base.findProfileSpace(address);
-        if (!profile?.content) {
-            toast.error("Error logging in");
-            return;
-        }
-        setSpaceId(+profile.struct.id.toString());
-        const rep = await axios.get(`${REST_API}/user/user-rp/${address}`);
-        setReputation(rep.data);
-        setUser(profile.content as unknown as User);
-        const substrateApi = await api.substrateApi;
-        const accFollowers = await substrateApi.query.accountFollows.accountFollowers(address);
-        const accFollowing = await substrateApi.query.accountFollows.accountsFollowedByAccount(address);
-        setFollowers(accFollowers.toArray().map(x => encodeAddress(x, 42)));
-        setFollowing(accFollowing.toArray().map(x => encodeAddress(x, 42)));
-        toast.success("Login success");
-        cb();
+        const loginPromise = new Promise(async (resolve, reject) => {
+            const profile = await api.base.findProfileSpace(address);
+            if (!profile?.content) {
+                toast.error("Error logging in");
+                return reject();
+            }
+            setSpaceId(+profile.struct.id.toString());
+            const rep = await axios.get(`${REST_API}/user/user-rp/${address}`);
+            setReputation(rep.data);
+            setUser(profile.content as unknown as User);
+            const substrateApi = await api.substrateApi;
+            const accFollowers = await substrateApi.query.accountFollows.accountFollowers(address);
+            const accFollowing = await substrateApi.query.accountFollows.accountsFollowedByAccount(address);
+            setFollowers(accFollowers.toArray().map(x => encodeAddress(x, 42)));
+            setFollowing(accFollowing.toArray().map(x => encodeAddress(x, 42)));
+            cb();
+            return resolve(true);
+        });
+        toast.promise(loginPromise, {
+            loading: "Fetching account details",
+            success: "Login success",
+            error: "Unable to log in"
+        });
     };
 
     const logoutUser = () => {
