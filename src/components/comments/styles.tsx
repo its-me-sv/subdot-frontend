@@ -27,7 +27,7 @@ export const CommentContainer = styled.div`
 export const CommentHolder = styled.div<{ dark: boolean }>`
   display: flex;
   flex-direction: column;
-  width: 35rem;
+  width: 42rem;
   margin-right: 0.24rem;
   border-radius: 0.14rem;
   padding: 0.14rem;
@@ -57,6 +57,7 @@ export const CommentFooter = styled.div<{ dark: boolean }>`
   gap: 0.42rem;
   align-items: center;
   border-radius: 0.14rem;
+  width: 42rem;
   textarea,
   textarea::placeholder {
     resize: none;

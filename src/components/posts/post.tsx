@@ -158,7 +158,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
           </FooterItem>
           <FooterItem dark={dark} onClick={() => {
             setCurrCmts!(comments);
-            setCmtOpen!(true);
+            setCmtOpen!(postId);
           }}>
             <img alt="comment" src={cmtIcon} />
             {comments.length > 0 && <span>{comments.length}</span>}

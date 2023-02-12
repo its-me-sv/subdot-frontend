@@ -59,7 +59,7 @@ const App: React.FC<AppProps> = () => {
             {advertMenuOpen && <Advertise />}
             {explore.length > 2 && <Results />}
             {peek.length > 0 && <Peek id={peek} />}
-            {cmtOpen && <Comments />}
+            {cmtOpen.length > 0 && <Comments />}
             {transferId.length > 0 && <Transfer accountId={transferId} />}
             {postMenuOpen && <NewPost />}
             {txOpen && <Transactions />}
