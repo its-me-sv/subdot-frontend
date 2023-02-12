@@ -14,6 +14,10 @@ interface CommentsProps {}
 const Comments: React.FC<CommentsProps> = () => {
     const {setCmtOpen, language, dark, comments: cmts, setComments} = useAppContext();
 
+    const addComment = (newCmt: string) => {
+      window.alert(newCmt);
+    };
+
     return (
       <Container dark={dark}>
         <Box dark={dark}>
@@ -30,7 +34,7 @@ const Comments: React.FC<CommentsProps> = () => {
               <Comment key={cmt.id} comment={cmt} />
             ))}
           </CommentsHolder>
-          <CommentInput />
+          <CommentInput addComment={addComment} />
         </Box>
       </Container>
     );
