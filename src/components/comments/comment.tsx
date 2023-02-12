@@ -31,11 +31,9 @@ const Comment: React.FC<CommentProps> = ({comment}) => {
     });
 
     const fetchData = async () => {
-        console.log(comment);
         if (!api || !comment) return;
         const profile = await api.base.findProfileSpace(comment.creator);
         if (!profile?.content) return;
-        console.log(profile.content);
         setOwner(profile.content as unknown as User);
     };
 
