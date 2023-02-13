@@ -23,6 +23,7 @@ import NewPost from "../../components/posts/new";
 import Transactions from "../../components/transactions";
 import Loader from "../../components/loader";
 import NewAccount from "../../components/new-account";
+import LowBalance from "../../components/low-balance";
 import Header from "../../components/header";
 
 // providers
@@ -36,10 +37,11 @@ const App: React.FC<AppProps> = () => {
     loggedIn, showTerms, 
     settingsOpen, advertMenuOpen, 
     explore, peek, 
-    comments, transferId,
+    transferId,
     postMenuOpen, txOpen,
     loading, setLoading,
-    newAccount, cmtOpen
+    newAccount, cmtOpen,
+    lowBalance
   } = useAppContext();
 
   useEffect(() => {
@@ -52,6 +54,7 @@ const App: React.FC<AppProps> = () => {
       {loading && <Loader />}
       {showTerms && <TermsPolicies />}
       {settingsOpen && <Settings />}
+      {lowBalance && <LowBalance />}
       <HashRouter>
         {loggedIn && (
           <>
