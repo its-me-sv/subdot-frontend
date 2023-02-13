@@ -24,7 +24,8 @@ const HomePage: React.FC<HomePageProps> = () => {
       <FriendsCommunites accountId={account?.address} />
       <Posts 
         accountId={account?.address} 
-        spcId={spaceId.toString()} 
+        spcId={spaceId.toString()}
+        home
       />
       <RPAdvert />
     </Container>

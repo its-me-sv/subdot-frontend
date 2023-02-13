@@ -3,6 +3,7 @@ import React, {useState, useEffect} from "react";
 import {Container, StickyButton} from "./styles";
 import {Button} from "../../utils/styles";
 import {share} from "../../translations/posts";
+import { gqlClient, getFeedQuery } from "../../utils/graphql";
 
 import Post from "./post";
 
@@ -14,10 +15,11 @@ import { AnySpaceId } from "@subsocial/api/types";
 interface PostsProps {
   accountId?: string | undefined;
   spcId?: string;
+  home?: boolean;
 }
 
 const Posts: React.FC<PostsProps> = ({
-  accountId, spcId
+  accountId, spcId, home
 }) => {
     const {setPostMenuOpen, language, dark} = useAppContext();
     const {account, spaceId: currSpaceId} = useUserContext();
@@ -26,19 +28,27 @@ const Posts: React.FC<PostsProps> = ({
 
     const fetchData = async () => {
       if (!api) return;
-      let spaceId = currSpaceId;
-      if (spcId) {
-        spaceId = +spcId;
+      if (home) {
+        if (!account?.address) return;
+        const response = await gqlClient.query({
+          query: getFeedQuery(account.address)
+        });
+        setUserPosts(response.data.posts.map(({ id }: { id: string }) => id));
       } else {
-        if (!accountId) return;
-        if (accountId !== account?.address) {
-          const profile = await api.base.findProfileSpace(accountId);
-          if (!profile) return;
-          spaceId = +profile.struct.id.toString();
+        let spaceId = currSpaceId;
+        if (spcId) {
+          spaceId = +spcId;
+        } else {
+          if (!accountId) return;
+          if (accountId !== account?.address) {
+            const profile = await api.base.findProfileSpace(accountId);
+            if (!profile) return;
+            spaceId = +profile.struct.id.toString();
+          }
         }
+        const postIds = await api.blockchain.postIdsBySpaceId(spaceId as unknown as AnySpaceId);
+        setUserPosts(postIds.map((v) => v.toString()));
       }
-      const postIds = await api.blockchain.postIdsBySpaceId(spaceId as unknown as AnySpaceId);
-      setUserPosts(postIds.map((v) => v.toString()));
     };
 
     useEffect(() => {

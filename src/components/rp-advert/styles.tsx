@@ -6,7 +6,7 @@ export const Container = styled.div`
   display: grid;
   margin: 0.14rem;
   border-radius: 0.14rem;
-  border-left: 0.3rem solid rgb(227, 224, 224);
+  /* border-left: 0.3rem solid rgb(227, 224, 224); */
 `;
 
 export const AdvertContainer = styled.div`
