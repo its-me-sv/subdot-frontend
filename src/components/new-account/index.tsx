@@ -27,7 +27,7 @@ const NewAccount: React.FC<NewAccountProps> = ({account}) => {
     const [inProgress, setInProgress] = useState<boolean>(false);
     const [status, setStaus] = useState<string>("Hi there I'm new to Subdot");
     const [pp, setPp] = useState<{ file: File; preview: string } | null>(null);
-    const {dark, setNewAccount, language, setLoggedIn} = useAppContext();
+    const {dark, setNewAccount, language, setLoggedIn, setLowBalance} = useAppContext();
     const {api} = useSubsocial();
     const {setUser, setSpaceId} = useUserContext();
 
@@ -78,24 +78,29 @@ const NewAccount: React.FC<NewAccountProps> = ({account}) => {
           null
         );
         const createProfilePromise = new Promise(async (resolve, reject) => {
-          const signer = await getSigner(account.address);
-          if (!signer) return reject();
-          await spaceTx.signAsync(account.address, {signer});
-          const spaceTxIds = await getTxEventIds(spaceTx);
-          if (!spaceTxIds.length) return reject();
-          setSpaceId!(+spaceTxIds[0]);
-          const profileTx = substrateApi.tx.profiles.setProfile(spaceTxIds[0]);
-          await profileTx.signAsync(account.address, { signer });
-          getTxEventIds(profileTx)
-          .then(() => {
+          try {
+            const signer = await getSigner(account.address);
+            if (!signer) return reject();
+            const spaceTxIds = await getTxEventIds(spaceTx);
+            if (!spaceTxIds.length) return reject();
+            setSpaceId!(+spaceTxIds[0]);
+            const profileTx = substrateApi.tx.profiles.setProfile(spaceTxIds[0]);
+            await profileTx.signAsync(account.address, { signer });
+            await getTxEventIds(profileTx);
             setUser!(newUser);
             axios.post(`${REST_API}/user/new-account`, {
               ...newUser,
               accountId: account.address
             });
             resolve(true);
-          })
-          .catch(() => reject());
+          } catch (err) {
+            if ((err = "INSUFFICIENT BALANCE")) {
+              toast.error(
+                "Your account has insufficient funds to complete this transaction"
+              );
+            }
+            reject();
+          }
         });
         toast.promise(createProfilePromise, {
           loading: "Creating profile",
@@ -108,6 +113,10 @@ const NewAccount: React.FC<NewAccountProps> = ({account}) => {
           setNewAccount!(null);
           setLoggedIn!(true);
           navigate("/home");
+        })
+        .catch(() => {
+          setLowBalance!(true);
+          setNewAccount!(null);
         })
         .finally(() => setInProgress(false));
     };

@@ -9,16 +9,20 @@ export const getTxEventIds = (
     tx: SubmittableExtrinsic<"promise", SubmittableResult>
 ): Promise<Array<string>> => {
     return new Promise(async (resolve, reject) => {
-        await tx.send(async (result: any) => {
-            const { status } = result;
-            if (!result || !status) return reject();
-            if (status.isFinalized) {
-                const ids = getNewIdsFromEvent(result).map(v => v.toString());
-                return resolve(ids);
-            } else if (result.isError) {
-                return reject();
-            }
-        });
+        try {
+            await tx.send(async (result: any) => {
+                const { status } = result;
+                if (!result || !status) return reject();
+                if (status.isFinalized) {
+                    const ids = getNewIdsFromEvent(result).map(v => v.toString());
+                    return resolve(ids);
+                } else if (result.isError) {
+                    return reject();
+                }
+            });
+        } catch (err) {
+            reject("INSUFFICIENT BALANCE");
+        }
     });
 };
 
