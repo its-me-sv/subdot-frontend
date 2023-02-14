@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom";
-import {} from "@polkadot/types";
+import {simpleFormatBalance} from "@subsocial/utils";
 
 import {Container, Footer, HomeLogo, MenuLogo} from "./styles";
 
@@ -29,7 +29,7 @@ const Header: React.FC<HeaderProps> = () => {
         const substr = await api.substrateApi;
         unsub = await substr.derive.balances.all(account.address, (data) => {
           const balance = data.freeBalance;
-          isMounted && setBalance(balance.toString());
+          isMounted && setBalance(simpleFormatBalance(balance));
         });
       };
       isMounted && sub().catch((err) => console.log("Failed load balance:", err));
@@ -60,7 +60,7 @@ const Header: React.FC<HeaderProps> = () => {
             onClick={goToRP}
             title="Your reputation score"
           >{reputation} RP</span>
-          <span>{balance} SoonSocial</span>
+          <span>{balance}</span>
           <MenuLogo 
             onClick={openMenu}
             alt="menu" 
