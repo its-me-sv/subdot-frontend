@@ -1,29 +1,25 @@
 import React from "react";
 import {format} from "timeago.js";
-import {useNavigate} from "react-router-dom";
-import tmpImg from "../../assets/temp.jpg";
 
 import {Amount, Meta, TransactionContainer} from "./styles";
+import { TransactionInfo } from "../../utils/types";
 
 import {useAppContext} from "../../contexts/app";
 
-interface TransactionProps {}
+interface TransactionProps {
+  tx: TransactionInfo;
+}
 
-const Transaction: React.FC<TransactionProps> = () => {
-    const navigate = useNavigate();
+const Transaction: React.FC<TransactionProps> = ({tx}) => {
     const {dark} = useAppContext();
 
     return (
-      <TransactionContainer 
-        onClick={() => navigate("/profile/suraj")}
-        dark={dark}
-      >
-        <img alt="" src={tmpImg} />
+      <TransactionContainer dark={dark}>
         <Meta dark={dark}>
-          <span>{"<Dark Knight />"}</span>
-          <span>{format(new Date(2023, 0, 28))}</span>
+          <span>{tx.desc}</span>
+          <span>{format(new Date(tx.createdAt))}</span>
         </Meta>
-        <Amount dark={dark}>+ 21$</Amount>
+        <Amount dark={dark}>{tx.kind ? "+" : "-"} 21 SOON</Amount>
       </TransactionContainer>
     );
 };

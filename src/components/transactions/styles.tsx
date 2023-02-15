@@ -13,10 +13,9 @@ export const TransactionsHolder = styled.div`
 `;
 
 export const TransactionContainer = styled.div<{dark: boolean;}>`
-    display: grid;
-    grid-template-columns: 1fr 4fr 1fr;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    cursor: pointer;
     border-radius: 0.14rem;
     padding: 0.14rem;
     img {

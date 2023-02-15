@@ -1,4 +1,6 @@
-import React from "react";
+import React, {useState, useEffect, useRef} from "react";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 import {Container, Box, CloseIcon, Title} from "../terms-privacy/styles";
 import {TransactionsHolder} from "./styles";
@@ -7,21 +9,68 @@ import {title} from "../../translations/transactions";
 import Transaction from "./transaction";
 
 import {useAppContext} from "../../contexts/app";
+import { useUserContext } from "../../contexts/user";
+import { TransactionInfo } from "../../utils/types";
+import { REST_API } from "../../utils/constants";
+import { FetchButton } from "../reputation/styles";
+import { Button } from "../../utils/styles";
 
 interface TransactionProps {}
 
 const Transactions: React.FC<TransactionProps> = () => {
     const {setTxOpen, language, dark} = useAppContext();
+    const {account} = useUserContext();
+    const [txs, setTxs] = useState<Array<TransactionInfo>>([]);
+    const [over, setOver] = useState<boolean>(false);
+    const fetched = useRef<boolean>(false);
+
+    const fetchData = () => {
+      if (over || !account) return;
+      const txsPromise = axios.post(
+        `${REST_API}/transaction/${account.address}`,
+        { skip: txs.length }
+      );
+      toast.promise(txsPromise, {
+        loading: "Fetching transactions",
+        success: "Transactions fetched",
+        error: "Unable to fetch transactions"
+      });
+      txsPromise.then(({data}) => {
+        setTxs([...txs, ...data]);
+        console.log(data);
+        setOver(data.length === 0);
+      });
+    };
+
+    useEffect(() => {
+      if (fetched.current) return;
+      fetched.current = true;
+      fetchData();
+    }, [account]);
 
     return (
       <Container dark={dark}>
         <Box dark={dark}>
-          <CloseIcon onClick={() => setTxOpen!(false)} dark={dark}>X</CloseIcon>
+          <CloseIcon onClick={() => setTxOpen!(false)} dark={dark}>
+            X
+          </CloseIcon>
           <Title dark={dark}>{title[language]}</Title>
           <TransactionsHolder>
-            {new Array(42).fill(7).map(() => (
-              <Transaction />
+            {txs.length === 0 && <span>No transaction has been made by the account</span>}
+            {txs.map((tx) => (
+              <Transaction key={tx._id} tx={tx} />
             ))}
+            {!over && (
+              <FetchButton>
+                <Button
+                  bgColor={dark ? "#f5f4f9" : "#1a1a1a"}
+                  dark={dark}
+                  onClick={fetchData}
+                >
+                  Load more
+                </Button>
+              </FetchButton>
+            )}
           </TransactionsHolder>
         </Box>
       </Container>
