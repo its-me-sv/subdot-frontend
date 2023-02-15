@@ -59,3 +59,11 @@ export interface PostComment {
     id: string;
     body: string;
 }
+
+export interface TransactionInfo {
+    accountId: string;
+    desc: string;
+    kind: boolean;
+    amount: boolean;
+    createdAt: string;
+}

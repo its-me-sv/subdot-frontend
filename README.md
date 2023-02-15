@@ -1,1 +1,2 @@
 # SubDot - Bringing power back to the people
+[![wakatime](https://wakatime.com/badge/user/77078a50-96cc-4da2-b32c-08e468259a40/project/e42f2e90-715e-440e-a242-876e1e5affaf.svg)](https://wakatime.com/badge/user/77078a50-96cc-4da2-b32c-08e468259a40/project/e42f2e90-715e-440e-a242-876e1e5affaf)

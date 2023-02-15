@@ -9,7 +9,7 @@ import {
   recPrfx, amount,
   amtPh, transfer
 } from "../../translations/transactions";
-import { REST_API } from "../../utils/constants";
+import { BALANCE_DIVISOR, REST_API } from "../../utils/constants";
 
 import {useAppContext} from "../../contexts/app";
 import {Button} from "../../utils/styles";
@@ -17,8 +17,6 @@ import {Title, Footer} from "./styles";
 import { useSubsocial } from "../../subsocial";
 import { getSigner, getTxEventIds } from "../../subsocial/polkadot";
 import { useUserContext } from "../../contexts/user";
-
-const TEN_POW_10: number = 10000000000;
 
 interface TransferProps {
     accountId: string;
@@ -38,7 +36,7 @@ const Transfer: React.FC<TransferProps> = ({accountId}) => {
       const substr = await api.substrateApi;
       const transferTx = substr.tx.balances.transfer(
         encodeAddress(recipientId, 28), 
-        amt * TEN_POW_10
+        amt * BALANCE_DIVISOR
       );
       const transferPromise = new Promise(async (resolve, reject) => {
         try {
