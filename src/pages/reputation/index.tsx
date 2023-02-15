@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import {Container} from "../../components/reputation/styles";
 
@@ -11,6 +11,10 @@ interface ReputationPageProps {}
 
 const ReputationPage: React.FC<ReputationPageProps> = () => {
   const {dark} = useAppContext();
+
+  useEffect(() => {
+    window.document.title = "Reputation leaderboard • Subdot";
+  }, []);
 
   return (
     <Container dark={dark}>

@@ -34,6 +34,7 @@ const Transfer: React.FC<TransferProps> = ({accountId}) => {
     const handleTransfer = async () => {
       if (!api || !account) return;
       if (!amt) return toast.error("Invalid amount");
+      if (recipientId === account.address) return toast.error("Cannot tip yourself");
       const substr = await api.substrateApi;
       const transferTx = substr.tx.balances.transfer(
         encodeAddress(recipientId, 28), 

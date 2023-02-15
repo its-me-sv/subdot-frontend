@@ -130,7 +130,7 @@ const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
             bgColor="#005e20"
             onClick={() => setTransferId!(accountId as string)}
           >
-            {footer.transfer[language]} $
+            {footer.transfer[language]}
           </Button>
           <Button 
             bgColor={dark ? "#f5f4f9" : "#1a1a1a"} dark={dark}

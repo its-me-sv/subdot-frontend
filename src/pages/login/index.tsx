@@ -59,6 +59,10 @@ const LoginPage: React.FC<LoginPageProps> = () => {
     });
   };
 
+  useEffect(() => {
+    window.document.title = "Login • Subdot";
+  }, []);
+
   return (
     <Container dark={dark}>
       <div>

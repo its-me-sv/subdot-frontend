@@ -34,6 +34,7 @@ const ProfilePage: React.FC<ProfilePageProps> = () => {
   };
 
   useEffect(() => {
+    window.document.title = `${params.id} • Subdot profile`;
     fetchData();
   }, [params]);
 

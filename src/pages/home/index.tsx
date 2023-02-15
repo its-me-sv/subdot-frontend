@@ -16,6 +16,7 @@ const HomePage: React.FC<HomePageProps> = () => {
   const {account, spaceId} = useUserContext();
 
   useEffect(() => {
+    window.document.title = "Homepage • Subdot";
     return () => resetAppContext!();
   }, []);
 
