@@ -64,7 +64,7 @@ export interface TransactionInfo {
     accountId: string;
     desc: string;
     kind: boolean;
-    amount: boolean;
+    amount: number;
     createdAt: string;
     _id: string;
 }

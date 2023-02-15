@@ -13,6 +13,8 @@ import { useSubsocial } from "../../subsocial";
 import { IpfsContent } from "@subsocial/api/substrate/wrappers";
 import { getSigner, getTxEventIds } from "../../subsocial/polkadot";
 import { useUserContext } from "../../contexts/user";
+import axios from "axios";
+import { BALANCE_DIVISOR, REST_API } from "../../utils/constants";
 
 interface CommentsProps {}
 
@@ -20,7 +22,8 @@ const Comments: React.FC<CommentsProps> = () => {
     const {
       setCmtOpen, language, 
       dark, comments: cmts, 
-      setComments, cmtOpen: postId
+      setComments, cmtOpen: postId,
+      setLowBalance
     } = useAppContext();
     const {api} = useSubsocial();
     const {account} = useUserContext();
@@ -31,31 +34,49 @@ const Comments: React.FC<CommentsProps> = () => {
       if (newCmt.length === 0) return toast.error("Field empty"); 
       if (newCmt.length > 210) return toast.error("Comment too long");
       const cmtPromise = new Promise(async (resolve, reject) => {
-        setPosting(true);
-        const cid = await api.ipfs.saveContent({
-          body: newCmt
-        });
-        const substrateApi = await api.substrateApi;
-        const cmtTx = substrateApi.tx.posts.createPost(
-          null,
-          {Comment: {parentId: null, rootPostId: postId}},
-          IpfsContent(cid)
-        );
-        const signer = await getSigner(account.address);
-        if (!signer) {
+        try {
+          setPosting(true);
+          const cid = await api.ipfs.saveContent({
+            body: newCmt
+          });
+          const substrateApi = await api.substrateApi;
+          const cmtTx = substrateApi.tx.posts.createPost(
+            null,
+            {Comment: {parentId: null, rootPostId: postId}},
+            IpfsContent(cid)
+          );
+          const signer = await getSigner(account.address);
+          if (!signer) {
+            setPosting(false);
+            return reject();
+          }
+          await cmtTx.signAsync(account.address, {signer});
+          const cmtTxIds = await getTxEventIds(cmtTx);
+          const { partialFee } = await cmtTx.paymentInfo(account.address);
+          axios.post(`${REST_API}/transaction/new`, {
+            accountId: account.address,
+            desc: "Added comment to a post",
+            kind: false,
+            amount: +(partialFee.toNumber() / BALANCE_DIVISOR).toPrecision(3),
+          });
+          setComments!([...cmts, {
+            creator: account.address,
+            createdAt: Date.now(),
+            body: newCmt,
+            id: cmtTxIds[0]
+          }]);
+          setPosting(false);
+          return resolve(true);
+        } catch (err) {
+          if ((err = "INSUFFICIENT BALANCE")) {
+            toast.error(
+              "Your account has insufficient funds to complete this transaction"
+            );
+            setLowBalance!(true);
+          }
           setPosting(false);
           return reject();
         }
-        await cmtTx.signAsync(account.address, {signer});
-        const cmtTxIds = await getTxEventIds(cmtTx);
-        setComments!([...cmts, {
-          creator: account.address,
-          createdAt: Date.now(),
-          body: newCmt,
-          id: cmtTxIds[0]
-        }]);
-        setPosting(false);
-        return resolve(true);
       });
       toast.promise(cmtPromise, {
         loading: "Posting comment",

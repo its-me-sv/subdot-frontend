@@ -37,7 +37,6 @@ const Transactions: React.FC<TransactionProps> = () => {
       });
       txsPromise.then(({data}) => {
         setTxs([...txs, ...data]);
-        console.log(data);
         setOver(data.length === 0);
       });
     };

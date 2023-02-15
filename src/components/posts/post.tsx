@@ -11,7 +11,8 @@ import {
     PostContent, PostFooter, 
     PostHeader, PostHeaderRight, 
     PostImage, PostTime, 
-    PostUsername
+    PostUsername,
+    StickyButton
 } from './styles';
 import likeIcon from "../../assets/icons/like.png";
 import likedIcon from "../../assets/icons/liked.png";
@@ -28,6 +29,7 @@ import {defaultUser, defaultPost, defaultUserPostMeta} from "./data";
 import { useUserContext } from "../../contexts/user";
 import { getSigner, getTxEventIds } from "../../subsocial/polkadot";
 import { REST_API } from "../../utils/constants";
+import { CloseIcon } from "../terms-privacy/styles";
 
 interface PostProps {
   postId: string;
@@ -134,6 +136,11 @@ const Post: React.FC<PostProps> = ({postId}) => {
 
     return (
       <PostContainer dark={dark}>
+        <StickyButton>
+          <CloseIcon onClick={fetchData} dark={dark} title="Refetch data">
+            ↩️
+          </CloseIcon>
+        </StickyButton>
         <PostHeader onClick={() => navigate(`/profile/${owner.username}`)}>
           <img alt={`pp of ${owner.username}`} src={getImage(owner.picture)} />
           <PostHeaderRight dark={dark}>
@@ -156,10 +163,13 @@ const Post: React.FC<PostProps> = ({postId}) => {
             />
             {postMeta.likes > 0 && <span>{postMeta.likes}</span>}
           </FooterItem>
-          <FooterItem dark={dark} onClick={() => {
-            setCurrCmts!(comments);
-            setCmtOpen!(postId);
-          }}>
+          <FooterItem
+            dark={dark}
+            onClick={() => {
+              setCurrCmts!(comments);
+              setCmtOpen!(postId);
+            }}
+          >
             <img alt="comment" src={cmtIcon} />
             {comments.length > 0 && <span>{comments.length}</span>}
           </FooterItem>

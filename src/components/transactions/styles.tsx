@@ -4,7 +4,7 @@ import {BoxShadow, BoxShadowDark} from "../../utils/styles";
 export const TransactionsHolder = styled.div`
     display: flex;
     flex-direction: column;
-    width: 21rem;
+    /* width: 21rem; */
     max-height: 30rem;
     gap: 0.42rem;
     overflow-y: auto;
@@ -18,6 +18,7 @@ export const TransactionContainer = styled.div<{dark: boolean;}>`
     align-items: center;
     border-radius: 0.14rem;
     padding: 0.14rem;
+    width: 42vw;
     img {
         width: 3rem;
         height: 3rem;
