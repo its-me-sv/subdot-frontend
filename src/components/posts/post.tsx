@@ -165,7 +165,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
           </FooterItem>
           <FooterItem
             dark={dark}
-            onClick={() => setTransferId!(owner.username)}
+            onClick={() => setTransferId!(`${onwerId}:${owner.username}`)}
           >
             <img alt="tip" src={tipIcon} />
           </FooterItem>

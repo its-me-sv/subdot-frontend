@@ -110,7 +110,10 @@ const Peek: React.FC<PeekProps> = ({id}) => {
                 >
                   {footer.msg[language]}
                 </Button>
-                <Button bgColor="#005e20" onClick={() => setTransferId!(id)}>
+                <Button 
+                  bgColor="#005e20" 
+                  onClick={() => setTransferId!(`${id}:${user.username}`)}
+                >
                   {footer.transfer[language]} $
                 </Button>
               </>

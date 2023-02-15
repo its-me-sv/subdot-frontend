@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {format} from "timeago.js";
 import {useNavigate} from "react-router-dom";
-import {encodeAddress} from "@polkadot/util-crypto";
 
 import {
     CommentContainer, CommentHolder, 
