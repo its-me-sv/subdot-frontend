@@ -49,7 +49,7 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
     const [following, setFollowing] = useState<Array<string>>(defaultState.following);
     const [spaceId, setSpaceId] = useState<number>(defaultState.spaceId);
     const {api} = useSubsocial();
-    const {setNewAccount, setLoggedIn, setLowBalance} = useAppContext();
+    const {setNewAccount, setLoggedIn, setLowBalance, setOverlap} = useAppContext();
 
     const loginUser = async (acc: WalletAccount, cb: () => void) => {
         if (!api) return;
@@ -57,13 +57,16 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
         setAccount(acc);
         const {presence} = (await axios.get(`${REST_API}/user/account/${address}`))
           .data;
+        const profile = await api.base.findProfileSpace(address);
         if (!presence) {
-            setNewAccount!(acc);
-            setReputation(1);
-            return;
+          setNewAccount!(acc);
+          setReputation(1);
+          if (profile?.content || profile) {
+            setOverlap!(true);
+          }
+          return;
         }
         const loginPromise = new Promise(async (resolve, reject) => {
-            const profile = await api.base.findProfileSpace(address);
             if (!profile?.content) {
                 toast.error("Error logging in");
                 return reject();

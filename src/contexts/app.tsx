@@ -20,6 +20,7 @@ interface AppContextInterface {
   loading: boolean;
   newAccount: WalletAccount | null;
   lowBalance: boolean;
+  overlap: boolean;
   resetAppContext?: () => void;
   setLoggedIn?: React.Dispatch<React.SetStateAction<boolean>>;
   setShowTerms?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -38,6 +39,7 @@ interface AppContextInterface {
   setNewAccount?: React.Dispatch<React.SetStateAction<WalletAccount | null>>;
   setCmtOpen?: React.Dispatch<React.SetStateAction<string>>;
   setLowBalance?: React.Dispatch<React.SetStateAction<boolean>>;
+  setOverlap?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const defaultState: AppContextInterface = {
@@ -57,7 +59,8 @@ const defaultState: AppContextInterface = {
     loading: true,
     newAccount: null,
     cmtOpen: "",
-    lowBalance: false
+    lowBalance: false,
+    overlap: false
 };
 
 export const AppContext = createContext<AppContextInterface>(defaultState);
@@ -82,6 +85,7 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
     const [newAccount, setNewAccount] = useState<WalletAccount | null>(defaultState.newAccount);
     const [cmtOpen, setCmtOpen] = useState<string>(defaultState.cmtOpen);
     const [lowBalance, setLowBalance] = useState<boolean>(defaultState.lowBalance);
+    const [overlap, setOverlap] = useState<boolean>(defaultState.overlap);
 
     const resetAppContext = () => {
         setShowTerms!(false);
@@ -96,6 +100,7 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
         setTxOpen!(false);
         setCmtOpen("");
         setLowBalance(false);
+        setOverlap(false);
     };
 
     return (
@@ -117,7 +122,8 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
             loading, setLoading,
             newAccount, setNewAccount,
             cmtOpen, setCmtOpen,
-            lowBalance, setLowBalance
+            lowBalance, setLowBalance,
+            overlap, setOverlap
         }}>
             {children}
         </AppContext.Provider>

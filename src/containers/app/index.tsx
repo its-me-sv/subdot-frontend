@@ -29,6 +29,7 @@ import Header from "../../components/header";
 // providers
 import {useAppContext} from "../../contexts/app";
 import Comments from "../../components/comments";
+import Overlap from "../../components/overlap";
 
 interface AppProps {}
 
@@ -41,7 +42,8 @@ const App: React.FC<AppProps> = () => {
     postMenuOpen, txOpen,
     loading, setLoading,
     newAccount, cmtOpen,
-    lowBalance, dark
+    lowBalance, dark,
+    overlap
   } = useAppContext();
 
   useEffect(() => {
@@ -69,6 +71,7 @@ const App: React.FC<AppProps> = () => {
           </>
         )}
         {newAccount !== null && <NewAccount account={newAccount} />}
+        {overlap && <Overlap />}
         <Suspense fallback={<Loader />}>
           <Routes>
             <Route
