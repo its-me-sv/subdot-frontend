@@ -49,7 +49,7 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
     const [following, setFollowing] = useState<Array<string>>(defaultState.following);
     const [spaceId, setSpaceId] = useState<number>(defaultState.spaceId);
     const {api} = useSubsocial();
-    const {setNewAccount, setLoggedIn} = useAppContext();
+    const {setNewAccount, setLoggedIn, setLowBalance} = useAppContext();
 
     const loginUser = async (acc: WalletAccount, cb: () => void) => {
         if (!api) return;
@@ -101,18 +101,25 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
     const followUser = (id: string, cb: () => void) => {
         if (!api || !account) return;
         const followPromise = new Promise(async (resolve, reject) => {
-            const substrateApi = await api.blockchain.api;
-            const followTx = substrateApi.tx.accountFollows.followAccount(id);
-            const signer = await getSigner(account.address);
-            if (!signer) return reject();
-            await followTx.signAsync(account.address, { signer });
-            getTxEventIds(followTx)
-            .then(() => {
+            try {
+                const substrateApi = await api.blockchain.api;
+                const followTx = substrateApi.tx.accountFollows.followAccount(id);
+                const signer = await getSigner(account.address);
+                if (!signer) return reject();
+                await followTx.signAsync(account.address, { signer });
+                await getTxEventIds(followTx);
                 toast.success("Account has been follwed");
                 axios.put(`${REST_API}/user/incr-rp/${id}/1`);
                 resolve(true);
-            })
-            .catch(() => reject());
+            } catch (err) {
+                if ((err = "INSUFFICIENT BALANCE")) {
+                  toast.error(
+                    "Your account has insufficient funds to complete this transaction"
+                  );
+                  setLowBalance!(true);
+                }
+                return reject();
+            }
         });
         toast.promise(followPromise, {
             loading: "Following user",
@@ -128,17 +135,24 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
     const unFollowUser = (id: string, cb: () => void) => {
         if (!api || !account) return;
         const unFollowPromise = new Promise(async (resolve, reject) => {
-          const substrateApi = await api.blockchain.api;
-          const followTx = substrateApi.tx.accountFollows.unfollowAccount(id);
-          const signer = await getSigner(account.address);
-          if (!signer) return reject();
-          await followTx.signAsync(account.address, { signer });
-          getTxEventIds(followTx)
-            .then(() => {
-              toast.success("Account has been unfollwed");
-              resolve(true);
-            })
-            .catch(() => reject());
+          try {
+            const substrateApi = await api.blockchain.api;
+            const followTx = substrateApi.tx.accountFollows.unfollowAccount(id);
+            const signer = await getSigner(account.address);
+            if (!signer) return reject();
+            await followTx.signAsync(account.address, { signer });
+            await getTxEventIds(followTx);
+            toast.success("Account has been unfollwed");
+            resolve(true);
+          } catch (err) {
+            if ((err = "INSUFFICIENT BALANCE")) {
+              toast.error(
+                "Your account has insufficient funds to complete this transaction"
+              );
+              setLowBalance!(true);
+            }
+            return reject();
+          }
         });
         toast.promise(unFollowPromise, {
           loading: "Unfollowing user",

@@ -28,7 +28,7 @@ const ProfileEdit: React.FC<ProfileEditProps> = ({
     original, address, onClose, setter
 }) => {
     const navigate = useNavigate();
-    const {dark, language} = useAppContext();
+    const {dark, language, setLowBalance} = useAppContext();
     const {setUser: setCurrUser, spaceId} = useUserContext();
     const {api} = useSubsocial();
     const [picture, setPicture] = useState<string>(original.picture);
@@ -86,20 +86,27 @@ const ProfileEdit: React.FC<ProfileEditProps> = ({
             content: IpfsContent(cid)
         });
         const updateProfilePromise = new Promise(async (resolve, reject) => {
+          try {
             const signer = await getSigner(address);
             if (!signer) return reject();
             await spaceTx.signAsync(address, {signer});
-            getTxEventIds(spaceTx)
-              .then(() => {
-                setCurrUser!(updatedUser);
-                setter(updatedUser);
-                axios.put(`${REST_API}/user/user-edit/${address}`, {
-                  username,
-                  name,
-                });
-                resolve(true);
-              })
-              .catch(() => reject());
+            await getTxEventIds(spaceTx);
+            setCurrUser!(updatedUser);
+            setter(updatedUser);
+            axios.put(`${REST_API}/user/user-edit/${address}`, {
+              username,
+              name,
+            });
+            resolve(true);
+          } catch (err) {
+            if ((err = "INSUFFICIENT BALANCE")) {
+              toast.error(
+                "Your account has insufficient funds to complete this transaction"
+              );
+              setLowBalance!(true);
+            }
+            return reject();
+          }
         });
         toast.promise(updateProfilePromise, {
           loading: "Updating profile",

@@ -32,7 +32,7 @@ interface NewPostProps {}
 
 const NewPost: React.FC<NewPostProps> = () => {
     const navigate = useNavigate();
-    const {setPostMenuOpen, language, dark} = useAppContext();
+    const {setPostMenuOpen, language, dark, setLowBalance} = useAppContext();
     const {api} = useSubsocial();
     const {spaceId, account, setReputation, user} = useUserContext();
     const [description, setDesccription] = useState<string>("");
@@ -59,32 +59,44 @@ const NewPost: React.FC<NewPostProps> = () => {
       if (!description.length) return toast.error("Field empty");
       if (description.length > 500) return toast.error("Max description length - 500 characters");
       const newPostPromise = new Promise(async (resolve, reject) => {
-        setInProgress(true);
-        const postData = {
-          description,
-          picture: "",
-        };
-        if (pp) {
-          const ppId = await api.ipfs.saveFile(pp.file);
-          postData.picture = ppId;
-        }
-        const cid = await api.ipfs.saveContent({...postData});
-        const substrateApi = await api.blockchain.api;
-        const postTx = substrateApi.tx.posts.createPost(
-          spaceId,
-          {RegularPost: null},
-          IpfsContent(cid)
-        );
-        const signer = await getSigner(account.address);
-        if (!signer) {
+        try {
+
+          setInProgress(true);
+          const postData = {
+            description,
+            picture: "",
+          };
+          if (pp) {
+            const ppId = await api.ipfs.saveFile(pp.file);
+            postData.picture = ppId;
+          }
+          const cid = await api.ipfs.saveContent({...postData});
+          const substrateApi = await api.blockchain.api;
+          const postTx = substrateApi.tx.posts.createPost(
+            spaceId,
+            {RegularPost: null},
+            IpfsContent(cid)
+          );
+          const signer = await getSigner(account.address);
+          if (!signer) {
+            setInProgress(false);
+            return reject();
+          }
+          await postTx.signAsync(account.address, {signer});
+          await getTxEventIds(postTx);
+          await axios.put(`${REST_API}/user/incr-rp/${account.address}/1`);
+          setInProgress(false);
+          return resolve(true);
+        } catch (err) {
+          if ((err = "INSUFFICIENT BALANCE")) {
+            toast.error(
+              "Your account has insufficient funds to complete this transaction"
+            );
+            setLowBalance!(true);
+          }
           setInProgress(false);
           return reject();
         }
-        await postTx.signAsync(account.address, {signer});
-        await getTxEventIds(postTx);
-        await axios.put(`${REST_API}/user/incr-rp/${account.address}/1`);
-        setInProgress(false);
-        return resolve(true);
       });
       toast.promise(newPostPromise, {
         loading: "Uploading post",

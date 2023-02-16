@@ -39,7 +39,8 @@ const Post: React.FC<PostProps> = ({postId}) => {
     const navigate = useNavigate();
     const {
         setTransferId,
-        language, dark, setCmtOpen
+        language, dark, setCmtOpen,
+        setLowBalance
     } = useAppContext();
     const {api} = useSubsocial();
     const {account, setReputation} = useUserContext();
@@ -80,21 +81,31 @@ const Post: React.FC<PostProps> = ({postId}) => {
         const substrateApi = await api.blockchain.api;
         const likeTx = substrateApi.tx.reactions.createPostReaction(postId, "Upvote");
         const likePromise = new Promise(async (resolve, reject) => {
-          const signer = await getSigner(account.address);
-          if (!signer) return reject();
-          await likeTx.signAsync(account.address, {signer});
-          const likeTxIds = await getTxEventIds(likeTx);
-          if (!likeTxIds) return reject();
-          setLikeId(likeTxIds[1]);
-          axios.put(`${REST_API}/user/incr-rp/${onwerId}/1`);
-          setPostMeta(prevMeta => ({
-            ...prevMeta,
-            likes: prevMeta.likes + 1
-          }));
-          if (onwerId === account.address) {
-            setReputation!(prev => prev + 1);
+          try {
+            const signer = await getSigner(account.address);
+            if (!signer) return reject();
+            await likeTx.signAsync(account.address, {signer});
+            const likeTxIds = await getTxEventIds(likeTx);
+            if (!likeTxIds) return reject();
+            setLikeId(likeTxIds[1]);
+            axios.put(`${REST_API}/user/incr-rp/${onwerId}/1`);
+            setPostMeta(prevMeta => ({
+              ...prevMeta,
+              likes: prevMeta.likes + 1
+            }));
+            if (onwerId === account.address) {
+              setReputation!(prev => prev + 1);
+            }
+            resolve(true);
+          } catch (err) {
+            if ((err = "INSUFFICIENT BALANCE")) {
+              toast.error(
+                "Your account has insufficient funds to complete this transaction"
+              );
+              setLowBalance!(true);
+            }
+            return reject();
           }
-          resolve(true);
         });
         toast.promise(likePromise, {
           success: "Post liked",
@@ -105,16 +116,26 @@ const Post: React.FC<PostProps> = ({postId}) => {
         const substrateApi = await api.blockchain.api;
         const disLikeTx = substrateApi.tx.reactions.deletePostReaction(postId, likedId);
         const disLikePromise = new Promise(async (resolve, reject) => {
-          const signer = await getSigner(account.address);
-          if (!signer) return reject();
-          await disLikeTx.signAsync(account.address, { signer });
-          await getTxEventIds(disLikeTx);
-          setLikeId("0");
-          setPostMeta((prevMeta) => ({
-            ...prevMeta,
-            likes: prevMeta.likes - 1,
-          }));
-          resolve(true);
+          try {
+            const signer = await getSigner(account.address);
+            if (!signer) return reject();
+            await disLikeTx.signAsync(account.address, { signer });
+            await getTxEventIds(disLikeTx);
+            setLikeId("0");
+            setPostMeta((prevMeta) => ({
+              ...prevMeta,
+              likes: prevMeta.likes - 1,
+            }));
+            resolve(true);
+          } catch (err) {
+            if ((err = "INSUFFICIENT BALANCE")) {
+              toast.error(
+                "Your account has insufficient funds to complete this transaction"
+              );
+              setLowBalance!(true);
+            }
+            return reject();
+          }
         });
         toast.promise(disLikePromise, {
           success: "Post like removed",
