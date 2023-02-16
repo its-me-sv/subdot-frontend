@@ -11,10 +11,12 @@ const Advert: React.FC<AdvertProps> = () => {
 
     return (
         <AdvertContainer>
-            {advert !== null && (
+            {advert ? (
                 <a href={advert.link} target="_blank" referrerPolicy="no-referrer">
                     <AdvertImage dark={dark} src={advert.picture} />
                 </a>
+            ) : (
+                <span>Advertisement(s) goes here</span>
             )}
         </AdvertContainer>
     );

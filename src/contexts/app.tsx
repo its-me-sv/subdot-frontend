@@ -5,6 +5,7 @@ import React, {
   useContext,
   useState,
   useEffect,
+  useRef
 } from "react";
 import { REST_API } from "../utils/constants";
 
@@ -30,6 +31,7 @@ interface AppContextInterface {
   lowBalance: boolean;
   overlap: boolean;
   advert: AdvertInfo | null;
+  timeOut?: React.MutableRefObject<NodeJS.Timeout | null>;
   resetAppContext?: () => void;
   setLoggedIn?: React.Dispatch<React.SetStateAction<boolean>>;
   setShowTerms?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -71,7 +73,7 @@ const defaultState: AppContextInterface = {
     cmtOpen: "",
     lowBalance: false,
     overlap: false,
-    advert: null
+    advert: null,
 };
 
 export const AppContext = createContext<AppContextInterface>(defaultState);
@@ -97,7 +99,8 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
     const [cmtOpen, setCmtOpen] = useState<string>(defaultState.cmtOpen);
     const [lowBalance, setLowBalance] = useState<boolean>(defaultState.lowBalance);
     const [overlap, setOverlap] = useState<boolean>(defaultState.overlap);
-    const [advert, setAdvert] = useState<AdvertInfo | null>(null);
+    const [advert, setAdvert] = useState<AdvertInfo | null>(defaultState.advert);
+    const timeOut = useRef<NodeJS.Timeout | null>(null);
 
     const resetAppContext = () => {
         setShowTerms!(false);
@@ -119,9 +122,10 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
     useEffect(() => {
         axios.get(`${REST_API}/advert/`).then(({ data }) => {
           setAdvert(data);
+          if (data === null) return;
           const diff = new Date(data.expires).getTime() - new Date().getTime();
           if (diff < 1) setAdvert(null);
-          else setTimeout(() => setAdvert(null), diff);
+          else timeOut.current = setTimeout(() => setAdvert(null), diff);
         });
     }, []);
 
@@ -146,7 +150,8 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
             cmtOpen, setCmtOpen,
             lowBalance, setLowBalance,
             overlap, setOverlap,
-            advert, setAdvert
+            advert, setAdvert,
+            timeOut
         }}>
             {children}
         </AppContext.Provider>
