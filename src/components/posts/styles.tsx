@@ -133,9 +133,12 @@ export const PostDescription = styled.textarea<{dark: boolean;}>`
   `}
 `;
 
-export const FetchButton = styled.span`
+export const FetchButton = styled.span<{dark: boolean;}>`
   align-self: flex-start;
   cursor: pointer;
+  color: #1a1a1a;
+  font-size: 1.2rem;
+  ${props => props.dark && "color: #f5f4f9;"}
   &:hover {
     opacity: 0.5;
   }

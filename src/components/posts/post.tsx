@@ -173,8 +173,12 @@ const Post: React.FC<PostProps> = ({postId}) => {
               </PostTime>
             </PostHeaderRight>
           </div>
-          <FetchButton onClick={fetchData} title="Refetch data">
-            {fetching ? " " : "↩️"}
+          <FetchButton 
+            onClick={fetchData} 
+            title="Refetch data"
+            dark={dark}
+          >
+            {fetching ? " " : "↺"}
           </FetchButton>
         </PostHeader>
         <PostContent dark={dark}>{post.description}</PostContent>
