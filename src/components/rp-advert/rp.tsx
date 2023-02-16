@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 
 import {Button} from "../../utils/styles";
-import {RPContainer, RPItem, RPTitle} from "./styles";
+import {RPContainer, RPItem, RPItemsContainer, RPTitle} from "./styles";
 import {title, detail} from "../../translations/rp";
 
 import {useAppContext} from "../../contexts/app";
@@ -34,7 +34,7 @@ const RP: React.FC<RPProps> = () => {
     return (
       <RPContainer dark={dark}>
         <RPTitle dark={dark}>{title[language]}</RPTitle>
-        <div>
+        <RPItemsContainer>
           {users.map((v, i) => (
             <RPItem 
               key={v.accountId} 
@@ -45,13 +45,13 @@ const RP: React.FC<RPProps> = () => {
               <span>{v.reputation} RP</span>
             </RPItem>
           ))}
-        </div>
+        </RPItemsContainer>
         <Button
           onClick={() => navigate("/rp")}
           bgColor={dark ? "#f5f4f9" : "#1a1a1a"}
           dark={dark}
         >
-          {detail[language]}
+          VIEW ALL
         </Button>
       </RPContainer>
     );

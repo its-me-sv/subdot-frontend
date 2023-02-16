@@ -3,7 +3,8 @@ import {BoxShadow, BoxShadowDark} from "../../utils/styles";
 
 export const Container = styled.div`
   padding: 0.5rem;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   margin: 0.14rem;
   border-radius: 0.14rem;
   /* border-left: 0.3rem solid rgb(227, 224, 224); */
@@ -13,6 +14,7 @@ export const AdvertContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 60%;
     cursor: pointer;
     &:hover {
         opacity: 0.84;
@@ -21,7 +23,7 @@ export const AdvertContainer = styled.div`
 
 export const AdvertImage = styled.img<{dark: boolean;}>`
     width: 16rem;
-    height: 21rem;
+    height: auto;
     padding: 0.42rem;
     border-radius: 0.21rem;
     ${BoxShadow}
@@ -30,11 +32,12 @@ export const AdvertImage = styled.img<{dark: boolean;}>`
     `}
 `;
 
-export const RPContainer = styled.div<{dark: boolean;}>`
+export const RPContainer = styled.div<{ dark: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   margin: 0rem 1rem;
+  height: 35vh;
   padding-bottom: 0.42rem;
   border-bottom: 1px solid #1a1a1a;
   ${(props) =>
@@ -42,6 +45,10 @@ export const RPContainer = styled.div<{dark: boolean;}>`
     `
     border-bottom: 1px solid #f5f4f9;;
     `}
+`;
+
+export const RPItemsContainer = styled.div`
+    height: 24vh;
 `;
 
 export const RPTitle = styled.span<{dark: boolean;}>`
