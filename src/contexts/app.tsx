@@ -1,6 +1,14 @@
-import React, {ReactNode, createContext, useContext, useState} from "react";
+import axios from "axios";
+import React, {
+  ReactNode,
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+} from "react";
+import { REST_API } from "../utils/constants";
 
-import {PostComment, WalletAccount} from "../utils/types";
+import {PostComment, WalletAccount, AdvertInfo} from "../utils/types";
 
 interface AppContextInterface {
   loggedIn: boolean;
@@ -21,6 +29,7 @@ interface AppContextInterface {
   newAccount: WalletAccount | null;
   lowBalance: boolean;
   overlap: boolean;
+  advert: AdvertInfo | null;
   resetAppContext?: () => void;
   setLoggedIn?: React.Dispatch<React.SetStateAction<boolean>>;
   setShowTerms?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -40,6 +49,7 @@ interface AppContextInterface {
   setCmtOpen?: React.Dispatch<React.SetStateAction<string>>;
   setLowBalance?: React.Dispatch<React.SetStateAction<boolean>>;
   setOverlap?: React.Dispatch<React.SetStateAction<boolean>>;
+  setAdvert?: React.Dispatch<React.SetStateAction<AdvertInfo | null>>;
 }
 
 const defaultState: AppContextInterface = {
@@ -60,7 +70,8 @@ const defaultState: AppContextInterface = {
     newAccount: null,
     cmtOpen: "",
     lowBalance: false,
-    overlap: false
+    overlap: false,
+    advert: null
 };
 
 export const AppContext = createContext<AppContextInterface>(defaultState);
@@ -86,6 +97,7 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
     const [cmtOpen, setCmtOpen] = useState<string>(defaultState.cmtOpen);
     const [lowBalance, setLowBalance] = useState<boolean>(defaultState.lowBalance);
     const [overlap, setOverlap] = useState<boolean>(defaultState.overlap);
+    const [advert, setAdvert] = useState<AdvertInfo | null>(null);
 
     const resetAppContext = () => {
         setShowTerms!(false);
@@ -102,6 +114,16 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
         setLowBalance(false);
         setOverlap(false);
     };
+
+    // fetching advertisement
+    useEffect(() => {
+        axios.get(`${REST_API}/advert/`).then(({ data }) => {
+          setAdvert(data);
+          const diff = new Date(data.expires).getTime() - new Date().getTime();
+          if (diff < 1) setAdvert(null);
+          else setTimeout(() => setAdvert(null), diff);
+        });
+    }, []);
 
     return (
         <AppContext.Provider value={{
@@ -123,7 +145,8 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
             newAccount, setNewAccount,
             cmtOpen, setCmtOpen,
             lowBalance, setLowBalance,
-            overlap, setOverlap
+            overlap, setOverlap,
+            advert, setAdvert
         }}>
             {children}
         </AppContext.Provider>

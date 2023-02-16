@@ -1,5 +1,4 @@
 import React from "react";
-import tmpImg from "../../assets/temp.jpg";
 
 import {AdvertContainer, AdvertImage} from "./styles";
 
@@ -8,11 +7,15 @@ import {useAppContext} from "../../contexts/app";
 interface AdvertProps {}
 
 const Advert: React.FC<AdvertProps> = () => {
-    const {dark} = useAppContext();
+    const {dark, advert} = useAppContext();
 
     return (
         <AdvertContainer>
-            <AdvertImage dark={dark} src={tmpImg} />
+            {advert !== null && (
+                <a href={advert.link} target="_blank" referrerPolicy="no-referrer">
+                    <AdvertImage dark={dark} src={advert.picture} />
+                </a>
+            )}
         </AdvertContainer>
     );
 };

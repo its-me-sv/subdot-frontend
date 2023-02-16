@@ -68,3 +68,12 @@ export interface TransactionInfo {
     createdAt: string;
     _id: string;
 }
+
+export interface AdvertInfo {
+    accountId: string;
+    picture: string;
+    link: string;
+    expires: string;
+    _id: string;
+    __v: number;
+}
