@@ -57,7 +57,7 @@ const Posts: React.FC<PostsProps> = ({
     
     return (
       <Container>
-        <StickyButton>
+        <StickyButton abs>
           {(account?.address === accountId) && (
             <Button
               bgColor={dark ? "#f5f4f9" : "#1a1a1a"}

@@ -11,10 +11,10 @@ export const Container = styled.div`
   padding-bottom: 2.4rem;
 `;
 
-export const StickyButton = styled.div`
-    align-self: flex-end;
-    padding-top: 0.42rem;
-    position: absolute;
+export const StickyButton = styled.div<{ abs?: boolean }>`
+  align-self: flex-end;
+  padding-top: 0.42rem;
+  ${(props) => props.abs && `position: absolute;`}
 `;
 
 export const PostContainer = styled.div<{dark: boolean;}>`

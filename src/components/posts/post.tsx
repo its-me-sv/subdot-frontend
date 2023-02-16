@@ -146,7 +146,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
     };
 
     useEffect(() => {
-        fetchData();
+      fetchData();
     }, [api, postId]);
 
     return (
