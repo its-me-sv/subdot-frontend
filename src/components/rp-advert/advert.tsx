@@ -22,7 +22,7 @@ const Advert: React.FC<AdvertProps> = () => {
     }, [advert]);
 
     return (
-        <AdvertContainer>
+        <AdvertContainer dark={dark}>
             {advert ? (
                 <a href={advert.link} target="_blank" referrerPolicy="no-referrer">
                     <AdvertImage dark={dark} src={advert.picture} />

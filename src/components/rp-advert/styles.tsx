@@ -10,7 +10,7 @@ export const Container = styled.div`
   /* border-left: 0.3rem solid rgb(227, 224, 224); */
 `;
 
-export const AdvertContainer = styled.div`
+export const AdvertContainer = styled.div<{dark: boolean}>`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,6 +18,12 @@ export const AdvertContainer = styled.div`
     cursor: pointer;
     &:hover {
         opacity: 0.84;
+    }
+    span {
+        text-align: center;
+        font-family: Inter;
+        color: #1a1a1a;
+        ${props => props.dark && `color: #f5f4f9;`}
     }
 `;
 
