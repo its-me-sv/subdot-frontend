@@ -69,12 +69,13 @@ const Comments: React.FC<CommentsProps> = ({postId, dark}) => {
       });
     };
 
-    const addComment = (newCmt: string) => {
+    const addComment = (newCmt: string, cb: () => void) => {
       if (!api || !account || !postId) return;
       if (newCmt.length === 0) return toast.error("Field empty"); 
       if (newCmt.length > 210) return toast.error("Comment too long");
       const cmtPromise = new Promise(async (resolve, reject) => {
         try {
+          cb();
           setPosting(true);
           const cid = await api.ipfs.saveContent({
             body: newCmt
@@ -145,9 +146,7 @@ const Comments: React.FC<CommentsProps> = ({postId, dark}) => {
               <Comment key={cmt.id} comment={cmt} />
             ))}
           </CommentsHolder>
-          {!posting && (
-            <CommentInput addComment={addComment} />
-          )}
+          <CommentInput addComment={addComment} />
         </Box>
       </Container>
     );

@@ -7,7 +7,7 @@ import {cmtPh, pstCmt} from "../../translations/comments";
 import {useAppContext} from "../../contexts/app";
 
 interface CommentInputProps {
-  addComment: (newCmt: string) => void;
+  addComment: (newCmt: string, cb: () => void) => void;
 }
 
 const CommentInput: React.FC<CommentInputProps> = ({
@@ -26,7 +26,7 @@ const CommentInput: React.FC<CommentInputProps> = ({
         />
         <Button 
           bgColor={dark ? "#f5f4f9" : "#1a1a1a"} dark={dark}
-          onClick={() => addComment(newCmt)}
+          onClick={() => addComment(newCmt, () => setNewCmt(""))}
         >
           {pstCmt[language]}
         </Button>

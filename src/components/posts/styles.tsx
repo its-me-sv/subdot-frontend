@@ -137,7 +137,7 @@ export const FetchButton = styled.span<{dark: boolean;}>`
   align-self: flex-start;
   cursor: pointer;
   color: #1a1a1a;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   ${props => props.dark && "color: #f5f4f9;"}
   &:hover {
     opacity: 0.5;

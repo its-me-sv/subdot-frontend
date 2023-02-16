@@ -65,19 +65,13 @@ const Peek: React.FC<PeekProps> = ({id}) => {
           <CloseIcon onClick={() => setPeek!("")} dark={dark}>
             X
           </CloseIcon>
-          <ProfilePicture
-            alt={`pp of ${id}`}
-            src={getImage(user.picture)}
-          />
-          <JoinedDate dark={dark}>{memSce[language]} {(new Date(user.created)).toDateString()}</JoinedDate>
+          <ProfilePicture alt={`pp of ${id}`} src={getImage(user.picture)} />
+          <JoinedDate dark={dark}>
+            {memSce[language]} {new Date(user.created).toDateString()}
+          </JoinedDate>
           <Details>
             <Section dark={dark}>{username[language]}</Section>
-            <Detail
-              dark={dark}
-              type="text"
-              value={user.username}
-              readOnly
-            />
+            <Detail dark={dark} type="text" value={user.username} readOnly />
           </Details>
           <Details>
             <Section dark={dark}>{name[language]}</Section>
@@ -102,7 +96,7 @@ const Peek: React.FC<PeekProps> = ({id}) => {
             </MetaInfo>
           </MetaDetails>
           <Footer>
-            {account?.address !== id && (
+            {user.username !== "--------" && account?.address !== id && (
               <>
                 <Button
                   bgColor="#0072bb"
@@ -110,24 +104,26 @@ const Peek: React.FC<PeekProps> = ({id}) => {
                 >
                   {footer.msg[language]}
                 </Button>
-                <Button 
-                  bgColor="#005e20" 
+                <Button
+                  bgColor="#005e20"
                   onClick={() => setTransferId!(`${id}:${user.username}`)}
                 >
                   {footer.transfer[language]} $
                 </Button>
               </>
             )}
-            <Button
-              bgColor={dark ? "#f5f4f9" : "#1a1a1a"}
-              dark={dark}
-              onClick={() => {
-                navigate(`/profile/${user.username}`);
-                setPeek!("");
-              }}
-            >
-              {footer.profile[language]}
-            </Button>
+            {user.username !== "--------" && (
+              <Button
+                bgColor={dark ? "#f5f4f9" : "#1a1a1a"}
+                dark={dark}
+                onClick={() => {
+                  navigate(`/profile/${user.username}`);
+                  setPeek!("");
+                }}
+              >
+                {footer.profile[language]}
+              </Button>
+            )}
           </Footer>
         </Box>
       </Container>
