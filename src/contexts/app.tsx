@@ -5,11 +5,10 @@ import React, {
   useContext,
   useState,
   useEffect,
-  useRef,
-  useCallback
 } from "react";
-import { REST_API } from "../utils/constants";
+import toast from "react-hot-toast";
 
+import { REST_API } from "../utils/constants";
 import {PostComment, WalletAccount, AdvertInfo} from "../utils/types";
 
 interface AppContextInterface {
@@ -121,6 +120,14 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
     useEffect(() => {
         axios.get(`${REST_API}/advert/`).then(({ data }) => {
           setAdvert(data);
+        });
+        const connectionReq = axios.get(`${REST_API.slice(0, -3)}`);
+        toast.promise(connectionReq, {
+            loading: "Connecting to Subdot",
+            success: "Successfully connected to Subdot",
+            error: "Unable to connect to Subdot"
+        }, {
+            id: "subdot-server-connect"
         });
     }, []);
 

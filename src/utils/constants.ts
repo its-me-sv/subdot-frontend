@@ -1,4 +1,6 @@
-export const REST_API: string = "http://192.168.29.97:5000/api";
+export const REST_API: string = process.env.NODE_ENV === "development" 
+? "http://192.168.29.97:5000/api"
+: "https://subdot-backend.onrender.com/api";
 
 export const DICE_BEAR: string = "https://api.dicebear.com/5.x/identicon/svg?seed=subdot";
 
