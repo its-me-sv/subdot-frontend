@@ -50,7 +50,7 @@ const App: React.FC<AppProps> = () => {
 
   return (
     <div className={loggedIn ? "app-container" : ""}>
-      <Toaster position="top-center" />
+      <Toaster position="top-right" />
       {loading && <Loader />}
       {showTerms && <TermsPolicies />}
       {settingsOpen && <Settings />}

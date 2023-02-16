@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import toast from "react-hot-toast";
 
 import {Container, StickyButton} from "./styles";
 import {Button} from "../../utils/styles";
@@ -25,30 +26,59 @@ const Posts: React.FC<PostsProps> = ({
     const {account, spaceId: currSpaceId} = useUserContext();
     const {api} = useSubsocial();
     const [userPosts, setUserPosts] = useState<Array<string>>([]);
+    const [fetching, setFetching] = useState<boolean>(false);
 
     const fetchData = async () => {
-      if (!api) return;
-      if (home) {
-        if (!account?.address) return;
-        const response = await gqlClient.query({
-          query: getFeedQuery(account.address)
-        });
-        setUserPosts(response.data.posts.map(({ id }: { id: string }) => id));
-      } else {
-        let spaceId = currSpaceId;
-        if (spcId) {
-          spaceId = +spcId;
-        } else {
-          if (!accountId) return;
-          if (accountId !== account?.address) {
-            const profile = await api.base.findProfileSpace(accountId);
-            if (!profile) return;
-            spaceId = +profile.struct.id.toString();
+      if (!api || fetching) return;
+      const postsPromise = new Promise(async (resolve, reject) => {
+        try {
+          setFetching(true);
+          if (home) {
+            if (!account?.address) {
+              setFetching(false);
+              return reject();
+            }
+            const response = await gqlClient.query({
+              query: getFeedQuery(account.address)
+            });
+            setUserPosts(response.data.posts.map(({ id }: { id: string }) => id));
+            setFetching(false);
+            resolve(true);
+          } else {
+            let spaceId = currSpaceId;
+            if (spcId) {
+              spaceId = +spcId;
+            } else {
+              if (!accountId) {
+                setFetching(false);
+                return reject();
+              }
+              if (accountId !== account?.address) {
+                const profile = await api.base.findProfileSpace(accountId);
+                if (!profile) {
+                  setFetching(false);
+                  return reject();
+                }
+                spaceId = +profile.struct.id.toString();
+              }
+            }
+            const postIds = await api.blockchain.postIdsBySpaceId(spaceId as unknown as AnySpaceId);
+            setUserPosts(postIds.map((v) => v.toString()));
+            setFetching(false);
+            resolve(true);
           }
+        } catch (err) {
+          setFetching(false);
+          return reject();
         }
-        const postIds = await api.blockchain.postIdsBySpaceId(spaceId as unknown as AnySpaceId);
-        setUserPosts(postIds.map((v) => v.toString()));
-      }
+      });
+      toast.promise(postsPromise, {
+        loading: "Fetching posts",
+        success: "Posts fetched",
+        error: "Unable to fetch posts"
+      }, {
+        id: "Posts fetch"
+      });
     };
 
     useEffect(() => {

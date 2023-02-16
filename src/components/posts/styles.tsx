@@ -34,17 +34,22 @@ export const PostContainer = styled.div<{dark: boolean;}>`
 
 export const PostHeader = styled.div`
   display: flex;
-  align-self: flex-start;
-  align-items: center;
-  gap: 0.21rem;
+  width: 36vw;
+  justify-content: space-between;
   img {
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
   }
-  cursor: pointer;
-  &:hover {
-    opacity: 0.5;
+  div {
+    &:first-child {
+      display: flex;
+      gap: 0.21rem;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.5;
+      }
+    }
   }
 `;
 
@@ -126,4 +131,12 @@ export const PostDescription = styled.textarea<{dark: boolean;}>`
     color: #f5f4f9;
     ${BoxShadowDark}
   `}
+`;
+
+export const FetchButton = styled.span`
+  align-self: flex-start;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.5;
+  }
 `;

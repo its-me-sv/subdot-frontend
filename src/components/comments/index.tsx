@@ -132,14 +132,12 @@ const Comments: React.FC<CommentsProps> = ({postId, dark}) => {
     return (
       <Container dark={dark}>
         <Box dark={dark}>
-          {!posting && (
-            <CloseIcon onClick={() => {
-              setComments!([]);
-              setCmtOpen!("");
-            }} 
-              dark={dark}
-            >X</CloseIcon>
-          )}
+          <CloseIcon onClick={() => {
+            setComments!([]);
+            setCmtOpen!("");
+          }} 
+            dark={dark}
+          >X</CloseIcon>
           <Title dark={dark}>{title[language]}</Title>
           <CommentsHolder>
             {comments.length === 0 && <span>No commments yet.</span>}

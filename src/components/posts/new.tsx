@@ -114,11 +114,9 @@ const NewPost: React.FC<NewPostProps> = () => {
     return (
       <Container dark={dark}>
         <Box dark={dark}>
-          {!inProgress && (
-            <CloseIcon onClick={() => setPostMenuOpen!(false)} dark={dark}>
-              X
-            </CloseIcon>
-          )}
+          <CloseIcon onClick={() => setPostMenuOpen!(false)} dark={dark}>
+            X
+          </CloseIcon>
           <Title dark={dark}>{newPost[language]}</Title>
           <InputsForm>
             <InputLabel dark={dark}>{desc[language]}</InputLabel>

@@ -7,12 +7,12 @@ import axios from "axios";
 import {encodeAddress} from "@polkadot/util-crypto";
 
 import {
+  FetchButton,
     FooterItem, PostContainer, 
     PostContent, PostFooter, 
     PostHeader, PostHeaderRight, 
     PostImage, PostTime, 
     PostUsername,
-    StickyButton
 } from './styles';
 import likeIcon from "../../assets/icons/like.png";
 import likedIcon from "../../assets/icons/liked.png";
@@ -21,7 +21,7 @@ import tipIcon from "../../assets/icons/tip.png";
 import {posted} from "../../translations/posts";
 
 import {useAppContext} from "../../contexts/app";
-import { UserPost, User, UserPostMeta, PostComment } from "../../utils/types";
+import { UserPost, User, UserPostMeta } from "../../utils/types";
 import { useSubsocial } from "../../subsocial";
 import { getImage } from "../../utils/utils";
 
@@ -29,7 +29,6 @@ import {defaultUser, defaultPost, defaultUserPostMeta} from "./data";
 import { useUserContext } from "../../contexts/user";
 import { getSigner, getTxEventIds } from "../../subsocial/polkadot";
 import { REST_API } from "../../utils/constants";
-import { CloseIcon } from "../terms-privacy/styles";
 
 interface PostProps {
   postId: string;
@@ -50,29 +49,39 @@ const Post: React.FC<PostProps> = ({postId}) => {
     const [postMeta, setPostMeta] = useState<UserPostMeta>(defaultUserPostMeta);
     const [cmtsLen, setCmtsLen] = useState<number>(0);
     const [likedId, setLikeId] = useState<string>("0");
+    const [fetching, setFetching] = useState<boolean>(false);
 
     const fetchData = async () => {
-        if (!api || !postId || !account) return;
-        const post = await api.findPost({id: postId});
-        if (!post?.content) return;
-        setPost(post.content as unknown as UserPost);
-        setPostMeta({
-            likes: post.struct.upvotesCount,
-            createdAt: post.struct.createdAtTime
-        });
-        setOwnerId(encodeAddress(post.struct.ownerId, 42));
-        api.base.findProfileSpace(post.struct.createdByAccount)
-        .then(profile => {
-            if (!profile?.content) return;
-            setOwner(profile.content as unknown as User);
-        });
-        const cmtIds = await api.blockchain.getReplyIdsByPostId(idToBn(postId));
-        const cmts = await api.findPublicPosts(cmtIds);
-        setCmtsLen(cmts.length);
-        api.blockchain.getReactionIdsByAccount(account.address, [postId])
-        .then((reactData) => {
-          setLikeId(reactData[0].toString());
-        });
+        if (!api || !postId || !account || fetching) return;
+        try {
+          setFetching(true);
+          const post = await api.findPost({id: postId});
+          if (!post?.content) {
+            setFetching(false);
+            return;
+          }
+          setPost(post.content as unknown as UserPost);
+          setPostMeta({
+              likes: post.struct.upvotesCount,
+              createdAt: post.struct.createdAtTime
+          });
+          setOwnerId(encodeAddress(post.struct.ownerId, 42));
+          api.base.findProfileSpace(post.struct.createdByAccount)
+          .then(profile => {
+              if (!profile?.content) return;
+              setOwner(profile.content as unknown as User);
+          });
+          const cmtIds = await api.blockchain.getReplyIdsByPostId(idToBn(postId));
+          const cmts = await api.findPublicPosts(cmtIds);
+          setCmtsLen(cmts.length);
+          api.blockchain.getReactionIdsByAccount(account.address, [postId])
+          .then((reactData) => {
+            setLikeId(reactData[0].toString());
+          });
+          setFetching(false);
+        } catch (err) {
+          setFetching(false);
+        }
     };
 
     const toggleLike = async () => {
@@ -151,19 +160,22 @@ const Post: React.FC<PostProps> = ({postId}) => {
 
     return (
       <PostContainer dark={dark}>
-        <StickyButton>
-          <CloseIcon onClick={fetchData} dark={dark} title="Refetch data">
-            ↩️
-          </CloseIcon>
-        </StickyButton>
-        <PostHeader onClick={() => navigate(`/profile/${owner.username}`)}>
-          <img alt={`pp of ${owner.username}`} src={getImage(owner.picture)} />
-          <PostHeaderRight dark={dark}>
-            <PostUsername>{owner.username}</PostUsername>
-            <PostTime>
-              {posted[language]} {format(new Date(postMeta.createdAt))}
-            </PostTime>
-          </PostHeaderRight>
+        <PostHeader>
+          <div onClick={() => navigate(`/profile/${owner.username}`)}>
+            <img
+              alt={`pp of ${owner.username}`}
+              src={getImage(owner.picture)}
+            />
+            <PostHeaderRight dark={dark}>
+              <PostUsername>{owner.username}</PostUsername>
+              <PostTime>
+                {posted[language]} {format(new Date(postMeta.createdAt))}
+              </PostTime>
+            </PostHeaderRight>
+          </div>
+          <FetchButton onClick={fetchData} title="Refetch data">
+            {fetching ? " " : "↩️"}
+          </FetchButton>
         </PostHeader>
         <PostContent dark={dark}>{post.description}</PostContent>
         {post.picture.length > 0 && (
@@ -178,10 +190,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
             />
             {postMeta.likes > 0 && <span>{postMeta.likes}</span>}
           </FooterItem>
-          <FooterItem
-            dark={dark}
-            onClick={() => setCmtOpen!(postId)}
-          >
+          <FooterItem dark={dark} onClick={() => setCmtOpen!(postId)}>
             <img alt="comment" src={cmtIcon} />
             {cmtsLen > 0 && <span>{cmtsLen}</span>}
           </FooterItem>
