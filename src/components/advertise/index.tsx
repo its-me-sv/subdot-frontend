@@ -26,7 +26,7 @@ import { dummyLink, dummyPicture } from "../../data/advert";
 interface AdvertiseProps {}
 
 const Advertise: React.FC<AdvertiseProps> = () => {
-    const {setAdvertMenuOpen, language, dark, setAdvert, timeOut} = useAppContext();
+    const {setAdvertMenuOpen, language, dark, setAdvert} = useAppContext();
     const {account} = useUserContext();
     const {api} = useSubsocial();
     const [lnk, setLnk] = useState<string>(dummyLink);
@@ -72,10 +72,6 @@ const Advertise: React.FC<AdvertiseProps> = () => {
             expires: (new Date(Date.now() + (60000 * durt))).toISOString()
           });
           setAdvert!(data);
-          timeOut!.current = setTimeout(
-            () => setAdvert!(null),
-            Date.now() + 60000 * durt
-          );
           setAdvertMenuOpen!(false);
           resolve(true);
         } catch (err) {

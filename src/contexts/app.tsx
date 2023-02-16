@@ -5,7 +5,8 @@ import React, {
   useContext,
   useState,
   useEffect,
-  useRef
+  useRef,
+  useCallback
 } from "react";
 import { REST_API } from "../utils/constants";
 
@@ -31,7 +32,6 @@ interface AppContextInterface {
   lowBalance: boolean;
   overlap: boolean;
   advert: AdvertInfo | null;
-  timeOut?: React.MutableRefObject<NodeJS.Timeout | null>;
   resetAppContext?: () => void;
   setLoggedIn?: React.Dispatch<React.SetStateAction<boolean>>;
   setShowTerms?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -100,7 +100,6 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
     const [lowBalance, setLowBalance] = useState<boolean>(defaultState.lowBalance);
     const [overlap, setOverlap] = useState<boolean>(defaultState.overlap);
     const [advert, setAdvert] = useState<AdvertInfo | null>(defaultState.advert);
-    const timeOut = useRef<NodeJS.Timeout | null>(null);
 
     const resetAppContext = () => {
         setShowTerms!(false);
@@ -122,10 +121,6 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
     useEffect(() => {
         axios.get(`${REST_API}/advert/`).then(({ data }) => {
           setAdvert(data);
-          if (data === null) return;
-          const diff = new Date(data.expires).getTime() - new Date().getTime();
-          if (diff < 1) setAdvert(null);
-          else timeOut.current = setTimeout(() => setAdvert(null), diff);
         });
     }, []);
 
@@ -151,7 +146,6 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
             lowBalance, setLowBalance,
             overlap, setOverlap,
             advert, setAdvert,
-            timeOut
         }}>
             {children}
         </AppContext.Provider>

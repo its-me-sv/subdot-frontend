@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import {AdvertContainer, AdvertImage} from "./styles";
 
@@ -7,7 +7,19 @@ import {useAppContext} from "../../contexts/app";
 interface AdvertProps {}
 
 const Advert: React.FC<AdvertProps> = () => {
-    const {dark, advert} = useAppContext();
+    const {dark, advert, setAdvert} = useAppContext();
+
+    useEffect(() => {
+        if (!advert) return;
+        console.log("called", new Date(advert.expires).toLocaleTimeString());
+        setTimeout(
+            () => {
+                console.log("executed");
+                setAdvert!(null);
+            },
+            new Date(advert.expires).getTime() - Date.now()
+        );
+    }, [advert]);
 
     return (
         <AdvertContainer>
