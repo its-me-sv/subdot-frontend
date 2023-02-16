@@ -44,7 +44,20 @@ const Transfer: React.FC<TransferProps> = ({accountId}) => {
           if (!signer) return reject();
           await transferTx.signAsync(account.address, {signer});
           await getTxEventIds(transferTx);
-          await axios.put(`${REST_API}/user/incr-rp/${account.address}/1`);
+          axios.put(`${REST_API}/user/incr-rp/${account.address}/1`);
+          const {partialFee} = await transferTx.paymentInfo(account.address);
+          axios.post(`${REST_API}/transaction/new`, {
+            accountId: account.address,
+            desc: "Transfer / Tipped to an user",
+            kind: false,
+            amount: +(partialFee.toNumber() / BALANCE_DIVISOR).toPrecision(3),
+          });
+          axios.post(`${REST_API}/transaction/new`, {
+            accountId: recipientId,
+            desc: "Recieved Transfer / Tip from an user",
+            kind: true,
+            amount: +(amt * BALANCE_DIVISOR).toPrecision(3),
+          });
           setReputation!(prev => prev + 1);
           resolve(true);
         } catch (err) {

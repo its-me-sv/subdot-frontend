@@ -6,7 +6,7 @@ import {encodeAddress} from "@polkadot/util-crypto";
 import {User, WalletAccount} from "../utils/types";
 import {useSubsocial} from "../subsocial";
 import {useAppContext} from "./app";
-import { REST_API } from "../utils/constants";
+import { BALANCE_DIVISOR, REST_API } from "../utils/constants";
 import { getSigner, getTxEventIds } from "../subsocial/polkadot";
 
 interface UserContextInterface {
@@ -108,6 +108,15 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
                 if (!signer) return reject();
                 await followTx.signAsync(account.address, { signer });
                 await getTxEventIds(followTx);
+                const {partialFee} = await followTx.paymentInfo(account.address);
+                axios.post(`${REST_API}/transaction/new`, {
+                  accountId: account.address,
+                  desc: "Followed a user",
+                  kind: false,
+                  amount: +(
+                    partialFee.toNumber() / BALANCE_DIVISOR
+                  ).toPrecision(3),
+                });
                 toast.success("Account has been follwed");
                 axios.put(`${REST_API}/user/incr-rp/${id}/1`);
                 resolve(true);
@@ -142,6 +151,13 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
             if (!signer) return reject();
             await followTx.signAsync(account.address, { signer });
             await getTxEventIds(followTx);
+            const {partialFee} = await followTx.paymentInfo(account.address);
+            axios.post(`${REST_API}/transaction/new`, {
+              accountId: account.address,
+              desc: "Unfollowed a user",
+              kind: false,
+              amount: +(partialFee.toNumber() / BALANCE_DIVISOR).toPrecision(3),
+            });
             toast.success("Account has been unfollwed");
             resolve(true);
           } catch (err) {

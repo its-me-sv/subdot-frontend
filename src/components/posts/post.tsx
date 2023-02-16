@@ -28,7 +28,7 @@ import { getImage } from "../../utils/utils";
 import {defaultUser, defaultPost, defaultUserPostMeta} from "./data";
 import { useUserContext } from "../../contexts/user";
 import { getSigner, getTxEventIds } from "../../subsocial/polkadot";
-import { REST_API } from "../../utils/constants";
+import { BALANCE_DIVISOR, REST_API } from "../../utils/constants";
 
 interface PostProps {
   postId: string;
@@ -98,6 +98,13 @@ const Post: React.FC<PostProps> = ({postId}) => {
             if (!likeTxIds) return reject();
             setLikeId(likeTxIds[1]);
             axios.put(`${REST_API}/user/incr-rp/${onwerId}/1`);
+            const {partialFee} = await likeTx.paymentInfo(account.address);
+            axios.post(`${REST_API}/transaction/new`, {
+              accountId: account.address,
+              desc: "Liked a post",
+              kind: false,
+              amount: +(partialFee.toNumber() / BALANCE_DIVISOR).toPrecision(3),
+            });
             setPostMeta(prevMeta => ({
               ...prevMeta,
               likes: prevMeta.likes + 1
@@ -131,6 +138,13 @@ const Post: React.FC<PostProps> = ({postId}) => {
             await disLikeTx.signAsync(account.address, { signer });
             await getTxEventIds(disLikeTx);
             setLikeId("0");
+            const {partialFee} = await disLikeTx.paymentInfo(account.address);
+            axios.post(`${REST_API}/transaction/new`, {
+              accountId: account.address,
+              desc: "Removed like from a post",
+              kind: false,
+              amount: +(partialFee.toNumber() / BALANCE_DIVISOR).toPrecision(3),
+            });
             setPostMeta((prevMeta) => ({
               ...prevMeta,
               likes: prevMeta.likes - 1,

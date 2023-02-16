@@ -6,7 +6,7 @@ import {IpfsContent} from "@subsocial/api/substrate/wrappers";
 import { useAppContext } from "../../contexts/app";
 import { useSubsocial } from "../../subsocial";
 import { name as name1, username as username1 } from "../../translations/peek";
-import { DICE_BEAR, REST_API } from "../../utils/constants";
+import { BALANCE_DIVISOR, DICE_BEAR, REST_API } from "../../utils/constants";
 import { Button } from "../../utils/styles";
 import {getTxEventIds, getSigner} from "../../subsocial/polkadot";
 
@@ -87,10 +87,17 @@ const NewAccount: React.FC<NewAccountProps> = ({account}) => {
             const profileTx = substrateApi.tx.profiles.setProfile(spaceTxIds[0]);
             await profileTx.signAsync(account.address, { signer });
             await getTxEventIds(profileTx);
+            const {partialFee} = await profileTx.paymentInfo(account.address);
             setUser!(newUser);
             axios.post(`${REST_API}/user/new-account`, {
               ...newUser,
               accountId: account.address
+            });
+            axios.post(`${REST_API}/transaction/new`, {
+              accountId: account.address,
+              desc: "Created account",
+              kind: false,
+              amount: +(partialFee.toNumber() / BALANCE_DIVISOR).toPrecision(3),
             });
             resolve(true);
           } catch (err) {

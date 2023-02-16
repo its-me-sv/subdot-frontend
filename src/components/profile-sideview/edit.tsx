@@ -12,7 +12,7 @@ import { ProfileEditContainer } from "./styles";
 import {name as name1, username as username1} from "../../translations/peek";
 import { useSubsocial } from "../../subsocial";
 import axios from "axios";
-import { REST_API } from "../../utils/constants";
+import { BALANCE_DIVISOR, REST_API } from "../../utils/constants";
 import { User } from "../../utils/types";
 import { useUserContext } from "../../contexts/user";
 import { getSigner, getTxEventIds } from "../../subsocial/polkadot";
@@ -91,6 +91,13 @@ const ProfileEdit: React.FC<ProfileEditProps> = ({
             if (!signer) return reject();
             await spaceTx.signAsync(address, {signer});
             await getTxEventIds(spaceTx);
+            const {partialFee} = await spaceTx.paymentInfo(address);
+            axios.post(`${REST_API}/transaction/new`, {
+              accountId: address,
+              desc: "Updated profile",
+              kind: false,
+              amount: +(partialFee.toNumber() / BALANCE_DIVISOR).toPrecision(3),
+            });
             setCurrUser!(updatedUser);
             setter(updatedUser);
             axios.put(`${REST_API}/user/user-edit/${address}`, {

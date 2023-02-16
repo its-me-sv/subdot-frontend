@@ -26,7 +26,7 @@ import { useUserContext } from "../../contexts/user";
 import { IpfsContent } from "@subsocial/api/substrate/wrappers";
 import { getSigner, getTxEventIds } from "../../subsocial/polkadot";
 import axios from "axios";
-import { REST_API } from "../../utils/constants";
+import { BALANCE_DIVISOR, REST_API } from "../../utils/constants";
 
 interface NewPostProps {}
 
@@ -84,7 +84,14 @@ const NewPost: React.FC<NewPostProps> = () => {
           }
           await postTx.signAsync(account.address, {signer});
           await getTxEventIds(postTx);
-          await axios.put(`${REST_API}/user/incr-rp/${account.address}/1`);
+          axios.put(`${REST_API}/user/incr-rp/${account.address}/1`);
+          const {partialFee} = await postTx.paymentInfo(account.address);
+          axios.post(`${REST_API}/transaction/new`, {
+            accountId: account.address,
+            desc: "Shared a post",
+            kind: false,
+            amount: +(partialFee.toNumber() / BALANCE_DIVISOR).toPrecision(3),
+          });
           setInProgress(false);
           return resolve(true);
         } catch (err) {
