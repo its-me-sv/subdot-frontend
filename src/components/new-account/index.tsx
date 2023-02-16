@@ -81,6 +81,7 @@ const NewAccount: React.FC<NewAccountProps> = ({account}) => {
           try {
             const signer = await getSigner(account.address);
             if (!signer) return reject();
+            await spaceTx.signAsync(account.address, { signer });
             const spaceTxIds = await getTxEventIds(spaceTx);
             if (!spaceTxIds.length) return reject();
             setSpaceId!(+spaceTxIds[0]);
