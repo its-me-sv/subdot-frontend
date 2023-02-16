@@ -41,7 +41,7 @@ const App: React.FC<AppProps> = () => {
     postMenuOpen, txOpen,
     loading, setLoading,
     newAccount, cmtOpen,
-    lowBalance
+    lowBalance, dark
   } = useAppContext();
 
   useEffect(() => {
@@ -62,7 +62,7 @@ const App: React.FC<AppProps> = () => {
             {advertMenuOpen && <Advertise />}
             {explore.length > 2 && <Results />}
             {peek.length > 0 && <Peek id={peek} />}
-            {cmtOpen.length > 0 && <Comments />}
+            {cmtOpen.length > 0 && <Comments dark={dark} postId={cmtOpen} />}
             {transferId.length > 0 && <Transfer accountId={transferId} />}
             {postMenuOpen && <NewPost />}
             {txOpen && <Transactions />}

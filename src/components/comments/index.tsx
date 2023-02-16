@@ -1,5 +1,9 @@
-import React, {useState} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import toast from "react-hot-toast";
+import axios from "axios";
+import { IpfsContent } from "@subsocial/api/substrate/wrappers";
+import { idToBn } from "@subsocial/utils";
+import { encodeAddress } from "@polkadot/util-crypto";
 
 import {Container, Box, CloseIcon, Title} from "../terms-privacy/styles";
 import {CommentsHolder} from "./styles";
@@ -10,24 +14,60 @@ import CommentInput from "./input";
 
 import {useAppContext} from "../../contexts/app";
 import { useSubsocial } from "../../subsocial";
-import { IpfsContent } from "@subsocial/api/substrate/wrappers";
 import { getSigner, getTxEventIds } from "../../subsocial/polkadot";
 import { useUserContext } from "../../contexts/user";
-import axios from "axios";
 import { BALANCE_DIVISOR, REST_API } from "../../utils/constants";
 
-interface CommentsProps {}
+interface CommentsProps {
+  postId: string;
+  dark: boolean
+}
 
-const Comments: React.FC<CommentsProps> = () => {
+interface PostComment {
+  creator: string;
+  createdAt: number;
+  id: string;
+  body: string;
+}
+
+const Comments: React.FC<CommentsProps> = ({postId, dark}) => {
     const {
       setCmtOpen, language, 
-      dark, comments: cmts, 
-      setComments, cmtOpen: postId,
       setLowBalance
     } = useAppContext();
     const {api} = useSubsocial();
     const {account} = useUserContext();
     const [posting, setPosting] = useState<boolean>(false);
+    const [comments, setComments] = useState<Array<PostComment>>([]);
+    const fetching = useRef<boolean>(false);
+
+    const fetchData = async () => {
+      if (!api || !postId || fetching.current) return;
+      const cmtsPromise = new Promise(async (resolve, reject) => {
+        try {
+          fetching.current = true;
+          const cmtIds = await api.blockchain.getReplyIdsByPostId(idToBn(postId));
+          const cmts = await api.findPublicPosts(cmtIds);
+          const prettyCmts = cmts.map((cmt) => ({
+            creator: encodeAddress(cmt.struct.createdByAccount, 42),
+            createdAt: cmt.struct.createdAtTime,
+            id: cmt.struct.id,
+            body: cmt.content?.body || "",
+          }));
+          setComments(prettyCmts);
+          fetching.current = false;
+          resolve(true);
+        } catch (err) {
+          fetching.current = false;
+          reject();
+        }
+      });
+      toast.promise(cmtsPromise, {
+        loading: "Fetching comments",
+        success: "Comments fetched",
+        error: "Unable to fetch comments"
+      });
+    };
 
     const addComment = (newCmt: string) => {
       if (!api || !account || !postId) return;
@@ -59,7 +99,7 @@ const Comments: React.FC<CommentsProps> = () => {
             kind: false,
             amount: +(partialFee.toNumber() / BALANCE_DIVISOR).toPrecision(3),
           });
-          setComments!([...cmts, {
+          setComments([...comments, {
             creator: account.address,
             createdAt: Date.now(),
             body: newCmt,
@@ -85,6 +125,10 @@ const Comments: React.FC<CommentsProps> = () => {
       });
     };
 
+    useEffect(() => {
+      fetchData();
+    }, [api, postId]);
+
     return (
       <Container dark={dark}>
         <Box dark={dark}>
@@ -98,8 +142,8 @@ const Comments: React.FC<CommentsProps> = () => {
           )}
           <Title dark={dark}>{title[language]}</Title>
           <CommentsHolder>
-            {cmts.length === 0 && <span>No commments yet.</span>}
-            {[...cmts].reverse().map((cmt) => (
+            {comments.length === 0 && <span>No commments yet.</span>}
+            {[...comments].reverse().map((cmt) => (
               <Comment key={cmt.id} comment={cmt} />
             ))}
           </CommentsHolder>

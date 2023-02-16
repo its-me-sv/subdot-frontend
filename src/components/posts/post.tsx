@@ -38,7 +38,7 @@ interface PostProps {
 const Post: React.FC<PostProps> = ({postId}) => {
     const navigate = useNavigate();
     const {
-        setComments: setCurrCmts, setTransferId,
+        setTransferId,
         language, dark, setCmtOpen
     } = useAppContext();
     const {api} = useSubsocial();
@@ -47,7 +47,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
     const [owner, setOwner] = useState<User>(defaultUser);
     const [onwerId, setOwnerId] = useState<string>("");
     const [postMeta, setPostMeta] = useState<UserPostMeta>(defaultUserPostMeta);
-    const [comments, setComments] = useState<Array<PostComment>>([]);
+    const [cmtsLen, setCmtsLen] = useState<number>(0);
     const [likedId, setLikeId] = useState<string>("0");
 
     const fetchData = async () => {
@@ -67,13 +67,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
         });
         const cmtIds = await api.blockchain.getReplyIdsByPostId(idToBn(postId));
         const cmts = await api.findPublicPosts(cmtIds);
-        const prettyCmts = cmts.map((cmt) => ({
-          creator: encodeAddress(cmt.struct.createdByAccount, 42),
-          createdAt: cmt.struct.createdAtTime,
-          id: cmt.struct.id,
-          body: cmt.content?.body || "",
-        }));
-        setComments(prettyCmts);
+        setCmtsLen(cmts.length);
         api.blockchain.getReactionIdsByAccount(account.address, [postId])
         .then((reactData) => {
           setLikeId(reactData[0].toString());
@@ -165,13 +159,10 @@ const Post: React.FC<PostProps> = ({postId}) => {
           </FooterItem>
           <FooterItem
             dark={dark}
-            onClick={() => {
-              setCurrCmts!(comments);
-              setCmtOpen!(postId);
-            }}
+            onClick={() => setCmtOpen!(postId)}
           >
             <img alt="comment" src={cmtIcon} />
-            {comments.length > 0 && <span>{comments.length}</span>}
+            {cmtsLen > 0 && <span>{cmtsLen}</span>}
           </FooterItem>
           <FooterItem
             dark={dark}
