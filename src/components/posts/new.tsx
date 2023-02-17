@@ -83,7 +83,7 @@ const NewPost: React.FC<NewPostProps> = () => {
             return reject();
           }
           await postTx.signAsync(account.address, {signer});
-          getTxEventIds(postTx);
+          await getTxEventIds(postTx);
           axios.put(`${REST_API}/user/incr-rp/${account.address}/1`);
           const {partialFee} = await postTx.paymentInfo(account.address);
           axios.post(`${REST_API}/transaction/new`, {

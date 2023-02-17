@@ -142,7 +142,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
             const signer = await getSigner(account.address);
             if (!signer) return reject();
             await disLikeTx.signAsync(account.address, { signer });
-            getTxEventIds(disLikeTx);
+            await getTxEventIds(disLikeTx);
             setLikeId("0");
             const {partialFee} = await disLikeTx.paymentInfo(account.address);
             axios.post(`${REST_API}/transaction/new`, {
