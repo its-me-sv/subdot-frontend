@@ -18,7 +18,7 @@ export const TransactionContainer = styled.div<{dark: boolean;}>`
     align-items: center;
     border-radius: 0.14rem;
     padding: 0.14rem;
-    width: 42vw;
+    width: 36rem;
     img {
         width: 3rem;
         height: 3rem;
