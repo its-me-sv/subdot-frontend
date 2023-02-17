@@ -66,6 +66,10 @@ const Transfer: React.FC<TransferProps> = ({accountId}) => {
             `Recieved ${amt} SOON from ${user?.username}`
           );
           setReputation!(prev => prev + 1);
+          toast("Recieved 1 RP for Transfering / Tiping a user", {
+            icon: "🔔",
+            id: "tipper"
+          });
           resolve(true);
         } catch (err) {
           if ((err = "INSUFFICIENT BALANCE")) {

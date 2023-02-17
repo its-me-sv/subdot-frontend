@@ -12,6 +12,9 @@ import {useUserContext} from "./user";
 interface ServerToClientEvents {
   newAdvert?: (advert: AdvertInfo) => void;
   newTx?: (msg: string) => void;
+  notify?: (msg: string) => void;
+  follow?: (accId: string) => void;
+  unfollow?: (accId: string) => void;
 }
 
 interface ClientToServerEvents {
@@ -19,6 +22,9 @@ interface ClientToServerEvents {
   leaveRoom?: (roomId: string) => void;
   newAdvert?: (advert: AdvertInfo) => void;
   newTx?: (roomId: string, msg: string) => void;
+  notify?: (roomId: string, msg: string) => void;
+  follow?: (roomId: string, accId: string) => void;
+  unfollow?: (roomId: string, accId: string) => void;
 }
 
 interface SocketContextInterface {
@@ -37,7 +43,7 @@ export const useSocketContext = () => useContext(SocketContext);
 
 export const SocketContextProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
   const {setAdvert} = useAppContext();
-  const {account} = useUserContext();
+  const {account, setFollowers} = useUserContext();
   const [socket, setSocket] =
     useState<Socket<ServerToClientEvents, ClientToServerEvents>>(defaultState.socket);
 
@@ -45,6 +51,14 @@ export const SocketContextProvider: React.FC<{children: React.ReactNode}> = ({ c
     socket.emit("joinRoom", "advert");
     socket.on("newAdvert", setAdvert);
     socket.on("newTx", (msg) => toast(msg, { icon: "💸", id: msg }));
+    socket.on("notify", (msg) => toast(msg, { icon: "🔔", id: msg }));
+    socket.on("follow", accId => {
+      toast("You have a new follower (+1 RP)", { icon: "🔔", id: accId });
+      setFollowers!(prev => [...prev, accId]);
+    });
+    socket.on("unfollow", accId => {
+      setFollowers!(prev => [...prev.filter(v => v !== accId)]);
+    });
   }, []);
 
   useEffect(() => {

@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {format} from "timeago.js";
 import {useNavigate} from "react-router-dom";
-import { toast } from "react-hot-toast";
-import { idToBn } from "@subsocial/utils";
+import {toast} from "react-hot-toast";
+import {idToBn} from "@subsocial/utils";
 import axios from "axios";
 import {encodeAddress} from "@polkadot/util-crypto";
 
@@ -21,14 +21,16 @@ import tipIcon from "../../assets/icons/tip.png";
 import {posted} from "../../translations/posts";
 
 import {useAppContext} from "../../contexts/app";
-import { UserPost, User, UserPostMeta } from "../../utils/types";
-import { useSubsocial } from "../../subsocial";
-import { getImage } from "../../utils/utils";
+import {useUserContext} from "../../contexts/user";
+import {useSocketContext} from "../../contexts/socket";
+
+import {UserPost, User, UserPostMeta} from "../../utils/types";
+import {useSubsocial} from "../../subsocial";
+import {getImage} from "../../utils/utils";
 
 import {defaultUser, defaultPost, defaultUserPostMeta} from "./data";
-import { useUserContext } from "../../contexts/user";
-import { getSigner, getTxEventIds } from "../../subsocial/polkadot";
-import { BALANCE_DIVISOR, REST_API } from "../../utils/constants";
+import {getSigner, getTxEventIds} from "../../subsocial/polkadot";
+import {BALANCE_DIVISOR, REST_API} from "../../utils/constants";
 
 interface PostProps {
   postId: string;
@@ -42,7 +44,8 @@ const Post: React.FC<PostProps> = ({postId}) => {
         setLowBalance
     } = useAppContext();
     const {api} = useSubsocial();
-    const {account, setReputation} = useUserContext();
+    const {account, setReputation, user} = useUserContext();
+    const {socket} = useSocketContext();
     const [post, setPost] = useState<UserPost>(defaultPost);
     const [owner, setOwner] = useState<User>(defaultUser);
     const [onwerId, setOwnerId] = useState<string>("");
@@ -98,6 +101,11 @@ const Post: React.FC<PostProps> = ({postId}) => {
             if (!likeTxIds) return reject();
             setLikeId(likeTxIds[1]);
             axios.put(`${REST_API}/user/incr-rp/${onwerId}/1`);
+            socket.emit(
+              "notify", 
+              onwerId, 
+              `${user?.username} liked your post (+1 RP)`
+            );
             const {partialFee} = await likeTx.paymentInfo(account.address);
             axios.post(`${REST_API}/transaction/new`, {
               accountId: account.address,
