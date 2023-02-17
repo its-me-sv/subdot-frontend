@@ -1,6 +1,6 @@
 export const REST_API: string = process.env.NODE_ENV === "development" 
 ? "http://192.168.29.97:5000/api"
-: "https://subdot-backend.onrender.com/api";
+: "https://firm-affinity-378110.el.r.appspot.com/api";
 
 export const SOCKET: string = REST_API.slice(0, -4);
 
