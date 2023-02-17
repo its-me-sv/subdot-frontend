@@ -54,7 +54,7 @@ const Transactions: React.FC<TransactionProps> = () => {
             X
           </CloseIcon>
           <Title dark={dark}>{title[language]}</Title>
-          <TransactionsHolder>
+          <TransactionsHolder dark={dark}>
             {txs.length === 0 && <span>No transaction has been made by the account</span>}
             {txs.map((tx) => (
               <Transaction key={tx._id} tx={tx} />

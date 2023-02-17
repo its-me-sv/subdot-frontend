@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {BoxShadow, BoxShadowDark} from "../../utils/styles";
 
-export const TransactionsHolder = styled.div`
+export const TransactionsHolder = styled.div<{dark: boolean;}>`
     display: flex;
     flex-direction: column;
     /* width: 21rem; */
@@ -10,6 +10,9 @@ export const TransactionsHolder = styled.div`
     overflow-y: auto;
     padding: 0.14rem 0.14rem;
     margin-bottom: 0.42rem;
+    font-family: Inter;
+    color: #1a1a1a;
+    ${props => props.dark && `color: #f5f4f9;`}
 `;
 
 export const TransactionContainer = styled.div<{dark: boolean;}>`

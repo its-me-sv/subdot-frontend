@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {BoxShadow, BoxShadowDark} from "../../utils/styles";
 
-export const Container = styled.div`
+export const Container = styled.div<{dark: boolean}>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,6 +9,9 @@ export const Container = styled.div`
   overflow-y: auto;
   padding: 1rem;
   padding-bottom: 2.4rem;
+  font-family: Inter;
+  color: #1a1a1a;
+  ${props => props.dark && `color: #f5f4f9;`}
 `;
 
 export const StickyButton = styled.div<{ abs?: boolean }>`

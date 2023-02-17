@@ -86,7 +86,7 @@ const Posts: React.FC<PostsProps> = ({
     }, [api, accountId, spcId]);
     
     return (
-      <Container>
+      <Container dark={dark}>
         <StickyButton abs>
           {(account?.address === accountId) && (
             <Button
