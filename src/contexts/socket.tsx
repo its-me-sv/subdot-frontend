@@ -15,6 +15,7 @@ interface ServerToClientEvents {
   notify?: (msg: string) => void;
   follow?: (accId: string) => void;
   unfollow?: (accId: string) => void;
+  incrRP?: (rp: number) => void;
 }
 
 interface ClientToServerEvents {
@@ -25,6 +26,7 @@ interface ClientToServerEvents {
   notify?: (roomId: string, msg: string) => void;
   follow?: (roomId: string, accId: string) => void;
   unfollow?: (roomId: string, accId: string) => void;
+  incrRP?: (roomId: string, rp: string) => void;
 }
 
 interface SocketContextInterface {
@@ -43,7 +45,7 @@ export const useSocketContext = () => useContext(SocketContext);
 
 export const SocketContextProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
   const {setAdvert} = useAppContext();
-  const {account, setFollowers} = useUserContext();
+  const {account, setFollowers, setReputation} = useUserContext();
   const [socket, setSocket] =
     useState<Socket<ServerToClientEvents, ClientToServerEvents>>(defaultState.socket);
 
@@ -59,6 +61,7 @@ export const SocketContextProvider: React.FC<{children: React.ReactNode}> = ({ c
     socket.on("unfollow", accId => {
       setFollowers!(prev => [...prev.filter(v => v !== accId)]);
     });
+    socket.on("incrRP", rp => setReputation!(prev => prev + rp));
   }, []);
 
   useEffect(() => {

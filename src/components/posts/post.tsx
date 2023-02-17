@@ -44,7 +44,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
         setLowBalance
     } = useAppContext();
     const {api} = useSubsocial();
-    const {account, setReputation, user} = useUserContext();
+    const {account, user} = useUserContext();
     const {socket} = useSocketContext();
     const [post, setPost] = useState<UserPost>(defaultPost);
     const [owner, setOwner] = useState<User>(defaultUser);
@@ -106,6 +106,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
               onwerId, 
               `${user?.username} liked your post (+1 RP)`
             );
+            socket.emit("incrRP", onwerId, String(1));
             const {partialFee} = await likeTx.paymentInfo(account.address);
             axios.post(`${REST_API}/transaction/new`, {
               accountId: account.address,
@@ -117,9 +118,6 @@ const Post: React.FC<PostProps> = ({postId}) => {
               ...prevMeta,
               likes: prevMeta.likes + 1
             }));
-            if (onwerId === account.address) {
-              setReputation!(prev => prev + 1);
-            }
             resolve(true);
           } catch (err) {
             if ((err = "INSUFFICIENT BALANCE")) {
