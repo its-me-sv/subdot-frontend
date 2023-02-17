@@ -7,7 +7,8 @@ import {menu} from "../../translations/header";
 
 import {useAppContext} from "../../contexts/app";
 import {useUserContext} from "../../contexts/user";
-import { getImage } from "../../utils/utils";
+import {useSocketContext} from "../../contexts/socket";
+import {getImage} from "../../utils/utils";
 
 interface MenuProps {}
 
@@ -19,7 +20,8 @@ const Menu: React.FC<MenuProps> = () => {
         setAdvertMenuOpen, setTxOpen,
         language, dark
     } = useAppContext();
-    const {logoutUser, user} = useUserContext();
+    const {logoutUser, user, account} = useUserContext();
+    const {socket} = useSocketContext();
 
     const closeMenu = () => {
         setMenuOpen!(false);
@@ -31,8 +33,10 @@ const Menu: React.FC<MenuProps> = () => {
     };
 
     const logout = () => {
-        logoutUser!();
-        closeMenu();
+      if (!account) return;
+      socket.emit("leaveRoom", account.address);
+      logoutUser!();
+      closeMenu();
     };
 
     const takeToRP = () => {

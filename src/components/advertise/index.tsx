@@ -18,10 +18,18 @@ import {InputContainer, InputLabel, Input, InputsForm} from "./styles";
 
 import {useAppContext} from "../../contexts/app";
 import {useUserContext} from "../../contexts/user";
-import { useSubsocial } from "../../subsocial";
-import { ADVERT_BENEFICIAR, ADVERT_COST, BALANCE_DIVISOR, REST_API } from "../../utils/constants";
-import { getSigner, getTxEventIds } from "../../subsocial/polkadot";
-import { dummyLink, dummyPicture } from "../../data/advert";
+import {useSubsocial} from "../../subsocial";
+import {useSocketContext} from "../../contexts/socket";
+
+import {
+  ADVERT_BENEFICIAR,
+  ADVERT_COST,
+  BALANCE_DIVISOR,
+  REST_API,
+} from "../../utils/constants";
+
+import {getSigner, getTxEventIds} from "../../subsocial/polkadot";
+import {dummyLink, dummyPicture} from "../../data/advert";
 
 interface AdvertiseProps {}
 
@@ -29,6 +37,7 @@ const Advertise: React.FC<AdvertiseProps> = () => {
     const {setAdvertMenuOpen, language, dark, setAdvert} = useAppContext();
     const {account} = useUserContext();
     const {api} = useSubsocial();
+    const {socket} = useSocketContext();
     const [lnk, setLnk] = useState<string>(dummyLink);
     const [pict, setPict] = useState<string>(dummyPicture);
     const [durt, setDurt] = useState<number>(1)
@@ -71,6 +80,7 @@ const Advertise: React.FC<AdvertiseProps> = () => {
             link: lnk,
             expires: (new Date(Date.now() + (60000 * durt))).toISOString()
           });
+          socket.emit("newAdvert", data);
           setAdvert!(data);
           setAdvertMenuOpen!(false);
           resolve(true);

@@ -1,13 +1,21 @@
-import React, {createContext, useContext, useState} from "react";
+import React, {createContext, useContext, useEffect, useState} from "react";
 import {Socket} from "socket.io-client";
 import {io} from "socket.io-client";
 
 import {SOCKET} from "../utils/constants";
+import {AdvertInfo} from "../utils/types";
 
-interface ServerToClientEvents {}
+import {useAppContext} from "./app";
+import {useUserContext} from "./user";
+
+interface ServerToClientEvents {
+  newAdvert?: (advert: AdvertInfo) => void;
+}
 
 interface ClientToServerEvents {
   joinRoom?: (roomId: string) => void;
+  leaveRoom?: (roomId: string) => void;
+  newAdvert?: (advert: AdvertInfo) => void;
 }
 
 interface SocketContextInterface {
@@ -25,8 +33,20 @@ export const SocketContext =
 export const useSocketContext = () => useContext(SocketContext);
 
 export const SocketContextProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
+  const {setAdvert} = useAppContext();
+  const {account} = useUserContext();
   const [socket, setSocket] =
     useState<Socket<ServerToClientEvents, ClientToServerEvents>>(defaultState.socket);
+
+  useEffect(() => {
+    socket.emit("joinRoom", "advert");
+    socket.on("newAdvert", setAdvert);
+  }, []);
+
+  useEffect(() => {
+    if (!account) return;
+    socket.emit("joinRoom", account.address);
+  }, [account]);
 
   return (
     <SocketContext.Provider

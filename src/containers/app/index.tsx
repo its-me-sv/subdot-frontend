@@ -30,7 +30,6 @@ import Header from "../../components/header";
 
 // providers
 import {useAppContext} from "../../contexts/app";
-import {useSocketContext} from "../../contexts/socket";
 
 interface AppProps {}
 
@@ -46,7 +45,6 @@ const App: React.FC<AppProps> = () => {
     lowBalance, dark,
     overlap
   } = useAppContext();
-  const {socket, setSocket} = useSocketContext();
 
   useEffect(() => {
     setTimeout(() => setLoading!(false), 2400);

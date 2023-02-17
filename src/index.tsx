@@ -18,11 +18,11 @@ root.render(
   <React.StrictMode>
     <AppContextProvider>
       <SubsocialContextProvider>
-        <SocketContextProvider>
-          <UserContextProvider>
+        <UserContextProvider>
+          <SocketContextProvider>
             <App />
-          </UserContextProvider>
-        </SocketContextProvider>
+          </SocketContextProvider>
+        </UserContextProvider>
       </SubsocialContextProvider>
     </AppContextProvider>
   </React.StrictMode>
