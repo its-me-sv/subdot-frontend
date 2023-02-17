@@ -24,12 +24,13 @@ import Transactions from "../../components/transactions";
 import Loader from "../../components/loader";
 import NewAccount from "../../components/new-account";
 import LowBalance from "../../components/low-balance";
+import Comments from "../../components/comments";
+import Overlap from "../../components/overlap";
 import Header from "../../components/header";
 
 // providers
 import {useAppContext} from "../../contexts/app";
-import Comments from "../../components/comments";
-import Overlap from "../../components/overlap";
+import {useSocketContext} from "../../contexts/socket";
 
 interface AppProps {}
 
@@ -45,9 +46,10 @@ const App: React.FC<AppProps> = () => {
     lowBalance, dark,
     overlap
   } = useAppContext();
+  const {socket, setSocket} = useSocketContext();
 
   useEffect(() => {
-    setTimeout(() => setLoading!(false), 3000);
+    setTimeout(() => setLoading!(false), 2400);
   }, []);
 
   return (
