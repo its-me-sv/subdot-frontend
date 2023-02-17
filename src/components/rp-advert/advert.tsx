@@ -11,12 +11,8 @@ const Advert: React.FC<AdvertProps> = () => {
 
     useEffect(() => {
         if (!advert) return;
-        console.log("called", new Date(advert.expires).toLocaleTimeString());
         setTimeout(
-            () => {
-                console.log("executed");
-                setAdvert!(null);
-            },
+            () => setAdvert!(null),
             new Date(advert.expires).getTime() - Date.now()
         );
     }, [advert]);
