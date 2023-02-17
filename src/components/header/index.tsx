@@ -40,10 +40,12 @@ const Header: React.FC<HeaderProps> = () => {
     }, [api, account]);
 
     const goHome = () => {
+      setExplore!("");
       navigate("/home");
     };
 
     const goToRP = () => {
+      setExplore!("");
       navigate("/rp");
     };
 
