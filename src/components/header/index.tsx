@@ -16,7 +16,7 @@ interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = () => {
     const navigate = useNavigate();
-    const {setMenuOpen, menuOpen, dark} = useAppContext();
+    const {setMenuOpen, menuOpen, dark, setExplore} = useAppContext();
     const {user, reputation, account} = useUserContext();
     const {api} = useSubsocial();
     const [balance, setBalance] = useState<string>("");
@@ -48,6 +48,7 @@ const Header: React.FC<HeaderProps> = () => {
     };
 
     const openMenu = () => {
+      setExplore!("");
       setMenuOpen!(true);
     };
 

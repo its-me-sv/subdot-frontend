@@ -1,5 +1,6 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
+import toast from "react-hot-toast";
 
 import {Container, MenuItem} from "./styles";
 import {MenuLogo} from "../header/styles";
@@ -18,7 +19,7 @@ const Menu: React.FC<MenuProps> = () => {
         setMenuOpen, setShowTerms, 
         setSettingsOpen,
         setAdvertMenuOpen, setTxOpen,
-        language, dark
+        language, dark, advert
     } = useAppContext();
     const {logoutUser, user, account} = useUserContext();
     const {socket} = useSocketContext();
@@ -55,8 +56,12 @@ const Menu: React.FC<MenuProps> = () => {
     };
 
     const openAdvertise = () => {
-        setAdvertMenuOpen!(true);
-        closeMenu();
+      if (advert) {
+        toast.error("Cannot advertise at the moment");
+        return;
+      }
+      setAdvertMenuOpen!(true);
+      closeMenu();
     };
 
     const openTransactions = () => {
