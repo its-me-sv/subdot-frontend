@@ -110,7 +110,7 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
                 const signer = await getSigner(account.address);
                 if (!signer) return reject();
                 await followTx.signAsync(account.address, { signer });
-                await getTxEventIds(followTx);
+                getTxEventIds(followTx);
                 const {partialFee} = await followTx.paymentInfo(account.address);
                 axios.post(`${REST_API}/transaction/new`, {
                   accountId: account.address,
@@ -153,7 +153,7 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
             const signer = await getSigner(account.address);
             if (!signer) return reject();
             await followTx.signAsync(account.address, { signer });
-            await getTxEventIds(followTx);
+            getTxEventIds(followTx);
             const {partialFee} = await followTx.paymentInfo(account.address);
             axios.post(`${REST_API}/transaction/new`, {
               accountId: account.address,
