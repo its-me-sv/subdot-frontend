@@ -14,9 +14,10 @@ import { BALANCE_DIVISOR, REST_API } from "../../utils/constants";
 import {useAppContext} from "../../contexts/app";
 import {Button} from "../../utils/styles";
 import {Title, Footer} from "./styles";
-import { useSubsocial } from "../../subsocial";
-import { getSigner, getTxEventIds } from "../../subsocial/polkadot";
-import { useUserContext } from "../../contexts/user";
+import {useSubsocial} from "../../subsocial";
+import {getSigner, getTxEventIds} from "../../subsocial/polkadot";
+import {useUserContext} from "../../contexts/user";
+import {useSocketContext} from "../../contexts/socket";
 
 interface TransferProps {
     accountId: string;
@@ -26,7 +27,8 @@ const Transfer: React.FC<TransferProps> = ({accountId}) => {
     const {setTransferId, language, dark} = useAppContext();
     const [amt, setAmt] = useState<number>(0);
     const {api} = useSubsocial();
-    const {account, setReputation} = useUserContext();
+    const {account, setReputation, user} = useUserContext();
+    const {socket} = useSocketContext();
     const [recipientId, username] = accountId.split(":");
 
     const handleTransfer = async () => {
@@ -43,7 +45,7 @@ const Transfer: React.FC<TransferProps> = ({accountId}) => {
           const signer = await getSigner(account.address);
           if (!signer) return reject();
           await transferTx.signAsync(account.address, {signer});
-          await getTxEventIds(transferTx);
+          getTxEventIds(transferTx);
           axios.put(`${REST_API}/user/incr-rp/${account.address}/1`);
           const {partialFee} = await transferTx.paymentInfo(account.address);
           axios.post(`${REST_API}/transaction/new`, {
@@ -56,8 +58,13 @@ const Transfer: React.FC<TransferProps> = ({accountId}) => {
             accountId: recipientId,
             desc: "Recieved Transfer / Tip from an user",
             kind: true,
-            amount: +(amt * BALANCE_DIVISOR).toPrecision(3),
+            amount: amt,
           });
+          socket.emit(
+            "newTx",
+            recipientId,
+            `Recieved ${amt} SOON from ${user?.username}`
+          );
           setReputation!(prev => prev + 1);
           resolve(true);
         } catch (err) {
