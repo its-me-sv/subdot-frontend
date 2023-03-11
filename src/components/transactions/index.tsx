@@ -4,7 +4,7 @@ import axios from "axios";
 
 import {Container, Box, CloseIcon, Title} from "../terms-privacy/styles";
 import {TransactionsHolder} from "./styles";
-import {title} from "../../translations/transactions";
+import {title, noTx, loadMore} from "../../translations/transactions";
 
 import Transaction from "./transaction";
 
@@ -55,7 +55,7 @@ const Transactions: React.FC<TransactionProps> = () => {
           </CloseIcon>
           <Title dark={dark}>{title[language]}</Title>
           <TransactionsHolder dark={dark}>
-            {txs.length === 0 && <span>No transaction has been made by the account</span>}
+            {txs.length === 0 && <span>{noTx[language]}</span>}
             {txs.map((tx) => (
               <Transaction key={tx._id} tx={tx} />
             ))}
@@ -66,7 +66,7 @@ const Transactions: React.FC<TransactionProps> = () => {
                   dark={dark}
                   onClick={fetchData}
                 >
-                  Load more
+                  {loadMore[language]}
                 </Button>
               </FetchButton>
             )}
