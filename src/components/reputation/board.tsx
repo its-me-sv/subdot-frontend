@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 
 import {BoardContainer, FetchButton} from "./styles";
 import { TopRPUser } from "../../utils/types";
+import {loadMore} from "../../translations/rp";
 
 import User from "./user";
 import { REST_API } from "../../utils/constants";
@@ -16,7 +17,7 @@ const Board: React.FC<BoardProps> = () => {
     const [users, setUsers] = useState<Array<TopRPUser>>([]);
     const [over, setOver] = useState<boolean>(false);
     const fetched = useRef<boolean>(false);
-    const {dark} = useAppContext();
+    const {dark, language} = useAppContext();
 
     const fetchData = () => {
         if (over) return;
@@ -50,7 +51,7 @@ const Board: React.FC<BoardProps> = () => {
                     dark={dark}
                     onClick={fetchData}
                 >
-                Load more
+                {loadMore[language]}
                 </Button>
             </FetchButton>
         )}

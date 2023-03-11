@@ -56,13 +56,28 @@ export const info = {
         "प्रति 10 अनुयायी",
         "por 10 seguidores",
         "Pour 10 abonnés"
+    ],
+    accCrt: [
+        "Account creation",
+        "创建帐户",
+        "खाता निर्माण",
+        "Creación de cuenta",
+        "Création de compte"
     ]
 };
 
-export const viewMore: Array<string> = [
+export const viewAll: Array<string> = [
     "VIEW ALL",
     "查看全部",
     "सभी को देखें",
     "VER TODO",
     "VOIR TOUT"
+];
+
+export const loadMore: Array<string> = [
+    "Load more",
+    "装载更多",
+    "और लोड करें",
+    "Carga más",
+    "Charger plus"
 ];
