@@ -16,6 +16,13 @@ import {
   descPh, pict,
   post
 } from "../../translations/posts";
+import {
+  fileBig,
+  emptyFlds,
+  hugeDesc,
+  noFunds,
+  newPostTrans
+} from "../../translations/toast";
 
 import {Button} from "../../utils/styles";
 
@@ -43,7 +50,7 @@ const NewPost: React.FC<NewPostProps> = () => {
       e.preventDefault();
       if (!e.target.files) return;
       let file = e.target.files[0];
-      if (file.size > 4404019) return toast.error("File too big. Max size 4MB");
+      if (file.size > 4404019) return toast.error(fileBig[language]);
       let reader = new FileReader();
       reader.onloadend = () => {
         setPp({
@@ -56,8 +63,8 @@ const NewPost: React.FC<NewPostProps> = () => {
 
     const handleSubmit = async () => {
       if (!api || !account || !user) return;
-      if (!description.length) return toast.error("Field empty");
-      if (description.length > 500) return toast.error("Max description length - 500 characters");
+      if (!description.length) return toast.error(emptyFlds[language]);
+      if (description.length > 500) return toast.error(hugeDesc[language]);
       const newPostPromise = new Promise(async (resolve, reject) => {
         try {
 
@@ -96,9 +103,7 @@ const NewPost: React.FC<NewPostProps> = () => {
           return resolve(true);
         } catch (err) {
           if ((err = "INSUFFICIENT BALANCE")) {
-            toast.error(
-              "Your account has insufficient funds to complete this transaction"
-            );
+            toast.error(noFunds[language]);
             setLowBalance!(true);
           }
           setInProgress(false);
@@ -106,9 +111,9 @@ const NewPost: React.FC<NewPostProps> = () => {
         }
       });
       toast.promise(newPostPromise, {
-        loading: "Uploading post",
-        success: "Posted shared",
-        error: "Unable to upload post"
+        loading: newPostTrans.loading[language],
+        success: newPostTrans.success[language],
+        error: newPostTrans.error[language]
       });
       newPostPromise
       .then(() => {

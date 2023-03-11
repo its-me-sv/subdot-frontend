@@ -20,6 +20,7 @@ import { BALANCE_DIVISOR, REST_API } from "../../utils/constants";
 import { User } from "../../utils/types";
 import { useUserContext } from "../../contexts/user";
 import { getSigner, getTxEventIds } from "../../subsocial/polkadot";
+import { createAcc, emptyFlds, fileBig, noFunds, updateAcc } from "../../translations/toast";
 
 interface ProfileEditProps {
   original: User;
@@ -46,7 +47,7 @@ const ProfileEdit: React.FC<ProfileEditProps> = ({
       e.preventDefault();
       if (!e.target.files) return;
       let file = e.target.files[0];
-      if (file.size > 4404019) return toast.error("File too big. Max size 4MB");
+      if (file.size > 4404019) return toast.error(fileBig[language]);
       let reader = new FileReader();
       reader.onloadend = () => {
         setPp({
@@ -60,16 +61,16 @@ const ProfileEdit: React.FC<ProfileEditProps> = ({
     const handleUpdate = async () => {
         if (!api) return;
         if (!name.length || !username.length || !status.length) {
-          return toast.error("Field(s) empty");
+          return toast.error(emptyFlds[language]);
         }
-        if (username.length > 10) return toast.error("Username too long");
-        if (status.length > 84) return toast.error("Status too long");
-        if (name.length > 42) return toast.error("Name too long");
+        if (username.length > 10) return toast.error(createAcc.unameLong[language]);
+        if (status.length > 84) return toast.error(createAcc.statLong[language]);
+        if (name.length > 42) return toast.error(createAcc.nameLong[language]);
         if (/^[a-zA-Z0-9]+$/.test(username) === false)
-        return toast.error("Invalid username");
+        return toast.error(createAcc.unameInvalid[language]);
         if (username !== original.username) {
             const {presence} = (await axios.get(`${REST_API}/user/username/${username}`)).data;
-            if (presence) return toast.error("Username already in use");
+            if (presence) return toast.error(createAcc.unameUsed[language]);
         }
         
         setInProgress(true);
@@ -111,18 +112,16 @@ const ProfileEdit: React.FC<ProfileEditProps> = ({
             resolve(true);
           } catch (err) {
             if ((err = "INSUFFICIENT BALANCE")) {
-              toast.error(
-                "Your account has insufficient funds to complete this transaction"
-              );
+              toast.error(noFunds[language]);
               setLowBalance!(true);
             }
             return reject();
           }
         });
         toast.promise(updateProfilePromise, {
-          loading: "Updating profile",
-          success: "Profile has been updated successfully",
-          error: "Unable to update profile",
+          loading: updateAcc.loading[language],
+          success: updateAcc.success[language],
+          error: updateAcc.error[language],
         });
         updateProfilePromise
           .then(() => {

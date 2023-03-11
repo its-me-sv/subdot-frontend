@@ -18,6 +18,7 @@ import {useSubsocial} from "../../subsocial";
 import {getSigner, getTxEventIds} from "../../subsocial/polkadot";
 import {useUserContext} from "../../contexts/user";
 import {useSocketContext} from "../../contexts/socket";
+import { noFunds, transferTrans } from "../../translations/toast";
 
 interface TransferProps {
     accountId: string;
@@ -33,8 +34,8 @@ const Transfer: React.FC<TransferProps> = ({accountId}) => {
 
     const handleTransfer = async () => {
       if (!api || !account) return;
-      if (!amt) return toast.error("Invalid amount");
-      if (recipientId === account.address) return toast.error("Cannot tip yourself");
+      if (!amt) return toast.error(transferTrans.amtInval[language]);
+      if (recipientId === account.address) return toast.error(transferTrans.tipSelf[language]);
       const substr = await api.substrateApi;
       const transferTx = substr.tx.balances.transfer(
         encodeAddress(recipientId, 28), 
@@ -74,17 +75,15 @@ const Transfer: React.FC<TransferProps> = ({accountId}) => {
           resolve(true);
         } catch (err) {
           if ((err = "INSUFFICIENT BALANCE")) {
-            toast.error(
-              "Your account has insufficient funds to complete this transaction"
-            );
+            toast.error(noFunds[language]);
           }
           reject();
         }
       });
       toast.promise(transferPromise, {
-        loading: `Transferring ${amt} SOON`,
-        success: "Transfer success",
-        error: "Unable to transfer"
+        loading: `${transferTrans.transfer.loading[language]} ${amt} SOON`,
+        success: transferTrans.transfer.success[language],
+        error: transferTrans.transfer.error[language],
       });
       transferPromise
       .finally(() => {

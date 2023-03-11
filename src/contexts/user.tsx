@@ -8,6 +8,7 @@ import {useSubsocial} from "../subsocial";
 import {useAppContext} from "./app";
 import { BALANCE_DIVISOR, REST_API } from "../utils/constants";
 import { getSigner, getTxEventIds } from "../subsocial/polkadot";
+import { noFunds, userTrans } from "../translations/toast";
 
 interface UserContextInterface {
   account: WalletAccount | null;
@@ -49,7 +50,11 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
     const [following, setFollowing] = useState<Array<string>>(defaultState.following);
     const [spaceId, setSpaceId] = useState<number>(defaultState.spaceId);
     const {api} = useSubsocial();
-    const {setNewAccount, setLoggedIn, setLowBalance, setOverlap} = useAppContext();
+    const {
+      language, setNewAccount, 
+      setLoggedIn, setLowBalance, 
+      setOverlap
+    } = useAppContext();
 
     const loginUser = async (acc: WalletAccount, cb: () => void) => {
         if (!api) return;
@@ -68,7 +73,7 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
         }
         const loginPromise = new Promise(async (resolve, reject) => {
             if (!profile?.content) {
-                toast.error("Error logging in");
+                toast.error(userTrans.loginErr[language]);
                 return reject();
             }
             setSpaceId(+profile.struct.id.toString());
@@ -84,9 +89,9 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
             return resolve(true);
         });
         toast.promise(loginPromise, {
-            loading: "Fetching account details",
-            success: "Login success",
-            error: "Unable to log in"
+          loading: userTrans.loggingIn.loading[language],
+          success: userTrans.loggingIn.success[language],
+          error: userTrans.loggingIn.error[language],
         });
     };
 
@@ -98,7 +103,7 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
         setFollowers([]);
         setFollowing([]);
         setSpaceId(0);
-        toast.success("Account logout success");
+        toast.success(userTrans.logout[language]);
     };
 
     const followUser = (id: string, cb: () => void) => {
@@ -125,18 +130,16 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
                 resolve(true);
             } catch (err) {
                 if ((err = "INSUFFICIENT BALANCE")) {
-                  toast.error(
-                    "Your account has insufficient funds to complete this transaction"
-                  );
+                  toast.error(noFunds[language]);
                   setLowBalance!(true);
                 }
                 return reject();
             }
         });
         toast.promise(followPromise, {
-            loading: "Following user",
-            success: "User followed",
-            error: "Couldn't follow user"
+          loading: userTrans.flwInit.loading[language],
+          success: userTrans.flwInit.success[language],
+          error: userTrans.flwInit.error[language],
         });
         followPromise.then(() => {
             setFollowing([...following, id]);
@@ -161,22 +164,20 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
               kind: false,
               amount: +(partialFee.toNumber() / BALANCE_DIVISOR).toPrecision(3),
             });
-            toast.success("Account has been unfollwed");
+            toast.success(userTrans.unflwOk[language]);
             resolve(true);
           } catch (err) {
             if ((err = "INSUFFICIENT BALANCE")) {
-              toast.error(
-                "Your account has insufficient funds to complete this transaction"
-              );
+              toast.error(noFunds[language]);
               setLowBalance!(true);
             }
             return reject();
           }
         });
         toast.promise(unFollowPromise, {
-          loading: "Unfollowing user",
-          success: "User unfollowed",
-          error: "Couldn't unfollow user",
+          loading: userTrans.unflwInit.loading[language],
+          success: userTrans.unflwInit.success[language],
+          error: userTrans.unflwInit.error[language],
         });
         unFollowPromise.then(() => {
           setFollowing([...following.filter((v) => v != id)]);

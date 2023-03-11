@@ -31,6 +31,7 @@ import {getImage} from "../../utils/utils";
 import {defaultUser, defaultPost, defaultUserPostMeta} from "./data";
 import {getSigner, getTxEventIds} from "../../subsocial/polkadot";
 import {BALANCE_DIVISOR, REST_API} from "../../utils/constants";
+import { noFunds, postDislike, postLike } from "../../translations/toast";
 
 interface PostProps {
   postId: string;
@@ -121,18 +122,16 @@ const Post: React.FC<PostProps> = ({postId}) => {
             resolve(true);
           } catch (err) {
             if ((err = "INSUFFICIENT BALANCE")) {
-              toast.error(
-                "Your account has insufficient funds to complete this transaction"
-              );
+              toast.error(noFunds[language]);
               setLowBalance!(true);
             }
             return reject();
           }
         });
         toast.promise(likePromise, {
-          success: "Post liked",
-          error: "Unable to like post",
-          loading: "Adding like to post"
+          success: postLike.success[language],
+          error: postLike.error[language],
+          loading: postLike.loading[language]
         });
       } else {
         const substrateApi = await api.blockchain.api;
@@ -158,18 +157,16 @@ const Post: React.FC<PostProps> = ({postId}) => {
             resolve(true);
           } catch (err) {
             if ((err = "INSUFFICIENT BALANCE")) {
-              toast.error(
-                "Your account has insufficient funds to complete this transaction"
-              );
+              toast.error(noFunds[language]);
               setLowBalance!(true);
             }
             return reject();
           }
         });
         toast.promise(disLikePromise, {
-          success: "Post like removed",
-          error: "Unable to remove post like",
-          loading: "Removing post like",
+          success: postDislike.success[language],
+          error: postDislike.error[language],
+          loading: postDislike.loading[language]
         });
       }
     };

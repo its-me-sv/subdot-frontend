@@ -190,6 +190,78 @@ export const cmtPost = {
     ]
 };
 
+export const newPostTrans = {
+    loading: [
+        "Uploading post",
+        "上传帖子",
+        "पोस्ट अपलोड कर रहा है",
+        "Subiendo publicación",
+        "Téléchargement de la publication"
+    ],
+    success: [
+        "Post shared",
+        "帖子分享",
+        "पोस्ट साझा किया",
+        "Publicación compartida",
+        "Message partagé"
+    ],
+    error: [
+        "Unable to upload post",
+        "无法上传帖子",
+        "पोस्ट अपलोड करने में असमर्थ",
+        "No se puede cargar la publicación",
+        "Impossible de télécharger le message"
+    ]
+};
+
+export const postLike = {
+    success: [
+        "Post liked",
+        "帖子喜欢",
+        "पोस्ट पसंद आया",
+        "Publicación que le gustó",
+        "Message aimé"
+    ],
+    error: [
+        "Unable to like post",
+        "无法为帖子点赞",
+        "पोस्ट पसंद करने में असमर्थ",
+        "No se puede dar me gusta a la publicación",
+        "Impossible d'aimer le post"
+    ],
+    loading: [
+        "Adding like to post",
+        "添加喜欢的帖子",
+        "पोस्ट करने के लिए लाइक जोड़ना",
+        "Agregar me gusta a la publicación",
+        "Ajout d'un j'aime à la publication"
+    ]
+};
+
+export const postDislike = {
+    success: [
+        "Post like removed",
+        "帖子喜欢已删除",
+        "पोस्ट लाइक हटा दी गई है",
+        "Publicar como eliminado",
+        "Message comme supprimé"
+    ],
+    error: [
+        "Unable to remove post like",
+        "无法删除类似的帖子",
+        "पसंद की पोस्ट को निकालने में असमर्थ",
+        "No se puede eliminar la publicación como",
+        "Impossible de supprimer le message comme"
+    ],
+    loading: [
+        "Removing post like",
+        "删除帖子喜欢",
+        "लाइक पोस्ट हटा रहे हैं",
+        "Eliminando publicación como",
+        "Suppression d'un message comme"
+    ]
+};
+
 export const settings = {
     theme: [
         "Theme toggled",
@@ -266,6 +338,170 @@ export const createAcc = {
     ]
 };
 
+export const updateAcc = {
+    loading: [
+        "Updating profile",
+        "更新资料",
+        "प्रोफ़ाइल अपडेट हो रहा है",
+        "Actualizando perfil",
+        "Mise à jour du profil"
+    ],
+    success: [
+        "Profile has been updated successfully",
+        "配置文件已成功更新",
+        "प्रोफ़ाइल सफलतापूर्वक अपडेट कर दी गई है",
+        "El perfil ha sido actualizado con éxito",
+        "Le profil a été mis à jour avec succès"
+    ],
+    error: [
+        "Unable to update profile",
+        "无法更新个人资料",
+        "प्रोफ़ाइल अपडेट करने में असमर्थ",
+        "No se puede actualizar el perfil",
+        "Impossible de mettre à jour le profil"
+    ]
+};
+
+export const transferTrans = {
+    amtInval: [
+        "Invalid amount",
+        "金额无效",
+        "अवैध राशि",
+        "Monto invalido",
+        "Montant invalide"
+    ],
+    tipSelf: [
+        "Cannot tip yourself",
+        "不能给自己小费",
+        "अपने आप को टिप नहीं कर सकता",
+        "No puedes darte propina",
+        "Vous ne pouvez pas vous donner de pourboire"
+    ],
+    transfer: {
+        loading: [
+            "Transferring",
+            "转移",
+            "स्थानांतरित कर रहा है",
+            "Transferencia",
+            "Transfert"
+        ],
+        success: [
+            "Transfer success",
+            "转账成功",
+            "स्थानांतरण सफलता",
+            "Transferencia exitosa",
+            "Succès du transfert"
+        ],
+        error: [
+            "Unable to transfer",
+            "无法转移",
+            "स्थानांतरित करने में असमर्थ",
+            "No se puede transferir",
+            "Impossible de transférer"
+        ]
+    }
+};
+
+export const userTrans = {
+    loginErr: [
+        "Error logging in",
+        "登录错误",
+        "लॉग इन करने में त्रुटि",
+        "Error al iniciar sesión",
+        "Erreur de connexion"
+    ],
+    loggingIn: {
+        loading: [
+            "Fetching account details",
+            "获取帐户详细信息",
+            "खाते की जानकारी लाई जा रही है",
+            "Obtener detalles de la cuenta",
+            "Récupération des détails du compte"
+        ],
+        success: [
+            "Login success",
+            "登录成功",
+            "लॉगिन की सफलता",
+            "Acceso exitoso",
+            "Connexion réussie"
+        ],
+        error: [
+            "Unable to log in",
+            "无法登入",
+            "लॉगिन करने में असमर्थ",
+            "Incapaz de iniciar sesión",
+            "Connection impossible"
+        ]
+    },
+    logout: [
+        "Account logout success",
+        "账号注销成功",
+        "खाता लॉगआउट सफलता",
+        "Cierre de sesión de cuenta exitoso",
+        "Déconnexion du compte réussie"
+    ],
+    flwOk: [
+        "Account has been follwed",
+        "帐号已被关注",
+        "खाते का पालन किया गया है",
+        "Se ha seguido la cuenta",
+        "Le compte a été suivi"
+    ],
+    flwInit: {
+        loading: [
+            "Following user",
+            "关注用户",
+            "उपयोगकर्ता का अनुसरण करना",
+            "Usuario siguiente",
+            "Utilisateur suivant"
+        ],
+        success: [
+            "User followed",
+            "用户已关注",
+            "उपयोगकर्ता ने अनुसरण किया",
+            "Usuario siguió",
+            "Utilisateur suivi"
+        ],
+        error: [
+            "Couldn't follow user",
+            "无法关注用户",
+            "उपयोगकर्ता का अनुसरण नहीं किया जा सका",
+            "No se pudo seguir usuario",
+            "Impossible de suivre l'utilisateur"
+        ]
+    },
+    unflwOk: [
+        "Account has been unfollwed",
+        "帐户已取消关注",
+        "अकाउंट को अनफॉलो कर दिया गया है",
+        "Se ha dejado de seguir la cuenta",
+        "Le compte n'a pas été suivi"
+    ],
+    unflwInit: {
+        loading: [
+            "Unfollowing user",
+            "取消关注用户",
+            "उपयोगकर्ता का अनुसरण करना बंद करना",
+            "Usuario que deja de seguir",
+            "Utilisateur désabonné"
+        ],
+        success: [
+            "User unfollowed",
+            "用户取消关注",
+            "उपयोगकर्ता ने अनुसरण करना बंद कर दिया",
+            "Usuario no seguid",
+            "Utilisateur non suivi"
+        ],
+        error: [
+            "Couldn't unfollow user",
+            "无法取消关注用户",
+            "उपयोगकर्ता का अनुसरण करना बंद नहीं किया जा सका",
+            "No se pudo dejar de seguir usuario",
+            "Impossible de ne plus suivre l'utilisateur"
+        ]
+    }
+};
+
 export const accNotFnd: Array<string> = [
     "Account not found",
     "找不到帐户",
@@ -312,4 +548,20 @@ export const fileBig: Array<string> = [
     "फ़ाइल बहुत बड़ी है. अधिकतम आकार 4 एमबी",
     "Archivo demasiado grande. Tamaño máximo 4 MB",
     "Fichier trop gros. Taille maximale 4 Mo"
+];
+
+export const hugeDesc: Array<string> = [
+    "Max description length - 500 characters",
+    "最大描述长度 - 500 个字符",
+    "अधिकतम विवरण लंबाई - 500 वर्ण",
+    "Longitud máxima de la descripción: 500 caracteres",
+    "Longueur maximale de la description - 500 caractères"
+];
+
+export const newFollower: Array<string> = [
+    "You have a new follower (+1 RP)",
+    "你有一个新的追随者（+1 RP）",
+    "आपके पास एक नया अनुयायी है (+1 RP)",
+    "Tienes un nuevo seguido (+1 RP)",
+    "Vous avez un nouveau follower (+1 RP)"
 ];

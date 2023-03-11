@@ -8,6 +8,7 @@ import {AdvertInfo} from "../utils/types";
 
 import {useAppContext} from "./app";
 import {useUserContext} from "./user";
+import { newFollower } from "../translations/toast";
 
 interface ServerToClientEvents {
   newAdvert?: (advert: AdvertInfo) => void;
@@ -44,7 +45,7 @@ export const SocketContext =
 export const useSocketContext = () => useContext(SocketContext);
 
 export const SocketContextProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
-  const {setAdvert} = useAppContext();
+  const {setAdvert, language} = useAppContext();
   const {account, setFollowers, setReputation} = useUserContext();
   const [socket, setSocket] =
     useState<Socket<ServerToClientEvents, ClientToServerEvents>>(defaultState.socket);
@@ -55,7 +56,7 @@ export const SocketContextProvider: React.FC<{children: React.ReactNode}> = ({ c
     socket.on("newTx", (msg) => toast(msg, { icon: "💸", id: msg }));
     socket.on("notify", (msg) => toast(msg, { icon: "🔔", id: msg }));
     socket.on("follow", accId => {
-      toast("You have a new follower (+1 RP)", { icon: "🔔", id: accId });
+      toast(newFollower[language], { icon: "🔔", id: accId });
       setFollowers!(prev => [...prev, accId]);
     });
     socket.on("unfollow", accId => {
