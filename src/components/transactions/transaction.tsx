@@ -19,7 +19,9 @@ const Transaction: React.FC<TransactionProps> = ({tx}) => {
           <span>{tx.desc}</span>
           <span>{format(new Date(tx.createdAt))}</span>
         </Meta>
-        <Amount dark={dark}>{tx.kind ? "+" : "-"} {tx.amount} SOON</Amount>
+        <Amount kind={tx.kind}>
+          {tx.kind ? "+" : "-"} {tx.amount} SOON
+        </Amount>
       </TransactionContainer>
     );
 };

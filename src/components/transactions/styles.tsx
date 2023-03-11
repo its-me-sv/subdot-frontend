@@ -51,11 +51,9 @@ export const Meta = styled.div<{dark: boolean;}>`
   }
 `;
 
-export const Amount = styled.span<{dark: boolean;}>`
-    font-family: Inter;
-    font-size: 1.2rem;
-    color: #1a1a1a;
-    ${props => props.dark && `
-      color: #f5f4f9;
-    `}
+export const Amount = styled.span<{ kind: boolean }>`
+  font-family: Inter;
+  font-size: 1.2rem;
+  color: #d0421b;
+  ${(props) => props.kind && `color: #138000`}
 `;
