@@ -87,6 +87,8 @@ export const PostContent = styled.span<{dark: boolean;}>`
 
 export const PostImage = styled.img`
   width: 36vw;
+  max-height: 49vh;
+  object-fit: fill;
   border-radius: 0.14rem;
 `;
 
