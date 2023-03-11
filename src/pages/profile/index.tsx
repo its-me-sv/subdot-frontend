@@ -3,6 +3,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import toast from "react-hot-toast";
 
 import {Container} from '../home/styles';
+import {profilePage} from "../../translations/page-titles";
 
 import Posts from "../../components/posts";
 import FriendsCommunites from "../../components/friends-communities";
@@ -17,7 +18,7 @@ interface ProfilePageProps {}
 const ProfilePage: React.FC<ProfilePageProps> = () => {
   const params = useParams();
   const navigate = useNavigate();
-  const {dark, resetAppContext} = useAppContext();
+  const {dark, resetAppContext, language} = useAppContext();
   const [accountId, setAccountId] = useState<string|undefined>(undefined);
 
   const fetchData = () => {
@@ -34,7 +35,7 @@ const ProfilePage: React.FC<ProfilePageProps> = () => {
   };
 
   useEffect(() => {
-    window.document.title = `${params.id} • Subdot profile`;
+    window.document.title = `${params.id} ${profilePage[language]} • Subdot`;
     fetchData();
   }, [params]);
 

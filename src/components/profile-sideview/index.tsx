@@ -122,7 +122,7 @@ const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
         <Footer>
           <Button
             bgColor="#0072bb"
-            onClick={() => navigate(`/chat?user=${accountId}`)}
+            // onClick={() => navigate(`/chat?user=${accountId}`)}
           >
             {footer.msg[language]}
           </Button>

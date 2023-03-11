@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 
 import {Container} from './styles';
+import {homePage} from "../../translations/page-titles";
 
 import FriendsCommunites from "../../components/friends-communities";
 import Posts from "../../components/posts";
@@ -12,11 +13,11 @@ import {useUserContext} from "../../contexts/user";
 interface HomePageProps {}
 
 const HomePage: React.FC<HomePageProps> = () => {
-  const {resetAppContext, dark} = useAppContext();
+  const {resetAppContext, dark, language} = useAppContext();
   const {account, spaceId} = useUserContext();
 
   useEffect(() => {
-    window.document.title = "Homepage • Subdot";
+    window.document.title = `${homePage[language]} • Subdot`;
     return () => resetAppContext!();
   }, []);
 

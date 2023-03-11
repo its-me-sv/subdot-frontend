@@ -21,6 +21,7 @@ import {
   settings, noAcc,
   caption2
 } from "../../translations/login";
+import {loginPage} from "../../translations/page-titles";
 
 import {useAppContext} from "../../contexts/app";
 import {useUserContext} from "../../contexts/user";
@@ -60,8 +61,8 @@ const LoginPage: React.FC<LoginPageProps> = () => {
   };
 
   useEffect(() => {
-    window.document.title = "Login • Subdot";
-  }, []);
+    window.document.title = `${loginPage[language]} • Subdot`;
+  }, [language]);
 
   return (
     <Container dark={dark}>
