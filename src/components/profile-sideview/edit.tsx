@@ -9,7 +9,11 @@ import { getImage } from "../../utils/utils";
 import { Footer, ProfilePicture, Details, Section, Detail} from "../peek/styles";
 import { ProfileEditContainer } from "./styles";
 
-import {name as name1, username as username1} from "../../translations/peek";
+import {
+  name as name1, 
+  username as username1,
+  editor
+} from "../../translations/peek";
 import { useSubsocial } from "../../subsocial";
 import axios from "axios";
 import { BALANCE_DIVISOR, REST_API } from "../../utils/constants";
@@ -178,11 +182,11 @@ const ProfileEdit: React.FC<ProfileEditProps> = ({
         </Details>
         <Footer>
           {inProgress ? (
-            <span>Account updation in progress</span>
+            <span>{editor.inProcess[language]}</span>
           ) : (
             <>
               <Button bgColor="#e15d5d" onClick={onClose}>
-                CANCEL
+                {editor.cancel[language]}
               </Button>
               {((
                 name !== original.name ||
@@ -191,7 +195,7 @@ const ProfileEdit: React.FC<ProfileEditProps> = ({
                 pp !== null
               ) && (
                 <Button bgColor="#0072bb" onClick={handleUpdate}>
-                    UPDATE ACCOUNT
+                    {editor.updAcc[language]}
                 </Button>
               ))}
             </>

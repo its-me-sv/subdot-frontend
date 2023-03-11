@@ -10,7 +10,7 @@ import {
   Meta, MetaItem,
   Username, Name
 } from "./styles";
-import {memSce, meta, footer} from "../../translations/peek";
+import {memSce, meta, footer, prflEdit} from "../../translations/peek";
 
 import {useAppContext} from "../../contexts/app";
 import {useUserContext} from "../../contexts/user";
@@ -137,7 +137,7 @@ const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
             onClick={handleFollow}
           >
             {following.includes(accountId || "")
-              ? "UNFOLLOW"
+              ? footer.unfollow[language]
               : footer.follow[language]}
           </Button>
         </Footer>
@@ -148,7 +148,7 @@ const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
             dark={dark}
             onClick={() => setEditOpen(true)}
           >
-            EDIT
+            {prflEdit[language]}
           </Button>
         </Footer>
       )}

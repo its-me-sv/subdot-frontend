@@ -81,5 +81,44 @@ export const footer = {
         "का पालन करें",
         "SEGUIR",
         "SUIVRE"
+    ],
+    unfollow: [
+        "UNFOLLOW",
+        "取消关注",
+        "अनफ़ॉलो",
+        "DEJAR DE SEGUIR",
+        "NE PAS SUIVRE"
+    ]
+};
+
+export const prflEdit: Array<string> = [
+    "EDIT",
+    "编辑",
+    "संपादन करना",
+    "EDITAR",
+    "MODIFIER"
+];
+
+export const editor = {
+    cancel: [
+        "CANCEL",
+        "取消",
+        "रद्द करना",
+        "CANCELAR",
+        "ANNULER"
+    ],
+    updAcc: [
+        "UPDATE ACCOUNT",
+        "更新账户",
+        "खाता अद्यतन करें",
+        "ACTUALIZAR CUENTA",
+        "COMPTE MIS À JOUR"
+    ],
+    inProcess: [
+        "Account updation in progress",
+        "正在进行帐户更新",
+        "खाता अपडेशन प्रगति पर है",
+        "Actualización de cuenta en curso",
+        "Mise à jour du compte en cours"
     ]
 };
