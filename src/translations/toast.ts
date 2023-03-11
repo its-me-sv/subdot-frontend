@@ -207,6 +207,65 @@ export const settings = {
     ]
 };
 
+export const createAcc = {
+    unameLong: [
+        "Username too long",
+        "用户名太长",
+        "उपयोगकर्ता नाम बहुत लंबा है",
+        "Nombre de usuario demasiado largo",
+        "Nom d'utilisateur trop long"
+    ],
+    statLong: [
+        "Status too long",
+        "状态太长",
+        "स्थिति बहुत लंबी है",
+        "Estado demasiado larg",
+        "Statut trop long"
+    ],
+    nameLong: [
+        "Name too long",
+        "名字太长",
+        "नाम बहुत लंबा है",
+        "Nombre demasiado larg",
+        "Nom trop long"
+    ],
+    unameInvalid: [
+        "Invalid username",
+        "无效的用户名",
+        "अमान्य उपयोगकर्ता नाम",
+        "Nombre de usuario no válido",
+        "Nom d'utilisateur invalide"
+    ],
+    unameUsed: [
+        "Username already in use",
+        "用户名已被使用",
+        "उपयोगकर्ता का नाम पहले से ही उपयोग में है",
+        "Nombre de usuario ya está en uso",
+        "Nom d'utilisateur déjà utilisé"
+    ],
+    loading: [
+        "Creating profile",
+        "创建配置文件",
+        "प्रोफाइल बनाना",
+        "Creando perfil",
+        "Création de profil"
+    ],
+    success: [
+        "Profile has been created successfully",
+        "配置文件已成功创建",
+        "प्रोफ़ाइल सफलतापूर्वक बना दी गई है",
+        "El perfil ha sido creado con éxito",
+        "Le profil a été créé avec succès"
+    ],
+    error: [
+        "Unable to create profile",
+        "无法创建配置文件",
+        "प्रोफ़ाइल बनाने में असमर्थ",
+        "No se puede crear el perfil",
+        "Impossible de créer le profil"
+    ]
+};
+
 export const accNotFnd: Array<string> = [
     "Account not found",
     "找不到帐户",
@@ -245,4 +304,12 @@ export const cmtLong: Array<string> = [
     "टिप्पणी बहुत लंबी है",
     "Comentario demasiado larg",
     "Commentaire trop long"
+];
+
+export const fileBig: Array<string> = [
+    "File too big. Max size 4MB",
+    "文件太大。最大大小 4MB",
+    "फ़ाइल बहुत बड़ी है. अधिकतम आकार 4 एमबी",
+    "Archivo demasiado grande. Tamaño máximo 4 MB",
+    "Fichier trop gros. Taille maximale 4 Mo"
 ];

@@ -11,6 +11,10 @@ import { Button } from "../../utils/styles";
 import {getTxEventIds, getSigner} from "../../subsocial/polkadot";
 
 import {User, WalletAccount} from "../../utils/types";
+import {
+  fileBig, emptyFlds,
+  createAcc, noFunds
+} from "../../translations/toast";
 import { ProfilePicture, Footer, Details, Section, Detail } from "../peek/styles";
 
 import {Container, Box} from "../terms-privacy/styles";
@@ -35,7 +39,7 @@ const NewAccount: React.FC<NewAccountProps> = ({account}) => {
       e.preventDefault();
       if (!e.target.files) return;
       let file = e.target.files[0];
-      if (file.size > 4404019) return toast.error("File too big. Max size 4MB");
+      if (file.size > 4404019) return toast.error(fileBig[language]);
       let reader = new FileReader();
       reader.onloadend = () => {
         setPp({
@@ -49,15 +53,15 @@ const NewAccount: React.FC<NewAccountProps> = ({account}) => {
     const createAccount = async () => {
         if (!api) return;
         if (!name.length || !username.length || !status.length) {
-          return toast.error("Field(s) empty");
+          return toast.error(emptyFlds[language]);
         }
-        if (username.length > 10) return toast.error("Username too long");
-        if (status.length > 84) return toast.error("Status too long");
-        if (name.length > 42) return toast.error("Name too long");
+        if (username.length > 10) return toast.error(createAcc.unameLong[language]);
+        if (status.length > 84) return toast.error(createAcc.statLong[language]);
+        if (name.length > 42) return toast.error(createAcc.nameLong[language]);
         if (/^[a-zA-Z0-9]+$/.test(username) === false)
-        return toast.error("Invalid username");
+        return toast.error(createAcc.unameInvalid[language]);
         const {presence} = (await axios.get(`${REST_API}/user/username/${username}`)).data;
-        if (presence) return toast.error("Username already in use");
+        if (presence) return toast.error(createAcc.unameUsed[language]);
         
         setInProgress!(true);
         let newUser: User = {
@@ -103,17 +107,15 @@ const NewAccount: React.FC<NewAccountProps> = ({account}) => {
             resolve(true);
           } catch (err) {
             if ((err = "INSUFFICIENT BALANCE")) {
-              toast.error(
-                "Your account has insufficient funds to complete this transaction"
-              );
+              toast.error(noFunds[language]);
             }
             reject();
           }
         });
         toast.promise(createProfilePromise, {
-          loading: "Creating profile",
-          success: "Profile has been created successfully",
-          error: "Unable to create profile"
+          loading: createAcc.loading[language],
+          success: createAcc.success[language],
+          error: createAcc.error[language]
         });
         createProfilePromise
         .then(() => {
