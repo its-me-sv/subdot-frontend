@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import toast from "react-hot-toast";
 
 import {Container, StickyButton} from "./styles";
+import {postFetch} from "../../translations/toast";
 import {Button} from "../../utils/styles";
 import {share} from "../../translations/posts";
 import { gqlClient, getFeedQuery } from "../../utils/graphql";
@@ -73,9 +74,9 @@ const Posts: React.FC<PostsProps> = ({
         }
       });
       toast.promise(postsPromise, {
-        loading: "Fetching posts",
-        success: "Posts fetched",
-        error: "Unable to fetch posts"
+        loading: postFetch.loading[language],
+        success: postFetch.success[language],
+        error: postFetch.error[language]
       }, {
         id: "Posts fetch"
       });

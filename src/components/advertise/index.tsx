@@ -15,6 +15,7 @@ import {
 
 import {Button} from "../../utils/styles";
 import {InputContainer, InputLabel, Input, InputsForm} from "./styles";
+import {emptyFlds, noFunds, advertPost} from "../../translations/toast";
 
 import {useAppContext} from "../../contexts/app";
 import {useUserContext} from "../../contexts/user";
@@ -52,7 +53,7 @@ const Advertise: React.FC<AdvertiseProps> = () => {
 
     const handleSubmit = async () => {
       if (!lnk.length || !pict.length) {
-        return toast.error("Field(s) empty");
+        return toast.error(emptyFlds[language]);
       }
       if (!api || !account) return;
       const substr = await api.substrateApi;
@@ -86,17 +87,15 @@ const Advertise: React.FC<AdvertiseProps> = () => {
           resolve(true);
         } catch (err) {
           if ((err = "INSUFFICIENT BALANCE")) {
-            toast.error(
-              "Your account has insufficient funds to complete this transaction"
-            );
+            toast.error(noFunds[language]);
           }
           reject();
         }
       });
       toast.promise(transferPromise, {
-        loading: "Posting advertisement",
-        success: "Advertisement on Air",
-        error: "Unable to post advertisement"
+        loading: advertPost.loading[language],
+        success: advertPost.success[language],
+        error: advertPost.error[language]
       });
     };
 

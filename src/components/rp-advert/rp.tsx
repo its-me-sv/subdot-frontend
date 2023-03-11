@@ -6,6 +6,7 @@ import axios from "axios";
 import {Button} from "../../utils/styles";
 import {RPContainer, RPItem, RPItemsContainer, RPTitle} from "./styles";
 import {title, viewAll} from "../../translations/rp";
+import {topRpFetch} from "../../translations/toast";
 
 import {useAppContext} from "../../contexts/app";
 import { TopRPUser } from "../../utils/types";
@@ -24,9 +25,9 @@ const RP: React.FC<RPProps> = () => {
       fetched.current = true;
       const rpPromise = axios.get(`${REST_API}/user/rp-5`);
       toast.promise(rpPromise, {
-        loading: "Fetching top RP accounts",
-        success: "Fetched top RP accounts",
-        error: "Unable to fetch top RP accounts"
+        loading: topRpFetch.loading[language],
+        success: topRpFetch.success[language],
+        error: topRpFetch.error[language]
       });
       rpPromise.then(({data}) => setUsers(data));
     }, []);

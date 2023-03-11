@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 
 import { REST_API } from "../utils/constants";
 import {PostComment, WalletAccount, AdvertInfo} from "../utils/types";
+import {sdConnect} from "../translations/toast";
 
 interface AppContextInterface {
   loggedIn: boolean;
@@ -123,9 +124,9 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
         });
         const connectionReq = axios.get(`${REST_API.slice(0, -3)}`);
         toast.promise(connectionReq, {
-            loading: "Connecting to Subdot",
-            success: "Successfully connected to Subdot",
-            error: "Unable to connect to Subdot"
+            loading: sdConnect.loading[language],
+            success: sdConnect.success[language],
+            error: sdConnect.error[language]
         }, {
             id: "subdot-server-connect"
         });

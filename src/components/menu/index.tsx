@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import {Container, MenuItem} from "./styles";
 import {MenuLogo} from "../header/styles";
 import {menu} from "../../translations/header";
+import {noAdvert} from "../../translations/toast";
 
 import {useAppContext} from "../../contexts/app";
 import {useUserContext} from "../../contexts/user";
@@ -57,7 +58,7 @@ const Menu: React.FC<MenuProps> = () => {
 
     const openAdvertise = () => {
       if (advert) {
-        toast.error("Cannot advertise at the moment");
+        toast.error(noAdvert[language]);
         return;
       }
       setAdvertMenuOpen!(true);

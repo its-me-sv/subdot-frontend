@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 
 import {Container} from '../home/styles';
 import {profilePage} from "../../translations/page-titles";
+import {accNotFnd} from "../../translations/toast";
 
 import Posts from "../../components/posts";
 import FriendsCommunites from "../../components/friends-communities";
@@ -27,7 +28,7 @@ const ProfilePage: React.FC<ProfilePageProps> = () => {
     .then(({data}) => {
       if (data.presence) setAccountId(data.accountId);
       else {
-        toast.error("Account not found");
+        toast.error(accNotFnd[language]);
         navigate("/home");
       }
     })

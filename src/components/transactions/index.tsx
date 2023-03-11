@@ -5,6 +5,7 @@ import axios from "axios";
 import {Container, Box, CloseIcon, Title} from "../terms-privacy/styles";
 import {TransactionsHolder} from "./styles";
 import {title, noTx, loadMore} from "../../translations/transactions";
+import {txsFetch} from "../../translations/toast";
 
 import Transaction from "./transaction";
 
@@ -31,9 +32,9 @@ const Transactions: React.FC<TransactionProps> = () => {
         { skip: txs.length }
       );
       toast.promise(txsPromise, {
-        loading: "Fetching transactions",
-        success: "Transactions fetched",
-        error: "Unable to fetch transactions"
+        loading: txsFetch.loading[language],
+        success: txsFetch.success[language],
+        error: txsFetch.error[language]
       });
       txsPromise.then(({data}) => {
         setTxs([...txs, ...data]);

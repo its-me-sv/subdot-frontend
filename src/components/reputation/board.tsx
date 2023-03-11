@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import {BoardContainer, FetchButton} from "./styles";
 import { TopRPUser } from "../../utils/types";
 import {loadMore} from "../../translations/rp";
+import {topRpFetch} from "../../translations/toast";
 
 import User from "./user";
 import { REST_API } from "../../utils/constants";
@@ -23,9 +24,9 @@ const Board: React.FC<BoardProps> = () => {
         if (over) return;
         const usersPromise = axios.post(`${REST_API}/user/rp`, {skip: users.length});
         toast.promise(usersPromise, {
-            loading: "Fetching top RP users",
-            success: "Fetched top RP users",
-            error: "Unable to fetch top RP users",
+            loading: topRpFetch.loading[language],
+            success: topRpFetch.success[language],
+            error: topRpFetch.error[language],
         });
         usersPromise.then(({data}) => {
             setUsers([...users, ...data]);
