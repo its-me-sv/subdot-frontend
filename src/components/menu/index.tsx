@@ -77,7 +77,7 @@ const Menu: React.FC<MenuProps> = () => {
           src={getImage(user?.picture ?? "")}
         />
         <MenuItem dark={dark} onClick={takeToRP}>
-          RP BOARD
+          {menu.rpBoard[language]}
         </MenuItem>
         <MenuItem dark={dark} onClick={takeToProfile}>
           {menu.profile[language]}

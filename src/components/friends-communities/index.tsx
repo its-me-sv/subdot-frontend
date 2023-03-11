@@ -3,6 +3,10 @@ import {encodeAddress} from "@polkadot/util-crypto";
 
 import FrndCommSection from "./section";
 import {Container} from './styles';
+import {
+    followers as FOLLOWERS, 
+    following as FOLLOWING
+} from "../../translations/frnds-comms";
 
 import { useAppContext } from "../../contexts/app";
 import { useUserContext } from "../../contexts/user";
@@ -15,7 +19,7 @@ interface FriendsCommunitiesProps {
 const FriendsCommunites: React.FC<FriendsCommunitiesProps> = ({
     accountId
 }) => {
-    const {dark} = useAppContext();
+    const {dark, language} = useAppContext();
     const {api} = useSubsocial();
     const {
         account, 
@@ -45,8 +49,8 @@ const FriendsCommunites: React.FC<FriendsCommunitiesProps> = ({
 
     return (
         <Container dark={dark}>
-            <FrndCommSection title="FOLLOWERS" ids={followers} />
-            <FrndCommSection title="FOLLOWING" ids={following} />
+            <FrndCommSection title={FOLLOWERS[language]} ids={followers} />
+            <FrndCommSection title={FOLLOWING[language]} ids={following} />
         </Container>
     );
 };

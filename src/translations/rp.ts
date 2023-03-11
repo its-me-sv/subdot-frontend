@@ -58,3 +58,11 @@ export const info = {
         "Pour 10 abonnés"
     ]
 };
+
+export const viewMore: Array<string> = [
+    "VIEW ALL",
+    "查看全部",
+    "सभी को देखें",
+    "VER TODO",
+    "VOIR TOUT"
+];

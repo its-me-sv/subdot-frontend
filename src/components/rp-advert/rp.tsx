@@ -5,7 +5,7 @@ import axios from "axios";
 
 import {Button} from "../../utils/styles";
 import {RPContainer, RPItem, RPItemsContainer, RPTitle} from "./styles";
-import {title, detail} from "../../translations/rp";
+import {title, viewMore} from "../../translations/rp";
 
 import {useAppContext} from "../../contexts/app";
 import { TopRPUser } from "../../utils/types";
@@ -51,7 +51,7 @@ const RP: React.FC<RPProps> = () => {
           bgColor={dark ? "#f5f4f9" : "#1a1a1a"}
           dark={dark}
         >
-          VIEW ALL
+          {viewMore[language]}
         </Button>
       </RPContainer>
     );

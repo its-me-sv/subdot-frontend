@@ -93,3 +93,11 @@ export const postAdvert: Array<string> = [
     "PUBLICIDAD POSTAL",
     "PUBLIER UNE ANNONCE"
 ];
+
+export const noAdvertText: Array<string> = [
+    "Advertisement(s) goes here",
+    "广告在这里",
+    "विज्ञापन यहां जाता है",
+    "Los anuncios van aquí",
+    "La ou les publicités vont ici"
+];

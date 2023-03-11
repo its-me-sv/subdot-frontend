@@ -7,6 +7,13 @@ export const explr: Array<string> = [
 ];
 
 export const menu = {
+    rpBoard: [
+        "RP BOARD",
+        "RP板",
+        "आरपी बोर्ड",
+        "TABLERO RP",
+        "CARTE RP"
+    ],
     profile: [
         "PROFILE",
         "轮廓",

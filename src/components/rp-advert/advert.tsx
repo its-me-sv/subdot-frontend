@@ -1,13 +1,14 @@
 import React, {useEffect} from "react";
 
 import {AdvertContainer, AdvertImage} from "./styles";
+import {noAdvertText} from "../../translations/advert";
 
 import {useAppContext} from "../../contexts/app";
 
 interface AdvertProps {}
 
 const Advert: React.FC<AdvertProps> = () => {
-    const {dark, advert, setAdvert} = useAppContext();
+    const {dark, advert, setAdvert, language} = useAppContext();
 
     useEffect(() => {
         if (!advert) return;
@@ -24,7 +25,7 @@ const Advert: React.FC<AdvertProps> = () => {
                     <AdvertImage dark={dark} src={advert.picture} />
                 </a>
             ) : (
-                <span>Advertisement(s) goes here</span>
+                <span>{noAdvertText[language]}</span>
             )}
         </AdvertContainer>
     );

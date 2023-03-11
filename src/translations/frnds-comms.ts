@@ -13,3 +13,19 @@ export const communities: Array<string> = [
     "COMUNIDADES",
     "COMMUNAUTÉS"
 ];
+
+export const followers: Array<string> = [
+    "FOLLOWERS",
+    "追随者",
+    "फ़ॉलोअर्स",
+    "SEGUIDORS",
+    "SUIVEUS"
+];
+
+export const following: Array<string> = [
+    "FOLLOWING",
+    "下列的",
+    "अगले",
+    "SIGUIENTE",
+    "SUIVANT"
+];
