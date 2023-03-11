@@ -142,6 +142,54 @@ export const advertPost = {
     ]
 };
 
+export const cmtsFetch = {
+    loading: [
+        "Fetching comments",
+        "获取评论",
+        "टिप्पणियां लाई जा रही हैं",
+        "Obteniendo comentarios",
+        "Récupération des commentaires"
+    ],
+    success: [
+        "Comments fetched",
+        "已提取评论",
+        "टिप्पणियाँ प्राप्त हुईं",
+        "Comentarios obtenidos",
+        "Commentaires récupérés"
+    ],
+    error: [
+        "Unable to fetch comments",
+        "无法获取评论",
+        "टिप्पणियां प्राप्त करने में असमर्थ",
+        "No se pueden obtener los comentarios",
+        "Impossible de récupérer les commentaires"
+    ]
+};
+
+export const cmtPost = {
+    loading: [
+        "Posting comment",
+        "发表评论",
+        "टिप्पणी पोस्ट कर रहा है",
+        "Publicar comentario",
+        "Publier un commentaire"
+    ],
+    success: [
+        "Comment posted",
+        "发表评论",
+        "टिप्पणी पोस्ट की गई",
+        "Comentario publicado",
+        "Commentaire posté"
+    ],
+    error: [
+        "Unable to post comment",
+        "无法发表评论",
+        "टिप्पणी पोस्ट करने में असमर्थ",
+        "no disponible para dejar comentario",
+        "Impossible de poster un commentaire"
+    ]
+};
+
 export const settings = {
     theme: [
         "Theme toggled",
@@ -189,4 +237,12 @@ export const noFunds: Array<string> = [
     "इस लेन-देन को पूरा करने के लिए आपके खाते में अपर्याप्त धनराशि है",
     "Su cuenta no tiene fondos suficientes para completar esta transacción",
     "Votre compte ne dispose pas de fonds suffisants pour effectuer cette transaction"
+];
+
+export const cmtLong: Array<string> = [
+    "Comment too long",
+    "评论太长",
+    "टिप्पणी बहुत लंबी है",
+    "Comentario demasiado larg",
+    "Commentaire trop long"
 ];

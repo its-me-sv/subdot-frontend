@@ -8,6 +8,11 @@ import { encodeAddress } from "@polkadot/util-crypto";
 import {Container, Box, CloseIcon, Title} from "../terms-privacy/styles";
 import {CommentsHolder} from "./styles";
 import {title} from "../../translations/comments";
+import {
+  cmtsFetch, emptyFlds, 
+  cmtLong, noFunds,
+  cmtPost
+} from "../../translations/toast";
 
 import Comment from "./comment";
 import CommentInput from "./input";
@@ -63,16 +68,16 @@ const Comments: React.FC<CommentsProps> = ({postId, dark}) => {
         }
       });
       toast.promise(cmtsPromise, {
-        loading: "Fetching comments",
-        success: "Comments fetched",
-        error: "Unable to fetch comments"
+        loading: cmtsFetch.loading[language],
+        success: cmtsFetch.success[language],
+        error: cmtsFetch.error[language]
       });
     };
 
     const addComment = (newCmt: string, cb: () => void) => {
       if (!api || !account || !postId) return;
-      if (newCmt.length === 0) return toast.error("Field empty"); 
-      if (newCmt.length > 210) return toast.error("Comment too long");
+      if (newCmt.length === 0) return toast.error(emptyFlds[language]); 
+      if (newCmt.length > 210) return toast.error(cmtLong[language]);
       const cmtPromise = new Promise(async (resolve, reject) => {
         try {
           cb();
@@ -110,9 +115,7 @@ const Comments: React.FC<CommentsProps> = ({postId, dark}) => {
           return resolve(true);
         } catch (err) {
           if ((err = "INSUFFICIENT BALANCE")) {
-            toast.error(
-              "Your account has insufficient funds to complete this transaction"
-            );
+            toast.error(noFunds[language]);
             setLowBalance!(true);
           }
           setPosting(false);
@@ -120,9 +123,9 @@ const Comments: React.FC<CommentsProps> = ({postId, dark}) => {
         }
       });
       toast.promise(cmtPromise, {
-        loading: "Posting comment",
-        success: "Comment posted",
-        error: "Unable to post comment",
+        loading: cmtPost.loading[language],
+        success: cmtPost.success[language],
+        error: cmtPost.error[language],
       });
     };
 
