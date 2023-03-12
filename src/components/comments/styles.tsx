@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { FadeAnim } from "../../utils/styles";
 
 export const CommentsHolder = styled.div`
   display: flex;
@@ -10,18 +11,19 @@ export const CommentsHolder = styled.div`
 `;
 
 export const CommentContainer = styled.div`
-    display: flex;
-    gap: 0.14rem;
-    img {
-        width: 3rem;
-        height: 3rem;
-        border-radius: 50%;
-        cursor: pointer;
-        &:hover {
-            opacity: 0.5;
-        }
+  display: flex;
+  gap: 0.14rem;
+  img {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.5;
     }
-    align-items: flex-start;
+  }
+  animation: ${FadeAnim} 1s;
+  align-items: flex-start;
 `;
 
 export const CommentHolder = styled.div<{ dark: boolean }>`
