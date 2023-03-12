@@ -22,7 +22,7 @@ export const Box = styled.div<{ dark: boolean }>`
   font-family: Inter;
   display: flex;
   flex-direction: column;
-  border-radius: 0.14rem;
+  border-radius: 1.4rem;
   padding: 0.4rem 0.7rem;
   ${BoxShadow};
   ${(props) =>

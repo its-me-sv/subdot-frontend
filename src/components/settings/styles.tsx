@@ -2,7 +2,7 @@ import styled from "styled-components";
 import {BoxShadow, BoxShadowDark} from "../../utils/styles";
 
 export const SelectLang = styled.select<{ dark: boolean }>`
-  border-radius: 0.14rem;
+  border-radius: 1.4rem;
   z-index: 998;
   font-size: 1.4rem;
   font-family: Inter;

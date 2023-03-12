@@ -6,7 +6,7 @@ export const Container = styled.div<{ dark: boolean }>`
   place-items: center;
   width: 100vw;
   height: 100vh;
-  background-color: #ffffff;
+  background-color: #f8fafc;
   ${(props) =>
     props.dark &&
     `
@@ -19,7 +19,7 @@ export const LoginForm = styled.div<{ dark: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 0.14rem;
+  border-radius: 1.4rem;
   gap: 1.4rem;
   ${BoxShadow}
   ${(props) =>

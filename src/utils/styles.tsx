@@ -16,7 +16,7 @@ export const Button = styled.span<{bgColor: string; dark?: boolean;}>`
   ${BoxShadow}
   background-color: ${props => props.bgColor};
   padding: 0.42rem;
-  border-radius: 0.14rem;
+  border-radius: 1.4rem;
   text-align: center;
   cursor: pointer;
   &:hover {
