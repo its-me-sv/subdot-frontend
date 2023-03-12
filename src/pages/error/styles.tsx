@@ -7,12 +7,12 @@ export const Container = styled.div<{ dark: boolean }>`
   justify-content: center;
   font-family: Inter;
   font-size: 2.1rem;
-  color: #1a1a1a;
-  background-color: #f5f4f9;
+  color: #222222;
+  background-color: #ffffff;
   ${(props) =>
     props.dark &&
     `
-        background-color: #1a1a1a;
-        color: #f5f4f9;
+        background-color: #222222;
+        color: #ffffff;
     `}
 `;

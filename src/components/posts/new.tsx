@@ -154,7 +154,7 @@ const NewPost: React.FC<NewPostProps> = () => {
             <span>Post creation in progress</span>
           ) : (
             <Button
-              bgColor={dark ? "#f5f4f9" : "#1a1a1a"}
+              bgColor={dark ? "#ffffff" : "#222222"}
               dark={dark}
               onClick={handleSubmit}
             >

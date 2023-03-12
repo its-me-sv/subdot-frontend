@@ -93,7 +93,7 @@ const LoginPage: React.FC<LoginPageProps> = () => {
           ) : (
             <Button
               onClick={onWalletConnect}
-              bgColor={dark ? "#f5f4f9" : "#1a1a1a"}
+              bgColor={dark ? "#ffffff" : "#222222"}
               dark={dark}
             >
               {button[language]}

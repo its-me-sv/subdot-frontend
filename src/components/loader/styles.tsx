@@ -9,10 +9,10 @@ export const Container = styled.div<{ dark: boolean }>`
   width: 100vw;
   height: 100vh;
   z-index: 999;
-  background-color: #f5f4f9;
+  background-color: #ffffff;
   gap: 1.8rem;
   ${props => props.dark && `
-    background-color: #1a1a1a;
+    background-color: #222222;
   `}
 `;
 
@@ -44,6 +44,6 @@ export const CaptionText = styled.span<{dark: boolean;}>`
     font-family: Inter;
     text-align: center;
     font-size: 1.4rem;
-    color: #1a1a1a;
-    ${props => props.dark && `color: #f5f4f9;`}
+    color: #222222;
+    ${props => props.dark && `color: #ffffff;`}
 `;

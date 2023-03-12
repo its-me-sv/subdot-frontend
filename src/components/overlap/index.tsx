@@ -21,7 +21,7 @@ const Overlap: React.FC<OverlapProps> = () => {
             kindly consider creating an exclusive account for Subdot if possible.
           </Text>
           <Button
-            bgColor={dark ? "#f5f4f9" : "#1a1a1a"}
+            bgColor={dark ? "#ffffff" : "#222222"}
             dark={dark}
             onClick={() => setOverlap!(false)}
           >

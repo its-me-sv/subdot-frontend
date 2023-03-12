@@ -27,8 +27,8 @@ export const MenuItem = styled.span<{dark: boolean;}>`
     opacity: 0.5;
     text-decoration: underline;
   }
-  color: #1a1a1a;
+  color: #222222;
   ${props => props.dark && `
-    color: #f5f4f9;
+    color: #ffffff;
   `}
 `;

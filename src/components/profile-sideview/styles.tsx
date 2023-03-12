@@ -14,9 +14,9 @@ export const Container = styled.div<{ dark: boolean }>`
     height: 8.4rem;
     border-radius: 50%;
   }
-  color: #1a1a1a;
+  color: #222222;
   border-left: 0.3rem solid rgb(227, 224, 224);
-  ${(props) => props.dark && `color: #f5f4f9;`}
+  ${(props) => props.dark && `color: #ffffff;`}
 `;
 
 export const Username = styled.span`
@@ -31,7 +31,7 @@ export const Name = styled.span`
 
 export const Joined = styled.span`
   /* font-family: Inter;
-  color: #1a1a1a; */
+  color: #222222; */
 `;
 
 export const Status = styled.span`
@@ -52,8 +52,8 @@ export const MetaItem = styled.div<{dark: boolean;}>`
   span {
     font-family: Inter;
     font-size: 1.2rem;
-    color: #1a1a1a;
-    ${props => props.dark && `color: #f5f4f9;`}
+    color: #222222;
+    ${props => props.dark && `color: #ffffff;`}
   }
   span:first-child {
     font-size: 1.6rem;

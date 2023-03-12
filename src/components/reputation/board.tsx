@@ -48,7 +48,7 @@ const Board: React.FC<BoardProps> = () => {
         {!over && (
             <FetchButton>
                 <Button 
-                    bgColor={dark ? "#f5f4f9" : "#1a1a1a"} 
+                    bgColor={dark ? "#ffffff" : "#222222"} 
                     dark={dark}
                     onClick={fetchData}
                 >

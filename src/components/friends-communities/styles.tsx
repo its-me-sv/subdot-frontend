@@ -27,11 +27,11 @@ export const SectionTitle = styled.span<{ dark: boolean }>`
   font-family: Inter;
   font-size: 1.6rem;
   opacity: 0.84;
-  color: #1a1a1a;
+  color: #222222;
   ${(props) =>
     props.dark &&
     `
-    color: #f5f4f9;
+    color: #ffffff;
   `}
 `;
 
@@ -44,8 +44,8 @@ export const SectionProfiles = styled.div<{ dark: boolean }>`
   overflow-y: auto;
   span {
     font-family: Inter;
-    color: #1a1a1a;
-    ${props => props.dark && `color #f5f4f9;`}
+    color: #222222;
+    ${props => props.dark && `color #ffffff;`}
   }
 `;
 
@@ -89,16 +89,16 @@ export const ProfileInfo = styled.div`
 export const ProfileName = styled.span<{dark: boolean;}>`
   font-family: Inter;
   font-size: 1.2rem;
-  color: #1a1a1a;
+  color: #222222;
   ${props => props.dark && `
-    color: #f5f4f9;
+    color: #ffffff;
   `}
 `;
 
 export const ProfileStatusText = styled.span<{ dark: boolean }>`
   font-family: Inter;
   font-size: 1rem;
-  color: #1a1a1a;
+  color: #222222;
   white-space: nowrap;
   overflow: hidden;
   max-width: 11rem;
@@ -106,6 +106,6 @@ export const ProfileStatusText = styled.span<{ dark: boolean }>`
   ${(props) =>
     props.dark &&
     `
-    color: #f5f4f9;
+    color: #ffffff;
   `}
 `;

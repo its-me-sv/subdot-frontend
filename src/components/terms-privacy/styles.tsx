@@ -35,9 +35,9 @@ export const Box = styled.div<{ dark: boolean }>`
 export const CloseIcon = styled.span<{ dark: boolean }>`
   cursor: pointer;
   align-self: flex-end;
-  color: #1a1a1a;
+  color: #222222;
   ${props => props.dark && `
-    color: #f5f4f9;
+    color: #ffffff;
   `}
 `;
 
@@ -45,9 +45,9 @@ export const Title = styled.span<{ dark: boolean }>`
     margin-bottom: 1rem;
     text-align: center;
     font-size: 1.4rem;
-    color: #1a1a1a;
+    color: #222222;
     ${props => props.dark && `
-      color: #f5f4f9;
+      color: #ffffff;
     `}
 `;
 
@@ -55,8 +55,8 @@ export const Content = styled.span<{ dark: boolean }>`
   margin-bottom: 1rem;
   max-height: 18rem;
   overflow-y: auto;
-  color: #1a1a1a;
+  color: #222222;
   ${props => props.dark && `
-    color: #f5f4f9;
+    color: #ffffff;
   `}
 `;

@@ -10,8 +10,8 @@ export const Container = styled.div<{dark: boolean}>`
   padding: 1rem;
   padding-bottom: 2.4rem;
   font-family: Inter;
-  color: #1a1a1a;
-  ${props => props.dark && `color: #f5f4f9;`}
+  color: #222222;
+  ${props => props.dark && `color: #ffffff;`}
 `;
 
 export const StickyButton = styled.div<{ abs?: boolean }>`
@@ -60,9 +60,9 @@ export const PostHeaderRight = styled.div<{dark: boolean;}>`
   display: flex;
   flex-direction: column;
   font-family: Inter;
-  color: #1a1a1a;
+  color: #222222;
   ${props => props.dark && `
-    color: #f5f4f9;
+    color: #ffffff;
   `}
 `;
 
@@ -77,11 +77,11 @@ export const PostTime = styled.span`
 export const PostContent = styled.span<{dark: boolean;}>`
   font-family: Inter;
   font-size: 1.2rem;
-  color: #1a1a1a;
+  color: #222222;
   max-height: 14rem;
   overflow-y: auto;
   ${props => props.dark && `
-    color: #f5f4f9;
+    color: #ffffff;
   `}
 `;
 
@@ -113,9 +113,9 @@ export const FooterItem = styled.div<{dark: boolean;}>`
     font-family: Inter;
     font-size: 1.2rem;
     opacity: 0.9;
-    color: #1a1a1a;
+    color: #222222;
     ${props => props.dark && `
-      color: #f5f4f9;
+      color: #ffffff;
     `}
   }
   &:hover {
@@ -130,10 +130,10 @@ export const PostDescription = styled.textarea<{dark: boolean;}>`
   font-size: 1.2rem;
   border-radius: 0.14rem;
   resize: none;
-  color: #1a1a1a;
+  color: #222222;
   ${BoxShadow}
   ${props => props.dark && `
-    color: #f5f4f9;
+    color: #ffffff;
     ${BoxShadowDark}
   `}
 `;
@@ -141,9 +141,9 @@ export const PostDescription = styled.textarea<{dark: boolean;}>`
 export const FetchButton = styled.span<{dark: boolean;}>`
   align-self: flex-start;
   cursor: pointer;
-  color: #1a1a1a;
+  color: #222222;
   font-size: 0.9rem;
-  ${props => props.dark && "color: #f5f4f9;"}
+  ${props => props.dark && "color: #ffffff;"}
   &:hover {
     opacity: 0.5;
   }

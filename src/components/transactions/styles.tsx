@@ -11,8 +11,8 @@ export const TransactionsHolder = styled.div<{dark: boolean;}>`
     padding: 0.14rem 0.14rem;
     margin-bottom: 0.42rem;
     font-family: Inter;
-    color: #1a1a1a;
-    ${props => props.dark && `color: #f5f4f9;`}
+    color: #222222;
+    ${props => props.dark && `color: #ffffff;`}
 `;
 
 export const TransactionContainer = styled.div<{dark: boolean;}>`
@@ -41,9 +41,9 @@ export const Meta = styled.div<{dark: boolean;}>`
   flex-direction: column;
   span {
     font-family: Inter;
-    color: #1a1a1a;
+    color: #222222;
     ${props => props.dark && `
-      color: #f5f4f9;
+      color: #ffffff;
     `}
   }
   span:first-child {

@@ -23,9 +23,9 @@ export const InputContainer = styled.div`
 export const InputLabel = styled.span<{dark: boolean;}>`
   font-family: Inter;
   font-size: 1.2rem;
-  color: #1a1a1a;
+  color: #222222;
   ${props => props.dark && `
-    color: #f5f4f9;
+    color: #ffffff;
   `}
 `;
 
@@ -36,10 +36,10 @@ export const Input = styled.input<{dark: boolean;}>`
   font-size: 1.8rem;
   text-align: center;
   border-radius: 0.14rem;
-  color: #1a1a1a;
+  color: #222222;
   ${BoxShadow}
   ${props => props.dark && `
-    color: #f5f4f9;
+    color: #ffffff;
     ${BoxShadowDark}
   `}
 `;

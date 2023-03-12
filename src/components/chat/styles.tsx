@@ -6,9 +6,9 @@ export const Container = styled.div<{dark: boolean;}>`
   flex-direction: column;
   height: 92vh;
   padding: 0.42rem 0rem;
-  border-right: 1px solid #1a1a1a;
+  border-right: 1px solid #222222;
   ${props => props.dark && `
-    border-right: 1px solid #f5f4f9;
+    border-right: 1px solid #ffffff;
   `}
 `;
 
@@ -34,7 +34,7 @@ export const InputContainer = styled.div<{ dark: boolean }>`
     font-family: Inter;
     border-radius: 0.14rem;
     font-size: 1.2rem;
-    color: #1a1a1a;
+    color: #222222;
     background-color: #d7d7d7;
     ${(props) =>
       props.dark &&
@@ -70,7 +70,7 @@ export const Message = styled.div<{ dark: boolean }>`
     align-self: flex-end;
     font-size: 0.84rem;
   }
-  color: #1a1a1a;
+  color: #222222;
   background-color: #d7d7d7;
   ${(props) =>
     props.dark &&

@@ -32,7 +32,7 @@ export const CommentHolder = styled.div<{ dark: boolean }>`
   border-radius: 0.14rem;
   padding: 0.14rem;
   background-color: #d7d7d7;
-  color: #1a1a1a;
+  color: #222222;
   ${(props) =>
     props.dark &&
     `
@@ -66,7 +66,7 @@ export const CommentFooter = styled.div<{ dark: boolean }>`
     font-family: Inter;
     border-radius: 0.14rem;
     font-size: 1.2rem;
-    color: #1a1a1a;
+    color: #222222;
     background-color: #d7d7d7;
     ${(props) =>
       props.dark &&

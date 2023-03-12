@@ -31,12 +31,12 @@ export const Input = styled.input<{ dark: boolean }>`
   font-family: Inter;
   font-size: 1.4rem;
   width: 30vw;
-  background-color: #f5f4f9;
-  color: #1a1a1a;
+  background-color: #ffffff;
+  color: #222222;
   ${(props) =>
     props.dark &&
     `
-    background-color: #1a1a1a;
-    color: #f5f4f9;
+    background-color: #222222;
+    color: #ffffff;
   `}
 `;

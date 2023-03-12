@@ -22,8 +22,8 @@ export const AdvertContainer = styled.div<{dark: boolean}>`
     span {
         text-align: center;
         font-family: Inter;
-        color: #1a1a1a;
-        ${props => props.dark && `color: #f5f4f9;`}
+        color: #222222;
+        ${props => props.dark && `color: #ffffff;`}
     }
 `;
 
@@ -45,11 +45,11 @@ export const RPContainer = styled.div<{ dark: boolean }>`
   margin: 0rem 1rem;
   height: 35vh;
   padding-bottom: 0.42rem;
-  border-bottom: 1px solid #1a1a1a;
+  border-bottom: 1px solid #222222;
   ${(props) =>
     props.dark &&
     `
-    border-bottom: 1px solid #f5f4f9;;
+    border-bottom: 1px solid #ffffff;;
     `}
 `;
 
@@ -63,9 +63,9 @@ export const RPTitle = styled.span<{dark: boolean;}>`
     text-align: center;
     font-size: 1.6rem;
     opacity: 0.84;
-    color: #1a1a1a;
+    color: #222222;
     ${props => props.dark && `
-        color: #f5f4f9;
+        color: #ffffff;
     `}
 `;
 
@@ -81,9 +81,9 @@ export const RPItem = styled.div<{dark: boolean;}>`
         &:hover {
             opacity: 0.5;
         }
-        color: #1a1a1a;
+        color: #222222;
         ${props => props.dark && `
-            color: #f5f4f9;
+            color: #ffffff;
         `}
     }
 `;

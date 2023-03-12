@@ -6,11 +6,11 @@ export const Container = styled.div<{ dark: boolean }>`
   place-items: center;
   width: 100vw;
   height: 100vh;
-  background-color: #f5f4f9;
+  background-color: #ffffff;
   ${(props) =>
     props.dark &&
     `
-    background-color: #1a1a1a;
+    background-color: #222222;
   `}
 `;
 
@@ -66,12 +66,12 @@ export const Account = styled.div<{ dark: boolean }>`
     opacity: 0.5;
   }
   ${BoxShadow}
-  color: #1a1a1a;
+  color: #222222;
   ${(props) =>
     props.dark &&
     `
     ${BoxShadowDark}
-    color: #f5f4f9;
+    color: #ffffff;
   `}
 `;
 
@@ -90,9 +90,9 @@ export const Caption = styled.span<{ dark: boolean }>`
   font-family: Inter;
   opacity: 0.9;
   font-size: 1.4rem;
-  color: #1a1a1a;
+  color: #222222;
   ${props => props.dark && `
-  color: #f5f4f9;
+  color: #ffffff;
   `}
   `;
 
@@ -100,11 +100,11 @@ export const Caption2 = styled.span<{ dark: boolean }>`
   font-family: Inter;
   opacity: 0.9;
   font-size: 1.2rem;
-  color: #1a1a1a;
+  color: #222222;
   ${(props) =>
     props.dark &&
     `
-  color: #f5f4f9;
+  color: #ffffff;
   `}
 `;
 
@@ -113,14 +113,14 @@ export const Footer1 = styled.span<{ dark: boolean }>`
   bottom: 0.7rem;
   left: 0.7rem;
   font-family: Inter;
-  color: #1a1a1a;
+  color: #222222;
   font-size: 1rem;
   cursor: pointer;
   &:hover {
     opacity: 0.84;
   }
   ${props => props.dark && `
-    color: #f5f4f9;
+    color: #ffffff;
   `}
 `;
 
@@ -129,13 +129,13 @@ export const Footer2 = styled.span<{ dark: boolean }>`
   bottom: 0.7rem;
   right: 0.7rem;
   font-family: Inter;
-  color: #1a1a1a;
+  color: #222222;
   font-size: 1rem;
   cursor: pointer;
   &:hover {
     opacity: 0.84;
   }
   ${props => props.dark && `
-    color: #f5f4f9;
+    color: #ffffff;
   `}
 `;

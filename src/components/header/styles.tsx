@@ -48,10 +48,10 @@ export const Footer = styled.div<{ dark: boolean }>`
       opacity: 0.5;
     }
   }
-  color: #1a1a1a;
+  color: #222222;
   ${(props) =>
     props.dark &&
     `
-    color: #f5f4f9;
+    color: #ffffff;
   `}
 `;

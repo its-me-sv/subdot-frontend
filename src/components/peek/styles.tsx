@@ -12,9 +12,9 @@ export const JoinedDate = styled.span<{dark: boolean;}>`
     font-family: Inter;
     font-size: 0.8rem;
     align-self: flex-end;
-    color: #1a1a1a;
+    color: #222222;
     ${props => props.dark && `
-      color: #f5f4f9;
+      color: #ffffff;
     `}
 `;
 
@@ -36,10 +36,10 @@ export const Detail = styled.input<{dark: boolean;}>`
   border-radius: 0.14rem;
   opacity: 0.9;
   padding: 0.42rem 0;
-  color: #1a1a1a;
+  color: #222222;
   ${BoxShadow}
   ${props => props.dark && `
-    color: #f5f4f9;
+    color: #ffffff;
     ${BoxShadowDark}
   `}
 `;
@@ -48,9 +48,9 @@ export const Section = styled.span<{dark: boolean;}>`
     font-family: Inter;
     font-size: 1.2rem;
     opacity: 0.9;
-    color: #1a1a1a;
+    color: #222222;
     ${props => props.dark && `
-      color: #f5f4f9;
+      color: #ffffff;
     `}
 `;
 
@@ -58,9 +58,9 @@ export const Content = styled.span<{dark: boolean;}>`
     font-family: Inter;
     font-size: 1.6rem;
     opacity: 0.9;
-    color: #1a1a1a;
+    color: #222222;
     ${props => props.dark && `
-      color: #f5f4f9;
+      color: #ffffff;
     `}
 `;
 

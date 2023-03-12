@@ -133,7 +133,7 @@ const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
             {footer.transfer[language]}
           </Button>
           <Button 
-            bgColor={dark ? "#f5f4f9" : "#1a1a1a"} dark={dark}
+            bgColor={dark ? "#ffffff" : "#222222"} dark={dark}
             onClick={handleFollow}
           >
             {following.includes(accountId || "")
@@ -144,7 +144,7 @@ const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
       ) : (
         <Footer>
           <Button
-            bgColor={dark ? "#f5f4f9" : "#1a1a1a"}
+            bgColor={dark ? "#ffffff" : "#222222"}
             dark={dark}
             onClick={() => setEditOpen(true)}
           >

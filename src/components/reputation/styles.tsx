@@ -4,9 +4,9 @@ import {BoxShadow, BoxShadowDark} from "../../utils/styles";
 export const Container = styled.div<{dark: boolean;}>`
     display: grid;
     grid-template-columns: 5fr 1fr;
-    background-color: #f5f4f9;
+    background-color: #ffffff;
     ${props => props.dark && `
-        background-color: #1a1a1a;
+        background-color: #222222;
     `}
 `;
 
@@ -23,9 +23,9 @@ export const InfoBox = styled.div`
 export const InfoBoxTitle = styled.span<{dark: boolean;}>`
   font-family: Inter;
   font-size: 1.4rem;
-  color: #1a1a1a;
+  color: #222222;
   ${props => props.dark && `
-    color: #f5f4f9;
+    color: #ffffff;
   `}
 `;
 
@@ -42,9 +42,9 @@ export const InfoItem = styled.div<{dark: boolean;}>`
     span {
         font-family: Inter;
         font-size: 1.2rem;
-        color: #1a1a1a;
+        color: #222222;
         ${props => props.dark && `
-            color: #f5f4f9;
+            color: #ffffff;
         `}
     }
 `;
@@ -78,8 +78,8 @@ export const UserContainer = styled.div<{dark: boolean;}>`
     span {
         font-family: Inter;
         font-size: 1.2rem;
-        color: #1a1a1a;
-        ${props => props.dark && `color: #f5f4f9;`}
+        color: #222222;
+        ${props => props.dark && `color: #ffffff;`}
     }
     &:hover {
         opacity: 0.5;

@@ -28,7 +28,7 @@ export const Item = styled.span<{dark: boolean;}>`
   padding: 0.7rem;
   border-radius: 0.14rem;
   cursor: pointer;
-  color: #1a1a1a;
+  color: #222222;
   display: flex;
   align-items: center;
   gap: 0.14rem;
@@ -44,6 +44,6 @@ export const Item = styled.span<{dark: boolean;}>`
   ${BoxShadow}
   ${props => props.dark && `
     ${BoxShadowDark}
-    color: #f5f4f9;
+    color: #ffffff;
   `}
 `;

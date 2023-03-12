@@ -25,7 +25,7 @@ const CommentInput: React.FC<CommentInputProps> = ({
           onChange={(e) => setNewCmt(e.target.value)}
         />
         <Button 
-          bgColor={dark ? "#f5f4f9" : "#1a1a1a"} dark={dark}
+          bgColor={dark ? "#ffffff" : "#222222"} dark={dark}
           onClick={() => addComment(newCmt, () => setNewCmt(""))}
         >
           {pstCmt[language]}

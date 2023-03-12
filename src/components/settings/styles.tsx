@@ -10,13 +10,13 @@ export const SelectLang = styled.select<{ dark: boolean }>`
   cursor: pointer;
   opacity: 0.84;
   width: 8rem;
-  color: #1a1a1a;
+  color: #222222;
   ${BoxShadow}
   ${(props) =>
     props.dark &&
     `
       ${BoxShadowDark}
-      color: #f5f4f9;
+      color: #ffffff;
   `}
 `;
 
@@ -37,10 +37,10 @@ export const Item = styled.div`
 export const ItemTitle = styled.span<{ dark: boolean }>`
   font-family: Inter;
   font-size: 1rem;
-  color: #1a1a1a;
+  color: #222222;
   ${(props) =>
     props.dark &&
     `
-    color: #f5f4f9;
+    color: #ffffff;
   `}
 `;

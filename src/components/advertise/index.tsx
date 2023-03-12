@@ -150,7 +150,7 @@ const Advertise: React.FC<AdvertiseProps> = () => {
           </InputsForm>
           {!(!cst || !lnk.length || !pict.length) && (
             <Button 
-              bgColor={dark ? "#f5f4f9" : "#1a1a1a"} 
+              bgColor={dark ? "#ffffff" : "#222222"} 
               dark={dark}
               onClick={handleSubmit}
             >

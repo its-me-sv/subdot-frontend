@@ -5,9 +5,9 @@ export const Title = styled.span<{dark: boolean;}>`
     font-size: 1.2rem;
     align-self: center;
     margin-bottom: 1rem;
-    color: #1a1a1a;
+    color: #222222;
     ${props => props.dark && `
-        color: #f5f4f9;
+        color: #ffffff;
     `}
 `;
 
