@@ -60,7 +60,7 @@ export const BoardContainer = styled.div`
 `;
 
 export const UserContainer = styled.div<{dark: boolean;}>`
-    border-radius: 0.14rem;
+    border-radius: 1.4rem;
     display: flex;
     flex-direction: column;
     align-items: center;

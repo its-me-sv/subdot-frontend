@@ -26,7 +26,7 @@ export const Item = styled.span<{dark: boolean;}>`
   font-family: Inter;
   font-size: 1.2rem;
   padding: 0.7rem;
-  border-radius: 0.14rem;
+  border-radius: 1.4rem;
   cursor: pointer;
   color: #222222;
   display: flex;
