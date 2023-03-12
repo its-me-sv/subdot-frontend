@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {BoxShadow, BoxShadowDark} from "../../utils/styles";
+import {BoxShadow, BoxShadowDark, FadeAnim} from "../../utils/styles";
 
 export const Container = styled.div<{dark: boolean}>`
   display: flex;
@@ -17,6 +17,7 @@ export const Container = styled.div<{dark: boolean}>`
 export const StickyButton = styled.div<{ abs?: boolean }>`
   align-self: flex-end;
   padding-top: 0.42rem;
+  animation: ${FadeAnim} 1s;
   ${(props) => props.abs && `position: absolute;`}
 `;
 

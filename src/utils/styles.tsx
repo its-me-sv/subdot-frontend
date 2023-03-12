@@ -1,4 +1,4 @@
-import styled, {css} from "styled-components";
+import styled, {css, keyframes} from "styled-components";
 
 export const BoxShadow = css`
   box-shadow: 0 0 20px #e2e8f0;
@@ -33,4 +33,9 @@ export const HrLn = styled.div`
   align-self: center;
   border-bottom: 1px solid #222222;
   opacity: 0.84;
+`;
+
+export const FadeAnim = keyframes`
+  0% {opacity: 0;}
+  100% {opacity: 0.6;}
 `;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {BoxShadow, BoxShadowDark} from "../../utils/styles";
+import {BoxShadow, BoxShadowDark, FadeAnim} from "../../utils/styles";
 
 export const Container = styled.div<{ dark: boolean }>`
   display: grid;
@@ -15,6 +15,7 @@ export const Container = styled.div<{ dark: boolean }>`
 `;
 
 export const LoginForm = styled.div<{ dark: boolean }>`
+  animation: ${FadeAnim} 0.42s;
   width: 36rem;
   display: flex;
   flex-direction: column;
@@ -39,6 +40,7 @@ export const AccountsContainer = styled.div`
 `;
 
 export const Account = styled.div<{ dark: boolean }>`
+  animation: ${FadeAnim} 0.42s;
   display: flex;
   align-items: center;
   gap: 0.14rem;

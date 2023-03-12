@@ -1,14 +1,17 @@
 import styled from "styled-components";
-import {BoxShadow, BoxShadowDark} from "../../utils/styles";
+import {BoxShadow, BoxShadowDark, FadeAnim} from "../../utils/styles";
 import searchIcon from "../../assets/icons/search.png";
 
-export const Container = styled.div<{dark: boolean;}>`
+export const Container = styled.div<{ dark: boolean }>`
   padding: 0.3rem 0.6rem;
   display: flex;
   gap: 0.42rem;
   border-radius: 14rem;
+  animation: ${FadeAnim} 1s;
   ${BoxShadow}
-  ${props => props.dark && `
+  ${(props) =>
+    props.dark &&
+    `
     ${BoxShadowDark}
   `}
 `;

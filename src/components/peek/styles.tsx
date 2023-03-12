@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {BoxShadow, BoxShadowDark} from "../../utils/styles";
+import {BoxShadow, BoxShadowDark, FadeAnim} from "../../utils/styles";
 
 export const ProfilePicture = styled.img`
     width: 7rem;
@@ -54,12 +54,15 @@ export const Section = styled.span<{dark: boolean;}>`
     `}
 `;
 
-export const Content = styled.span<{dark: boolean;}>`
-    font-family: Inter;
-    font-size: 1.6rem;
-    opacity: 0.9;
-    color: #222222;
-    ${props => props.dark && `
+export const Content = styled.span<{ dark: boolean }>`
+  font-family: Inter;
+  font-size: 1.6rem;
+  opacity: 0.9;
+  color: #222222;
+  animation: ${FadeAnim} 1s;
+  ${(props) =>
+    props.dark &&
+    `
       color: #ffffff;
     `}
 `;
@@ -84,4 +87,5 @@ export const Footer = styled.div`
   justify-content: space-between;
   padding: 0rem 1.8rem;
   margin: 1rem 0rem 0.42rem 0rem;
+  animation: ${FadeAnim} 1s;
 `;

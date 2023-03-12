@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {BoxShadow, BoxShadowDark} from "../../utils/styles";
+import {BoxShadow, BoxShadowDark, FadeAnim} from "../../utils/styles";
 
 export const Container = styled.div<{dark: boolean;}>`
     display: grid;
@@ -20,11 +20,14 @@ export const InfoBox = styled.div`
   border-left: 0.3rem solid rgb(227, 224, 224);
 `;
 
-export const InfoBoxTitle = styled.span<{dark: boolean;}>`
+export const InfoBoxTitle = styled.span<{ dark: boolean }>`
   font-family: Inter;
   font-size: 1.4rem;
   color: #222222;
-  ${props => props.dark && `
+  animation: ${FadeAnim} 1s;
+  ${(props) =>
+    props.dark &&
+    `
     color: #ffffff;
   `}
 `;
@@ -35,18 +38,21 @@ export const InfoContent = styled.span`
     gap: 0.14rem;
 `;
 
-export const InfoItem = styled.div<{dark: boolean;}>`
-    display: flex;
-    justify-content: space-between;
-    gap: 0.42rem;
-    span {
-        font-family: Inter;
-        font-size: 1.2rem;
-        color: #222222;
-        ${props => props.dark && `
+export const InfoItem = styled.div<{ dark: boolean }>`
+  display: flex;
+  justify-content: space-between;
+  gap: 0.42rem;
+  span {
+    animation: ${FadeAnim} 1s;
+    font-family: Inter;
+    font-size: 1.2rem;
+    color: #222222;
+    ${(props) =>
+      props.dark &&
+      `
             color: #ffffff;
         `}
-    }
+  }
 `;
 
 export const BoardContainer = styled.div`
@@ -59,31 +65,32 @@ export const BoardContainer = styled.div`
     padding: 1rem;
 `;
 
-export const UserContainer = styled.div<{dark: boolean;}>`
-    border-radius: 1.4rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1.2rem;
-    gap: 0.7rem;
-    cursor: pointer;
-    ${BoxShadow}
-    ${props => props.dark && `${BoxShadowDark}`}
+export const UserContainer = styled.div<{ dark: boolean }>`
+  border-radius: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+  gap: 0.7rem;
+  cursor: pointer;
+  animation: ${FadeAnim} 1s;
+  ${BoxShadow}
+  ${(props) => props.dark && `${BoxShadowDark}`}
     img {
-        width: 6rem;
-        height: 6rem;
-        border-radius: 50%;
-    }
-    span {
-        font-family: Inter;
-        font-size: 1.2rem;
-        color: #222222;
-        ${props => props.dark && `color: #ffffff;`}
-    }
-    &:hover {
-        opacity: 0.5;
-    }
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+  }
+  span {
+    font-family: Inter;
+    font-size: 1.2rem;
+    color: #222222;
+    ${(props) => props.dark && `color: #ffffff;`}
+  }
+  &:hover {
+    opacity: 0.5;
+  }
 `;
 
 export const FetchButton = styled.div``;

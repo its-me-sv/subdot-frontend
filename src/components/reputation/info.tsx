@@ -23,16 +23,16 @@ const Info: React.FC<InfoProps> = () => {
                     <span>7</span>
                 </InfoItem>
                 <InfoItem dark={dark}>
-                    <span>{info.tip[language]}</span>
-                    <span>2</span>
-                </InfoItem>
-                <InfoItem dark={dark}>
                     <span>{info.like[language]}</span>
                     <span>5</span>
                 </InfoItem>
                 <InfoItem dark={dark}>
                     <span>{info.followers[language]}</span>
                     <span>3</span>
+                </InfoItem>
+                <InfoItem dark={dark}>
+                    <span>{info.tip[language]}</span>
+                    <span>2</span>
                 </InfoItem>
                 <InfoItem dark={dark}>
                     <span>{info.accCrt[language]}</span>

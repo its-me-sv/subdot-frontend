@@ -1,4 +1,5 @@
 import styled, {keyframes} from "styled-components";
+import { FadeAnim } from "../../utils/styles";
 
 export const Container = styled.div<{ dark: boolean }>`
   display: flex;
@@ -40,10 +41,11 @@ export const LogoText = styled.span`
   animation: ${showHide} 2.1s ease-in-out infinite;
 `;
 
-export const CaptionText = styled.span<{dark: boolean;}>`
-    font-family: Inter;
-    text-align: center;
-    font-size: 1.4rem;
-    color: #222222;
-    ${props => props.dark && `color: #ffffff;`}
+export const CaptionText = styled.span<{ dark: boolean }>`
+  font-family: Inter;
+  text-align: center;
+  font-size: 1.4rem;
+  color: #222222;
+  animation: ${FadeAnim} 1.8s;
+  ${(props) => props.dark && `color: #ffffff;`}
 `;

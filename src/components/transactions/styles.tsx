@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {BoxShadow, BoxShadowDark} from "../../utils/styles";
+import {BoxShadow, BoxShadowDark, FadeAnim} from "../../utils/styles";
 
 export const TransactionsHolder = styled.div<{dark: boolean;}>`
     display: flex;
@@ -15,25 +15,26 @@ export const TransactionsHolder = styled.div<{dark: boolean;}>`
     ${props => props.dark && `color: #ffffff;`}
 `;
 
-export const TransactionContainer = styled.div<{dark: boolean;}>`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 0.14rem;
-    padding: 0.14rem;
-    width: 36rem;
-    img {
-        width: 3rem;
-        height: 3rem;
-        border-radius: 50%;
-        &:hover {
-            opacity: 0.5;
-        }
-    }
+export const TransactionContainer = styled.div<{ dark: boolean }>`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0.14rem;
+  padding: 0.14rem;
+  width: 36rem;
+  animation: ${FadeAnim} 1s;
+  img {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
     &:hover {
-      ${BoxShadow}
-      ${props => props.dark && `${BoxShadowDark}`}
+      opacity: 0.5;
     }
+  }
+  &:hover {
+    ${BoxShadow}
+    ${(props) => props.dark && `${BoxShadowDark}`}
+  }
 `;
 
 export const Meta = styled.div<{dark: boolean;}>`

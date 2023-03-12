@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {BoxShadow, BoxShadowDark} from "../../utils/styles";
+import {BoxShadow, BoxShadowDark, FadeAnim} from "../../utils/styles";
 import logoSmall from "../../assets/logo_small.png";
 
 export const Container = styled.div<{dark: boolean;}>`
@@ -18,12 +18,13 @@ export const HomeLogo = styled.img.attrs({
   alt: "home",
   src: logoSmall,
 })`
-    height: 2.8rem;
-    width: auto;
-    cursor: pointer;
-    &:hover {
-        opacity: 0.8;
-    }
+  height: 2.8rem;
+  width: auto;
+  cursor: pointer;
+  animation: ${FadeAnim} 1s;
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 export const MenuLogo = styled.img`
@@ -34,6 +35,7 @@ export const MenuLogo = styled.img`
   &:hover {
     opacity: 0.5;
   }
+  animation: ${FadeAnim} 1s;
 `;
 
 export const Footer = styled.div<{ dark: boolean }>`
@@ -42,6 +44,7 @@ export const Footer = styled.div<{ dark: boolean }>`
   gap: 1rem;
   span {
     font-family: Inter;
+    animation: ${FadeAnim} 1s;
     font-size: 1.2rem;
     cursor: pointer;
     &:hover {

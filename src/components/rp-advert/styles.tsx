@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {BoxShadow, BoxShadowDark} from "../../utils/styles";
+import {BoxShadow, BoxShadowDark, FadeAnim} from "../../utils/styles";
 
 export const Container = styled.div`
   padding: 0.5rem;
@@ -57,33 +57,38 @@ export const RPItemsContainer = styled.div`
     height: 24vh;
 `;
 
-export const RPTitle = styled.span<{dark: boolean;}>`
-    font-family: Inter;
-    align-self: center;
-    text-align: center;
-    font-size: 1.6rem;
-    opacity: 0.84;
-    color: #222222;
-    ${props => props.dark && `
+export const RPTitle = styled.span<{ dark: boolean }>`
+  font-family: Inter;
+  align-self: center;
+  text-align: center;
+  font-size: 1.6rem;
+  opacity: 0.84;
+  color: #222222;
+  ${(props) =>
+    props.dark &&
+    `
         color: #ffffff;
     `}
 `;
 
-export const RPItem = styled.div<{dark: boolean;}>`
-    display: flex;
-    justify-content: space-between;
-    margin-top: 0.42rem;
-    span {
-        font-family: Inter;
-        font-size: 1.4rem;
-        opacity: 0.9;
-        cursor: pointer;
-        &:hover {
-            opacity: 0.5;
-        }
-        color: #222222;
-        ${props => props.dark && `
+export const RPItem = styled.div<{ dark: boolean }>`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.42rem;
+  animation: ${FadeAnim} 1s;
+  span {
+    font-family: Inter;
+    font-size: 1.4rem;
+    opacity: 0.9;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.5;
+    }
+    color: #222222;
+    ${(props) =>
+      props.dark &&
+      `
             color: #ffffff;
         `}
-    }
+  }
 `;

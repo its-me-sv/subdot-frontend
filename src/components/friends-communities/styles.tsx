@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {BoxShadow, BoxShadowDark} from "../../utils/styles";
+import {BoxShadow, BoxShadowDark, FadeAnim} from "../../utils/styles";
 
 export const Container = styled.div<{ dark: boolean }>`
   display: grid;
@@ -56,10 +56,11 @@ export const ProfileContainer = styled.div<{ hover?: boolean; dark: boolean }>`
   flex-direction: column;
   gap: 0.21rem;
   padding: 0.21rem;
+  animation: ${FadeAnim} 1s;
   &:hover {
     border-radius: 0.14rem;
     ${BoxShadow}
-    ${props => props.dark && `${BoxShadowDark}`}
+    ${(props) => props.dark && `${BoxShadowDark}`}
   }
   ${(props) =>
     props?.hover &&
