@@ -1,6 +1,6 @@
 import React, {useEffect, lazy, Suspense} from "react";
 import {HashRouter, Route, Routes, Navigate} from "react-router-dom";
-import {Toaster} from "react-hot-toast";
+import {Toaster, ToastOptions} from "react-hot-toast";
 
 import '../../index.css';
 
@@ -33,6 +33,12 @@ import {useAppContext} from "../../contexts/app";
 
 interface AppProps {}
 
+const toastOptions: ToastOptions = {
+  style: {
+    borderRadius: "1.4rem",
+  },
+};
+
 const App: React.FC<AppProps> = () => {
   const {
     loggedIn, showTerms, 
@@ -52,7 +58,7 @@ const App: React.FC<AppProps> = () => {
 
   return (
     <div className={loggedIn ? "app-container" : ""}>
-      <Toaster position="top-right" />
+      <Toaster position="top-right" toastOptions={toastOptions} />
       {loading && <Loader />}
       {showTerms && <TermsPolicies />}
       {settingsOpen && <Settings />}

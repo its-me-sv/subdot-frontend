@@ -45,7 +45,7 @@ export const Account = styled.div<{ dark: boolean }>`
   cursor: pointer;
   margin: 0.42rem;
   padding: 0.42rem;
-  border-radius: 0.14rem;
+  border-radius: 1.4rem;
   img {
     width: 3rem;
     height: 3rem;
