@@ -32,6 +32,7 @@ import {defaultUser, defaultPost, defaultUserPostMeta} from "./data";
 import {getSigner, getTxEventIds} from "../../subsocial/polkadot";
 import {BALANCE_DIVISOR, REST_API} from "../../utils/constants";
 import { noFunds, postDislike, postLike } from "../../translations/toast";
+import skeleton from "../../assets/loader.gif";
 
 interface PostProps {
   postId: string;
@@ -177,47 +178,53 @@ const Post: React.FC<PostProps> = ({postId}) => {
 
     return (
       <PostContainer dark={dark}>
-        <PostHeader>
-          <div onClick={() => navigate(`/profile/${owner.username}`)}>
-            <img
-              alt={`pp of ${owner.username}`}
-              src={getImage(owner.picture)}
-            />
-            <PostHeaderRight dark={dark}>
-              <PostUsername>{owner.username}</PostUsername>
-              <PostTime>
-                {posted[language]} {format(new Date(postMeta.createdAt))}
-              </PostTime>
-            </PostHeaderRight>
-          </div>
-          <FetchButton onClick={fetchData} title="Refetch data" dark={dark}>
-            {fetching ? "⏱️" : "↺"}
-          </FetchButton>
-        </PostHeader>
-        <PostContent dark={dark}>{post.description}</PostContent>
-        {post.picture.length > 0 && (
-          <PostImage alt="content" src={getImage(post.picture)} />
+        {fetching ? (
+          <img src={skeleton} alt="skeleton loading" />
+        ) : (
+          <>
+            <PostHeader>
+              <div onClick={() => navigate(`/profile/${owner.username}`)}>
+                <img
+                  alt={`pp of ${owner.username}`}
+                  src={getImage(owner.picture)}
+                />
+                <PostHeaderRight dark={dark}>
+                  <PostUsername>{owner.username}</PostUsername>
+                  <PostTime>
+                    {posted[language]} {format(new Date(postMeta.createdAt))}
+                  </PostTime>
+                </PostHeaderRight>
+              </div>
+              <FetchButton onClick={fetchData} title="Refetch data" dark={dark}>
+                {fetching ? "⏱️" : "↺"}
+              </FetchButton>
+            </PostHeader>
+            <PostContent dark={dark}>{post.description}</PostContent>
+            {post.picture.length > 0 && (
+              <PostImage alt="content" src={getImage(post.picture)} />
+            )}
+            <PostFooter>
+              <FooterItem dark={dark}>
+                <img
+                  alt="like"
+                  src={likedId === "0" ? likeIcon : likedIcon}
+                  onClick={toggleLike}
+                />
+                {postMeta.likes > 0 && <span>{postMeta.likes}</span>}
+              </FooterItem>
+              <FooterItem dark={dark} onClick={() => setCmtOpen!(postId)}>
+                <img alt="comment" src={cmtIcon} />
+                {cmtsLen > 0 && <span>{cmtsLen}</span>}
+              </FooterItem>
+              <FooterItem
+                dark={dark}
+                onClick={() => setTransferId!(`${onwerId}:${owner.username}`)}
+              >
+                <img alt="tip" src={tipIcon} />
+              </FooterItem>
+            </PostFooter>
+          </>
         )}
-        <PostFooter>
-          <FooterItem dark={dark}>
-            <img
-              alt="like"
-              src={likedId === "0" ? likeIcon : likedIcon}
-              onClick={toggleLike}
-            />
-            {postMeta.likes > 0 && <span>{postMeta.likes}</span>}
-          </FooterItem>
-          <FooterItem dark={dark} onClick={() => setCmtOpen!(postId)}>
-            <img alt="comment" src={cmtIcon} />
-            {cmtsLen > 0 && <span>{cmtsLen}</span>}
-          </FooterItem>
-          <FooterItem
-            dark={dark}
-            onClick={() => setTransferId!(`${onwerId}:${owner.username}`)}
-          >
-            <img alt="tip" src={tipIcon} />
-          </FooterItem>
-        </PostFooter>
       </PostContainer>
     );
 };
