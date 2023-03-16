@@ -101,7 +101,7 @@ const Comments: React.FC<CommentsProps> = ({postId, dark}) => {
           const { partialFee } = await cmtTx.paymentInfo(account.address);
           axios.post(`${REST_API}/transaction/new`, {
             accountId: account.address,
-            desc: "Added comment to a post",
+            desc: 0,
             kind: false,
             amount: +(partialFee.toNumber() / BALANCE_DIVISOR).toPrecision(3),
           });

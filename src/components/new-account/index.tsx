@@ -100,7 +100,7 @@ const NewAccount: React.FC<NewAccountProps> = ({account}) => {
             });
             axios.post(`${REST_API}/transaction/new`, {
               accountId: account.address,
-              desc: "Created account",
+              desc: 4,
               kind: false,
               amount: +(partialFee.toNumber() / BALANCE_DIVISOR).toPrecision(3),
             });

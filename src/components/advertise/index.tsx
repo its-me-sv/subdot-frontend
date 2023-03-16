@@ -70,7 +70,7 @@ const Advertise: React.FC<AdvertiseProps> = () => {
           const { partialFee } = await transferTx.paymentInfo(account.address);
           axios.post(`${REST_API}/transaction/new`, {
             accountId: account.address,
-            desc: "Advertisement cost",
+            desc: 5,
             kind: false,
             amount:
               cst + +(partialFee.toNumber() / BALANCE_DIVISOR).toPrecision(3),

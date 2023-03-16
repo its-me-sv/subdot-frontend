@@ -119,7 +119,7 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
                 const {partialFee} = await followTx.paymentInfo(account.address);
                 axios.post(`${REST_API}/transaction/new`, {
                   accountId: account.address,
-                  desc: "Followed a user",
+                  desc: 9,
                   kind: false,
                   amount: +(
                     partialFee.toNumber() / BALANCE_DIVISOR
@@ -160,7 +160,7 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
             const {partialFee} = await followTx.paymentInfo(account.address);
             axios.post(`${REST_API}/transaction/new`, {
               accountId: account.address,
-              desc: "Unfollowed a user",
+              desc: 10,
               kind: false,
               amount: +(partialFee.toNumber() / BALANCE_DIVISOR).toPrecision(3),
             });

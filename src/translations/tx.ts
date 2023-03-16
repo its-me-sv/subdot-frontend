@@ -8,7 +8,8 @@ const english: Array<string> = [
     "Liked a post",
     "Updated profile",
     "Shared a post",
-    "Followed a user"
+    "Followed a user",
+    "Unfollowed a user"
 ];
 
 const chinese: Array<string> = [
@@ -21,7 +22,8 @@ const chinese: Array<string> = [
     "喜欢一个帖子",
     "更新资料",
     "分享了一个帖子",
-    "关注了一个用户"
+    "关注了一个用户",
+    "取消关注用户"
 ];
 
 const hindi: Array<string> = [
@@ -34,7 +36,8 @@ const hindi: Array<string> = [
     "एक पोस्ट पसंद आया",
     "अद्यतन प्रोफ़ाइल",
     "एक पोस्ट साझा की",
-    "एक उपयोगकर्ता का अनुसरण किया"
+    "एक उपयोगकर्ता का अनुसरण किया",
+    "किसी उपयोगकर्ता को अनफ़ॉलो किया"
 ];
 
 const spanish: Array<string> = [
@@ -47,7 +50,8 @@ const spanish: Array<string> = [
     "Me gustó una publicación",
     "Perfil actualizado",
     "compartió una publicación",
-    "Seguido a un usuario"
+    "Seguido a un usuario",
+    "Dejó de seguir a un usuario"
 ];
 
 const french: Array<string> = [
@@ -60,7 +64,8 @@ const french: Array<string> = [
     "J'ai aimé un post",
     "Profil mis à jour",
     "A partagé une publication",
-    "A suivi un utilisateur"
+    "A suivi un utilisateur",
+    "Désabonner un utilisateur"
 ];
 
 export const txDesc: Array<Array<string>> = [

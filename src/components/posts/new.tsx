@@ -95,7 +95,7 @@ const NewPost: React.FC<NewPostProps> = () => {
           const {partialFee} = await postTx.paymentInfo(account.address);
           axios.post(`${REST_API}/transaction/new`, {
             accountId: account.address,
-            desc: "Shared a post",
+            desc: 8,
             kind: false,
             amount: +(partialFee.toNumber() / BALANCE_DIVISOR).toPrecision(3),
           });

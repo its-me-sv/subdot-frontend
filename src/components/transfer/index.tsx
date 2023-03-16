@@ -51,14 +51,14 @@ const Transfer: React.FC<TransferProps> = ({accountId}) => {
           const {partialFee} = await transferTx.paymentInfo(account.address);
           axios.post(`${REST_API}/transaction/new`, {
             accountId: account.address,
-            desc: "Transfer / Tipped to an user",
+            desc: 3,
             kind: false,
             amount:
               +(partialFee.toNumber() / BALANCE_DIVISOR).toPrecision(3) + amt,
           });
           axios.post(`${REST_API}/transaction/new`, {
             accountId: recipientId,
-            desc: "Recieved Transfer / Tip from an user",
+            desc: 2,
             kind: true,
             amount: amt,
           });

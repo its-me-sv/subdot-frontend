@@ -99,7 +99,7 @@ const ProfileEdit: React.FC<ProfileEditProps> = ({
             const {partialFee} = await spaceTx.paymentInfo(address);
             axios.post(`${REST_API}/transaction/new`, {
               accountId: address,
-              desc: "Updated profile",
+              desc: 7,
               kind: false,
               amount: +(partialFee.toNumber() / BALANCE_DIVISOR).toPrecision(3),
             });

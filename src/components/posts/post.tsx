@@ -112,7 +112,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
             const {partialFee} = await likeTx.paymentInfo(account.address);
             axios.post(`${REST_API}/transaction/new`, {
               accountId: account.address,
-              desc: "Liked a post",
+              desc: 6,
               kind: false,
               amount: +(partialFee.toNumber() / BALANCE_DIVISOR).toPrecision(3),
             });
@@ -147,7 +147,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
             const {partialFee} = await disLikeTx.paymentInfo(account.address);
             axios.post(`${REST_API}/transaction/new`, {
               accountId: account.address,
-              desc: "Removed like from a post",
+              desc: 1,
               kind: false,
               amount: +(partialFee.toNumber() / BALANCE_DIVISOR).toPrecision(3),
             });
