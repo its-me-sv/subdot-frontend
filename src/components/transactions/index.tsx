@@ -22,14 +22,17 @@ const Transactions: React.FC<TransactionProps> = () => {
     const {setTxOpen, language, dark} = useAppContext();
     const {account} = useUserContext();
     const [txs, setTxs] = useState<Array<TransactionInfo>>([]);
-    const [over, setOver] = useState<boolean>(false);
+    const [page, setPage] = useState<string | null>("");
     const fetched = useRef<boolean>(false);
 
     const fetchData = () => {
-      if (over || !account) return;
+      if (page == null) return;
+      if (!account) return;
+      const reqBody: any = {};
+      if (page?.length) reqBody.page = page;
       const txsPromise = axios.post(
         `${REST_API}/transaction/${account.address}`,
-        { skip: txs.length }
+        { ...reqBody }
       );
       toast.promise(txsPromise, {
         loading: txsFetch.loading[language],
@@ -37,8 +40,8 @@ const Transactions: React.FC<TransactionProps> = () => {
         error: txsFetch.error[language]
       });
       txsPromise.then(({data}) => {
-        setTxs([...txs, ...data]);
-        setOver(data.length === 0);
+        setTxs([...txs, ...data.txs]);
+        setPage(data.page);
       });
     };
 
@@ -60,7 +63,7 @@ const Transactions: React.FC<TransactionProps> = () => {
             {txs.map((tx) => (
               <Transaction key={tx._id} tx={tx} />
             ))}
-            {!over && (
+            {page !== null && (
               <FetchButton>
                 <Button
                   bgColor={dark ? "#ffffff" : "#222222"}
