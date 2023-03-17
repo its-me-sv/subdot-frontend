@@ -8,7 +8,7 @@ import {useSubsocial} from "../subsocial";
 import {useAppContext} from "./app";
 import { BALANCE_DIVISOR, REST_API } from "../utils/constants";
 import { getSigner, getTxEventIds } from "../subsocial/polkadot";
-import { noFunds, userTrans } from "../translations/toast";
+import { noFunds, userTrans, accNotFnd } from "../translations/toast";
 
 interface UserContextInterface {
   account: WalletAccount | null;
@@ -60,18 +60,19 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
         if (!api) return;
         const {address} = acc;
         setAccount(acc);
-        const {presence} = (await axios.get(`${REST_API}/user/account/${address}`))
-          .data;
-        const profile = await api.base.findProfileSpace(address);
-        if (!presence) {
-          setNewAccount!(acc);
-          setReputation(1);
-          if (profile?.content || profile) {
-            setOverlap!(true);
-          }
-          return;
-        }
         const loginPromise = new Promise(async (resolve, reject) => {
+            const {presence} = (await axios.get(`${REST_API}/user/account/${address}`))
+              .data;
+            const profile = await api.base.findProfileSpace(address);
+            if (!presence) {
+              setNewAccount!(acc);
+              setReputation(1);
+              if (profile?.content || profile) {
+                setOverlap!(true);
+              }
+              toast.error(accNotFnd[language]);
+              return reject();
+            }
             if (!profile?.content) {
                 toast.error(userTrans.loginErr[language]);
                 return reject();
