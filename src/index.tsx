@@ -5,10 +5,7 @@ import './index.css';
 
 import App from './containers/app';
 
-import {AppContextProvider} from './contexts/app';
-import {SubsocialContextProvider} from './subsocial';
-import {UserContextProvider} from './contexts/user';
-import {SocketContextProvider} from './contexts/socket';
+import ContextProvider from './contexts';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -16,14 +13,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <AppContextProvider>
-      <SubsocialContextProvider>
-        <UserContextProvider>
-          <SocketContextProvider>
-            <App />
-          </SocketContextProvider>
-        </UserContextProvider>
-      </SubsocialContextProvider>
-    </AppContextProvider>
+    <ContextProvider>
+      <App />
+    </ContextProvider>
   </React.StrictMode>
 );
