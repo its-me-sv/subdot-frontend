@@ -12,7 +12,7 @@ import { getImage } from "../../utils/utils";
 interface ResultCardProps extends ExploreResult {}
 
 const ResultCard: React.FC<ResultCardProps> = ({
-    accountId, username, name
+    accountId, username, name, reputation
 }) => {
     const navigate = useNavigate();
     const {setExplore, dark} = useAppContext();
@@ -38,11 +38,14 @@ const ResultCard: React.FC<ResultCardProps> = ({
 
     return (
         <Item dark={dark} onClick={handlePress}>
-            <img alt="pp" src={getImage(picture)} />
-            <div>
-                <span>{`${username} - ${name}`}</span>
-                <span>{stTxt}</span>
+            <div id="info">
+                <img alt="pp" src={getImage(picture)} />
+                <div id="details">
+                    <span>{`${username} - ${name}`}</span>
+                    <span>{stTxt}</span>
+                </div>
             </div>
+            <span id="rp">{reputation} RP</span>
         </Item>
     );
 };

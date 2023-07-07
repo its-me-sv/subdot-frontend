@@ -34,8 +34,13 @@ export const Item = styled.span<{dark: boolean;}>`
   color: #222222;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 0.14rem;
-  div {
+  #info {
+    display: flex;
+    gap: 0.42rem;
+  }
+  #details {
     display: flex;
     flex-direction: column;
   }

@@ -39,6 +39,7 @@ export interface ExploreResult {
     accountId: string;
     username: string;
     name: string;
+    reputation: number;
 }
 
 export interface TopRPUser {
