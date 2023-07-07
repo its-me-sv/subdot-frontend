@@ -20,12 +20,15 @@ export const Container = styled.div<{dark: boolean;}>`
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    width: 15rem;
+    width: 16rem;
     right: 0px;
     gap: 1rem;
     height: 100vh;
     padding-top: 1rem;
     border-bottom-left-radius: 0.42rem;
+    a {
+      text-decoration: none;
+    }
     ${BoxShadow}
     ${props => props.dark && `
       ${BoxShadowDark}
@@ -39,7 +42,7 @@ export const MenuItem = styled.div<{ dark: boolean }>`
   cursor: pointer;
   display: flex;
   align-items: center;
-  width: 14rem;
+  width: 15rem;
   height: 2.1rem;
   gap: 1rem;
   img {

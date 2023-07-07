@@ -20,6 +20,7 @@ import policiesLogo from "../../assets/icons/policy.png";
 import logoutLogo from "../../assets/icons/logout.png";
 import chatLogo from "../../assets/icons/chat.png";
 import newLogo from "../../assets/icons/new.png";
+import feedBackLogo from "../../assets/icons/feedback.png";
 
 interface MenuProps {}
 
@@ -82,44 +83,51 @@ const Menu: React.FC<MenuProps> = () => {
     return (
       <BackgrorundHider dark={dark} onClick={closeMenu}>
         <Container dark={dark} onClick={(event) => event.stopPropagation()}>
-            <MenuItem dark={dark} onClick={takeToProfile}>
-              <img src={profileLogo} />
-              <span>{menu.profile[language]}</span>
-            </MenuItem>
-            <MenuItem dark={dark} onClick={takeToRP}>
-              <img src={chatLogo} />
-              <span>SUBCHAT</span>
+          <MenuItem dark={dark} onClick={takeToProfile}>
+            <img src={profileLogo} />
+            <span>{menu.profile[language]}</span>
+          </MenuItem>
+          <MenuItem dark={dark} onClick={takeToRP}>
+            <img src={chatLogo} />
+            <span>SUBCHAT</span>
+            <img src={newLogo} />
+          </MenuItem>
+          <MenuItem dark={dark} onClick={takeToRP}>
+            <img src={reputationLogo} />
+            <span>{menu.rpBoard[language]}</span>
+            <img src={newLogo} />
+          </MenuItem>
+          <MenuItem dark={dark} onClick={openTransactions}>
+            <img src={txsLogo} />
+            <span>{menu.transactions[language]}</span>
+          </MenuItem>
+          <MenuItem dark={dark} onClick={openSettings}>
+            <img src={settingsLogo} />
+            <span>{menu.settings[language]}</span>
+          </MenuItem>
+          <MenuItem dark={dark} onClick={openAdvertise}>
+            <img src={advertLogo} />
+            <span>{menu.advertise[language]}</span>
+          </MenuItem>
+          <MenuItem dark={dark} onClick={showTerms}>
+            <img src={termsLogo} />
+            <span>{menu.terms[language]}</span>
+          </MenuItem>
+          <MenuItem dark={dark} onClick={showTerms}>
+            <img src={policiesLogo} />
+            <span>{menu.policies[language]}</span>
+          </MenuItem>
+          <a href="https://subdot.canny.io/feedback" target="_blank">
+            <MenuItem dark={dark}>
+              <img src={feedBackLogo} />
+              <span>{menu.feedback[language]}</span>
               <img src={newLogo} />
             </MenuItem>
-            <MenuItem dark={dark} onClick={takeToRP}>
-              <img src={reputationLogo} />
-              <span>{menu.rpBoard[language]}</span>
-              <img src={newLogo} />
-            </MenuItem>
-            <MenuItem dark={dark} onClick={openTransactions}>
-              <img src={txsLogo} />
-              <span>{menu.transactions[language]}</span>
-            </MenuItem>
-            <MenuItem dark={dark} onClick={openSettings}>
-              <img src={settingsLogo} />
-              <span>{menu.settings[language]}</span>
-            </MenuItem>
-            <MenuItem dark={dark} onClick={openAdvertise}>
-              <img src={advertLogo} />
-              <span>{menu.advertise[language]}</span>
-            </MenuItem>
-            <MenuItem dark={dark} onClick={showTerms}>
-              <img src={termsLogo} />
-              <span>{menu.terms[language]}</span>
-            </MenuItem>
-            <MenuItem dark={dark} onClick={showTerms}>
-              <img src={policiesLogo} />
-              <span>{menu.policies[language]}</span>
-            </MenuItem>
-            <MenuItem dark={dark} onClick={logout}>
-              <img src={logoutLogo} />
-              <span>{menu.logout[language]}</span>
-            </MenuItem>
+          </a>
+          <MenuItem dark={dark} onClick={logout}>
+            <img src={logoutLogo} />
+            <span>{menu.logout[language]}</span>
+          </MenuItem>
         </Container>
       </BackgrorundHider>
     );

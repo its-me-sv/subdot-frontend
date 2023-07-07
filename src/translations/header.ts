@@ -62,5 +62,12 @@ export const menu = {
         "लॉग आउट",
         "CERRAR SESIÓN",
         "SE DÉCONNECTER"
+    ],
+    feedback: [
+        "FEEDBACK",
+        "反馈",
+        "प्रतिक्रिया",
+        "COMENTARIO",
+        "RETOUR"
     ]
 };
