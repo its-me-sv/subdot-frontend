@@ -56,6 +56,8 @@ export const Content = styled.span<{ dark: boolean }>`
   max-height: 18rem;
   overflow-y: auto;
   color: #222222;
+  text-align: justify;
+  padding-right: 0.7rem;
   ${props => props.dark && `
     color: #ffffff;
   `}

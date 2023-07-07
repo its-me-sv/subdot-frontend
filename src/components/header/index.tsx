@@ -5,7 +5,6 @@ import {simpleFormatBalance} from "@subsocial/utils";
 import {Container, Footer, HomeLogo, MenuLogo} from "./styles";
 
 import Explore from "../explore";
-import Menu from "../menu";
 
 import {useAppContext} from "../../contexts/app";
 import {useUserContext} from "../../contexts/user";
@@ -16,7 +15,7 @@ interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = () => {
     const navigate = useNavigate();
-    const {setMenuOpen, menuOpen, dark, setExplore} = useAppContext();
+    const {setMenuOpen, dark, setExplore} = useAppContext();
     const {user, reputation, account} = useUserContext();
     const {api} = useSubsocial();
     const [balance, setBalance] = useState<string>("");
@@ -67,10 +66,10 @@ const Header: React.FC<HeaderProps> = () => {
           <MenuLogo 
             onClick={openMenu}
             alt="menu" 
-            src={getImage(user?.picture ?? "")} 
+            src={getImage(user?.picture ?? "")}
+            title="menu"
           />
         </Footer>
-        {menuOpen && <Menu />}
       </Container>
     );
 };

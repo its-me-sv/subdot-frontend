@@ -15,7 +15,7 @@ const Results: React.FC<ResultsProps> = () => {
     const [results, setResults] = useState<Array<ExploreResult>>([]);
 
     useEffect(() => {
-        if (explore.length <= 2) return;
+        if (explore.length < 1) return;
         axios.post(`${REST_API}/user/explore`, {
             keyword: explore
         }).then(({data}) => setResults(data));
@@ -27,6 +27,7 @@ const Results: React.FC<ResultsProps> = () => {
                 {results.map(props => 
                     <ResultCard key={props.accountId} {...props} />
                 )}
+                {results.length === 0 && <span>No user found</span>}
             </ItemsContainer>
         </Container>
     );

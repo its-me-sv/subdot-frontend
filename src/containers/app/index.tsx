@@ -30,6 +30,7 @@ import Header from "../../components/header";
 
 // providers
 import {useAppContext} from "../../contexts/app";
+import Menu from "../../components/menu";
 
 interface AppProps {}
 
@@ -49,7 +50,7 @@ const App: React.FC<AppProps> = () => {
     loading, setLoading,
     newAccount, cmtOpen,
     lowBalance, dark,
-    overlap
+    overlap, menuOpen
   } = useAppContext();
 
   useEffect(() => {
@@ -67,8 +68,9 @@ const App: React.FC<AppProps> = () => {
         {loggedIn && (
           <>
             <Header />
+            {menuOpen && <Menu />}
             {advertMenuOpen && <Advertise />}
-            {explore.length > 2 && <Results />}
+            {explore.length > 0 && <Results />}
             {peek.length > 0 && <Peek id={peek} />}
             {cmtOpen.length > 0 && <Comments dark={dark} postId={cmtOpen} />}
             {transferId.length > 0 && <Transfer accountId={transferId} />}

@@ -2,15 +2,24 @@ import React from "react";
 import {useNavigate} from "react-router-dom";
 import toast from "react-hot-toast";
 
-import {Container, MenuItem} from "./styles";
-import {MenuLogo} from "../header/styles";
+import {Container, MenuItem, BackgrorundHider} from "./styles";
 import {menu} from "../../translations/header";
 import {noAdvert} from "../../translations/toast";
 
 import {useAppContext} from "../../contexts/app";
 import {useUserContext} from "../../contexts/user";
 import {useSocketContext} from "../../contexts/socket";
-import {getImage} from "../../utils/utils";
+
+import profileLogo from "../../assets/icons/profile.png";
+import reputationLogo from "../../assets/icons/reputation.png";
+import txsLogo from "../../assets/icons/transactions.png";
+import settingsLogo from "../../assets/icons/settings.png";
+import advertLogo from "../../assets/icons/advert.png";
+import termsLogo from "../../assets/icons/terms.png";
+import policiesLogo from "../../assets/icons/policy.png";
+import logoutLogo from "../../assets/icons/logout.png";
+import chatLogo from "../../assets/icons/chat.png";
+import newLogo from "../../assets/icons/new.png";
 
 interface MenuProps {}
 
@@ -71,37 +80,48 @@ const Menu: React.FC<MenuProps> = () => {
     };
 
     return (
-      <Container dark={dark}>
-        <MenuLogo
-          onClick={closeMenu}
-          alt="menu"
-          src={getImage(user?.picture ?? "")}
-        />
-        <MenuItem dark={dark} onClick={takeToRP}>
-          {menu.rpBoard[language]}
-        </MenuItem>
-        <MenuItem dark={dark} onClick={takeToProfile}>
-          {menu.profile[language]}
-        </MenuItem>
-        <MenuItem dark={dark} onClick={openTransactions}>
-          {menu.transactions[language]}
-        </MenuItem>
-        <MenuItem dark={dark} onClick={openSettings}>
-          {menu.settings[language]}
-        </MenuItem>
-        <MenuItem dark={dark} onClick={openAdvertise}>
-          {menu.advertise[language]}
-        </MenuItem>
-        <MenuItem dark={dark} onClick={showTerms}>
-          {menu.terms[language]}
-        </MenuItem>
-        <MenuItem dark={dark} onClick={showTerms}>
-          {menu.policies[language]}
-        </MenuItem>
-        <MenuItem dark={dark} onClick={logout}>
-          {menu.logout[language]}
-        </MenuItem>
-      </Container>
+      <BackgrorundHider dark={dark} onClick={closeMenu}>
+        <Container dark={dark} onClick={(event) => event.stopPropagation()}>
+            <MenuItem dark={dark} onClick={takeToProfile}>
+              <img src={profileLogo} />
+              <span>{menu.profile[language]}</span>
+            </MenuItem>
+            <MenuItem dark={dark} onClick={takeToRP}>
+              <img src={chatLogo} />
+              <span>SUBCHAT</span>
+              <img src={newLogo} />
+            </MenuItem>
+            <MenuItem dark={dark} onClick={takeToRP}>
+              <img src={reputationLogo} />
+              <span>{menu.rpBoard[language]}</span>
+              <img src={newLogo} />
+            </MenuItem>
+            <MenuItem dark={dark} onClick={openTransactions}>
+              <img src={txsLogo} />
+              <span>{menu.transactions[language]}</span>
+            </MenuItem>
+            <MenuItem dark={dark} onClick={openSettings}>
+              <img src={settingsLogo} />
+              <span>{menu.settings[language]}</span>
+            </MenuItem>
+            <MenuItem dark={dark} onClick={openAdvertise}>
+              <img src={advertLogo} />
+              <span>{menu.advertise[language]}</span>
+            </MenuItem>
+            <MenuItem dark={dark} onClick={showTerms}>
+              <img src={termsLogo} />
+              <span>{menu.terms[language]}</span>
+            </MenuItem>
+            <MenuItem dark={dark} onClick={showTerms}>
+              <img src={policiesLogo} />
+              <span>{menu.policies[language]}</span>
+            </MenuItem>
+            <MenuItem dark={dark} onClick={logout}>
+              <img src={logoutLogo} />
+              <span>{menu.logout[language]}</span>
+            </MenuItem>
+        </Container>
+      </BackgrorundHider>
     );
 };
 

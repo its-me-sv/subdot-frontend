@@ -2,9 +2,12 @@ import styled from "styled-components";
 import {BoxShadow, BoxShadowDark} from "../../utils/styles";
 
 export const Container = styled.div<{dark: boolean;}>`
+  position: absolute;
   z-index: 999;
   width: 100vw;
   display: flex;
+  height: 92%;
+  margin-top: 3.5rem;
   flex-direction: column;
   background-color: rgba(0, 0, 0, 0.5);
   ${props => props.dark && `
