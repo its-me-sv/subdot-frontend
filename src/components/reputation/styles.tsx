@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import {BoxShadow, BoxShadowDark, FadeAnim} from "../../utils/styles";
 
-export const Container = styled.div<{dark: boolean;}>`
-    display: grid;
-    grid-template-columns: 5fr 1fr;
-    background-color: #ffffff;
-    ${props => props.dark && `
+export const Container = styled.div<{ dark: boolean }>`
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  background-color: #ffffff;
+  ${(props) =>
+    props.dark &&
+    `
         background-color: #222222;
     `}
 `;
@@ -16,7 +18,7 @@ export const InfoBox = styled.div`
   align-items: center;
   justify-content: center;
   gap: 0.42rem;
-  margin: 0rem 0.42rem;
+  /* margin: 0rem 0.42rem; */
   border-left: 0.3rem solid rgb(227, 224, 224);
 `;
 
@@ -42,6 +44,7 @@ export const InfoItem = styled.div<{ dark: boolean }>`
   display: flex;
   justify-content: space-between;
   gap: 0.42rem;
+  width: 14rem;
   span {
     animation: ${FadeAnim} 1s;
     font-family: Inter;
