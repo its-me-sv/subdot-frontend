@@ -51,6 +51,11 @@ const Menu: React.FC<MenuProps> = () => {
       closeMenu();
     };
 
+    const takeToSubchat = () => {
+      navigate("/subchat");
+      closeMenu();
+    };
+
     const takeToRP = () => {
       navigate("/rp");
       closeMenu();
@@ -87,7 +92,7 @@ const Menu: React.FC<MenuProps> = () => {
             <img src={profileLogo} />
             <span>{menu.profile[language]}</span>
           </MenuItem>
-          <MenuItem dark={dark} onClick={takeToRP}>
+          <MenuItem dark={dark} onClick={takeToSubchat}>
             <img src={chatLogo} />
             <span>SUBCHAT</span>
             <img src={newLogo} />

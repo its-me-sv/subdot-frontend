@@ -89,6 +89,7 @@ const Transfer: React.FC<TransferProps> = ({accountId}) => {
       .finally(() => {
         setTransferId!("");
       });
+      setTransferId!("");
     };
 
     return (

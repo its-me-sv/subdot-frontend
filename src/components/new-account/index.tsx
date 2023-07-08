@@ -91,7 +91,7 @@ const NewAccount: React.FC<NewAccountProps> = ({account}) => {
             setSpaceId!(+spaceTxIds[0]);
             const profileTx = substrateApi.tx.profiles.setProfile(spaceTxIds[0]);
             await profileTx.signAsync(account.address, { signer });
-            getTxEventIds(profileTx);
+            await getTxEventIds(profileTx);
             const {partialFee} = await profileTx.paymentInfo(account.address);
             setUser!(newUser);
             axios.post(`${REST_API}/user/new-account`, {

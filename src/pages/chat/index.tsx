@@ -9,6 +9,7 @@ import Chat from "../../components/chat";
 
 import {useAppContext} from "../../contexts/app";
 import {useUserContext} from "../../contexts/user";
+import Advert from "../../components/rp-advert/advert";
 
 interface ChatPageProps {}
 
@@ -24,7 +25,7 @@ const ChatPage: React.FC<ChatPageProps> = () => {
       <Container dark={dark}>
         <FriendsCommunites accountId={account?.address} />
         <Chat />
-        <AdvertSideView />
+        <Advert />
       </Container>
     );
 };

@@ -95,7 +95,7 @@ const App: React.FC<AppProps> = () => {
               element={loggedIn ? <ProfilePage /> : <Navigate to="/" />}
             />
             <Route
-              path="/chat"
+              path="/subchat"
               element={loggedIn ? <ChatPage /> : <Navigate to="/" />}
             />
             <Route

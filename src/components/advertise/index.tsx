@@ -66,7 +66,7 @@ const Advertise: React.FC<AdvertiseProps> = () => {
           const signer = await getSigner(account.address);
           if (!signer) return reject();
           await transferTx.signAsync(account.address, { signer });
-          getTxEventIds(transferTx);
+          await getTxEventIds(transferTx);
           const { partialFee } = await transferTx.paymentInfo(account.address);
           axios.post(`${REST_API}/transaction/new`, {
             accountId: account.address,

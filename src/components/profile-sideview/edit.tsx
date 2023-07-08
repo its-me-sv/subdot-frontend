@@ -95,7 +95,7 @@ const ProfileEdit: React.FC<ProfileEditProps> = ({
             const signer = await getSigner(address);
             if (!signer) return reject();
             await spaceTx.signAsync(address, {signer});
-            getTxEventIds(spaceTx);
+            await getTxEventIds(spaceTx);
             const {partialFee} = await spaceTx.paymentInfo(address);
             axios.post(`${REST_API}/transaction/new`, {
               accountId: address,
