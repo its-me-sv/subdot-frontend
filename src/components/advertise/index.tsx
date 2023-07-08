@@ -97,6 +97,7 @@ const Advertise: React.FC<AdvertiseProps> = () => {
         success: advertPost.success[language],
         error: advertPost.error[language]
       });
+      setAdvertMenuOpen!(false);
     };
 
     return (

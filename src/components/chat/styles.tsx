@@ -12,6 +12,29 @@ export const Container = styled.div<{dark: boolean;}>`
   `}
 `;
 
+export const DefaultContainer = styled.div<{ dark: boolean }>`
+  height: 92vh;
+  padding: 0.42rem 0rem;
+  color: #222222;
+  font-family: Inter;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4.2rem;
+  border-right: 0.3rem solid rgb(227, 224, 224);
+  span {
+    width: 42vw;
+    text-align: justify;
+    opacity: 0.7;
+  }
+  ${(props) =>
+    props.dark &&
+    `
+      color: #d7d7d7;
+      border-right: 0.3rem solid rgb(227, 224, 224);
+    `}
+`;
+
 export const InputContainer = styled.div<{ dark: boolean }>`
   display: flex;
   margin: 0.42rem;

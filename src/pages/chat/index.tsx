@@ -11,6 +11,8 @@ import {useUserContext} from "../../contexts/user";
 import Advert from "../../components/rp-advert/advert";
 import { useLocation } from "react-router-dom";
 import { useChatContext } from "../../contexts/chat";
+import { DefaultContainer } from "../../components/chat/styles";
+import { chooseAcc } from "../../translations/chat";
 
 interface ChatPageProps {}
 
@@ -32,10 +34,13 @@ const ChatPage: React.FC<ChatPageProps> = () => {
     return (
       <Container dark={dark}>
         <FriendsCommunites accountId={account?.address} />
-        {currChat.length > 0 
-          ? <Chat address={currChat}  /> 
-          : <span>Choose a contact from right side to chat</span>
-        }
+        {currChat.length > 0 ? (
+          <Chat address={currChat} />
+        ) : (
+          <DefaultContainer dark={dark}>
+            <span>{chooseAcc[language]}</span>
+          </DefaultContainer>
+        )}
         <Advert />
       </Container>
     );
