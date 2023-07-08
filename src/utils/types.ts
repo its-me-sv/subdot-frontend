@@ -78,3 +78,9 @@ export interface AdvertInfo {
     _id: string;
     __v: number;
 }
+
+export interface MessageContent {
+    sender: string;
+    reciever: string;
+    message: string;
+}

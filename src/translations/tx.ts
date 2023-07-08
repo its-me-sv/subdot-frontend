@@ -9,7 +9,8 @@ const english: Array<string> = [
     "Updated profile",
     "Shared a post",
     "Followed a user",
-    "Unfollowed a user"
+    "Unfollowed a user",
+    "Message cost"
 ];
 
 const chinese: Array<string> = [
@@ -23,7 +24,8 @@ const chinese: Array<string> = [
     "更新资料",
     "分享了一个帖子",
     "关注了一个用户",
-    "取消关注用户"
+    "取消关注用户",
+    "消息费用"
 ];
 
 const hindi: Array<string> = [
@@ -37,7 +39,8 @@ const hindi: Array<string> = [
     "अद्यतन प्रोफ़ाइल",
     "एक पोस्ट साझा की",
     "एक उपयोगकर्ता का अनुसरण किया",
-    "किसी उपयोगकर्ता को अनफ़ॉलो किया"
+    "किसी उपयोगकर्ता को अनफ़ॉलो किया",
+    "संदेश की लागत"
 ];
 
 const spanish: Array<string> = [
@@ -51,7 +54,8 @@ const spanish: Array<string> = [
     "Perfil actualizado",
     "compartió una publicación",
     "Seguido a un usuario",
-    "Dejó de seguir a un usuario"
+    "Dejó de seguir a un usuario",
+    "Costo del mensaje"
 ];
 
 const french: Array<string> = [
@@ -65,7 +69,8 @@ const french: Array<string> = [
     "Profil mis à jour",
     "A partagé une publication",
     "A suivi un utilisateur",
-    "Désabonner un utilisateur"
+    "Désabonner un utilisateur",
+    "Coût des messages"
 ];
 
 export const txDesc: Array<Array<string>> = [
