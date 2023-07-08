@@ -8,18 +8,20 @@ import SectionProfile from "../friends-communities/profile";
 
 import {useAppContext} from "../../contexts/app";
 
-interface ChatProps {}
+interface ChatProps {
+    address: string
+}
 
-const Chat: React.FC<ChatProps> = () => {
-    const {dark} = useAppContext();
+const Chat: React.FC<ChatProps> = ({ address }) => {
+  const { dark } = useAppContext();
 
-    return (
-        <Container dark={dark}>
-            <SectionProfile id="<DarK Knight />" hover />
-            <Messages />
-            <MessageInput />
-        </Container>
-    );
+  return (
+    <Container dark={dark}>
+      <SectionProfile id={address} hover />
+      <Messages />
+      <MessageInput />
+    </Container>
+  );
 };
 
 export default Chat;

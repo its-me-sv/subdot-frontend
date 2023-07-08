@@ -122,7 +122,11 @@ const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
         <Footer>
           <Button
             bgColor="#0072bb"
-            // onClick={() => navigate(`/chat?user=${accountId}`)}
+            onClick={() =>
+              navigate(`/subchat`, {
+                state: { address: accountId },
+              })
+            }
           >
             {footer.msg[language]}
           </Button>
@@ -132,8 +136,9 @@ const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
           >
             {footer.transfer[language]}
           </Button>
-          <Button 
-            bgColor={dark ? "#ffffff" : "#222222"} dark={dark}
+          <Button
+            bgColor={dark ? "#ffffff" : "#222222"}
+            dark={dark}
             onClick={handleFollow}
           >
             {following.includes(accountId || "")

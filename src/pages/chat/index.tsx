@@ -4,27 +4,38 @@ import {Container} from "../home/styles";
 import {chatPage} from "../../translations/page-titles";
 
 import FriendsCommunites from "../../components/friends-communities";
-import AdvertSideView from "../../components/advert-sideview";
 import Chat from "../../components/chat";
 
 import {useAppContext} from "../../contexts/app";
 import {useUserContext} from "../../contexts/user";
 import Advert from "../../components/rp-advert/advert";
+import { useLocation } from "react-router-dom";
+import { useChatContext } from "../../contexts/chat";
 
 interface ChatPageProps {}
 
 const ChatPage: React.FC<ChatPageProps> = () => {
     const {dark, language} = useAppContext();
     const {account} = useUserContext();
+    const location = useLocation();
+    const {setCurrChat, currChat} = useChatContext();
 
     useEffect(() => {
       window.document.title = `${chatPage[language]} • Subdot`;
     }, [language]);
-    
+
+    useEffect(() => {
+      if (!location.state) return;
+      setCurrChat!(location.state.address as string);
+    }, [location.state]);
+
     return (
       <Container dark={dark}>
         <FriendsCommunites accountId={account?.address} />
-        <Chat />
+        {currChat.length > 0 
+          ? <Chat address={currChat}  /> 
+          : <span>Choose a contact from right side to chat</span>
+        }
         <Advert />
       </Container>
     );

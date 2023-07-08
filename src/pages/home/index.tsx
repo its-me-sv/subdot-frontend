@@ -9,15 +9,18 @@ import RPAdvert from "../../components/rp-advert";
 
 import {useAppContext} from "../../contexts/app";
 import {useUserContext} from "../../contexts/user";
+import { useChatContext } from "../../contexts/chat";
 
 interface HomePageProps {}
 
 const HomePage: React.FC<HomePageProps> = () => {
   const {resetAppContext, dark, language} = useAppContext();
   const {account, spaceId} = useUserContext();
+  const {resetChat} = useChatContext();
 
   useEffect(() => {
     window.document.title = `${homePage[language]} • Subdot`;
+    resetChat!();
     return () => resetAppContext!();
   }, []);
 

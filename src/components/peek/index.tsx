@@ -100,7 +100,12 @@ const Peek: React.FC<PeekProps> = ({id}) => {
               <>
                 <Button
                   bgColor="#0072bb"
-                  // onClick={() => navigate(`/chat?user=${user.username}`)}
+                  onClick={() => {
+                    navigate(`/subchat`, {
+                      state: { address: id },
+                    });
+                    setPeek!("");
+                  }}
                 >
                   {footer.msg[language]}
                 </Button>

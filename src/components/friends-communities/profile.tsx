@@ -17,8 +17,6 @@ interface SectionProfileProps {
     hover?: boolean;
 }
 
-
-
 const SectionProfile: React.FC<SectionProfileProps> = ({id, hover}) => {
     const {setPeek, dark} = useAppContext();
     const {api} = useSubsocial();

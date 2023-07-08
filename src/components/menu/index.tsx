@@ -21,6 +21,7 @@ import logoutLogo from "../../assets/icons/logout.png";
 import chatLogo from "../../assets/icons/chat.png";
 import newLogo from "../../assets/icons/new.png";
 import feedBackLogo from "../../assets/icons/feedback.png";
+import { useChatContext } from "../../contexts/chat";
 
 interface MenuProps {}
 
@@ -33,6 +34,7 @@ const Menu: React.FC<MenuProps> = () => {
         language, dark, advert
     } = useAppContext();
     const {logoutUser, user, account} = useUserContext();
+    const {resetChat} = useChatContext();
     const {socket} = useSocketContext();
 
     const closeMenu = () => {
@@ -48,6 +50,7 @@ const Menu: React.FC<MenuProps> = () => {
       if (!account) return;
       socket.emit("leaveRoom", account.address);
       logoutUser!();
+      resetChat!();
       closeMenu();
     };
 

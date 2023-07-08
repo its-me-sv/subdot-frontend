@@ -4,12 +4,14 @@ import { AppContextProvider } from "./app";
 import { SubsocialContextProvider } from "../subsocial";
 import { UserContextProvider } from "./user";
 import { SocketContextProvider } from "./socket";
+import { ChatContextProvider } from "./chat";
 
 const providers: Array<React.FC<{ children: React.ReactNode }>> = [
   AppContextProvider,
   SubsocialContextProvider,
   UserContextProvider,
-  SocketContextProvider
+  SocketContextProvider,
+  ChatContextProvider
 ];
 
 interface ContextProps {

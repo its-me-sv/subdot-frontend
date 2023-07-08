@@ -13,6 +13,7 @@ import ProfileSideView from "../../components/profile-sideview";
 import {useAppContext} from "../../contexts/app";
 import axios from "axios";
 import { REST_API } from "../../utils/constants";
+import { useChatContext } from "../../contexts/chat";
 
 interface ProfilePageProps {}
 
@@ -20,6 +21,7 @@ const ProfilePage: React.FC<ProfilePageProps> = () => {
   const params = useParams();
   const navigate = useNavigate();
   const {dark, resetAppContext, language} = useAppContext();
+  const {resetChat} = useChatContext();
   const [accountId, setAccountId] = useState<string|undefined>(undefined);
 
   const fetchData = () => {
@@ -39,6 +41,10 @@ const ProfilePage: React.FC<ProfilePageProps> = () => {
     window.document.title = `${params.id} ${profilePage[language]} • Subdot`;
     fetchData();
   }, [params]);
+
+  useEffect(() => {
+    resetChat!();
+  }, []);
 
   return (
     <Container dark={dark}>

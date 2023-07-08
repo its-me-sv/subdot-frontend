@@ -29,6 +29,7 @@ import {useUserContext} from "../../contexts/user";
 import {getAllAccounts} from "../../subsocial/polkadot";
 import {WalletAccount} from "../../utils/types";
 import { DICE_BEAR } from "../../utils/constants";
+import { useChatContext } from "../../contexts/chat";
 
 interface LoginPageProps {}
 
@@ -43,6 +44,7 @@ const LoginPage: React.FC<LoginPageProps> = () => {
   } = useAppContext();
   const {loginUser} = useUserContext();
   const [accounts, setAccounts] = useState<Array<WalletAccount>>([]);
+  const {resetChat} = useChatContext();
   
   const onWalletConnect = useCallback(async () => {
     const accounts = await getAllAccounts();
@@ -63,6 +65,10 @@ const LoginPage: React.FC<LoginPageProps> = () => {
   useEffect(() => {
     window.document.title = `${loginPage[language]} • Subdot`;
   }, [language]);
+
+  useEffect(() => {
+    resetChat!();
+  }, []);
 
   return (
     <Container dark={dark}>
