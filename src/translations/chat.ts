@@ -37,3 +37,27 @@ export const msgPromise = {
         "Impossible de vérifier le message"
     ]
 };
+
+export const msgsFetch = {
+    loading: [
+        "Fetching messages",
+        "获取消息",
+        "संदेश लाये जा रहे हैं",
+        "Obtener mensajes",
+        "Récupération des messages"
+    ],
+    success: [
+        "Messages fetched",
+        "已获取消息",
+        "संदेश लाए गए",
+        "Mensajes obtenidos",
+        "Messages récupérés"
+    ],
+    error: [
+        "Couldn't fetch messages",
+        "无法获取消息",
+        "संदेश नहीं लाये जा सके",
+        "No se pudieron recuperar los mensajes",
+        "Impossible de récupérer les messages"
+    ]
+};

@@ -3,18 +3,21 @@ import React from "react";
 import {MessagesContainer, Message} from "./styles";
 
 import {useAppContext} from "../../contexts/app";
+import { DBMessage } from "../../utils/types";
 
-interface MessagesProps {}
+interface MessagesProps {
+  messages: Array<DBMessage>;
+}
 
-const Messages: React.FC<MessagesProps> = () => {
+const Messages: React.FC<MessagesProps> = ({messages}) => {
     const {dark} = useAppContext();
 
     return (
         <MessagesContainer>
-            {new Array(42).fill(7).map(() => (
-                <Message dark={dark}>
-                    <span>Hi there!! How ya doing?</span>
-                    <span>2:43 PM 27 Jan 2023</span>
+            {messages.map((message) => (
+                <Message key={message.message_id} dark={dark}>
+                    <span>{message.ipfs_content_id}</span>
+                    <span>{message.created_at}</span>
                 </Message>
             ))}
         </MessagesContainer>
