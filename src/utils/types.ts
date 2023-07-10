@@ -89,4 +89,5 @@ export interface DBMessage {
     message_id: string;
     created_at: string;
     ipfs_content_id: string;
+    verified: boolean;
 }

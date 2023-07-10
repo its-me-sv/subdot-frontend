@@ -12,4 +12,4 @@ export const ADVERT_BENEFICIAR: string = "5GP4tv4zanLgcwup1u1dLX9Ca8XAs3uRS6RQCv
 
 export const ADVERT_COST: number = 2;
 
-export const MSG_COST: number = 0.01;
+export const MSG_COST: number = 0;

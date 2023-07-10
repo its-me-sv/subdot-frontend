@@ -15,7 +15,7 @@ import {toast} from "react-hot-toast";
 import { msgsFetch } from "../../translations/chat";
 
 interface ChatProps {
-    address: string
+    address: string;
 }
 
 const Chat: React.FC<ChatProps> = ({ address }) => {
@@ -44,10 +44,14 @@ const Chat: React.FC<ChatProps> = ({ address }) => {
     });
     msgsPromise
       .then(({data}) => {
-        setMessages([...messages, ...data.messages]);
+        setMessages([...data.messages, ...messages]);
         setPage(data.page);
       })
       .finally(() => setFetching(false));
+  };
+
+  const addMsg = (msg: DBMessage) => {
+    setMessages([...messages, msg]);
   };
 
   useEffect(() => {
@@ -60,7 +64,7 @@ const Chat: React.FC<ChatProps> = ({ address }) => {
     <Container dark={dark}>
       <SectionProfile id={address} hover />
       <Messages messages={messages} />
-      <MessageInput />
+      <MessageInput address={address} addMsg={addMsg} />
     </Container>
   );
 };

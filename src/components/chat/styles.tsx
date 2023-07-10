@@ -44,6 +44,7 @@ export const InputContainer = styled.div<{ dark: boolean }>`
   img {
     width: 2.1rem;
     align-self: center;
+    cursor: pointer;
     ${(props) => props.dark && `filter: invert(100%);`}
   }
   ${BoxShadow}
@@ -79,7 +80,7 @@ export const MessagesContainer = styled.div`
   padding-left: 0.84rem;
 `;
 
-export const Message = styled.div<{ dark: boolean }>`
+export const MessageContainer = styled.div<{ dark: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 0.42rem;

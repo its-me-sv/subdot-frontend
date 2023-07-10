@@ -1,21 +1,48 @@
-import React from "react";
+import React, {useState} from "react";
 import sendIcon from "../../assets/icons/send.png";
 
 import {InputContainer} from "./styles";
 import {msgPh} from "../../translations/chat";
 
 import {useAppContext} from "../../contexts/app";
+import { useChatContext } from "../../contexts/chat";
+import { DBMessage } from "../../utils/types";
 
-interface MessageInputProps {}
+interface MessageInputProps {
+  address: string;
+  addMsg: (msg: DBMessage) => void;
+}
 
-const MessageInput: React.FC<MessageInputProps> = () => {
+const MessageInput: React.FC<MessageInputProps> = ({address, addMsg}) => {
     const {language, dark} = useAppContext();
+    const {sendMessage} = useChatContext();
+    const [msg, setMsg] = useState<string>("");
+
+    const handleChange: React.ChangeEventHandler<HTMLTextAreaElement> = (
+      event
+    ) => {
+      setMsg!(event.target.value);
+    };
+
+    const handleSubmit = () => {
+        if (msg.length === 0) return;
+        sendMessage!(address, msg, addMsg);
+        setMsg("");
+    };
 
     return (
-        <InputContainer dark={dark}>
-            <textarea placeholder={msgPh[language]} />
-            <img alt="send" src={sendIcon} />
-        </InputContainer>
+      <InputContainer dark={dark}>
+        <textarea
+          placeholder={msgPh[language]}
+          value={msg}
+          onChange={handleChange}
+        />
+        <img 
+          alt="send" 
+          src={sendIcon} 
+          onClick={handleSubmit} 
+        />
+      </InputContainer>
     );
 };
 
