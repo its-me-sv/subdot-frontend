@@ -1,14 +1,16 @@
 import styled from "styled-components";
 import {BoxShadow, BoxShadowDark} from "../../utils/styles";
 
-export const Container = styled.div<{dark: boolean;}>`
+export const Container = styled.div<{ dark: boolean }>`
   display: flex;
   flex-direction: column;
   height: 92vh;
   padding: 0.42rem 0rem;
-  border-right: 1px solid #222222;
-  ${props => props.dark && `
-    border-right: 1px solid #ffffff;
+  border-right: 0.3rem solid rgb(227, 224, 224);
+  ${(props) =>
+    props.dark &&
+    `
+    border-right: 0.3rem solid rgb(227, 224, 224);
   `}
 `;
 
@@ -80,7 +82,7 @@ export const MessagesContainer = styled.div`
   padding-left: 0.84rem;
 `;
 
-export const MessageContainer = styled.div<{ dark: boolean }>`
+export const MessageContainer = styled.div<{ dark: boolean; isOwner?: string }>`
   display: flex;
   flex-direction: column;
   gap: 0.42rem;
@@ -90,16 +92,33 @@ export const MessageContainer = styled.div<{ dark: boolean }>`
   border-radius: 0.14rem;
   padding: 0.14rem;
   max-width: 21vw;
-  span:last-child {
-    align-self: flex-end;
-    font-size: 0.84rem;
-  }
+  min-width: 7vw;
   color: #222222;
-  background-color: #d7d7d7;
+  ${BoxShadow}
+  ${(props) => props.dark && `${BoxShadowDark}`}
   ${(props) =>
     props.dark &&
     `
-    background-color: #625e5e;
     color: #d7d7d7;
   `}
+  align-self: center;
+  .footer {
+    display: flex;
+    align-items: center;
+    align-self: flex-end;
+    gap: 0.21rem;
+    img {
+      cursor: pointer;
+      width: 0.84rem;
+      height: 0.84rem;
+      align-self: flex-end;
+    }
+    .timing {
+      cursor: pointer;
+      align-self: flex-end;
+      font-size: 0.7rem;
+    }
+  }
+  ${(props) => props.isOwner === "true" && `align-self: flex-end;`}
+  ${(props) => props.isOwner === "false" && `align-self: flex-start;`}
 `;

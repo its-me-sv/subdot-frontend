@@ -44,7 +44,7 @@ const Chat: React.FC<ChatProps> = ({ address }) => {
     });
     msgsPromise
       .then(({data}) => {
-        setMessages([...data.messages, ...messages]);
+        setMessages([...(data.messages as Array<DBMessage>).reverse(), ...messages]);
         setPage(data.page);
       })
       .finally(() => setFetching(false));
@@ -62,9 +62,19 @@ const Chat: React.FC<ChatProps> = ({ address }) => {
 
   return (
     <Container dark={dark}>
-      <SectionProfile id={address} hover />
-      <Messages messages={messages} />
-      <MessageInput address={address} addMsg={addMsg} />
+      <SectionProfile 
+        id={address} 
+        hover 
+      />
+      <Messages 
+        messages={messages} 
+        fetchData={fetchData}
+        page={page} 
+      />
+      <MessageInput 
+        address={address} 
+        addMsg={addMsg} 
+      />
     </Container>
   );
 };

@@ -96,7 +96,7 @@ export const ProfileName = styled.span<{dark: boolean;}>`
   `}
 `;
 
-export const ProfileStatusText = styled.span<{ dark: boolean }>`
+export const ProfileStatusText = styled.span<{ dark: boolean; hover?: boolean }>`
   font-family: Inter;
   font-size: 1rem;
   color: #222222;
@@ -108,5 +108,10 @@ export const ProfileStatusText = styled.span<{ dark: boolean }>`
     props.dark &&
     `
     color: #ffffff;
+  `}
+  ${(props) =>
+    props?.hover &&
+    `
+      max-width: unset;
   `}
 `;

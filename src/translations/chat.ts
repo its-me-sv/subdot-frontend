@@ -61,3 +61,19 @@ export const msgsFetch = {
         "Impossible de récupérer les messages"
     ]
 };
+
+export const noMsgs: Array<string> = [
+    "No messages to show",
+    "没有消息可显示",
+    "दिखाने के लिए कोई संदेश नहीं",
+    "No hay mensajes para mostrar",
+    "Aucun message à afficher"
+];
+
+export const unverified: Array<string> = [
+    "Unverified message",
+    "未经验证的消息",
+    "असत्यापित संदेश",
+    "Mensaje no verificado",
+    "Message non vérifié"
+];
