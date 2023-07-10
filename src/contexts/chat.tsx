@@ -83,7 +83,7 @@ export const ChatContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
               +(partialFee.toNumber() / BALANCE_DIVISOR).toPrecision(3),
           });
           axios.put(
-            `${REST_API}/chat/${account.address}/${reciever}/${msgFromDB.message_id}`
+            `${REST_API}/chat/${account.address}/${reciever}/${ipfsMsgID}/${msgFromDB.message_id}`
           );
           // socket work goes here
           resolve(true);
