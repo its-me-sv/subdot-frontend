@@ -54,6 +54,7 @@ const Chat: React.FC<ChatProps> = ({ address }) => {
 
   const addMsg = (msg: DBMessage) => {
     setMessages([...messages, msg]);
+    socket.emit("joinRoom", msg.message_id);
   };
 
   useEffect(() => {

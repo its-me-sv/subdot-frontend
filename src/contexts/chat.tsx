@@ -91,8 +91,8 @@ export const ChatContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
           axios.put(
             `${REST_API}/chat/${account.address}/${reciever}/${ipfsMsgID}/${msgFromDB.message_id}`
           );
-          // socket work goes here
-          resolve(true);
+          socket.emit("verifyMessage", msgFromDB.message_id);
+          resolve(msgFromDB.message_id);
         } catch (err) {
           if ((err = "INSUFFICIENT BALANCE")) {
             toast.error(noFunds[language]);
@@ -105,6 +105,7 @@ export const ChatContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
         success: msgPromise.success[language],
         error: msgPromise.error[language],
       });
+      messagePromise.then((roomId) => socket.emit("verifyMessage", roomId as string));
     };
 
     return (

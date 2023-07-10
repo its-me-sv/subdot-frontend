@@ -9,6 +9,7 @@ import UnverifiedLogo from "../../assets/icons/unverified.png";
 import { useSubsocial } from "../../subsocial";
 import { useUserContext } from "../../contexts/user";
 import { unverified } from "../../translations/chat";
+import { useSocketContext } from "../../contexts/socket";
 
 interface MessageProps {
     message: DBMessage
@@ -18,6 +19,7 @@ const Message: React.FC<MessageProps> = ({message}) => {
     const {dark, language} = useAppContext();
     const {api} = useSubsocial();
     const {account} = useUserContext();
+    const {socket} = useSocketContext();
     const [ipfsMessage, setIpfsMessage] = useState<MessageContent|null>(null);
     const [verified, setVerified] = useState<boolean>(message.verified);
     const fetched = useRef<boolean>(false);
@@ -31,11 +33,15 @@ const Message: React.FC<MessageProps> = ({message}) => {
     };
 
     useEffect(() => {
-      console.log(message);
       if (fetched.current) return;
       fetched.current = true;
       fetchMessage();
     }, [message]);
+
+    useEffect(() => {
+      socket.emit("joinRoom", message.message_id);
+      socket.on("verifyMessage", () => setVerified(true));
+    }, []);
 
     if (ipfsMessage === null) {
       return (

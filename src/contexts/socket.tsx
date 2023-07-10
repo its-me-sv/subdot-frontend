@@ -18,6 +18,7 @@ interface ServerToClientEvents {
   unfollow?: (accId: string) => void;
   incrRP?: (rp: number) => void;
   newMessage?: (msg: DBMessage) => void;
+  verifyMessage?: () => void;
 }
 
 interface ClientToServerEvents {
@@ -30,6 +31,7 @@ interface ClientToServerEvents {
   unfollow?: (roomId: string, accId: string) => void;
   incrRP?: (roomId: string, rp: string) => void;
   newMessage?: (roomId: string, msg: DBMessage) => void;
+  verifyMessage?: (roomId: string) => void;
 }
 
 interface SocketContextInterface {
