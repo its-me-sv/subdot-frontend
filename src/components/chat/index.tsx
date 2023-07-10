@@ -13,6 +13,7 @@ import axios from "axios";
 import { REST_API } from "../../utils/constants";
 import {toast} from "react-hot-toast";
 import { msgsFetch } from "../../translations/chat";
+import { useSocketContext } from "../../contexts/socket";
 
 interface ChatProps {
     address: string;
@@ -21,6 +22,7 @@ interface ChatProps {
 const Chat: React.FC<ChatProps> = ({ address }) => {
   const { dark, language} = useAppContext();
   const {account} = useUserContext();
+  const {socket} = useSocketContext();
   const [messages, setMessages] = useState<Array<DBMessage>>([]);
   const [page, setPage] = useState<string | null>("");
   const [fetching, setFetching] = useState<boolean>(false);
@@ -53,6 +55,15 @@ const Chat: React.FC<ChatProps> = ({ address }) => {
   const addMsg = (msg: DBMessage) => {
     setMessages([...messages, msg]);
   };
+
+  useEffect(() => {
+    const roomId = [address, account?.address].sort().join("###");
+    socket.emit("joinRoom", roomId);
+    socket.on("newMessage", addMsg);
+    return () => {
+      socket.emit("leaveRoom", roomId);
+    };
+  }, [addMsg]);
 
   useEffect(() => {
     if (fetched.current) return;

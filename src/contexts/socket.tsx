@@ -4,7 +4,7 @@ import {io} from "socket.io-client";
 import toast from "react-hot-toast";
 
 import {SOCKET} from "../utils/constants";
-import {AdvertInfo} from "../utils/types";
+import {AdvertInfo, DBMessage} from "../utils/types";
 
 import {useAppContext} from "./app";
 import {useUserContext} from "./user";
@@ -17,6 +17,7 @@ interface ServerToClientEvents {
   follow?: (accId: string) => void;
   unfollow?: (accId: string) => void;
   incrRP?: (rp: number) => void;
+  newMessage?: (msg: DBMessage) => void;
 }
 
 interface ClientToServerEvents {
@@ -28,6 +29,7 @@ interface ClientToServerEvents {
   follow?: (roomId: string, accId: string) => void;
   unfollow?: (roomId: string, accId: string) => void;
   incrRP?: (roomId: string, rp: string) => void;
+  newMessage?: (roomId: string, msg: DBMessage) => void;
 }
 
 interface SocketContextInterface {

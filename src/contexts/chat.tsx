@@ -12,6 +12,7 @@ import { ADVERT_BENEFICIAR, BALANCE_DIVISOR, MSG_COST, REST_API } from "../utils
 import { noFunds } from "../translations/toast";
 import { getSigner, getTxEventIds } from "../subsocial/polkadot";
 import { msgPromise } from "../translations/chat";
+import { useSocketContext } from "./socket";
 
 interface ChatContextInterface {
   currChat: string;
@@ -35,6 +36,7 @@ export const useChatContext = () => useContext(ChatContext);
 export const ChatContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const {account} = useUserContext();
     const {language} = useAppContext();
+    const {socket} = useSocketContext();
     const {api} = useSubsocial();
     const [currChat, setCurrChat] = useState<string>("");
 
@@ -64,7 +66,11 @@ export const ChatContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
               `${REST_API}/chat/${account.address}/${reciever}/${ipfsMsgID}`
             );
           addMsg(msgFromDB);
-          // socket work goes here
+          socket.emit(
+            "newMessage",
+            [reciever, account.address].sort().join("###"),
+            msgFromDB as DBMessage
+          );
           const transferTx = substr.tx.balances.transfer(
             encodeAddress(ADVERT_BENEFICIAR, 28),
             MSG_COST * BALANCE_DIVISOR
