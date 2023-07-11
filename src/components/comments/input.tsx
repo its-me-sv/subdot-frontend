@@ -16,17 +16,33 @@ const CommentInput: React.FC<CommentInputProps> = ({
     const {language, dark} = useAppContext();
     const [newCmt, setNewCmt] = useState<string>("");
 
+    const handleSubmit = () => {
+      addComment(newCmt, () => setNewCmt(""))
+    };
+
+    const handleKeyPress: React.KeyboardEventHandler<HTMLTextAreaElement> = (
+      event
+    ) => {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        handleSubmit();
+        return;
+      }
+    };
+
     return (
       <CommentFooter dark={dark}>
-        <textarea 
-          rows={2} 
+        <textarea
+          rows={2}
           placeholder={cmtPh[language]}
-          value={newCmt} 
+          value={newCmt}
           onChange={(e) => setNewCmt(e.target.value)}
+          onKeyDown={handleKeyPress}
         />
-        <Button 
-          bgColor={dark ? "#ffffff" : "#222222"} dark={dark}
-          onClick={() => addComment(newCmt, () => setNewCmt(""))}
+        <Button
+          bgColor={dark ? "#ffffff" : "#222222"}
+          dark={dark}
+          onClick={handleSubmit}
         >
           {pstCmt[language]}
         </Button>
