@@ -6,12 +6,6 @@ export const Container = styled.div<{ dark: boolean }>`
   flex-direction: column;
   height: 92vh;
   padding: 0.42rem 0rem;
-  border-right: 0.3rem solid rgb(227, 224, 224);
-  ${(props) =>
-    props.dark &&
-    `
-    border-right: 0.3rem solid rgb(227, 224, 224);
-  `}
 `;
 
 export const DefaultContainer = styled.div<{ dark: boolean }>`
@@ -80,6 +74,10 @@ export const MessagesContainer = styled.div`
   margin-right: 0.14rem;
   margin-top: 0.42rem;
   padding-left: 0.84rem;
+  img {
+    width: 18vw;
+    height: 4vh;
+  }
 `;
 
 export const MessageContainer = styled.div<{ dark: boolean; isOwner?: string }>`

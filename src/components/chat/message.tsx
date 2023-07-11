@@ -4,6 +4,7 @@ import { format } from "timeago.js";
 import { useAppContext } from "../../contexts/app";
 import { DBMessage, MessageContent } from "../../utils/types";
 import { MessageContainer } from "./styles";
+import skeleton from "../../assets/loader.gif";
 
 import UnverifiedLogo from "../../assets/icons/unverified.png";
 import { useSubsocial } from "../../subsocial";
@@ -45,22 +46,18 @@ const Message: React.FC<MessageProps> = ({message}) => {
 
     if (ipfsMessage === null) {
       return (
-        <MessageContainer
-          key={message.message_id}
-          dark={dark}
-        >
-          <span className="msg">-------</span>
+        <MessageContainer key={message.message_id} dark={dark}>
+          <img src={skeleton} alt="skeleton loading" />
           <div className="footer">
-            <span 
-              className="timing" 
+            <span
+              className="timing"
               title={new Date(message.created_at).toString()}
             >
               {format(new Date(message.created_at))}
             </span>
-            {!verified && <img 
-              src={UnverifiedLogo} 
-              title={unverified[language]} 
-            />}
+            {!verified && (
+              <img src={UnverifiedLogo} title={unverified[language]} />
+            )}
           </div>
         </MessageContainer>
       );
