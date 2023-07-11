@@ -85,6 +85,14 @@ export const ProfilePicture = styled.img`
 export const ProfileInfo = styled.div`
     display: flex;
     flex-direction: column;
+    img {
+      margin-bottom: 0.5rem;
+      width: 5rem;
+      height: 1rem;
+      &:last-child {
+        width: 11rem
+      }
+    }
 `;
 
 export const ProfileName = styled.span<{dark: boolean;}>`

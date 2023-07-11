@@ -12,6 +12,7 @@ import { getImage } from "../../utils/utils";
 import { useSubsocial } from "../../subsocial";
 import { defaultUser } from "./data";
 import { useChatContext } from "../../contexts/chat";
+import skeleton from "../../assets/loader.gif";
 
 interface SectionProfileProps {
     id: string;
@@ -52,8 +53,19 @@ const SectionProfile: React.FC<SectionProfileProps> = ({id, hover, fromChat}) =>
             src={getImage(user.picture)}
           />
           <ProfileInfo>
-            <ProfileName dark={dark}>{user.username}</ProfileName>
-            <ProfileStatusText dark={dark} hover={hover} >{user.status}</ProfileStatusText>
+            {user.username === "--------" ? (
+              <>
+                <img src={skeleton} alt="skeleton loading" />
+                <img src={skeleton} alt="skeleton loading" />
+              </>
+            ) : (
+              <>
+                <ProfileName dark={dark}>{user.username}</ProfileName>
+                <ProfileStatusText dark={dark} hover={hover}>
+                  {user.status}
+                </ProfileStatusText>
+              </>
+            )}
           </ProfileInfo>
         </ProfileDetails>
       </ProfileContainer>
