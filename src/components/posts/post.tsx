@@ -19,7 +19,7 @@ import likedIcon from "../../assets/icons/liked1.png";
 import cmtIcon from "../../assets/icons/comment1.png";
 import shareIcon from "../../assets/icons/share.png";
 import tipIcon from "../../assets/icons/tip1.png";
-import {posted} from "../../translations/posts";
+import { posted, ftrBtns } from "../../translations/posts";
 
 import {useAppContext} from "../../contexts/app";
 import {useUserContext} from "../../contexts/user";
@@ -209,16 +209,16 @@ const Post: React.FC<PostProps> = ({postId}) => {
               <PostImage alt="content" src={getImage(post.picture)} />
             )}
             <PostFooter>
-              <FooterItem dark={dark} title="Like">
+              <FooterItem dark={dark} title={ftrBtns.like[language]}>
                 <img
                   alt="like"
                   src={likedId === "0" ? likeIcon : likedIcon}
                   onClick={toggleLike}
-                />
+                  />
                 {postMeta.likes > 0 && <span>{postMeta.likes}</span>}
               </FooterItem>
               <FooterItem
-                title="Comment"
+                title={ftrBtns.comment[language]}
                 dark={dark}
                 onClick={() => setCmtOpen!(postId)}
               >
@@ -226,18 +226,20 @@ const Post: React.FC<PostProps> = ({postId}) => {
                 {cmtsLen > 0 && <span>{cmtsLen}</span>}
               </FooterItem>
               <FooterItem
-                title="Tip"
+                title={ftrBtns.tip[language]}
                 dark={dark}
                 onClick={() => setTransferId!(`${onwerId}:${owner.username}`)}
               >
                 <img alt="tip" src={tipIcon} />
+                <span>{ftrBtns.tip[language]}</span>
               </FooterItem>
               <FooterItem
-                title="Share"
+                title={ftrBtns.share[language]}
                 dark={dark}
                 onClick={() => setTransferId!(`${onwerId}:${owner.username}`)}
               >
                 <img alt="share" src={shareIcon} />
+                <span>{ftrBtns.share[language]}</span>
               </FooterItem>
             </PostFooter>
           </>

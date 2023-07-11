@@ -61,3 +61,34 @@ export const post: Array<string> = [
     "PUBLICAR",
     "PUBLIER"
 ];
+
+export const ftrBtns = {
+    like: [
+        "Like",
+        "喜欢",
+        "पसंद",
+        "Como",
+        "Comme"
+    ],
+    comment: [
+        "Comment",
+        "评论",
+        "टिप्पणी",
+        "Comentario",
+        "Commentaire"
+    ],
+    tip: [
+        "Tip",
+        "提示",
+        "बख्शीश",
+        "Consejo",
+        "Conseil"
+    ],
+    share: [
+        "Share",
+        "分享",
+        "शेयर करना",
+        "Compartir",
+        "Partager"
+    ]
+};
