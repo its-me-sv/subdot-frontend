@@ -65,6 +65,12 @@ export const PostHeaderRight = styled.div<{dark: boolean;}>`
   ${props => props.dark && `
     color: #ffffff;
   `}
+  img {
+    width: 14vw;
+    height: 2vh;
+    border-radius: unset;
+    margin: 0.3rem 0rem;
+  }
 `;
 
 export const PostUsername = styled.span`

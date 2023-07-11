@@ -189,7 +189,11 @@ const Post: React.FC<PostProps> = ({postId}) => {
                   src={getImage(owner.picture)}
                 />
                 <PostHeaderRight dark={dark}>
-                  <PostUsername>{owner.username}</PostUsername>
+                  {owner.username === "--------" ? (
+                    <img src={skeleton} alt="skeleton loading" />
+                  ) : (
+                    <PostUsername>{owner.username}</PostUsername>
+                  )}
                   <PostTime>
                     {posted[language]} {format(new Date(postMeta.createdAt))}
                   </PostTime>
