@@ -8,10 +8,11 @@ import {useAppContext} from "../../contexts/app";
 interface FrndCommSectionProps {
     title: string;
     ids: Array<string>;
+    fromChat?: boolean;
 }
 
 const FrndCommSection: React.FC<FrndCommSectionProps> = ({
-    title, ids
+    title, ids, fromChat
 }) => {
     const {dark} = useAppContext();
     
@@ -23,7 +24,7 @@ const FrndCommSection: React.FC<FrndCommSectionProps> = ({
                     <span>No accounts to show.</span>
                 )}
                 {ids.map((val) => (
-                    <SectionProfile key={val} id={val} />
+                    <SectionProfile key={val} id={val} fromChat={fromChat} />
                 ))}
             </SectionProfiles>
         </Section>

@@ -14,10 +14,11 @@ import { useSubsocial } from "../../subsocial";
 
 interface FriendsCommunitiesProps {
     accountId: string | undefined;
+    fromChat?: boolean;
 }
 
 const FriendsCommunites: React.FC<FriendsCommunitiesProps> = ({
-    accountId
+    accountId, fromChat
 }) => {
     const {dark, language} = useAppContext();
     const {api} = useSubsocial();
@@ -49,8 +50,8 @@ const FriendsCommunites: React.FC<FriendsCommunitiesProps> = ({
 
     return (
         <Container dark={dark}>
-            <FrndCommSection title={FOLLOWERS[language]} ids={followers} />
-            <FrndCommSection title={FOLLOWING[language]} ids={following} />
+            <FrndCommSection title={FOLLOWERS[language]} ids={followers} fromChat={fromChat} />
+            <FrndCommSection title={FOLLOWING[language]} ids={following} fromChat={fromChat} />
         </Container>
     );
 };

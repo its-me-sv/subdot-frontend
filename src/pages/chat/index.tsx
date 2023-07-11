@@ -33,7 +33,7 @@ const ChatPage: React.FC<ChatPageProps> = () => {
 
     return (
       <Container dark={dark}>
-        <FriendsCommunites accountId={account?.address} />
+        <FriendsCommunites accountId={account?.address} fromChat />
         {currChat.length > 0 ? (
           <Chat address={currChat} />
         ) : (

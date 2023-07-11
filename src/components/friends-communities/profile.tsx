@@ -11,14 +11,17 @@ import { User } from "../../utils/types";
 import { getImage } from "../../utils/utils";
 import { useSubsocial } from "../../subsocial";
 import { defaultUser } from "./data";
+import { useChatContext } from "../../contexts/chat";
 
 interface SectionProfileProps {
     id: string;
     hover?: boolean;
+    fromChat?: boolean;
 }
 
-const SectionProfile: React.FC<SectionProfileProps> = ({id, hover}) => {
+const SectionProfile: React.FC<SectionProfileProps> = ({id, hover, fromChat}) => {
     const {setPeek, dark} = useAppContext();
+    const {setCurrChat} = useChatContext();
     const {api} = useSubsocial();
     const [user, setUser] = useState<User>(defaultUser);
 
@@ -29,12 +32,20 @@ const SectionProfile: React.FC<SectionProfileProps> = ({id, hover}) => {
       setUser(profile.content as unknown as User);
     };
 
+    const handleClick = () => {
+      if (fromChat) {
+        setCurrChat!(id);
+        return;
+      }
+      setPeek!(id);
+    };
+
     useEffect(() => {
       fetchData();
     }, [api, id]);
 
     return (
-      <ProfileContainer onClick={() => setPeek!(id)} hover={hover} dark={dark}>
+      <ProfileContainer onClick={handleClick} hover={hover} dark={dark}>
         <ProfileDetails>
           <ProfilePicture
             alt={`pp of ${id.slice(7)}`}
