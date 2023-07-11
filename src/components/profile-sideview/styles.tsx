@@ -10,9 +10,13 @@ export const Container = styled.div<{ dark: boolean }>`
   gap: 1.4rem;
   font-family: Inter;
   img {
-    width: 8.4rem;
-    height: 8.4rem;
-    border-radius: 50%;
+    width: 14vw;
+    height: 3vh;
+    &:first-child {
+      width: 8.4rem;
+      height: 8.4rem;
+      border-radius: 50%;
+    }
   }
   color: #222222;
   border-left: 0.3rem solid rgb(227, 224, 224);

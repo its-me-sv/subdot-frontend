@@ -21,6 +21,7 @@ import { useSubsocial } from "../../subsocial";
 import { DICE_BEAR, REST_API } from "../../utils/constants";
 import { getImage } from "../../utils/utils";
 import { defaultUser, defaultMeta } from "./data";
+import skeleton from "../../assets/loader.gif";
 
 interface ProfileSideViewProps {
   accountId: string | undefined;
@@ -33,10 +34,7 @@ const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
   const {api} = useSubsocial();
   const [userMeta, setUserMeta] = useState<ProfileMeta>(defaultMeta);
   const [reputation, setReputation] = useState<number>(0);
-  const [user, setUser] = useState<User>({
-    ...defaultUser,
-    picture: `${DICE_BEAR}${accountId}`,
-  });
+  const [user, setUser] = useState<User>(defaultUser);
   const [editOpen, setEditOpen] = useState<boolean>(false);
 
   const fetchData = async () => {
@@ -94,27 +92,38 @@ const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
         />
       )}
       <img alt={`pp of ${accountId}`} src={getImage(user.picture)} />
-      <Username>{user.username}</Username>
-      <Name>{user.name}</Name>
+      {user.username === "--------" ? (
+        <>
+          <img src={skeleton} alt="skeleton loading" />
+          <img src={skeleton} alt="skeleton loading" />
+        </>
+      ) : (
+        <>
+          <Username>{user.username}</Username>
+          <Name>{user.name}</Name>
+        </>
+      )}
       <Joined>
         {memSce[language]} {new Date(user.created).toDateString()}
       </Joined>
-      <Status>{user.status}</Status>
+      {user.username === "--------" 
+      ? <img src={skeleton} alt="skeleton loading" />
+      : <Status>{user.status}</Status>}
       <Meta>
         <MetaItem dark={dark}>
-          <span>{reputation}</span>
+          <span>{reputation || "--"}</span>
           <span>{meta.reputation[language]}</span>
         </MetaItem>
         <MetaItem dark={dark}>
-          <span>{userMeta.posts}</span>
+          <span>{userMeta.posts || "--"}</span>
           <span>{meta.posts[language]}</span>
         </MetaItem>
         <MetaItem dark={dark}>
-          <span>{userMeta.followers}</span>
+          <span>{userMeta.followers || "--"}</span>
           <span>{meta.followers[language]}</span>
         </MetaItem>
         <MetaItem dark={dark}>
-          <span>{userMeta.following}</span>
+          <span>{userMeta.following || "--"}</span>
           <span>{meta.following[language]}</span>
         </MetaItem>
       </Meta>
