@@ -8,13 +8,13 @@ export const Container = styled.div`
   margin: 0.14rem;
   border-radius: 0.14rem;
   border-left: 0.3rem solid rgb(227, 224, 224);
+  gap: 1rem;
 `;
 
 export const AdvertContainer = styled.div<{dark: boolean}>`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 60%;
     cursor: pointer;
     &:hover {
         opacity: 0.84;
@@ -28,7 +28,7 @@ export const AdvertContainer = styled.div<{dark: boolean}>`
 `;
 
 export const AdvertImage = styled.img<{dark: boolean;}>`
-    width: 16rem;
+    width: 15rem;
     height: auto;
     padding: 0.42rem;
     border-radius: 0.21rem;
@@ -91,4 +91,16 @@ export const RPItem = styled.div<{ dark: boolean }>`
             color: #ffffff;
         `}
   }
+`;
+
+export const SmallMenuContainer = styled.div`
+  a {
+    all: unset;
+  }
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  padding-bottom: 1rem;
+  border-bottom: 0.3rem solid rgb(227, 224, 224);
 `;
