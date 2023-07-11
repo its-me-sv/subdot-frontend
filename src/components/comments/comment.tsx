@@ -12,6 +12,7 @@ import { useSubsocial } from "../../subsocial";
 import { PostComment, User } from "../../utils/types";
 import { getImage } from "../../utils/utils";
 import { DICE_BEAR } from "../../utils/constants";
+import { defaultUser } from "../peek/data";
 
 interface CommentProps {
     comment: PostComment;
@@ -21,13 +22,7 @@ const Comment: React.FC<CommentProps> = ({comment}) => {
     const navigate = useNavigate();
     const {dark} = useAppContext();
     const {api} = useSubsocial();
-    const [owner, setOwner] = useState<User>({
-        created: "string",
-        username: "string",
-        name: "string",
-        status: "string",
-        picture: `${DICE_BEAR}${comment.creator}`,
-    });
+    const [owner, setOwner] = useState<User>(defaultUser);
 
     const fetchData = async () => {
         if (!api || !comment) return;
@@ -41,17 +36,19 @@ const Comment: React.FC<CommentProps> = ({comment}) => {
     }, [api, comment]);
 
     return (
-        <CommentContainer>
-            <img 
-                onClick={() => navigate(`/profile/${owner.username}`)} 
-                alt={`pp of ${comment.creator.slice(7)}`}
-                src={getImage(owner.picture)} 
-            />
-            <CommentHolder dark={dark}>
-                <CommentTime>{format(new Date(comment.createdAt))}</CommentTime>
-                <CommentText>{comment.body}</CommentText>
-            </CommentHolder>
-        </CommentContainer>
+      <CommentContainer>
+        <img
+          onClick={() => navigate(`/profile/${owner.username}`)}
+          alt={`pp of ${comment.creator.slice(7)}`}
+          src={getImage(owner.picture)}
+        />
+        <CommentHolder dark={dark}>
+          <CommentTime title={new Date(comment.createdAt).toString()}>
+            {format(new Date(comment.createdAt))}
+          </CommentTime>
+          <CommentText>{comment.body}</CommentText>
+        </CommentHolder>
+      </CommentContainer>
     );
 };
 

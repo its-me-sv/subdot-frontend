@@ -194,7 +194,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
                   ) : (
                     <PostUsername>{owner.username}</PostUsername>
                   )}
-                  <PostTime>
+                  <PostTime title={new Date(postMeta.createdAt).toString()}>
                     {posted[language]} {format(new Date(postMeta.createdAt))}
                   </PostTime>
                 </PostHeaderRight>
