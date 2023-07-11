@@ -32,7 +32,8 @@ export const CommentHolder = styled.div<{ dark: boolean }>`
   width: 42rem;
   margin-right: 0.24rem;
   border-radius: 0.14rem;
-  padding: 0.14rem;
+  padding: 0.42rem;
+  padding-bottom: 0.14rem;
   background-color: #d7d7d7;
   color: #222222;
   ${(props) =>
@@ -76,5 +77,16 @@ export const CommentFooter = styled.div<{ dark: boolean }>`
       background-color: #625e5e;
       color: #d7d7d7;
     `}
+  }
+`;
+
+export const CommentMeta = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  img {
+    border-radius: unset;
+    width: 7vw;
+    height: 2vh;
   }
 `;

@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 
 import {
     CommentContainer, CommentHolder, 
+    CommentMeta, 
     CommentText, CommentTime
 } from "./styles";
 
@@ -13,6 +14,7 @@ import { PostComment, User } from "../../utils/types";
 import { getImage } from "../../utils/utils";
 import { DICE_BEAR } from "../../utils/constants";
 import { defaultUser } from "../peek/data";
+import skeleton from "../../assets/loader.gif";
 
 interface CommentProps {
     comment: PostComment;
@@ -43,9 +45,16 @@ const Comment: React.FC<CommentProps> = ({comment}) => {
           src={getImage(owner.picture)}
         />
         <CommentHolder dark={dark}>
-          <CommentTime title={new Date(comment.createdAt).toString()}>
-            {format(new Date(comment.createdAt))}
-          </CommentTime>
+          <CommentMeta>
+            {owner.username === "--------" ? (
+              <img src={skeleton} alt="skeleton loading" />
+            ) : (
+              <span>{owner.username}</span>
+            )}
+            <CommentTime title={new Date(comment.createdAt).toString()}>
+              {format(new Date(comment.createdAt))}
+            </CommentTime>
+          </CommentMeta>
           <CommentText>{comment.body}</CommentText>
         </CommentHolder>
       </CommentContainer>
