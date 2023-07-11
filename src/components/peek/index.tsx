@@ -8,12 +8,13 @@ import {
   memSce, username,
   name, meta, footer
 } from "../../translations/peek";
-import { DICE_BEAR, REST_API } from "../../utils/constants";
+import { REST_API } from "../../utils/constants";
 import { getImage } from "../../utils/utils";
 
 import {Button} from "../../utils/styles";
 import { ProfileMeta, User } from "../../utils/types";
 import { defaultMeta, defaultUser } from "./data";
+import skeleton from "../../assets/loader.gif";
 
 import {useAppContext} from "../../contexts/app";
 import {useUserContext} from "../../contexts/user";
@@ -28,10 +29,7 @@ const Peek: React.FC<PeekProps> = ({id}) => {
     const {setPeek, setTransferId, language, dark} = useAppContext();
     const [userMeta, setUserMeta] = useState<ProfileMeta>(defaultMeta);
     const [reputation, setReputation] = useState<number>(0);
-    const [user, setUser] = useState<User>({
-      ...defaultUser,
-      picture: `${DICE_BEAR}${id}`,
-    });
+    const [user, setUser] = useState<User>(defaultUser);
     const {api} = useSubsocial();
     const {account} = useUserContext();
 
@@ -71,27 +69,35 @@ const Peek: React.FC<PeekProps> = ({id}) => {
           </JoinedDate>
           <Details>
             <Section dark={dark}>{username[language]}</Section>
-            <Detail dark={dark} type="text" value={user.username} readOnly />
+            {user.username === "--------" ? (
+              <img src={skeleton} alt="skeleton loading" />
+            ) : (
+              <Detail dark={dark} type="text" value={user.username} readOnly />
+            )}
           </Details>
           <Details>
             <Section dark={dark}>{name[language]}</Section>
-            <Detail dark={dark} type="text" value={user.name} readOnly />
+            {user.username === "--------" ? (
+              <img src={skeleton} alt="skeleton loading" />
+            ) : (
+              <Detail dark={dark} type="text" value={user.name} readOnly />
+            )}
           </Details>
           <MetaDetails>
             <MetaInfo>
-              <Content dark={dark}>{reputation}</Content>
+              <Content dark={dark}>{reputation || "--"}</Content>
               <Section dark={dark}>RP</Section>
             </MetaInfo>
             <MetaInfo>
-              <Content dark={dark}>{userMeta.followers}</Content>
+              <Content dark={dark}>{userMeta.followers || "--"}</Content>
               <Section dark={dark}>{meta.followers[language]}</Section>
             </MetaInfo>
             <MetaInfo>
-              <Content dark={dark}>{userMeta.following}</Content>
+              <Content dark={dark}>{userMeta.following || "--"}</Content>
               <Section dark={dark}>{meta.following[language]}</Section>
             </MetaInfo>
             <MetaInfo>
-              <Content dark={dark}>{userMeta.posts}</Content>
+              <Content dark={dark}>{userMeta.posts || "--"}</Content>
               <Section dark={dark}>{meta.posts[language]}</Section>
             </MetaInfo>
           </MetaDetails>

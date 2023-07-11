@@ -25,6 +25,10 @@ export const Details = styled.div`
     margin: 0rem 0.42rem;
     gap: 1rem;
     margin-top: 1rem;
+    img {
+      width: 14vw;
+      height: 2.1rem;
+    }
 `;
 
 export const Detail = styled.input<{dark: boolean;}>`
