@@ -3,14 +3,14 @@ import React from "react";
 import {Container} from "./styles";
 
 import Advert from "./advert";
-import RP from "./rp";
+import SmallMenu from "./small-menu";
 
 interface RPAdvertProps {}
 
 const RPAdvert: React.FC<RPAdvertProps> = () => {
     return (
         <Container>
-            <RP />
+            <SmallMenu />
             <Advert />
         </Container>
     );
