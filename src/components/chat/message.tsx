@@ -41,7 +41,7 @@ const Message: React.FC<MessageProps> = ({message}) => {
     useEffect(() => {
       socket.emit("joinRoom", message.message_id);
       socket.on("verifyMessage", () => setVerified(true));
-    }, []);
+    }, [message]);
 
     if (ipfsMessage === null) {
       return (
