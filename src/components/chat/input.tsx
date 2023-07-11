@@ -30,12 +30,23 @@ const MessageInput: React.FC<MessageInputProps> = ({address, addMsg}) => {
         setMsg("");
     };
 
+    const handleKeyPress: React.KeyboardEventHandler<HTMLTextAreaElement> = (
+      event
+    ) => {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        handleSubmit();
+        return;
+      }
+    };
+
     return (
       <InputContainer dark={dark}>
         <textarea
           placeholder={msgPh[language]}
           value={msg}
           onChange={handleChange}
+          onKeyDown={handleKeyPress}
         />
         <img 
           alt="send" 
