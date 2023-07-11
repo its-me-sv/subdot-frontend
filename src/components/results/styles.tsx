@@ -48,6 +48,12 @@ export const Item = styled.span<{dark: boolean;}>`
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
+    &:last-child {
+      border-radius: unset;
+      width: 12rem;
+      height: 1rem;
+      margin-top: 0.36rem;
+    }
   }
   ${BoxShadow}
   ${props => props.dark && `

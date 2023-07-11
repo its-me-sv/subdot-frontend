@@ -17,7 +17,7 @@ const User: React.FC<UserProps> = ({
     const navigate = useNavigate();
     const {dark} = useAppContext();
     const { api } = useSubsocial();
-    const [picture, setPicture] = useState<string>(`${DICE_BEAR}${accountId}`);
+    const [picture, setPicture] = useState<string>(DICE_BEAR);
 
     useEffect(() => {
       if (!api) return;

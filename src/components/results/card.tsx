@@ -8,6 +8,7 @@ import { useAppContext } from "../../contexts/app";
 import { DICE_BEAR } from "../../utils/constants";
 import { useSubsocial } from "../../subsocial";
 import { getImage } from "../../utils/utils";
+import skeleton from "../../assets/loader.gif";
 
 interface ResultCardProps extends ExploreResult {}
 
@@ -17,8 +18,8 @@ const ResultCard: React.FC<ResultCardProps> = ({
     const navigate = useNavigate();
     const {setExplore, dark} = useAppContext();
     const {api} = useSubsocial();
-    const [picture, setPicture] = useState<string>(`${DICE_BEAR}${accountId}`);
-    const [stTxt, setStTxt] = useState<string>("  ");
+    const [picture, setPicture] = useState<string>(DICE_BEAR);
+    const [stTxt, setStTxt] = useState<string | null>(null);
     
     const handlePress = () => {
       navigate(`/profile/${username}`);
@@ -37,16 +38,20 @@ const ResultCard: React.FC<ResultCardProps> = ({
     }, [api, accountId]);
 
     return (
-        <Item dark={dark} onClick={handlePress}>
-            <div id="info">
-                <img alt="pp" src={getImage(picture)} />
-                <div id="details">
-                    <span>{`${username} - ${name}`}</span>
-                    <span>{stTxt}</span>
-                </div>
-            </div>
-            <span id="rp">{reputation} RP</span>
-        </Item>
+      <Item dark={dark} onClick={handlePress}>
+        <div id="info">
+          <img alt="pp" src={getImage(picture)} />
+          <div id="details">
+            <span>{`${username} - ${name}`}</span>
+            {stTxt === null ? (
+              <img src={skeleton} alt="skeleton loading" />
+            ) : (
+              <span>{stTxt}</span>
+            )}
+          </div>
+        </div>
+        <span id="rp">{reputation} RP</span>
+      </Item>
     );
 };
 

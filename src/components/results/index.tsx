@@ -27,7 +27,7 @@ const Results: React.FC<ResultsProps> = () => {
                 {results.map(props => 
                     <ResultCard key={props.accountId} {...props} />
                 )}
-                {results.length === 0 && <span>No user found</span>}
+                {results.length === 0 && <span>Nothing to show</span>}
             </ItemsContainer>
         </Container>
     );
