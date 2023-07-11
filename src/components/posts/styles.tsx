@@ -102,23 +102,24 @@ export const PostImage = styled.img`
 export const PostFooter = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-top: 0.07rem;
 `;
 
 export const FooterItem = styled.div<{dark: boolean;}>`
   display: flex;
   align-items: center;
-  gap: 0.14rem;
+  gap: 0.3rem;
   cursor: pointer;
   img {
-    width: 2.1rem;
-    height: 2.1rem;
+    width: 1.4rem;
+    height: 1.4rem;
     ${props => props.dark && `
       filter: invert(100%);
     `}
   }
   span {
     font-family: Inter;
-    font-size: 1.2rem;
+    font-size: 1rem;
     opacity: 0.9;
     color: #222222;
     ${props => props.dark && `

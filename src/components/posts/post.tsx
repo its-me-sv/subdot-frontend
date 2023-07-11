@@ -14,10 +14,11 @@ import {
     PostImage, PostTime, 
     PostUsername,
 } from './styles';
-import likeIcon from "../../assets/icons/like.png";
-import likedIcon from "../../assets/icons/liked.png";
-import cmtIcon from "../../assets/icons/comment.png";
-import tipIcon from "../../assets/icons/tip.png";
+import likeIcon from "../../assets/icons/like1.png";
+import likedIcon from "../../assets/icons/liked1.png";
+import cmtIcon from "../../assets/icons/comment1.png";
+import shareIcon from "../../assets/icons/share.png";
+import tipIcon from "../../assets/icons/tip1.png";
 import {posted} from "../../translations/posts";
 
 import {useAppContext} from "../../contexts/app";
@@ -208,7 +209,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
               <PostImage alt="content" src={getImage(post.picture)} />
             )}
             <PostFooter>
-              <FooterItem dark={dark}>
+              <FooterItem dark={dark} title="Like">
                 <img
                   alt="like"
                   src={likedId === "0" ? likeIcon : likedIcon}
@@ -216,15 +217,27 @@ const Post: React.FC<PostProps> = ({postId}) => {
                 />
                 {postMeta.likes > 0 && <span>{postMeta.likes}</span>}
               </FooterItem>
-              <FooterItem dark={dark} onClick={() => setCmtOpen!(postId)}>
+              <FooterItem
+                title="Comment"
+                dark={dark}
+                onClick={() => setCmtOpen!(postId)}
+              >
                 <img alt="comment" src={cmtIcon} />
                 {cmtsLen > 0 && <span>{cmtsLen}</span>}
               </FooterItem>
               <FooterItem
+                title="Tip"
                 dark={dark}
                 onClick={() => setTransferId!(`${onwerId}:${owner.username}`)}
               >
                 <img alt="tip" src={tipIcon} />
+              </FooterItem>
+              <FooterItem
+                title="Share"
+                dark={dark}
+                onClick={() => setTransferId!(`${onwerId}:${owner.username}`)}
+              >
+                <img alt="share" src={shareIcon} />
               </FooterItem>
             </PostFooter>
           </>
