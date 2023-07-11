@@ -20,7 +20,7 @@ const Messages: React.FC<MessagesProps> = ({ messages, fetchData, page }) => {
   const { dark, language } = useAppContext();
 
   return (
-    <MessagesContainer id="messagesBox">
+    <MessagesContainer>
       {messages.length === 0 && <span>{noMsgs[language]}</span>}
       {page !== null && (
         <FetchButton>
@@ -36,6 +36,7 @@ const Messages: React.FC<MessagesProps> = ({ messages, fetchData, page }) => {
       {messages.map((message) => (
         <Message key={message.message_id} message={message} />
       ))}
+      <div id="messages-end" />
     </MessagesContainer>
   );
 };

@@ -28,6 +28,14 @@ const Chat: React.FC<ChatProps> = ({ address }) => {
   const [fetching, setFetching] = useState<boolean>(false);
   const fetched = useRef<boolean>(false);
 
+  const handleScroll = () => {
+    setTimeout(() => {
+      document
+        .getElementById("messages-end")
+        ?.scrollIntoView({ behavior: "smooth" });
+    }, 1000);
+  };
+
   const fetchData = () => {
     if (page == null || fetching) return;
     if (!account) return;
@@ -55,6 +63,7 @@ const Chat: React.FC<ChatProps> = ({ address }) => {
   const addMsg = (msg: DBMessage) => {
     setMessages([...messages, msg]);
     socket.emit("joinRoom", msg.message_id);
+    handleScroll();
   };
 
   useEffect(() => {
@@ -70,6 +79,7 @@ const Chat: React.FC<ChatProps> = ({ address }) => {
     if (fetched.current) return;
     fetched.current = true;
     fetchData();
+    handleScroll();
   }, [address]);
 
   return (
