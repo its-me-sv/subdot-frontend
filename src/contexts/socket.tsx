@@ -19,6 +19,7 @@ interface ServerToClientEvents {
   incrRP?: (rp: number) => void;
   newMessage?: (msg: DBMessage) => void;
   verifyMessage?: () => void;
+  newMessageNotification?: (msg: string) => void;
 }
 
 interface ClientToServerEvents {
@@ -32,6 +33,7 @@ interface ClientToServerEvents {
   incrRP?: (roomId: string, rp: string) => void;
   newMessage?: (roomId: string, msg: DBMessage) => void;
   verifyMessage?: (roomId: string) => void;
+  newMessageNotification?: (roomId: string, msg: string) => void;
 }
 
 interface SocketContextInterface {

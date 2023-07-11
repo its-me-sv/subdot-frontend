@@ -34,7 +34,7 @@ export const ChatContext = createContext<ChatContextInterface>(defaultState);
 export const useChatContext = () => useContext(ChatContext);
 
 export const ChatContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const {account} = useUserContext();
+    const {account, user} = useUserContext();
     const {language} = useAppContext();
     const {socket} = useSocketContext();
     const {api} = useSubsocial();
@@ -70,6 +70,11 @@ export const ChatContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
             "newMessage",
             [reciever, account.address].sort().join("###"),
             msgFromDB as DBMessage
+          );
+          socket.emit(
+            "newMessageNotification",
+            reciever,
+            `Recieved a message from ${user?.username}`
           );
           const transferTx = substr.tx.balances.transfer(
             encodeAddress(ADVERT_BENEFICIAR, 28),

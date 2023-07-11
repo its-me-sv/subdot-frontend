@@ -1,6 +1,6 @@
 import React, {useEffect, lazy, Suspense} from "react";
 import {HashRouter, Route, Routes, Navigate} from "react-router-dom";
-import {Toaster, ToastOptions} from "react-hot-toast";
+import {toast, Toaster, ToastOptions} from "react-hot-toast";
 
 import '../../index.css';
 
@@ -31,6 +31,7 @@ import Header from "../../components/header";
 // providers
 import {useAppContext} from "../../contexts/app";
 import Menu from "../../components/menu";
+import { useSocketContext } from "../../contexts/socket";
 
 interface AppProps {}
 
@@ -52,10 +53,18 @@ const App: React.FC<AppProps> = () => {
     lowBalance, dark,
     overlap, menuOpen
   } = useAppContext();
+  const {socket} = useSocketContext();
 
   useEffect(() => {
     setTimeout(() => setLoading!(false), 2400);
   }, []);
+
+  useEffect(() => {
+    if (!window.location.href.includes("subchat"))
+    socket.on("newMessageNotification", msg => {
+      toast(msg, { icon: "📨", id: msg });
+    });
+  }, [socket]);
 
   return (
     <div className={loggedIn ? "app-container" : ""}>
