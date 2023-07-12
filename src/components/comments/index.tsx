@@ -11,7 +11,9 @@ import {CommentsHolder, Box, PostImage} from "./styles";
 import {
   cmtsFetch, emptyFlds, 
   cmtLong, noFunds,
-  cmtPost
+  cmtPost,
+  postDislike,
+  postLike
 } from "../../translations/toast";
 
 import Comment from "./comment";
@@ -22,7 +24,7 @@ import { useSubsocial } from "../../subsocial";
 import { getSigner, getTxEventIds } from "../../subsocial/polkadot";
 import { useUserContext } from "../../contexts/user";
 import { BALANCE_DIVISOR, REST_API } from "../../utils/constants";
-import { PostOpen } from "../../utils/types";
+import { PostOpen, UserPostMeta } from "../../utils/types";
 import { getImage } from "../../utils/utils";
 import { FetchButton, FooterItem, PostContent, PostFooter, PostHeader, PostHeaderRight, PostTime, PostUsername } from "../posts/styles";
 import { useNavigate } from "react-router-dom";
@@ -36,6 +38,7 @@ import shareIcon1 from "../../assets/icons/share1.png";
 import tipIcon from "../../assets/icons/tip1.png";
 import tipIcon1 from "../../assets/icons/tip.png";
 import { noCmts } from "../../translations/comments";
+import { useSocketContext } from "../../contexts/socket";
 
 interface CommentsProps {
   postOpen: PostOpen;
@@ -56,18 +59,20 @@ const Comments: React.FC<CommentsProps> = ({postOpen, dark}) => {
       post,
       owner,
       ownerId: onwerId,
-      postMeta,
       cmtsLen,
-      likedId,
     } = postOpen;
     const {
       setCmtOpen, language, 
       setLowBalance, setTransferId
     } = useAppContext();
     const {api} = useSubsocial();
-    const {account} = useUserContext();
+    const {account, user} = useUserContext();
+    const {socket} = useSocketContext();
     const [posting, setPosting] = useState<boolean>(false);
     const [comments, setComments] = useState<Array<PostComment>>([]);
+    const [postMeta, setPostMeta] = useState<UserPostMeta>(postOpen.postMeta);
+    const [likedId, setLikeId] = useState<string>(postOpen.likedId);
+
     const fetching = useRef<boolean>(false);
 
     const fetchData = async () => {
@@ -158,6 +163,95 @@ const Comments: React.FC<CommentsProps> = ({postOpen, dark}) => {
       setCmtOpen!(null);
     };
 
+    const toggleLike = async () => {
+      if (!api || !postId || !account?.address) return;
+      if (likedId === "0") {
+        const substrateApi = await api.blockchain.api;
+        const likeTx = substrateApi.tx.reactions.createPostReaction(
+          postId,
+          "Upvote"
+        );
+        const likePromise = new Promise(async (resolve, reject) => {
+          try {
+            const signer = await getSigner(account.address);
+            if (!signer) return reject();
+            await likeTx.signAsync(account.address, { signer });
+            const likeTxIds = await getTxEventIds(likeTx);
+            if (!likeTxIds) return reject();
+            setLikeId(likeTxIds[1]);
+            axios.put(`${REST_API}/user/incr-rp/${onwerId}/1`);
+            socket.emit(
+              "notify",
+              onwerId,
+              `${user?.username} liked your post (+1 RP)`
+            );
+            socket.emit("incrRP", onwerId, String(1));
+            const { partialFee } = await likeTx.paymentInfo(account.address);
+            axios.post(`${REST_API}/transaction/new`, {
+              accountId: account.address,
+              desc: 6,
+              kind: false,
+              amount: +(partialFee.toNumber() / BALANCE_DIVISOR).toPrecision(3),
+            });
+            setPostMeta((prevMeta) => ({
+              ...prevMeta,
+              likes: prevMeta.likes + 1,
+            }));
+            resolve(true);
+          } catch (err) {
+            if ((err = "INSUFFICIENT BALANCE")) {
+              toast.error(noFunds[language]);
+              setLowBalance!(true);
+            }
+            return reject();
+          }
+        });
+        toast.promise(likePromise, {
+          success: postLike.success[language],
+          error: postLike.error[language],
+          loading: postLike.loading[language],
+        });
+      } else {
+        const substrateApi = await api.blockchain.api;
+        const disLikeTx = substrateApi.tx.reactions.deletePostReaction(
+          postId,
+          likedId
+        );
+        const disLikePromise = new Promise(async (resolve, reject) => {
+          try {
+            const signer = await getSigner(account.address);
+            if (!signer) return reject();
+            await disLikeTx.signAsync(account.address, { signer });
+            await getTxEventIds(disLikeTx);
+            setLikeId("0");
+            const { partialFee } = await disLikeTx.paymentInfo(account.address);
+            axios.post(`${REST_API}/transaction/new`, {
+              accountId: account.address,
+              desc: 1,
+              kind: false,
+              amount: +(partialFee.toNumber() / BALANCE_DIVISOR).toPrecision(3),
+            });
+            setPostMeta((prevMeta) => ({
+              ...prevMeta,
+              likes: prevMeta.likes - 1,
+            }));
+            resolve(true);
+          } catch (err) {
+            if ((err = "INSUFFICIENT BALANCE")) {
+              toast.error(noFunds[language]);
+              setLowBalance!(true);
+            }
+            return reject();
+          }
+        });
+        toast.promise(disLikePromise, {
+          success: postDislike.success[language],
+          error: postDislike.error[language],
+          loading: postDislike.loading[language],
+        });
+      }
+    };
+
     useEffect(() => {
       fetchData();
     }, [api, postId]);
@@ -191,7 +285,7 @@ const Comments: React.FC<CommentsProps> = ({postOpen, dark}) => {
               <img
                 alt="like"
                 src={likedId === "0" ? likeIcon : likedIcon}
-                // onClick={toggleLike}
+                onClick={toggleLike}
               />
               {postMeta.likes > 0 && <span>{postMeta.likes}</span>}
             </FooterItem>
