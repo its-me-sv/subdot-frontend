@@ -102,7 +102,7 @@ export const PostImage = styled.img`
 export const PostFooter = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 0.07rem;
+  margin: 0.14rem 0;
 `;
 
 export const FooterItem = styled.div<{dark: boolean;}>`

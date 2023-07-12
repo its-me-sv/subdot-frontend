@@ -1,13 +1,13 @@
 import styled from "styled-components";
-import { FadeAnim } from "../../utils/styles";
+import { BoxShadow, BoxShadowDark, FadeAnim } from "../../utils/styles";
 
 export const CommentsHolder = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.42rem;
-  height: 30rem;
+  height: 30vh;
   overflow-y: auto;
-  margin-bottom: 0.42rem;
+  margin: 0.42rem 0;
 `;
 
 export const CommentContainer = styled.div`
@@ -60,7 +60,7 @@ export const CommentFooter = styled.div<{ dark: boolean }>`
   gap: 0.42rem;
   align-items: center;
   border-radius: 0.14rem;
-  width: 42rem;
+  width: 36vw;
   textarea,
   textarea::placeholder {
     resize: none;
@@ -89,4 +89,28 @@ export const CommentMeta = styled.div`
     width: 7vw;
     height: 2vh;
   }
+`;
+
+export const Box = styled.div<{ dark: boolean }>`
+  width: 36vw;
+  font-family: Inter;
+  display: flex;
+  flex-direction: column;
+  gap: 0.42rem;
+  padding: 0.84rem;
+  padding-bottom: 0.42rem;
+  border-radius: 1.4rem;
+  ${BoxShadow};
+  ${(props) =>
+    props.dark &&
+    `
+    ${BoxShadowDark}
+  `}
+`;
+
+export const PostImage = styled.img`
+  width: 36vw;
+  max-height: 49vh;
+  object-fit: fill;
+  border-radius: 0.14rem;
 `;
