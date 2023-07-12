@@ -61,6 +61,7 @@ const SmallMenu: React.FC<SmallMenuProps> = () => {
         <MenuItem dark={dark} onClick={openAdvertise}>
           <img src={advertLogo} />
           <span>{menu.advertise[language]}</span>
+          <img src={newLogo} />
         </MenuItem>
         <a href="https://subdot.canny.io/feedback" target="_blank">
           <MenuItem dark={dark}>

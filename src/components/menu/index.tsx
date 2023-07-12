@@ -116,6 +116,7 @@ const Menu: React.FC<MenuProps> = () => {
           <MenuItem dark={dark} onClick={openAdvertise}>
             <img src={advertLogo} />
             <span>{menu.advertise[language]}</span>
+            <img src={newLogo} />
           </MenuItem>
           <MenuItem dark={dark} onClick={showTerms}>
             <img src={termsLogo} />

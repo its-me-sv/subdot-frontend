@@ -73,7 +73,7 @@ export const MessagesContainer = styled.div`
   overflow-y: auto;
   margin-right: 0.14rem;
   margin-top: 0.42rem;
-  padding-left: 0.84rem;
+  padding: 0rem 1rem;
   img {
     width: 18vw;
     height: 4vh;
