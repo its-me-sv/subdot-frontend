@@ -131,19 +131,21 @@ const Comments: React.FC<CommentsProps> = ({postOpen, dark}) => {
       });
     };
 
+    const closeView = () => {
+      setComments!([]);
+      setCmtOpen!(null);
+    };
+
     useEffect(() => {
       fetchData();
     }, [api, postId]);
 
     return (
-      <Container dark={dark}>
-        <Box dark={dark}>
-          <CloseIcon onClick={() => {
-            setComments!([]);
-            setCmtOpen!(null);
-          }} 
-            dark={dark}
-          >X</CloseIcon>
+      <Container dark={dark} onClick={closeView}>
+        <Box dark={dark} onClick={(event) => event.stopPropagation()}>
+          <CloseIcon dark={dark} onClick={closeView}>
+            X
+          </CloseIcon>
           <Title dark={dark}>{title[language]}</Title>
           <CommentsHolder>
             {comments.length === 0 && <span>No commments yet.</span>}
