@@ -127,7 +127,7 @@ export const FooterItem = styled.div<{dark: boolean;}>`
     `}
   }
   &:hover {
-    opacity: 0.5;
+    transform: scale(1.1);
   }
 `;
 

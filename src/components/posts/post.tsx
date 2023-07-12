@@ -18,7 +18,9 @@ import likeIcon from "../../assets/icons/like1.png";
 import likedIcon from "../../assets/icons/liked1.png";
 import cmtIcon from "../../assets/icons/comment1.png";
 import shareIcon from "../../assets/icons/share.png";
+import shareIcon1 from "../../assets/icons/share1.png";
 import tipIcon from "../../assets/icons/tip1.png";
+import tipIcon1 from "../../assets/icons/tip.png";
 import { posted, ftrBtns } from "../../translations/posts";
 
 import {useAppContext} from "../../contexts/app";
@@ -214,7 +216,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
                   alt="like"
                   src={likedId === "0" ? likeIcon : likedIcon}
                   onClick={toggleLike}
-                  />
+                />
                 {postMeta.likes > 0 && <span>{postMeta.likes}</span>}
               </FooterItem>
               <FooterItem
@@ -230,7 +232,12 @@ const Post: React.FC<PostProps> = ({postId}) => {
                 dark={dark}
                 onClick={() => setTransferId!(`${onwerId}:${owner.username}`)}
               >
-                <img alt="tip" src={tipIcon} />
+                <img
+                  alt="tip"
+                  src={tipIcon}
+                  onMouseOut={(e) => (e.currentTarget.src = tipIcon)}
+                  onMouseOver={(e) => (e.currentTarget.src = tipIcon1)}
+                />
                 <span>{ftrBtns.tip[language]}</span>
               </FooterItem>
               <FooterItem
@@ -238,7 +245,12 @@ const Post: React.FC<PostProps> = ({postId}) => {
                 dark={dark}
                 onClick={() => setTransferId!(`${onwerId}:${owner.username}`)}
               >
-                <img alt="share" src={shareIcon} />
+                <img
+                  alt="share"
+                  src={shareIcon}
+                  onMouseOut={(e) => (e.currentTarget.src = shareIcon)}
+                  onMouseOver={(e) => (e.currentTarget.src = shareIcon1)}
+                />
                 <span>{ftrBtns.share[language]}</span>
               </FooterItem>
             </PostFooter>
