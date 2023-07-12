@@ -21,6 +21,7 @@ export const TransactionContainer = styled.div<{ dark: boolean }>`
   align-items: center;
   border-radius: 0.14rem;
   padding: 0.14rem;
+  padding-right: 0.42rem;
   width: 36rem;
   animation: ${FadeAnim} 1s;
   img {
@@ -49,6 +50,9 @@ export const Meta = styled.div<{dark: boolean;}>`
   }
   span:first-child {
     font-size: 1.2rem;
+  }
+  span:last-child {
+    cursor: pointer;
   }
 `;
 

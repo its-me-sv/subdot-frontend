@@ -96,4 +96,7 @@ export const UserContainer = styled.div<{ dark: boolean }>`
   }
 `;
 
-export const FetchButton = styled.div``;
+export const FetchButton = styled.div`
+  margin: 0.42rem 0rem;
+  align-self: center;
+`;
