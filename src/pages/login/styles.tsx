@@ -16,11 +16,10 @@ export const Container = styled.div<{ dark: boolean }>`
 
 export const LoginForm = styled.div<{ dark: boolean }>`
   animation: ${FadeAnim} 0.42s;
-  width: 36rem;
   display: flex;
-  flex-direction: column;
   align-items: center;
   border-radius: 1.4rem;
+  padding: 1.2rem;
   gap: 1.4rem;
   ${BoxShadow}
   ${(props) =>
@@ -28,15 +27,13 @@ export const LoginForm = styled.div<{ dark: boolean }>`
     `
     ${BoxShadowDark}
   `}
-  padding-bottom: 1.2rem;
 `;
 
 export const AccountsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  max-height: 14rem;
+  height: 42vh;
   overflow-y: auto;
-  padding-right: 0.42rem;
 `;
 
 export const Account = styled.div<{ dark: boolean }>`
@@ -45,9 +42,9 @@ export const Account = styled.div<{ dark: boolean }>`
   align-items: center;
   gap: 0.14rem;
   cursor: pointer;
-  margin: 0.42rem;
+  margin: 0.84rem;
   padding: 0.42rem;
-  border-radius: 1.4rem;
+  border-radius: 0.42rem;
   img {
     width: 3rem;
     height: 3rem;
@@ -67,8 +64,8 @@ export const Account = styled.div<{ dark: boolean }>`
   &:hover {
     opacity: 0.5;
   }
-  ${BoxShadow}
   color: #222222;
+  ${BoxShadow}
   ${(props) =>
     props.dark &&
     `
@@ -82,6 +79,7 @@ export const Title = styled.span`
   font-size: 12rem;
   width: 100%;
   height: 10rem;
+  line-height: unset;
   text-align: center;
   background: -webkit-linear-gradient(#18e9ea, #ec13e9);
   -webkit-background-clip: text;
@@ -140,4 +138,17 @@ export const Footer2 = styled.span<{ dark: boolean }>`
   ${props => props.dark && `
     color: #ffffff;
   `}
+`;
+
+export const LeftSide = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.42rem;
+`;
+
+export const RightSide = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.42rem;
 `;

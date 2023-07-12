@@ -11,7 +11,9 @@ import {
   Footer2,
   AccountsContainer,
   Account,
-  Caption2
+  Caption2,
+  LeftSide,
+  RightSide
 } from "./styles";
 import {Button} from "../../utils/styles";
 
@@ -68,43 +70,48 @@ const LoginPage: React.FC<LoginPageProps> = () => {
 
   useEffect(() => {
     resetChat!();
+    onWalletConnect();
   }, []);
 
   return (
     <Container dark={dark}>
       <div>
         <LoginForm dark={dark}>
-          <Title>{title[language]}</Title>
-          <Caption dark={dark}>{caption[language]}</Caption>
-          <Caption2 dark={dark}>{caption2[language]}</Caption2>
-          {accounts.length > 0 ? (
-            <AccountsContainer>
-              {accounts.map((acc) => (
-                <Account
-                  dark={dark}
-                  key={acc.address}
-                  onClick={() => onAccountChoose(acc)}
-                >
-                  <img
-                    alt="pp"
-                    src={`${DICE_BEAR}${acc.address}`}
-                  />
-                  <div>
-                    <span>{acc.name}</span>
-                    <span>{acc.address}</span>
-                  </div>
-                </Account>
-              ))}
-            </AccountsContainer>
-          ) : (
-            <Button
-              onClick={onWalletConnect}
-              bgColor={dark ? "#ffffff" : "#222222"}
-              dark={dark}
-            >
-              {button[language]}
-            </Button>
-          )}
+          <LeftSide>
+            <Title>{title[language]}</Title>
+            <Caption dark={dark}>{caption[language]}</Caption>
+          </LeftSide>
+          <RightSide>
+            <Caption2 dark={dark}>{caption2[language]}</Caption2>
+            {accounts.length > 0 ? (
+              <AccountsContainer>
+                {accounts.map((acc) => (
+                  <Account
+                    dark={dark}
+                    key={acc.address}
+                    onClick={() => onAccountChoose(acc)}
+                  >
+                    <img
+                      alt="pp"
+                      src={`${DICE_BEAR}${acc.address}`}
+                    />
+                    <div>
+                      <span>{acc.name}</span>
+                      <span>{acc.address}</span>
+                    </div>
+                  </Account>
+                ))}
+              </AccountsContainer>
+            ) : (
+              <Button
+                onClick={onWalletConnect}
+                bgColor={dark ? "#ffffff" : "#222222"}
+                dark={dark}
+              >
+                {button[language]}
+              </Button>
+            )}
+          </RightSide>
         </LoginForm>
       </div>
       <Footer1 onClick={() => setShowTerms!(true)} dark={dark}>
