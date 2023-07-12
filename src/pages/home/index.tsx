@@ -19,7 +19,7 @@ const HomePage: React.FC<HomePageProps> = () => {
   const {resetChat} = useChatContext();
 
   useEffect(() => {
-    window.document.title = `${homePage[language]} • Subdot`;
+    window.document.title = `${homePage[language]} / Subdot`;
     resetChat!();
     return () => resetAppContext!();
   }, []);

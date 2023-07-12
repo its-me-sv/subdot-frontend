@@ -63,7 +63,7 @@ const LoginPage: React.FC<LoginPageProps> = () => {
   };
 
   useEffect(() => {
-    window.document.title = `${loginPage[language]} • Subdot`;
+    window.document.title = `${loginPage[language]} / Subdot`;
   }, [language]);
 
   useEffect(() => {

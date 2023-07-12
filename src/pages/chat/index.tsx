@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 
 import {Container} from "../home/styles";
-import {chatPage} from "../../translations/page-titles";
 
 import FriendsCommunites from "../../components/friends-communities";
 import Chat from "../../components/chat";
@@ -23,7 +22,7 @@ const ChatPage: React.FC<ChatPageProps> = () => {
     const {setCurrChat, currChat} = useChatContext();
 
     useEffect(() => {
-      window.document.title = `${chatPage[language]} • Subdot`;
+      window.document.title = `Subchat`;
     }, [language]);
 
     useEffect(() => {

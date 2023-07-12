@@ -14,7 +14,7 @@ const ErrorPage: React.FC<ErrorPageProps> = () => {
     const {resetChat} = useChatContext();
 
     useEffect(() => {
-        window.document.title = `${errorPage[language]} • Subdot`;
+        window.document.title = `${errorPage[language]} / Subdot`;
     }, [language]);
 
     useEffect(() => {

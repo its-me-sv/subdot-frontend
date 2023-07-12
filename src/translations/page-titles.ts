@@ -7,11 +7,11 @@ export const loginPage: Array<string> = [
 ];
 
 export const homePage: Array<string> = [
-    "Home Page",
-    "主页",
-    "होम पेज",
-    "Página de inicio",
-    "Page d'accueil"
+    "Home",
+    "家",
+    "घर",
+    "Hogar",
+    "Maison"
 ];
 
 export const errorPage: Array<string> = [

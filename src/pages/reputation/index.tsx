@@ -16,7 +16,7 @@ const ReputationPage: React.FC<ReputationPageProps> = () => {
   const {resetChat} = useChatContext();
 
   useEffect(() => {
-    window.document.title = `${rpPage[language]} • Subdot`;
+    window.document.title = `${rpPage[language]} / Subdot`;
   }, [language]);
 
   useEffect(() => {
