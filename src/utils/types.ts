@@ -91,3 +91,13 @@ export interface DBMessage {
     ipfs_content_id: string;
     verified: boolean;
 }
+
+export interface PostOpen {
+    postId: string;
+    post: UserPost;
+    owner: User;
+    ownerId: string;
+    postMeta: UserPostMeta;
+    cmtsLen: number;
+    likedId: string;
+}

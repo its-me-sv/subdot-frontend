@@ -22,9 +22,10 @@ import { useSubsocial } from "../../subsocial";
 import { getSigner, getTxEventIds } from "../../subsocial/polkadot";
 import { useUserContext } from "../../contexts/user";
 import { BALANCE_DIVISOR, REST_API } from "../../utils/constants";
+import { PostOpen } from "../../utils/types";
 
 interface CommentsProps {
-  postId: string;
+  postOpen: PostOpen;
   dark: boolean
 }
 
@@ -35,7 +36,8 @@ interface PostComment {
   body: string;
 }
 
-const Comments: React.FC<CommentsProps> = ({postId, dark}) => {
+const Comments: React.FC<CommentsProps> = ({postOpen, dark}) => {
+    const {postId} = postOpen;
     const {
       setCmtOpen, language, 
       setLowBalance
@@ -138,7 +140,7 @@ const Comments: React.FC<CommentsProps> = ({postId, dark}) => {
         <Box dark={dark}>
           <CloseIcon onClick={() => {
             setComments!([]);
-            setCmtOpen!("");
+            setCmtOpen!(null);
           }} 
             dark={dark}
           >X</CloseIcon>

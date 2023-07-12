@@ -27,7 +27,7 @@ import {useAppContext} from "../../contexts/app";
 import {useUserContext} from "../../contexts/user";
 import {useSocketContext} from "../../contexts/socket";
 
-import {UserPost, User, UserPostMeta} from "../../utils/types";
+import {UserPost, User, UserPostMeta, PostOpen} from "../../utils/types";
 import {useSubsocial} from "../../subsocial";
 import {getImage} from "../../utils/utils";
 
@@ -175,6 +175,19 @@ const Post: React.FC<PostProps> = ({postId}) => {
       }
     };
 
+    const onCommentsClick = () => {
+      let postOpenObj: PostOpen = {
+        postId,
+        post,
+        owner,
+        ownerId: onwerId,
+        postMeta,
+        cmtsLen,
+        likedId
+      };
+      setCmtOpen!(postOpenObj);
+    };
+
     useEffect(() => {
       fetchData();
     }, [api, postId]);
@@ -222,7 +235,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
               <FooterItem
                 title={ftrBtns.comment[language]}
                 dark={dark}
-                onClick={() => setCmtOpen!(postId)}
+                onClick={onCommentsClick}
               >
                 <img alt="comment" src={cmtIcon} />
                 {cmtsLen > 0 && <span>{cmtsLen}</span>}

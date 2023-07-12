@@ -9,7 +9,7 @@ import React, {
 import toast from "react-hot-toast";
 
 import { REST_API } from "../utils/constants";
-import {PostComment, WalletAccount, AdvertInfo} from "../utils/types";
+import {PostComment, WalletAccount, AdvertInfo, PostOpen} from "../utils/types";
 import {sdConnect} from "../translations/toast";
 
 interface AppContextInterface {
@@ -23,7 +23,7 @@ interface AppContextInterface {
   explore: string;
   peek: string;
   comments: Array<PostComment>;
-  cmtOpen: string;
+  cmtOpen: PostOpen | null;
   transferId: string;
   postMenuOpen: boolean;
   txOpen: boolean;
@@ -48,7 +48,7 @@ interface AppContextInterface {
   setTxOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   setLoading?: React.Dispatch<React.SetStateAction<boolean>>;
   setNewAccount?: React.Dispatch<React.SetStateAction<WalletAccount | null>>;
-  setCmtOpen?: React.Dispatch<React.SetStateAction<string>>;
+  setCmtOpen?: React.Dispatch<React.SetStateAction<PostOpen | null>>;
   setLowBalance?: React.Dispatch<React.SetStateAction<boolean>>;
   setOverlap?: React.Dispatch<React.SetStateAction<boolean>>;
   setAdvert?: React.Dispatch<React.SetStateAction<AdvertInfo | null>>;
@@ -70,7 +70,7 @@ const defaultState: AppContextInterface = {
     txOpen: false,
     loading: true,
     newAccount: null,
-    cmtOpen: "",
+    cmtOpen: null,
     lowBalance: false,
     overlap: false,
     advert: null,
@@ -96,7 +96,7 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
     const [txOpen, setTxOpen] = useState<boolean>(defaultState.txOpen);
     const [loading, setLoading] = useState<boolean>(defaultState.loading);
     const [newAccount, setNewAccount] = useState<WalletAccount | null>(defaultState.newAccount);
-    const [cmtOpen, setCmtOpen] = useState<string>(defaultState.cmtOpen);
+    const [cmtOpen, setCmtOpen] = useState<PostOpen | null>(null);
     const [lowBalance, setLowBalance] = useState<boolean>(defaultState.lowBalance);
     const [overlap, setOverlap] = useState<boolean>(defaultState.overlap);
     const [advert, setAdvert] = useState<AdvertInfo | null>(defaultState.advert);
@@ -112,7 +112,7 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
         setTransferId!("");
         setPostMenuOpen!(false);
         setTxOpen!(false);
-        setCmtOpen("");
+        setCmtOpen(null);
         setLowBalance(false);
         setOverlap(false);
     };
