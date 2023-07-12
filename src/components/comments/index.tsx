@@ -35,6 +35,7 @@ import shareIcon from "../../assets/icons/share.png";
 import shareIcon1 from "../../assets/icons/share1.png";
 import tipIcon from "../../assets/icons/tip1.png";
 import tipIcon1 from "../../assets/icons/tip.png";
+import { noCmts } from "../../translations/comments";
 
 interface CommentsProps {
   postOpen: PostOpen;
@@ -226,7 +227,7 @@ const Comments: React.FC<CommentsProps> = ({postOpen, dark}) => {
             </FooterItem>
           </PostFooter>
           <CommentsHolder>
-            {comments.length === 0 && <span>No commments yet.</span>}
+            {comments.length === 0 && <span>{noCmts[language]}</span>}
             {[...comments].reverse().map((cmt) => (
               <Comment key={cmt.id} comment={cmt} />
             ))}

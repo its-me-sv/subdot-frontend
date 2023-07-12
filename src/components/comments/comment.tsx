@@ -49,7 +49,7 @@ const Comment: React.FC<CommentProps> = ({comment}) => {
             {owner.username === "--------" ? (
               <img src={skeleton} alt="skeleton loading" />
             ) : (
-              <CommentTime>{owner.username}</CommentTime>
+              <span>{owner.username}</span>
             )}
             <CommentTime title={new Date(comment.createdAt).toString()}>
               {format(new Date(comment.createdAt))}

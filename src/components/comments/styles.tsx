@@ -12,10 +12,11 @@ export const CommentsHolder = styled.div`
 
 export const CommentContainer = styled.div`
   display: flex;
+  align-items: flex-start;
   gap: 0.14rem;
   img {
-    width: 3rem;
-    height: 3rem;
+    width: 2rem;
+    height: 2rem;
     border-radius: 50%;
     cursor: pointer;
     &:hover {
@@ -29,11 +30,9 @@ export const CommentContainer = styled.div`
 export const CommentHolder = styled.div<{ dark: boolean }>`
   display: flex;
   flex-direction: column;
-  width: 42rem;
-  margin-right: 0.24rem;
+  width: 36vw;
   border-radius: 0.14rem;
-  padding: 0.42rem;
-  padding-bottom: 0.14rem;
+  padding: 0.14rem 0.21rem;
   background-color: #d7d7d7;
   color: #222222;
   ${(props) =>
@@ -47,6 +46,7 @@ export const CommentHolder = styled.div<{ dark: boolean }>`
 export const CommentTime = styled.span`
     font-family: Inter;
     align-self: flex-end;
+    font-size: 0.8rem;
 `;
 
 export const CommentText = styled.span`
@@ -82,12 +82,18 @@ export const CommentFooter = styled.div<{ dark: boolean }>`
 
 export const CommentMeta = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   img {
     border-radius: unset;
     width: 7vw;
     height: 2vh;
+  }
+  span:first-child {
+    font-size: 1rem;
+    font-family: Inter;
+    font-weight: bold;
+    opacity: 0.7;
   }
 `;
 

@@ -21,3 +21,11 @@ export const pstCmt: Array<string> = [
     "Publicar comentario",
     "Poster un commentaire"
 ];
+
+export const noCmts: Array<string> = [
+    "No commments yet.",
+    "还没有评论。",
+    "अभी तक कोई टिप्पणी नहीं.",
+    "Aún no hay comentarios.",
+    "Pas encore de commentaires."
+];
