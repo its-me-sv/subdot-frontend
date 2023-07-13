@@ -21,17 +21,19 @@ export const StickyButton = styled.div<{ abs?: boolean }>`
   ${(props) => props.abs && `position: absolute;`}
 `;
 
-export const PostContainer = styled.div<{dark: boolean;}>`
+export const PostContainer = styled.div<{ dark: boolean }>`
   display: flex;
   flex-direction: column;
   width: 36vw;
   gap: 0.42rem;
   padding: 0.84rem;
   padding-bottom: 0.42rem;
-  border-radius: 1.4rem;
+  border-radius: 0.36rem;
   margin-bottom: 1.2rem;
   ${BoxShadow}
-  ${props => props.dark && `
+  ${(props) =>
+    props.dark &&
+    `
     ${BoxShadowDark}
   `}
 `;

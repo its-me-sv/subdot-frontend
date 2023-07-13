@@ -12,8 +12,8 @@ import {useUserContext} from "../../contexts/user";
 import { getImage } from "../../utils/utils";
 import { useSubsocial } from "../../subsocial";
 import { Button } from "../../utils/styles";
-import { MenuItem } from "../menu/styles";
 import { settings } from "../../translations/login";
+import { lgnCrt } from "../../translations/header";
 
 interface HeaderProps {}
 
@@ -89,7 +89,7 @@ const Header: React.FC<HeaderProps> = () => {
                 dark={dark}
                 onClick={goHome}
               >
-                Login / Create Account
+                {lgnCrt[language]}
               </Button>
               <SettingsLogo
                 src={settingsLogo}

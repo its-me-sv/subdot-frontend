@@ -25,11 +25,11 @@ export const ItemsContainer = styled.div`
   padding: 1rem 14rem;
 `;
 
-export const Item = styled.span<{dark: boolean;}>`
+export const Item = styled.span<{ dark: boolean }>`
   font-family: Inter;
   font-size: 1.2rem;
   padding: 0.7rem;
-  border-radius: 1.4rem;
+  border-radius: 0.36rem;
   cursor: pointer;
   color: #222222;
   display: flex;
@@ -56,7 +56,9 @@ export const Item = styled.span<{dark: boolean;}>`
     }
   }
   ${BoxShadow}
-  ${props => props.dark && `
+  ${(props) =>
+    props.dark &&
+    `
     ${BoxShadowDark}
     color: #ffffff;
   `}

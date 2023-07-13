@@ -6,7 +6,7 @@ export const Container = styled.div<{ dark: boolean }>`
   padding: 0.3rem 0.6rem;
   display: flex;
   gap: 0.42rem;
-  border-radius: 14rem;
+  border-radius: 0.36rem;
   animation: ${FadeAnim} 1s;
   ${BoxShadow}
   ${(props) =>

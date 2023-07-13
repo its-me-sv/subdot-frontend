@@ -71,3 +71,11 @@ export const menu = {
         "RETOUR"
     ]
 };
+
+export const lgnCrt: Array<string> = [
+    "Login / Create Account",
+    "登录/创建帐户",
+    "लॉगइन करें/अकाउंट बनाएं",
+    "Login Crear cuenta",
+    "Connexion / Créer un compte"
+];
