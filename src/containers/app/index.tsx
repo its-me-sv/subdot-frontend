@@ -76,9 +76,9 @@ const App: React.FC<AppProps> = () => {
       {settingsOpen && <Settings />}
       {lowBalance && <LowBalance />}
       <HashRouter>
+        <Header />
         {loggedIn && (
           <>
-            <Header />
             {menuOpen && <Menu />}
             {advertMenuOpen && <Advertise />}
             {explore.length > 0 && <Results />}
