@@ -12,12 +12,47 @@ import { postPage } from "../../translations/page-titles";
 import { PostComment, User, UserPost, UserPostMeta } from "../../utils/types";
 import { defaultPost, defaultUser, defaultUserPostMeta } from "../../components/posts/data";
 
+import { getSigner, getTxEventIds } from "../../subsocial/polkadot";
+import {
+  cmtLong,
+  cmtPost,
+  cmtsFetch,
+  emptyFlds,
+  noFunds,
+  postDislike,
+  postLike,
+} from "../../translations/toast";
+import { Box, CommentsHolder } from "../../components/comments/styles";
+import {
+  FooterItem,
+  PostContent,
+  PostFooter,
+  PostHeader,
+  PostHeaderRight,
+  PostImage,
+  PostTime,
+  PostUsername,
+} from "../../components/posts/styles";
+import { getImage } from "../../utils/utils";
+import { ftrBtns, posted } from "../../translations/posts";
+import { format } from "timeago.js";
+import { noCmts } from "../../translations/comments";
+import CommentInput from "../../components/comments/input";
+import Comment from "../../components/comments/comment";
+import {Container} from './styles';
+
 import { useAppContext } from "../../contexts/app";
 import { useSubsocial } from "../../subsocial";
 import { useUserContext } from "../../contexts/user";
 import { useSocketContext } from "../../contexts/socket";
-import { getSigner, getTxEventIds } from "../../subsocial/polkadot";
-import { cmtLong, cmtPost, cmtsFetch, emptyFlds, noFunds, postDislike, postLike } from "../../translations/toast";
+
+import likeIcon from "../../assets/icons/like1.png";
+import likedIcon from "../../assets/icons/liked1.png";
+import cmtIcon from "../../assets/icons/comment1.png";
+import shareIcon from "../../assets/icons/share.png";
+import shareIcon1 from "../../assets/icons/share1.png";
+import tipIcon from "../../assets/icons/tip1.png";
+import tipIcon1 from "../../assets/icons/tip.png";
 
 interface PostPageProps {}
 
@@ -28,7 +63,8 @@ const PostPage: React.FC<PostPageProps> = () => {
     const postId = params.id;
     const { 
         language, setLowBalance, 
-        setTransferId, loggedIn 
+        setTransferId, loggedIn,
+        dark
     } = useAppContext();
     const { account, user } = useUserContext();
     const { socket } = useSocketContext();
@@ -44,15 +80,16 @@ const PostPage: React.FC<PostPageProps> = () => {
     const [notFound, setNotFound] = useState<boolean>(false);
 
     const fetchData = async () => {
-      if (!api || !postId || !account || fetching) return;
+      if (!api || !postId) return;
       try {
         setFetching(true);
         const post = await api.findPost({ id: postId });
-        if (!post?.content) {
+        if (!post?.content || !post) {
           setFetching(false);
           setNotFound(true);
           return;
         }
+        setNotFound(false);
         setPost(post.content as unknown as UserPost);
         setPostMeta({
           likes: post.struct.upvotesCount,
@@ -68,11 +105,13 @@ const PostPage: React.FC<PostPageProps> = () => {
         const cmtIds = await api.blockchain.getReplyIdsByPostId(idToBn(postId));
         const cmts = await api.findPublicPosts(cmtIds);
         setCmtsLen(cmts.length);
-        api.blockchain
-          .getReactionIdsByAccount(account.address, [postId])
-          .then((reactData) => {
-            setLikeId(reactData[0].toString());
-          });
+        if (account) {
+            api.blockchain
+              .getReactionIdsByAccount(account.address, [postId])
+              .then((reactData) => {
+                setLikeId(reactData[0].toString());
+              });
+        }
         const cmtsPromise = new Promise(async (resolve, reject) => {
           try {
             setFetching(true);
@@ -106,6 +145,10 @@ const PostPage: React.FC<PostPageProps> = () => {
     };
 
     const toggleLike = async () => {
+      if (!loggedIn) {
+        window.alert("Create an account today");
+        return;
+      }
       if (!api || !postId || !account?.address || !loggedIn) return;
       if (likedId === "0") {
         const substrateApi = await api.blockchain.api;
@@ -195,6 +238,10 @@ const PostPage: React.FC<PostPageProps> = () => {
     };
 
     const addComment = (newCmt: string, cb: () => void) => {
+        if (!loggedIn) {
+            window.alert("Create an account today");
+            return;
+        }
       if (!api || !account || !postId || !loggedIn) return;
       if (newCmt.length === 0) return toast.error(emptyFlds[language]);
       if (newCmt.length > 210) return toast.error(cmtLong[language]);
@@ -252,6 +299,14 @@ const PostPage: React.FC<PostPageProps> = () => {
       });
     };
 
+    const onProfileClick = () => {
+        if (!loggedIn) {
+            window.alert("Create an account today");
+            return;
+        }
+        navigate(`/profile/${owner.username}`)
+    };
+
     useEffect(() => {
         window.document.title = `${postPage[language]} / Subdot`;
     }, [language]);
@@ -260,10 +315,84 @@ const PostPage: React.FC<PostPageProps> = () => {
         fetchData();
     }, [api, postId]);
 
+    if (notFound) {
+        return (
+            <Container>
+                Page doesn't exist
+            </Container>
+        );
+    }
+
     return (
-        <div>
-            {postId}
-        </div>
+      <Container>
+        <Box dark={dark} onClick={(event) => event.stopPropagation()}>
+          <PostHeader>
+            <div onClick={onProfileClick}>
+              <img
+                alt={`pp of ${owner.username}`}
+                src={getImage(owner.picture)}
+              />
+              <PostHeaderRight dark={dark}>
+                <PostUsername>{owner.username}</PostUsername>
+                <PostTime title={new Date(postMeta.createdAt).toString()}>
+                  {posted[language]} {format(new Date(postMeta.createdAt))}
+                </PostTime>
+              </PostHeaderRight>
+            </div>
+          </PostHeader>
+          <PostContent dark={dark}>{post.description}</PostContent>
+          {post.picture.length > 0 && (
+            <PostImage alt="content" src={getImage(post.picture)} />
+          )}
+          <PostFooter>
+            <FooterItem dark={dark} title={ftrBtns.like[language]}>
+              <img
+                alt="like"
+                src={likedId === "0" ? likeIcon : likedIcon}
+                onClick={toggleLike}
+              />
+              {postMeta.likes > 0 && <span>{postMeta.likes}</span>}
+            </FooterItem>
+            <FooterItem title={ftrBtns.comment[language]} dark={dark}>
+              <img alt="comment" src={cmtIcon} />
+              {cmtsLen > 0 && <span>{cmtsLen}</span>}
+            </FooterItem>
+            <FooterItem
+              title={ftrBtns.tip[language]}
+              dark={dark}
+              onClick={() => setTransferId!(`${onwerId}:${owner.username}`)}
+            >
+              <img
+                alt="tip"
+                src={tipIcon}
+                onMouseOut={(e) => (e.currentTarget.src = tipIcon)}
+                onMouseOver={(e) => (e.currentTarget.src = tipIcon1)}
+              />
+              <span>{ftrBtns.tip[language]}</span>
+            </FooterItem>
+            <FooterItem
+              title={ftrBtns.share[language]}
+              dark={dark}
+              onClick={() => setTransferId!(`${onwerId}:${owner.username}`)}
+            >
+              <img
+                alt="share"
+                src={shareIcon}
+                onMouseOut={(e) => (e.currentTarget.src = shareIcon)}
+                onMouseOver={(e) => (e.currentTarget.src = shareIcon1)}
+              />
+              <span>{ftrBtns.share[language]}</span>
+            </FooterItem>
+          </PostFooter>
+          <CommentsHolder>
+            {comments.length === 0 && <span>{noCmts[language]}</span>}
+            {[...comments].reverse().map((cmt) => (
+              <Comment key={cmt.id} comment={cmt} />
+            ))}
+          </CommentsHolder>
+          <CommentInput addComment={addComment} />
+        </Box>
+      </Container>
     );
 };
 
