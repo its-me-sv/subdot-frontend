@@ -22,7 +22,7 @@ const ChatPage: React.FC<ChatPageProps> = () => {
     const {setCurrChat, currChat} = useChatContext();
 
     useEffect(() => {
-      window.document.title = `Subchat`;
+      window.document.title = `Subchat / Subdot`;
     }, [language]);
 
     useEffect(() => {

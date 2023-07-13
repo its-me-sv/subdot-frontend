@@ -38,7 +38,7 @@ const ProfilePage: React.FC<ProfilePageProps> = () => {
   };
 
   useEffect(() => {
-    window.document.title = `${params.id} ${profilePage[language]} / Subdot`;
+    window.document.title = `${params.id} / Subdot`;
     fetchData();
   }, [params]);
 
