@@ -24,7 +24,7 @@ import { useSubsocial } from "../../subsocial";
 import { getSigner, getTxEventIds } from "../../subsocial/polkadot";
 import { useUserContext } from "../../contexts/user";
 import { BALANCE_DIVISOR, REST_API } from "../../utils/constants";
-import { PostOpen, UserPostMeta } from "../../utils/types";
+import { PostComment, PostOpen, UserPostMeta } from "../../utils/types";
 import { getImage } from "../../utils/utils";
 import { FetchButton, FooterItem, PostContent, PostFooter, PostHeader, PostHeaderRight, PostTime, PostUsername } from "../posts/styles";
 import { useNavigate } from "react-router-dom";
@@ -43,13 +43,6 @@ import { useSocketContext } from "../../contexts/socket";
 interface CommentsProps {
   postOpen: PostOpen;
   dark: boolean
-}
-
-interface PostComment {
-  creator: string;
-  createdAt: number;
-  id: string;
-  body: string;
 }
 
 const Comments: React.FC<CommentsProps> = ({postOpen, dark}) => {
