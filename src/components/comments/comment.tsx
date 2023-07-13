@@ -22,7 +22,7 @@ interface CommentProps {
 
 const Comment: React.FC<CommentProps> = ({comment}) => {
     const navigate = useNavigate();
-    const {dark} = useAppContext();
+    const {dark, loggedIn} = useAppContext();
     const {api} = useSubsocial();
     const [owner, setOwner] = useState<User>(defaultUser);
 
@@ -33,6 +33,14 @@ const Comment: React.FC<CommentProps> = ({comment}) => {
         setOwner(profile.content as unknown as User);
     };
 
+    const onProfileClick = () => {
+      if (!loggedIn) {
+        window.alert("Create an account today");
+        return;
+      }
+      navigate(`/profile/${owner.username}`);
+    };
+
     useEffect(() => {
         fetchData();
     }, [api, comment]);
@@ -40,7 +48,7 @@ const Comment: React.FC<CommentProps> = ({comment}) => {
     return (
       <CommentContainer>
         <img
-          onClick={() => navigate(`/profile/${owner.username}`)}
+          onClick={onProfileClick}
           alt={`pp of ${comment.creator.slice(7)}`}
           src={getImage(owner.picture)}
         />

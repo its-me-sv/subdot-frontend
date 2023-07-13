@@ -188,6 +188,15 @@ const Post: React.FC<PostProps> = ({postId}) => {
       setCmtOpen!(postOpenObj);
     };
 
+    const onShareClick = () => {
+      const shareUrl = `${window.location.origin}/#/post/${postId}`;
+      navigator.clipboard
+        .writeText(shareUrl)
+        .then(() =>
+          toast("Post link copied to clipboard", { icon: "🚀", id: "share" })
+        );
+    };
+
     useEffect(() => {
       fetchData();
     }, [api, postId]);
@@ -256,7 +265,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
               <FooterItem
                 title={ftrBtns.share[language]}
                 dark={dark}
-                onClick={() => setTransferId!(`${onwerId}:${owner.username}`)}
+                onClick={onShareClick}
               >
                 <img
                   alt="share"

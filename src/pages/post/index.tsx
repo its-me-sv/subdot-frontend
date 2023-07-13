@@ -139,7 +139,7 @@ const PostPage: React.FC<PostPageProps> = () => {
           loading: cmtsFetch.loading[language],
           success: cmtsFetch.success[language],
           error: cmtsFetch.error[language],
-        });
+        }, {id: "cmts"});
         cmtsPromise.then(() => setFetching(false));
       } catch (err) {
         setFetching(false);
@@ -317,6 +317,13 @@ const PostPage: React.FC<PostPageProps> = () => {
         setTransferId!(`${onwerId}:${owner.username}`);
     };
 
+    const onShareClick = () => {
+        const shareUrl = `${window.location.origin}/#/post/${postId}`;
+        navigator.clipboard
+          .writeText(shareUrl)
+          .then(() => toast("Post link copied to clipboard", { icon: "🚀", id: "share" }));
+    };
+
     useEffect(() => {
         window.document.title = `${postPage[language]} / Subdot`;
     }, [language]);
@@ -394,7 +401,7 @@ const PostPage: React.FC<PostPageProps> = () => {
                 <FooterItem
                   title={ftrBtns.share[language]}
                   dark={dark}
-                  onClick={() => setTransferId!(`${onwerId}:${owner.username}`)}
+                  onClick={onShareClick}
                 >
                   <img
                     alt="share"
@@ -405,7 +412,7 @@ const PostPage: React.FC<PostPageProps> = () => {
                   <span>{ftrBtns.share[language]}</span>
                 </FooterItem>
               </PostFooter>
-              <CommentsHolder>
+              <CommentsHolder onClick={(event) => event.stopPropagation()}>
                 {comments.length === 0 && <span>{noCmts[language]}</span>}
                 {[...comments].reverse().map((cmt) => (
                   <Comment key={cmt.id} comment={cmt} />

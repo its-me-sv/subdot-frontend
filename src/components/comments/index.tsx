@@ -156,6 +156,15 @@ const Comments: React.FC<CommentsProps> = ({postOpen, dark}) => {
       setCmtOpen!(null);
     };
 
+    const onShareClick = () => {
+      const shareUrl = `${window.location.origin}/#/post/${postId}`;
+      navigator.clipboard
+        .writeText(shareUrl)
+        .then(() =>
+          toast("Post link copied to clipboard", { icon: "🚀", id: "share" })
+        );
+    };
+
     const toggleLike = async () => {
       if (!api || !postId || !account?.address) return;
       if (likedId === "0") {
@@ -302,7 +311,7 @@ const Comments: React.FC<CommentsProps> = ({postOpen, dark}) => {
             <FooterItem
               title={ftrBtns.share[language]}
               dark={dark}
-              onClick={() => setTransferId!(`${onwerId}:${owner.username}`)}
+              onClick={onShareClick}
             >
               <img
                 alt="share"
