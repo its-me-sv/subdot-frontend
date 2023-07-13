@@ -18,7 +18,7 @@ export const LoginForm = styled.div<{ dark: boolean }>`
   animation: ${FadeAnim} 0.42s;
   display: flex;
   align-items: center;
-  border-radius: 1.4rem;
+  border-radius: 0.36rem;
   padding: 1.2rem;
   gap: 1.4rem;
   ${BoxShadow}

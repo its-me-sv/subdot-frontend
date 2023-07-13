@@ -5,7 +5,7 @@ export const CommentsHolder = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.42rem;
-  height: 30vh;
+  max-height: 30vh;
   overflow-y: auto;
   margin: 0.42rem 0;
 `;

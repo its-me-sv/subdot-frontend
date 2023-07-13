@@ -61,8 +61,7 @@ const Header: React.FC<HeaderProps> = () => {
       setMenuOpen!(true);
     };
     
-    if (window.location.hash === "#/")
-      return <></>;
+    if (["#/", ""].includes(window.location.hash)) return <></>;
 
     return (
       <Container dark={dark}>

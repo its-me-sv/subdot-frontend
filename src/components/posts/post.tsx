@@ -58,6 +58,8 @@ const Post: React.FC<PostProps> = ({postId}) => {
     const [cmtsLen, setCmtsLen] = useState<number>(0);
     const [likedId, setLikeId] = useState<string>("0");
     const [fetching, setFetching] = useState<boolean>(false);
+    const [tipHover, setTipHover] = useState<boolean>(false);
+    const [shareHover, setShareHover] = useState<boolean>(false);
 
     const fetchData = async () => {
         if (!api || !postId || !account || fetching) return;
@@ -253,12 +255,12 @@ const Post: React.FC<PostProps> = ({postId}) => {
                 title={ftrBtns.tip[language]}
                 dark={dark}
                 onClick={() => setTransferId!(`${onwerId}:${owner.username}`)}
+                onMouseOut={() => setTipHover(false)}
+                onMouseOver={() => setTipHover(true)}
               >
                 <img
                   alt="tip"
-                  src={tipIcon}
-                  onMouseOut={(e) => (e.currentTarget.src = tipIcon)}
-                  onMouseOver={(e) => (e.currentTarget.src = tipIcon1)}
+                  src={tipHover ? tipIcon1 : tipIcon}
                 />
                 <span>{ftrBtns.tip[language]}</span>
               </FooterItem>
@@ -266,12 +268,12 @@ const Post: React.FC<PostProps> = ({postId}) => {
                 title={ftrBtns.share[language]}
                 dark={dark}
                 onClick={onShareClick}
+                onMouseOut={() => setShareHover(false)}
+                onMouseOver={() => setShareHover(true)}
               >
                 <img
                   alt="share"
-                  src={shareIcon}
-                  onMouseOut={(e) => (e.currentTarget.src = shareIcon)}
-                  onMouseOver={(e) => (e.currentTarget.src = shareIcon1)}
+                  src={shareHover ? shareIcon1 : shareIcon}
                 />
                 <span>{ftrBtns.share[language]}</span>
               </FooterItem>

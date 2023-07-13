@@ -65,6 +65,8 @@ const Comments: React.FC<CommentsProps> = ({postOpen, dark}) => {
     const [comments, setComments] = useState<Array<PostComment>>([]);
     const [postMeta, setPostMeta] = useState<UserPostMeta>(postOpen.postMeta);
     const [likedId, setLikeId] = useState<string>(postOpen.likedId);
+    const [tipHover, setTipHover] = useState<boolean>(false);
+    const [shareHover, setShareHover] = useState<boolean>(false);
 
     const fetching = useRef<boolean>(false);
 
@@ -299,26 +301,20 @@ const Comments: React.FC<CommentsProps> = ({postOpen, dark}) => {
               title={ftrBtns.tip[language]}
               dark={dark}
               onClick={() => setTransferId!(`${onwerId}:${owner.username}`)}
+              onMouseOut={() => setTipHover(false)}
+              onMouseOver={() => setTipHover(true)}
             >
-              <img
-                alt="tip"
-                src={tipIcon}
-                onMouseOut={(e) => (e.currentTarget.src = tipIcon)}
-                onMouseOver={(e) => (e.currentTarget.src = tipIcon1)}
-              />
+              <img alt="tip" src={tipHover ? tipIcon1 : tipIcon} />
               <span>{ftrBtns.tip[language]}</span>
             </FooterItem>
             <FooterItem
               title={ftrBtns.share[language]}
               dark={dark}
               onClick={onShareClick}
+              onMouseOut={() => setShareHover(false)}
+              onMouseOver={() => setShareHover(true)}
             >
-              <img
-                alt="share"
-                src={shareIcon}
-                onMouseOut={(e) => (e.currentTarget.src = shareIcon)}
-                onMouseOver={(e) => (e.currentTarget.src = shareIcon1)}
-              />
+              <img alt="share" src={shareHover ? shareIcon1 : shareIcon} />
               <span>{ftrBtns.share[language]}</span>
             </FooterItem>
           </PostFooter>
