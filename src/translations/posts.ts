@@ -92,3 +92,11 @@ export const ftrBtns = {
         "Partager"
     ]
 };
+
+export const copyUrl: Array<string> = [
+    "Post link copied to clipboard",
+    "帖子链接已复制到剪贴板",
+    "पोस्ट लिंक क्लिपबोर्ड पर कॉपी किया गया",
+    "Publicar enlace copiado al portapapeles",
+    "Publier le lien copié dans le presse-papiers"
+];

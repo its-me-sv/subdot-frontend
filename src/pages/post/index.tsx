@@ -35,7 +35,7 @@ import {
   PostUsername,
 } from "../../components/posts/styles";
 import { getImage } from "../../utils/utils";
-import { ftrBtns, posted } from "../../translations/posts";
+import { copyUrl, ftrBtns, posted } from "../../translations/posts";
 import { format } from "timeago.js";
 import { noCmts } from "../../translations/comments";
 import CommentInput from "../../components/comments/input";
@@ -321,7 +321,7 @@ const PostPage: React.FC<PostPageProps> = () => {
         const shareUrl = `${window.location.origin}/#/post/${postId}`;
         navigator.clipboard
           .writeText(shareUrl)
-          .then(() => toast("Post link copied to clipboard", { icon: "🚀", id: "share" }));
+          .then(() => toast(copyUrl[language], { icon: "🚀", id: "share" }));
     };
 
     useEffect(() => {
