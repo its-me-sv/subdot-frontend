@@ -24,6 +24,7 @@ import {
 } from "../../translations/toast";
 import { Box, CommentsHolder } from "../../components/comments/styles";
 import {
+    FetchButton,
   FooterItem,
   PostContent,
   PostFooter,
@@ -45,6 +46,7 @@ import { useAppContext } from "../../contexts/app";
 import { useSubsocial } from "../../subsocial";
 import { useUserContext } from "../../contexts/user";
 import { useSocketContext } from "../../contexts/socket";
+import skeleton from "../../assets/loader.gif";
 
 import likeIcon from "../../assets/icons/like1.png";
 import likedIcon from "../../assets/icons/liked1.png";
@@ -307,6 +309,14 @@ const PostPage: React.FC<PostPageProps> = () => {
         navigate(`/profile/${owner.username}`)
     };
 
+    const onTransferClick = () => {
+        if (!loggedIn) {
+          window.alert("Create an account today");
+          return;
+        }
+        setTransferId!(`${onwerId}:${owner.username}`);
+    };
+
     useEffect(() => {
         window.document.title = `${postPage[language]} / Subdot`;
     }, [language]);
@@ -326,71 +336,84 @@ const PostPage: React.FC<PostPageProps> = () => {
     return (
       <Container>
         <Box dark={dark} onClick={(event) => event.stopPropagation()}>
-          <PostHeader>
-            <div onClick={onProfileClick}>
-              <img
-                alt={`pp of ${owner.username}`}
-                src={getImage(owner.picture)}
-              />
-              <PostHeaderRight dark={dark}>
-                <PostUsername>{owner.username}</PostUsername>
-                <PostTime title={new Date(postMeta.createdAt).toString()}>
-                  {posted[language]} {format(new Date(postMeta.createdAt))}
-                </PostTime>
-              </PostHeaderRight>
-            </div>
-          </PostHeader>
-          <PostContent dark={dark}>{post.description}</PostContent>
-          {post.picture.length > 0 && (
-            <PostImage alt="content" src={getImage(post.picture)} />
+          {fetching ? (
+            <img src={skeleton} alt="skeleton loading" />
+          ) : (
+            <>
+              <PostHeader>
+                <div onClick={onProfileClick}>
+                  <img
+                    alt={`pp of ${owner.username}`}
+                    src={getImage(owner.picture)}
+                  />
+                  <PostHeaderRight dark={dark}>
+                    <PostUsername>{owner.username}</PostUsername>
+                    <PostTime title={new Date(postMeta.createdAt).toString()}>
+                      {posted[language]} {format(new Date(postMeta.createdAt))}
+                    </PostTime>
+                  </PostHeaderRight>
+                </div>
+                <FetchButton
+                  onClick={fetchData}
+                  title="Refetch data"
+                  dark={dark}
+                >
+                  {fetching ? "⏱️" : "↺"}
+                </FetchButton>
+              </PostHeader>
+              <PostContent dark={dark}>{post.description}</PostContent>
+              {post.picture.length > 0 && (
+                <PostImage alt="content" src={getImage(post.picture)} />
+              )}
+              <PostFooter>
+                <FooterItem dark={dark} title={ftrBtns.like[language]}>
+                  <img
+                    alt="like"
+                    src={likedId === "0" ? likeIcon : likedIcon}
+                    onClick={toggleLike}
+                  />
+                  {postMeta.likes > 0 && <span>{postMeta.likes}</span>}
+                </FooterItem>
+                <FooterItem title={ftrBtns.comment[language]} dark={dark}>
+                  <img alt="comment" src={cmtIcon} />
+                  {cmtsLen > 0 && <span>{cmtsLen}</span>}
+                </FooterItem>
+                <FooterItem
+                  title={ftrBtns.tip[language]}
+                  dark={dark}
+                  onClick={onTransferClick}
+                >
+                  <img
+                    alt="tip"
+                    src={tipIcon}
+                    onMouseOut={(e) => (e.currentTarget.src = tipIcon)}
+                    onMouseOver={(e) => (e.currentTarget.src = tipIcon1)}
+                  />
+                  <span>{ftrBtns.tip[language]}</span>
+                </FooterItem>
+                <FooterItem
+                  title={ftrBtns.share[language]}
+                  dark={dark}
+                  onClick={() => setTransferId!(`${onwerId}:${owner.username}`)}
+                >
+                  <img
+                    alt="share"
+                    src={shareIcon}
+                    onMouseOut={(e) => (e.currentTarget.src = shareIcon)}
+                    onMouseOver={(e) => (e.currentTarget.src = shareIcon1)}
+                  />
+                  <span>{ftrBtns.share[language]}</span>
+                </FooterItem>
+              </PostFooter>
+              <CommentsHolder>
+                {comments.length === 0 && <span>{noCmts[language]}</span>}
+                {[...comments].reverse().map((cmt) => (
+                  <Comment key={cmt.id} comment={cmt} />
+                ))}
+              </CommentsHolder>
+              <CommentInput addComment={addComment} />
+            </>
           )}
-          <PostFooter>
-            <FooterItem dark={dark} title={ftrBtns.like[language]}>
-              <img
-                alt="like"
-                src={likedId === "0" ? likeIcon : likedIcon}
-                onClick={toggleLike}
-              />
-              {postMeta.likes > 0 && <span>{postMeta.likes}</span>}
-            </FooterItem>
-            <FooterItem title={ftrBtns.comment[language]} dark={dark}>
-              <img alt="comment" src={cmtIcon} />
-              {cmtsLen > 0 && <span>{cmtsLen}</span>}
-            </FooterItem>
-            <FooterItem
-              title={ftrBtns.tip[language]}
-              dark={dark}
-              onClick={() => setTransferId!(`${onwerId}:${owner.username}`)}
-            >
-              <img
-                alt="tip"
-                src={tipIcon}
-                onMouseOut={(e) => (e.currentTarget.src = tipIcon)}
-                onMouseOver={(e) => (e.currentTarget.src = tipIcon1)}
-              />
-              <span>{ftrBtns.tip[language]}</span>
-            </FooterItem>
-            <FooterItem
-              title={ftrBtns.share[language]}
-              dark={dark}
-              onClick={() => setTransferId!(`${onwerId}:${owner.username}`)}
-            >
-              <img
-                alt="share"
-                src={shareIcon}
-                onMouseOut={(e) => (e.currentTarget.src = shareIcon)}
-                onMouseOver={(e) => (e.currentTarget.src = shareIcon1)}
-              />
-              <span>{ftrBtns.share[language]}</span>
-            </FooterItem>
-          </PostFooter>
-          <CommentsHolder>
-            {comments.length === 0 && <span>{noCmts[language]}</span>}
-            {[...comments].reverse().map((cmt) => (
-              <Comment key={cmt.id} comment={cmt} />
-            ))}
-          </CommentsHolder>
-          <CommentInput addComment={addComment} />
         </Box>
       </Container>
     );
