@@ -80,6 +80,8 @@ const PostPage: React.FC<PostPageProps> = () => {
     const [owner, setOwner] = useState<User>(defaultUser);
     const [cmtsLen, setCmtsLen] = useState<number>(0);
     const [notFound, setNotFound] = useState<boolean>(false);
+    const [tipHover, setTipHover] = useState<boolean>(false);
+    const [shareHover, setShareHover] = useState<boolean>(false);
 
     const fetchData = async () => {
       if (!api || !postId) return;
@@ -389,25 +391,22 @@ const PostPage: React.FC<PostPageProps> = () => {
                   title={ftrBtns.tip[language]}
                   dark={dark}
                   onClick={onTransferClick}
+                  onMouseOut={() => setTipHover(false)}
+                  onMouseOver={() => setTipHover(true)}
                 >
-                  <img
-                    alt="tip"
-                    src={tipIcon}
-                    onMouseOut={(e) => (e.currentTarget.src = tipIcon)}
-                    onMouseOver={(e) => (e.currentTarget.src = tipIcon1)}
-                  />
+                  <img alt="tip" src={tipHover ? tipIcon1 : tipIcon} />
                   <span>{ftrBtns.tip[language]}</span>
                 </FooterItem>
                 <FooterItem
                   title={ftrBtns.share[language]}
                   dark={dark}
                   onClick={onShareClick}
+                  onMouseOut={() => setShareHover(false)}
+                  onMouseOver={() => setShareHover(true)}
                 >
                   <img
                     alt="share"
-                    src={shareIcon}
-                    onMouseOut={(e) => (e.currentTarget.src = shareIcon)}
-                    onMouseOver={(e) => (e.currentTarget.src = shareIcon1)}
+                    src={shareHover ? shareIcon1 : shareIcon}
                   />
                   <span>{ftrBtns.share[language]}</span>
                 </FooterItem>
