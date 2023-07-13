@@ -11,6 +11,8 @@ const ProfilePage = lazy(() => import("../../pages/profile"));
 const ChatPage = lazy(() => import("../../pages/chat"));
 const ReputationPage = lazy(() => import("../../pages/reputation"));
 const ErrorPage = lazy(() => import("../../pages/error"));
+const PostPage = lazy(() => import("../../pages/post"));
+
 
 // components
 import TermsPolicies from "../../components/terms-privacy";
@@ -27,10 +29,10 @@ import LowBalance from "../../components/low-balance";
 import Comments from "../../components/comments";
 import Overlap from "../../components/overlap";
 import Header from "../../components/header";
+import Menu from "../../components/menu";
 
 // providers
 import {useAppContext} from "../../contexts/app";
-import Menu from "../../components/menu";
 import { useSocketContext } from "../../contexts/socket";
 
 interface AppProps {}
@@ -110,6 +112,10 @@ const App: React.FC<AppProps> = () => {
             <Route
               path="/rp"
               element={loggedIn ? <ReputationPage /> : <Navigate to="/" />}
+            />
+            <Route 
+              path="/post/:id"
+              element={<PostPage />}
             />
             <Route path="/*" element={<ErrorPage />} />
           </Routes>

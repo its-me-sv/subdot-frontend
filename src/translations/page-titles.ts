@@ -45,3 +45,11 @@ export const chatPage: Array<string> = [
     "Mensajer",
     "Messagère"
 ];
+
+export const postPage: Array<string> = [
+    "Post",
+    "邮政",
+    "डाक",
+    "Correo",
+    "Poste"
+];
