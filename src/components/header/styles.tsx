@@ -58,3 +58,15 @@ export const Footer = styled.div<{ dark: boolean }>`
     color: #ffffff;
   `}
 `;
+
+export const SettingsLogo = styled.img<{ dark: boolean }>`
+  width: 1.8rem;
+  height: 1.8rem;
+  margin-right: 0.42rem;
+  cursor: pointer;
+  ${(props) =>
+    props.dark &&
+    `
+      filter: invert(100%);
+    `}
+`;

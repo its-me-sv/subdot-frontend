@@ -334,14 +334,14 @@ const PostPage: React.FC<PostPageProps> = () => {
 
     if (notFound) {
         return (
-            <Container>
+            <Container dark={dark}>
                 Page doesn't exist
             </Container>
         );
     }
 
     return (
-      <Container>
+      <Container dark={dark}>
         <Box dark={dark} onClick={(event) => event.stopPropagation()}>
           {fetching ? (
             <img src={skeleton} alt="skeleton loading" />

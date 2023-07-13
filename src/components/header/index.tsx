@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom";
 import {simpleFormatBalance} from "@subsocial/utils";
 
-import {Container, Footer, HomeLogo, MenuLogo} from "./styles";
+import {Container, Footer, HomeLogo, MenuLogo, SettingsLogo} from "./styles";
+import settingsLogo from "../../assets/icons/settings.png";
 
 import Explore from "../explore";
 
@@ -10,12 +11,15 @@ import {useAppContext} from "../../contexts/app";
 import {useUserContext} from "../../contexts/user";
 import { getImage } from "../../utils/utils";
 import { useSubsocial } from "../../subsocial";
+import { Button } from "../../utils/styles";
+import { MenuItem } from "../menu/styles";
+import { settings } from "../../translations/login";
 
 interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = () => {
     const navigate = useNavigate();
-    const {setMenuOpen, dark, setExplore, loggedIn} = useAppContext();
+    const {setMenuOpen, dark, setExplore, loggedIn, setSettingsOpen, language} = useAppContext();
     const {user, reputation, account} = useUserContext();
     const {api} = useSubsocial();
     const [balance, setBalance] = useState<string>("");
@@ -63,19 +67,38 @@ const Header: React.FC<HeaderProps> = () => {
     return (
       <Container dark={dark}>
         <HomeLogo onClick={goHome} />
-        <Explore />
+        {loggedIn && <Explore />}
         <Footer dark={dark}>
-          <span 
-            onClick={goToRP}
-            title="Your reputation score"
-          >{reputation} RP</span>
-          <span>{balance}</span>
-          <MenuLogo 
-            onClick={openMenu}
-            alt="menu" 
-            src={getImage(user?.picture ?? "")}
-            title="menu"
-          />
+          {loggedIn ? (
+            <>
+              <span onClick={goToRP} title="Your reputation score">
+                {reputation} RP
+              </span>
+              <span>{balance}</span>
+              <MenuLogo
+                onClick={openMenu}
+                alt="menu"
+                src={getImage(user?.picture ?? "")}
+                title="menu"
+              />
+            </>
+          ) : (
+            <>
+              <Button
+                bgColor={dark ? "#ffffff" : "#222222"}
+                dark={dark}
+                onClick={goHome}
+              >
+                Login / Create Account
+              </Button>
+              <SettingsLogo
+                src={settingsLogo}
+                dark={dark}
+                title={settings[language]}
+                onClick={() => setSettingsOpen!(true)}
+              />
+            </>
+          )}
         </Footer>
       </Container>
     );
