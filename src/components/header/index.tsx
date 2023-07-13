@@ -15,7 +15,7 @@ interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = () => {
     const navigate = useNavigate();
-    const {setMenuOpen, dark, setExplore} = useAppContext();
+    const {setMenuOpen, dark, setExplore, loggedIn} = useAppContext();
     const {user, reputation, account} = useUserContext();
     const {api} = useSubsocial();
     const [balance, setBalance] = useState<string>("");
@@ -40,7 +40,11 @@ const Header: React.FC<HeaderProps> = () => {
 
     const goHome = () => {
       setExplore!("");
-      navigate("/home");
+      if (!loggedIn) {
+        navigate("/");
+      } else {
+        navigate("/home");
+      }
     };
 
     const goToRP = () => {
@@ -52,6 +56,9 @@ const Header: React.FC<HeaderProps> = () => {
       setExplore!("");
       setMenuOpen!(true);
     };
+    
+    if (window.location.hash === "#/")
+      return <></>;
 
     return (
       <Container dark={dark}>
