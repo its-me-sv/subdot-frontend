@@ -39,7 +39,7 @@ interface AppProps {}
 
 const toastOptions: ToastOptions = {
   style: {
-    borderRadius: "1.4rem",
+    borderRadius: "0.36rem",
   },
 };
 

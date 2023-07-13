@@ -29,7 +29,7 @@ export const PostContainer = styled.div<{ dark: boolean }>`
   padding: 0.84rem;
   padding-bottom: 0.42rem;
   border-radius: 0.36rem;
-  margin-bottom: 1.2rem;
+  margin-bottom: 0.42rem;
   ${BoxShadow}
   ${(props) =>
     props.dark &&
