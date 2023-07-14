@@ -20,7 +20,7 @@ export const LoginForm = styled.div<{ dark: boolean }>`
   align-items: center;
   border-radius: 0.36rem;
   padding: 1.2rem;
-  gap: 1.4rem;
+  gap: 2.1rem;
   ${BoxShadow}
   ${(props) =>
     props.dark &&
@@ -32,7 +32,8 @@ export const LoginForm = styled.div<{ dark: boolean }>`
 export const AccountsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 42vh;
+  height: 36rem;
+  padding-right: 1.4rem;
   overflow-y: auto;
 `;
 
@@ -150,5 +151,12 @@ export const RightSide = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 0.42rem;
+  min-height: 14rem;
+  min-width: 14rem;
+  max-height: 36rem;
+  max-width: 36rem;
+  padding: 0rem 2.1rem;
+  border-left: 0.3rem solid rgb(227, 224, 224);
 `;

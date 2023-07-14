@@ -70,7 +70,7 @@ const LoginPage: React.FC<LoginPageProps> = () => {
 
   useEffect(() => {
     resetChat!();
-    onWalletConnect();
+    // onWalletConnect();
   }, []);
 
   return (
@@ -85,7 +85,7 @@ const LoginPage: React.FC<LoginPageProps> = () => {
             <Caption2 dark={dark}>{caption2[language]}</Caption2>
             {accounts.length > 0 ? (
               <AccountsContainer>
-                {accounts.map((acc) => (
+                {[...accounts, ...accounts, ...accounts].map((acc) => (
                   <Account
                     dark={dark}
                     key={acc.address}
