@@ -13,7 +13,6 @@ const ReputationPage = lazy(() => import("../../pages/reputation"));
 const ErrorPage = lazy(() => import("../../pages/error"));
 const PostPage = lazy(() => import("../../pages/post"));
 
-
 // components
 import TermsPolicies from "../../components/terms-privacy";
 import Settings from "../../components/settings";
@@ -30,6 +29,7 @@ import Comments from "../../components/comments";
 import Overlap from "../../components/overlap";
 import Header from "../../components/header";
 import Menu from "../../components/menu";
+import CreateAccPopUp from "../../components/create-acc-pop-up";
 
 // providers
 import {useAppContext} from "../../contexts/app";
@@ -53,7 +53,8 @@ const App: React.FC<AppProps> = () => {
     loading, setLoading,
     newAccount, cmtOpen,
     lowBalance, dark,
-    overlap, menuOpen
+    overlap, menuOpen,
+    showCreate
   } = useAppContext();
   const {socket} = useSocketContext();
 
@@ -76,6 +77,8 @@ const App: React.FC<AppProps> = () => {
       {settingsOpen && <Settings />}
       {lowBalance && <LowBalance />}
       <HashRouter>
+        {showCreate && <CreateAccPopUp />}
+        {explore.length > 0 && <Results />}
         <Header />
         {loggedIn && (
           <>
@@ -88,7 +91,6 @@ const App: React.FC<AppProps> = () => {
             {txOpen && <Transactions />}
           </>
         )}
-        {explore.length > 0 && <Results />}
         {newAccount !== null && <NewAccount account={newAccount} />}
         {overlap && <Overlap />}
         <Suspense fallback={<Loader />}>

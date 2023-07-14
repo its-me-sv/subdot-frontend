@@ -22,7 +22,7 @@ interface CommentProps {
 
 const Comment: React.FC<CommentProps> = ({comment}) => {
     const navigate = useNavigate();
-    const {dark, loggedIn} = useAppContext();
+    const {dark, loggedIn, setShowCreate} = useAppContext();
     const {api} = useSubsocial();
     const [owner, setOwner] = useState<User>(defaultUser);
 
@@ -35,7 +35,7 @@ const Comment: React.FC<CommentProps> = ({comment}) => {
 
     const onProfileClick = () => {
       if (!loggedIn) {
-        window.alert("Create an account today");
+        setShowCreate!(true);
         return;
       }
       navigate(`/profile/${owner.username}`);

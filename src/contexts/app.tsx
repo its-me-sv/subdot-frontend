@@ -32,6 +32,7 @@ interface AppContextInterface {
   lowBalance: boolean;
   overlap: boolean;
   advert: AdvertInfo | null;
+  showCreate: boolean;
   resetAppContext?: () => void;
   setLoggedIn?: React.Dispatch<React.SetStateAction<boolean>>;
   setShowTerms?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -52,6 +53,7 @@ interface AppContextInterface {
   setLowBalance?: React.Dispatch<React.SetStateAction<boolean>>;
   setOverlap?: React.Dispatch<React.SetStateAction<boolean>>;
   setAdvert?: React.Dispatch<React.SetStateAction<AdvertInfo | null>>;
+  setShowCreate?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const defaultState: AppContextInterface = {
@@ -74,6 +76,7 @@ const defaultState: AppContextInterface = {
     lowBalance: false,
     overlap: false,
     advert: null,
+    showCreate: false
 };
 
 export const AppContext = createContext<AppContextInterface>(defaultState);
@@ -100,6 +103,7 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
     const [lowBalance, setLowBalance] = useState<boolean>(defaultState.lowBalance);
     const [overlap, setOverlap] = useState<boolean>(defaultState.overlap);
     const [advert, setAdvert] = useState<AdvertInfo | null>(defaultState.advert);
+    const [showCreate, setShowCreate] = useState<boolean>(defaultState.showCreate);
 
     const resetAppContext = () => {
         setShowTerms!(false);
@@ -115,6 +119,7 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
         setCmtOpen(null);
         setLowBalance(false);
         setOverlap(false);
+        setShowCreate(false);
     };
 
     // fetching advertisement
@@ -143,7 +148,6 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
             advertMenuOpen, setAdvertMenuOpen,
             explore, setExplore,
             peek, setPeek,
-            resetAppContext,
             comments, setComments,
             transferId, setTransferId,
             postMenuOpen, setPostMenuOpen,
@@ -154,6 +158,8 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
             lowBalance, setLowBalance,
             overlap, setOverlap,
             advert, setAdvert,
+            showCreate, setShowCreate,
+            resetAppContext
         }}>
             {children}
         </AppContext.Provider>

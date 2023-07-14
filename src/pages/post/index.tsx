@@ -63,10 +63,13 @@ const PostPage: React.FC<PostPageProps> = () => {
     const navigate = useNavigate();
     const { api } = useSubsocial();
     const postId = params.id;
-    const { 
-        language, setLowBalance, 
-        setTransferId, loggedIn,
-        dark
+    const {
+      language,
+      setLowBalance,
+      setTransferId,
+      loggedIn,
+      dark,
+      setShowCreate,
     } = useAppContext();
     const { account, user } = useUserContext();
     const { socket } = useSocketContext();
@@ -150,7 +153,7 @@ const PostPage: React.FC<PostPageProps> = () => {
 
     const toggleLike = async () => {
       if (!loggedIn) {
-        window.alert("Create an account today");
+        setShowCreate!(true);
         return;
       }
       if (!api || !postId || !account?.address || !loggedIn) return;
@@ -243,7 +246,7 @@ const PostPage: React.FC<PostPageProps> = () => {
 
     const addComment = (newCmt: string, cb: () => void) => {
         if (!loggedIn) {
-            window.alert("Create an account today");
+            setShowCreate!(true);
             return;
         }
       if (!api || !account || !postId || !loggedIn) return;
@@ -305,7 +308,7 @@ const PostPage: React.FC<PostPageProps> = () => {
 
     const onProfileClick = () => {
         if (!loggedIn) {
-            window.alert("Create an account today");
+            setShowCreate!(true);
             return;
         }
         navigate(`/profile/${owner.username}`)
@@ -313,7 +316,7 @@ const PostPage: React.FC<PostPageProps> = () => {
 
     const onTransferClick = () => {
         if (!loggedIn) {
-          window.alert("Create an account today");
+          setShowCreate!(true);
           return;
         }
         setTransferId!(`${onwerId}:${owner.username}`);

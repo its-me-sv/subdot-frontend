@@ -16,7 +16,7 @@ const ResultCard: React.FC<ResultCardProps> = ({
     accountId, username, name, reputation
 }) => {
     const navigate = useNavigate();
-    const {setExplore, dark, loggedIn} = useAppContext();
+    const { setExplore, dark, loggedIn, setShowCreate } = useAppContext();
     const {api} = useSubsocial();
     const [picture, setPicture] = useState<string>(DICE_BEAR);
     const [stTxt, setStTxt] = useState<string | null>(null);
@@ -24,7 +24,7 @@ const ResultCard: React.FC<ResultCardProps> = ({
     const handlePress = () => {
       setExplore!("");
       if (!loggedIn) {
-        window.alert("Create an account today");
+        setShowCreate!(true);
         return;
       }
       navigate(`/profile/${username}`);
