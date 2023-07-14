@@ -22,8 +22,8 @@ const CreateAccPopUp: React.FC<CreateAccPopUpProps> = () => {
     };
 
     return (
-      <Container dark={dark}>
-        <Box dark={dark}>
+      <Container dark={dark} onClick={() => setShowCreate!(false)}>
+        <Box dark={dark} onClick={(event) => event.stopPropagation()}>
           <Sides>
             <Caption2 dark={dark} className="title">
               🌟 Key features
@@ -31,7 +31,7 @@ const CreateAccPopUp: React.FC<CreateAccPopUpProps> = () => {
             <FeaturesContainer>
               {keyFeatures[language].map((v, i) => (
                 <Feature dark={dark} key={v}>
-                  {i + 1}. {v}
+                  {v}
                 </Feature>
               ))}
             </FeaturesContainer>
@@ -54,7 +54,7 @@ const CreateAccPopUp: React.FC<CreateAccPopUpProps> = () => {
             <FeaturesContainer isLeft>
               {addtnFeatures[language].map((v, i) => (
                 <Feature dark={dark} key={v}>
-                  {i + 1}. {v}
+                  {v}
                 </Feature>
               ))}
             </FeaturesContainer>
