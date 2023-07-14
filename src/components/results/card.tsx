@@ -16,14 +16,18 @@ const ResultCard: React.FC<ResultCardProps> = ({
     accountId, username, name, reputation
 }) => {
     const navigate = useNavigate();
-    const {setExplore, dark} = useAppContext();
+    const {setExplore, dark, loggedIn} = useAppContext();
     const {api} = useSubsocial();
     const [picture, setPicture] = useState<string>(DICE_BEAR);
     const [stTxt, setStTxt] = useState<string | null>(null);
     
     const handlePress = () => {
-      navigate(`/profile/${username}`);
       setExplore!("");
+      if (!loggedIn) {
+        window.alert("Create an account today");
+        return;
+      }
+      navigate(`/profile/${username}`);
     };
 
     useEffect(() => {

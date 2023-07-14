@@ -81,7 +81,6 @@ const App: React.FC<AppProps> = () => {
           <>
             {menuOpen && <Menu />}
             {advertMenuOpen && <Advertise />}
-            {explore.length > 0 && <Results />}
             {peek.length > 0 && <Peek id={peek} />}
             {cmtOpen !== null && <Comments dark={dark} postOpen={cmtOpen} />}
             {transferId.length > 0 && <Transfer accountId={transferId} />}
@@ -89,6 +88,7 @@ const App: React.FC<AppProps> = () => {
             {txOpen && <Transactions />}
           </>
         )}
+        {explore.length > 0 && <Results />}
         {newAccount !== null && <NewAccount account={newAccount} />}
         {overlap && <Overlap />}
         <Suspense fallback={<Loader />}>

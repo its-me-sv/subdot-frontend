@@ -66,7 +66,7 @@ const Header: React.FC<HeaderProps> = () => {
     return (
       <Container dark={dark}>
         <HomeLogo onClick={goHome} />
-        {loggedIn && <Explore />}
+        <Explore />
         <Footer dark={dark}>
           {loggedIn ? (
             <>
