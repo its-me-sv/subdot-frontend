@@ -25,11 +25,15 @@ const CreateAccPopUp: React.FC<CreateAccPopUpProps> = () => {
       <Container dark={dark}>
         <Box dark={dark}>
           <Sides>
-            <Caption2 dark={dark}>Key features</Caption2>
+            <Caption2 dark={dark} className="title">
+              🌟 Key features
+            </Caption2>
             <FeaturesContainer>
-                {keyFeatures[language].map((v, i) => 
-                    <Feature dark={dark} key={v}>{i+1}. {v}</Feature>
-                )}
+              {keyFeatures[language].map((v, i) => (
+                <Feature dark={dark} key={v}>
+                  {i + 1}. {v}
+                </Feature>
+              ))}
             </FeaturesContainer>
           </Sides>
           <Center>
@@ -44,11 +48,15 @@ const CreateAccPopUp: React.FC<CreateAccPopUpProps> = () => {
             </Button>
           </Center>
           <Sides>
-            <Caption2 dark={dark}>Upcoming features</Caption2>
-            <FeaturesContainer>
-                {addtnFeatures[language].map((v, i) => 
-                    <Feature dark={dark} key={v}>{i+1}. {v}</Feature>
-                )}
+            <Caption2 dark={dark} className="title">
+              📅 Upcoming features
+            </Caption2>
+            <FeaturesContainer isLeft>
+              {addtnFeatures[language].map((v, i) => (
+                <Feature dark={dark} key={v}>
+                  {i + 1}. {v}
+                </Feature>
+              ))}
             </FeaturesContainer>
           </Sides>
         </Box>
