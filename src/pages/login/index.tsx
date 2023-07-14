@@ -85,7 +85,7 @@ const LoginPage: React.FC<LoginPageProps> = () => {
             <Caption2 dark={dark}>{caption2[language]}</Caption2>
             {accounts.length > 0 ? (
               <AccountsContainer>
-                {[...accounts, ...accounts, ...accounts].map((acc) => (
+                {accounts.map((acc) => (
                   <Account
                     dark={dark}
                     key={acc.address}

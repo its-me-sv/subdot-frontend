@@ -2,13 +2,15 @@ import styled from "styled-components";
 import {BoxShadow, BoxShadowDark} from "../../utils/styles";
 
 export const SelectLang = styled.select<{ dark: boolean }>`
-  border-radius: 1.4rem;
+  border-radius: 0.36rem;
   z-index: 998;
   font-size: 1.4rem;
   font-family: Inter;
   text-align: center;
   cursor: pointer;
   opacity: 0.84;
+  outline: none;
+  border: none;
   width: 8rem;
   color: #222222;
   ${BoxShadow}
