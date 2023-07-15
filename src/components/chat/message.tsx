@@ -40,9 +40,16 @@ const Message: React.FC<MessageProps> = ({message}) => {
     }, [message]);
 
     useEffect(() => {
+      if (verified) return;
       socket.emit("joinRoom", message.message_id);
-      socket.on("verifyMessage", () => setVerified(true));
-    }, [message]);
+      socket.on("verifyMessage", (roomId) => {
+        if (roomId != message.message_id) return;
+        setVerified(true);
+      });
+      return () => {
+        socket.emit("leaveRoom", message.message_id);
+      };
+    }, [message.message_id]);
 
     if (ipfsMessage === null) {
       return (

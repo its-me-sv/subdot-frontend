@@ -18,7 +18,7 @@ interface ServerToClientEvents {
   unfollow?: (accId: string) => void;
   incrRP?: (rp: number) => void;
   newMessage?: (msg: DBMessage) => void;
-  verifyMessage?: () => void;
+  verifyMessage?: (roomId: string) => void;
   newMessageNotification?: (msg: string) => void;
 }
 
