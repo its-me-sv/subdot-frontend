@@ -12,6 +12,7 @@ const ChatPage = lazy(() => import("../../pages/chat"));
 const ReputationPage = lazy(() => import("../../pages/reputation"));
 const ErrorPage = lazy(() => import("../../pages/error"));
 const PostPage = lazy(() => import("../../pages/post"));
+const AdvertisePage = lazy(() => import("../../pages/advertise"));
 
 // components
 import TermsPolicies from "../../components/terms-privacy";
@@ -114,6 +115,10 @@ const App: React.FC<AppProps> = () => {
             <Route
               path="/rp"
               element={loggedIn ? <ReputationPage /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/advertise"
+              element={loggedIn ? <AdvertisePage /> : <Navigate to="/" />}
             />
             <Route 
               path="/post/:id"

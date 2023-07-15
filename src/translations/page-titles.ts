@@ -53,3 +53,11 @@ export const postPage: Array<string> = [
     "Correo",
     "Poste"
 ];
+
+export const advertisemenstPage: Array<string> = [
+    "Advertise",
+    "广告",
+    "विज्ञापित",
+    "Anunciar",
+    "Afficher"
+];

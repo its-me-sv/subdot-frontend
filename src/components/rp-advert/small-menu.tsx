@@ -9,8 +9,6 @@ import feedBackLogo from "../../assets/icons/feedback.png";
 import advertLogo from "../../assets/icons/advert.png";
 import { useAppContext } from "../../contexts/app";
 import { useNavigate } from "react-router-dom";
-import { noAdvert } from "../../translations/toast";
-import { toast } from "react-hot-toast";
 
 interface SmallMenuProps {}
 
@@ -31,11 +29,7 @@ const SmallMenu: React.FC<SmallMenuProps> = () => {
     };
 
     const openAdvertise = () => {
-      if (advert) {
-        toast.error(noAdvert[language]);
-        return;
-      }
-      setAdvertMenuOpen!(true);
+      navigate(`/advertise`);
     };
 
     const openTransactions = () => {

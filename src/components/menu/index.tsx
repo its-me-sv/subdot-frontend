@@ -30,8 +30,8 @@ const Menu: React.FC<MenuProps> = () => {
     const {
         setMenuOpen, setShowTerms, 
         setSettingsOpen,
-        setAdvertMenuOpen, setTxOpen,
-        language, dark, advert
+        setTxOpen,
+        language, dark,
     } = useAppContext();
     const {logoutUser, user, account} = useUserContext();
     const {resetChat} = useChatContext();
@@ -75,11 +75,7 @@ const Menu: React.FC<MenuProps> = () => {
     };
 
     const openAdvertise = () => {
-      if (advert) {
-        toast.error(noAdvert[language]);
-        return;
-      }
-      setAdvertMenuOpen!(true);
+      navigate(`/advertise`);
       closeMenu();
     };
 
