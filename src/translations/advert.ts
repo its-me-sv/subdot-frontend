@@ -101,3 +101,49 @@ export const noAdvertText: Array<string> = [
     "Los anuncios van aquí",
     "La ou les publicités vont ici"
 ];
+
+export const statTitle: Array<string> = [
+    "Advertisement stats",
+    "广告统计",
+    "विज्ञापन आँकड़े",
+    "Estadísticas de publicidad",
+    "Statistiques de publicité"
+];
+
+export const statsBox = {
+    posted: [
+        "Posted",
+        "已发布",
+        "की तैनाती",
+        "Al corriente",
+        "Posté"
+    ],
+    expires: [
+        "Expires",
+        "过期",
+        "समय-सीमा समाप्त",
+        "Caduca",
+        "Expire"
+    ],
+    invst: [
+        "Investment",
+        "投资",
+        "निवेश",
+        "Inversión",
+        "Investissement"
+    ],
+    vws: [
+        "Views",
+        "意见",
+        "दृश्य",
+        "Puntos de vista",
+        "Vues"
+    ],
+    engmnt: [
+        "Engagement",
+        "订婚",
+        "सगाई",
+        "Compromiso",
+        "Engagement"
+    ]
+};
