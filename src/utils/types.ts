@@ -101,3 +101,11 @@ export interface PostOpen {
     cmtsLen: number;
     likedId: string;
 }
+
+export interface AdvertStats {
+    posted: string;
+    expires: string;
+    investment: number;
+    views: number;
+    engagement: number;
+}

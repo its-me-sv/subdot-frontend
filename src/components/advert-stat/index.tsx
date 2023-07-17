@@ -3,11 +3,14 @@ import { format } from "timeago.js";
 import { AdvertStatsContainer, FetchButton, Seperator, StatHeader, StatItem, StatsContainer } from "./styles";
 import { useAppContext } from "../../contexts/app";
 import { statTitle, statsBox } from "../../translations/advert";
+import { AdvertStats } from "../../utils/types";
+import { defaultAdvertStats } from "../../data/advert";
 
 interface AdvertStatProps {}
 
 const AdvertStat: React.FC<AdvertStatProps> = () => {
     const {dark, language} = useAppContext();
+    const [advertStat, setAdvertStat] = useState<AdvertStats>(defaultAdvertStats);
     const [fetching, setFetching] = useState<boolean>(false);
 
     const fetchData = () => {
@@ -29,27 +32,31 @@ const AdvertStat: React.FC<AdvertStatProps> = () => {
         <StatsContainer>
           <StatItem dark={dark}>
             <span>{statsBox.posted[language]}</span>
-            <span title={new Date().toString()}>{format(Date.now())}</span>
+            <span title={new Date(advertStat.posted).toString()}>
+              {format(new Date(advertStat.posted))}
+            </span>
           </StatItem>
           <Seperator />
           <StatItem dark={dark}>
             <span>{statsBox.expires[language]}</span>
-            <span title={new Date().toString()}>{format(Date.now())}</span>
+            <span title={new Date(advertStat.expires).toString()}>
+              {format(new Date(advertStat.expires))}
+            </span>
           </StatItem>
           <Seperator />
           <StatItem dark={dark}>
             <span>{statsBox.invst[language]}</span>
-            <span>3 SOON</span>
+            <span>{advertStat.investment || "--"} SOON</span>
           </StatItem>
           <Seperator />
           <StatItem dark={dark}>
             <span>{statsBox.vws[language]}</span>
-            <span>500</span>
+            <span>{advertStat.views || "--"}</span>
           </StatItem>
           <Seperator />
           <StatItem dark={dark}>
             <span>{statsBox.engmnt[language]}</span>
-            <span>127</span>
+            <span>{advertStat.engagement || "--"}</span>
           </StatItem>
         </StatsContainer>
       </AdvertStatsContainer>
