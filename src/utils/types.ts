@@ -109,3 +109,8 @@ export interface AdvertStats {
     views: number;
     engagement: number;
 }
+
+export interface UserAdvertDetails {
+    picture: string;
+    link: string;
+}

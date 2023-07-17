@@ -31,7 +31,7 @@ export const AdvertImage = styled.img<{dark: boolean;}>`
     width: 15rem;
     height: auto;
     padding: 0.42rem;
-    border-radius: 0.21rem;
+    border-radius: 0.36rem;
     ${BoxShadow}
     ${props => props.dark && `
         ${BoxShadowDark}

@@ -1,4 +1,4 @@
-import { AdvertStats } from "../utils/types";
+import { AdvertStats, UserAdvertDetails } from "../utils/types";
 
 export const dummyLink: string = "https://bit.ly/temp-advert";
 
@@ -10,4 +10,9 @@ export const defaultAdvertStats: AdvertStats = {
     investment: 0,
     views: 0,
     engagement: 0
+};
+
+export const defaultUserAdvert: UserAdvertDetails = {
+    link: "-------",
+    picture: "-------"
 };
