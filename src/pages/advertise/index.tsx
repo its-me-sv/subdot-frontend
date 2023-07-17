@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useAppContext } from "../../contexts/app";
 import { advertisemenstPage } from "../../translations/page-titles";
-import { AdvertStatsContainer, Container, FetchButton, Seperator, StatItem, StatsContainer } from "./styles";
+import { AdvertStatsContainer, Container, FetchButton, Seperator, StatHeader, StatItem, StatsContainer } from "./styles";
+import { format } from "timeago.js";
 
 interface AdvertisePageProps {}
 
@@ -24,26 +25,34 @@ const AdvertisePage: React.FC<AdvertisePageProps> = () => {
     return (
       <Container dark={dark}>
         <AdvertStatsContainer dark={dark}>
-          <FetchButton onClick={fetchData} title="Refetch data" dark={dark}>
-            {fetching ? "⏱️" : "↺"}
-          </FetchButton>
+          <StatHeader dark={dark}>
+            <span>Advertisement stats</span>
+            <FetchButton onClick={fetchData} title="Refetch data" dark={dark}>
+              {fetching ? "⏱️" : "↺"}
+            </FetchButton>
+          </StatHeader>
           <StatsContainer>
-            <StatItem>
+            <StatItem dark={dark}>
               <span>Posted</span>
-              <span>2 days ago</span>
+              <span title={new Date().toString()}>{format(Date.now())}</span>
             </StatItem>
             <Seperator />
-            <StatItem>
+            <StatItem dark={dark}>
               <span>Expires</span>
-              <span>in 1 day</span>
+              <span title={new Date().toString()}>{format(Date.now())}</span>
             </StatItem>
             <Seperator />
-            <StatItem>
+            <StatItem dark={dark}>
+              <span>Investment</span>
+              <span>3 SOON</span>
+            </StatItem>
+            <Seperator />
+            <StatItem dark={dark}>
               <span>Views</span>
               <span>500</span>
             </StatItem>
             <Seperator />
-            <StatItem>
+            <StatItem dark={dark}>
               <span>Engagements</span>
               <span>127</span>
             </StatItem>
