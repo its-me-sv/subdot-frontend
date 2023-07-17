@@ -15,7 +15,7 @@ const AdvertisePage: React.FC<AdvertisePageProps> = () => {
 
     return (
       <Container dark={dark}>
-        <AdvertStat />
+        <AdvertStat advertId="123" />
       </Container>
     );
 };

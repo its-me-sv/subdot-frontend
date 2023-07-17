@@ -1,14 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { format } from "timeago.js";
 import { AdvertStatsContainer, FetchButton, Seperator, StatHeader, StatItem, StatsContainer } from "./styles";
 import { useAppContext } from "../../contexts/app";
 import { statTitle, statsBox } from "../../translations/advert";
 import { AdvertStats } from "../../utils/types";
 import { defaultAdvertStats } from "../../data/advert";
+import axios from "axios";
+import { REST_API } from "../../utils/constants";
 
-interface AdvertStatProps {}
+interface AdvertStatProps {
+    advertId: string;
+}
 
-const AdvertStat: React.FC<AdvertStatProps> = () => {
+const AdvertStat: React.FC<AdvertStatProps> = ({advertId}) => {
     const {dark, language} = useAppContext();
     const [advertStat, setAdvertStat] = useState<AdvertStats>(defaultAdvertStats);
     const [fetching, setFetching] = useState<boolean>(false);
@@ -16,10 +20,15 @@ const AdvertStat: React.FC<AdvertStatProps> = () => {
     const fetchData = () => {
       if (fetching) return;
       setFetching(true);
-      setTimeout(() => {
-        setFetching(false);
-      }, 1000);
+      axios.get(`${REST_API}/advert/stat/${advertId}`)
+      .then(({data}) => setAdvertStat(data))
+      .finally(() => setFetching(false));
     };
+
+    useEffect(() => {
+        if (!advertId) return;
+        fetchData();
+    }, [advertId]);
 
     return (
       <AdvertStatsContainer dark={dark}>
