@@ -40,7 +40,9 @@ const AdvertisePage: React.FC<AdvertisePageProps> = () => {
             <UserAdvert advertId={advertId} />
             <AdvertStat advertId={advertId} />
           </>
-        ): <PostAdvert />}
+        ) : (
+          <PostAdvert setAdvertId={setAdvertId} />
+        )}
       </Container>
     );
 };
