@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 import { Container } from "./styles";
 import { advertisemenstPage } from "../../translations/page-titles";
 
 import AdvertStat from "../../components/advert-stat";
 import UserAdvert from "../../components/user-advert";
+import PostAdvert from "../../components/post-advert";
 
 import { useAppContext } from "../../contexts/app";
 import { useUserContext } from "../../contexts/user";
-import axios from "axios";
 import { REST_API } from "../../utils/constants";
 
 interface AdvertisePageProps {}
@@ -39,9 +40,7 @@ const AdvertisePage: React.FC<AdvertisePageProps> = () => {
             <UserAdvert advertId={advertId} />
             <AdvertStat advertId={advertId} />
           </>
-        ): (
-          <h1>You can post advertisement</h1>
-        )}
+        ): <PostAdvert />}
       </Container>
     );
 };

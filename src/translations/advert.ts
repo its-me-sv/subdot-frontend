@@ -39,11 +39,11 @@ export const durationPh: Array<string> = [
 ];
 
 export const link: Array<string> = [
-    "LINK",
+    "Link",
     "关联",
     "संपर्क",
-    "ENLACE",
-    "LIEN"
+    "Enlace",
+    "Lien"
 ];
 
 export const linkPh: Array<string> = [
