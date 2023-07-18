@@ -7,12 +7,14 @@ import { AdvertStats } from "../../utils/types";
 import { defaultAdvertStats } from "../../data/advert";
 import axios from "axios";
 import { REST_API } from "../../utils/constants";
+import { toast } from "react-hot-toast";
 
 interface AdvertStatProps {
-    advertId: string;
+  advertId: string;
+  setAdvertId: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const AdvertStat: React.FC<AdvertStatProps> = ({advertId}) => {
+const AdvertStat: React.FC<AdvertStatProps> = ({advertId, setAdvertId}) => {
     const {dark, language} = useAppContext();
     const [advertStat, setAdvertStat] = useState<AdvertStats>(defaultAdvertStats);
     const [fetching, setFetching] = useState<boolean>(false);
@@ -21,7 +23,13 @@ const AdvertStat: React.FC<AdvertStatProps> = ({advertId}) => {
       if (fetching) return;
       setFetching(true);
       axios.get(`${REST_API}/advert/stat/${advertId}`)
-      .then(({data}) => setAdvertStat(data))
+      .then(({data}) => {
+        setAdvertStat(data);
+        setTimeout(() => {
+          toast("Advertisement expired", { icon: "ℹ️", id: "add exp" });
+          setAdvertId("");
+        }, new Date(data.expires).getTime() - Date.now());
+      })
       .finally(() => setFetching(false));
     };
 

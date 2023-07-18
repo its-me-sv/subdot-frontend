@@ -38,7 +38,7 @@ const AdvertisePage: React.FC<AdvertisePageProps> = () => {
         {advertId.length > 0 ? (
           <>
             <UserAdvert advertId={advertId} />
-            <AdvertStat advertId={advertId} />
+            <AdvertStat advertId={advertId} setAdvertId={setAdvertId} />
           </>
         ) : (
           <PostAdvert setAdvertId={setAdvertId} />
