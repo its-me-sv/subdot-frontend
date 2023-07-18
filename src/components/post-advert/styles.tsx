@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import { BoxShadow, BoxShadowDark } from "../../utils/styles";
 
+export const UserAdvertContainer = styled.div`
+  display: flex;
+  gap: 1.4rem;
+`;
+
 export const FieldInput = styled.input<{ dark: boolean }>`
   font-family: Inter;
   font-size: 1.4rem;
@@ -22,4 +27,9 @@ export const FieldInput = styled.input<{ dark: boolean }>`
     color: #ffffff;
     ${BoxShadowDark}
     `}
+`;
+
+export const FooterButton = styled.div`
+  margin-top: 1.4rem;
+  align-self: flex-end;
 `;

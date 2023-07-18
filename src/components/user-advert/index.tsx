@@ -9,13 +9,14 @@ import skeleton from "../../assets/loader.gif";
 import { AdvertImage } from "../rp-advert/styles";
 import { AdvertInfoItem, UserAdvertContainer } from "./styles";
 import { REST_API } from "../../utils/constants";
+import { link as lnkTxt } from "../../translations/advert";
 
 interface UserAdvertProps {
     advertId: string
 }
 
 const UserAdvert: React.FC<UserAdvertProps> = ({advertId}) => {
-    const {dark} = useAppContext();
+    const {dark, language} = useAppContext();
     const [advertData, setAdvertData] = useState<UserAdvertDetails>(defaultUserAdvert);
 
     const fetchData = () => {
@@ -36,7 +37,7 @@ const UserAdvert: React.FC<UserAdvertProps> = ({advertId}) => {
           src={advertData.picture === "-------" ? skeleton : advertData.picture}
         />
         <AdvertInfoItem dark={dark}>
-          <span>Link</span>
+          <span>{lnkTxt[language]}</span>
           {advertData.link === "-------" ? (
             <img src={skeleton} alt="skeleton loader" />
           ) : (
