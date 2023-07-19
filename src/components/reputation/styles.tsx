@@ -12,14 +12,16 @@ export const Container = styled.div<{ dark: boolean }>`
     `}
 `;
 
-export const InfoBox = styled.div`
+export const InfoBox = styled.div<{ dark: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 0.42rem;
-  /* margin: 0rem 0.42rem; */
-  border-left: 0.3rem solid rgb(227, 224, 224);
+  margin: 0.42rem;
+  border-radius: 0.36rem;
+  ${BoxShadow}
+  ${(props) => props.dark && `${BoxShadowDark}`}
 `;
 
 export const InfoBoxTitle = styled.span<{ dark: boolean }>`

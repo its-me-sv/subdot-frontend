@@ -4,11 +4,13 @@ import { BoxShadow, BoxShadowDark } from "../../utils/styles";
 export const Container = styled.div<{ dark: boolean }>`
   display: flex;
   flex-direction: column;
-  padding: 0 0.42rem;
   align-items: center;
   justify-content: center;
   gap: 1.4rem;
   font-family: Inter;
+  border-radius: 0.36rem;
+  padding: 0.5rem;
+  margin: 0.42rem;
   img {
     width: 14vw;
     height: 3vh;
@@ -19,8 +21,13 @@ export const Container = styled.div<{ dark: boolean }>`
     }
   }
   color: #222222;
-  border-left: 0.3rem solid rgb(227, 224, 224);
-  ${(props) => props.dark && `color: #ffffff;`}
+  ${BoxShadow}
+  ${(props) =>
+    props.dark &&
+    `
+    color: #ffffff;
+    ${BoxShadowDark}
+  `}
 `;
 
 export const Username = styled.span`
@@ -80,6 +87,7 @@ export const ProfileEditContainer = styled.div<{dark: boolean}>`
   width: 21%;
   position: fixed;
   z-index: 800;
+  right: 1rem;
   input {
     max-width: 60%;
   }

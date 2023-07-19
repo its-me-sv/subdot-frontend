@@ -17,17 +17,15 @@ const FrndCommSection: React.FC<FrndCommSectionProps> = ({
     const {dark} = useAppContext();
     
     return (
-        <Section>
-            <SectionTitle dark={dark}>{title}</SectionTitle>
-            <SectionProfiles dark={dark}>
-                {ids.length === 0 && (
-                    <span>No accounts to show.</span>
-                )}
-                {ids.map((val) => (
-                    <SectionProfile key={val} id={val} fromChat={fromChat} />
-                ))}
-            </SectionProfiles>
-        </Section>
+      <Section dark={dark}>
+        <SectionTitle dark={dark}>{title}</SectionTitle>
+        <SectionProfiles dark={dark}>
+          {ids.length === 0 && <span>No accounts to show.</span>}
+          {ids.map((val) => (
+            <SectionProfile key={val} id={val} fromChat={fromChat} />
+          ))}
+        </SectionProfiles>
+      </Section>
     );
 };
 

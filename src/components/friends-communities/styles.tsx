@@ -3,24 +3,18 @@ import {BoxShadow, BoxShadowDark, FadeAnim} from "../../utils/styles";
 
 export const Container = styled.div<{ dark: boolean }>`
   display: grid;
-  border-radius: 2px;
-  border-right: 0.3rem solid rgb(227, 224, 224);
-  ${(props) =>
-    props.dark &&
-    `
-    border-right: 0.3rem solid rgb(227, 224, 224);
-  `}
+  padding: 0.5rem;
+  margin: 0.14rem;
+  gap: 0.42rem;
 `;
 
-export const Section = styled.div`
+export const Section = styled.div<{ dark: boolean }>`
   display: flex;
   flex-direction: column;
-  margin: 0.14rem;
-  border-radius: 0.14rem;
-  padding: 0rem 0.42rem;
-  padding-bottom: 0.42rem;
-  margin-right: 0rem;
-  margin-bottom: 0rem;
+  border-radius: 0.36rem;
+  padding: 0.42rem;
+  ${BoxShadow}
+  ${(props) => props.dark && `${BoxShadowDark}`}
 `;
 
 export const SectionTitle = styled.span<{ dark: boolean }>`
@@ -55,7 +49,7 @@ export const ProfileContainer = styled.div<{ hover?: boolean; dark: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 0.21rem;
-  padding: 0.21rem;
+  padding: 0.14rem;
   animation: ${FadeAnim} 1s;
   &:hover {
     border-radius: 0.14rem;

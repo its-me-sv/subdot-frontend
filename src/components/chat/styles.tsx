@@ -6,6 +6,7 @@ export const Container = styled.div<{ dark: boolean }>`
   flex-direction: column;
   height: 92vh;
   padding: 0.42rem 0rem;
+  margin: 0.14rem;
 `;
 
 export const DefaultContainer = styled.div<{ dark: boolean }>`
@@ -17,7 +18,6 @@ export const DefaultContainer = styled.div<{ dark: boolean }>`
   align-items: center;
   justify-content: center;
   font-size: 4.2rem;
-  border-right: 0.3rem solid rgb(227, 224, 224);
   span {
     width: 42vw;
     text-align: justify;
@@ -27,7 +27,6 @@ export const DefaultContainer = styled.div<{ dark: boolean }>`
     props.dark &&
     `
       color: #d7d7d7;
-      border-right: 0.3rem solid rgb(227, 224, 224);
     `}
 `;
 

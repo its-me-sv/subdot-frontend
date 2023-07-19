@@ -7,24 +7,27 @@ export const Container = styled.div`
   flex-direction: column;
   margin: 0.14rem;
   border-radius: 0.14rem;
-  border-left: 0.3rem solid rgb(227, 224, 224);
-  gap: 1rem;
+  gap: 0.42rem;
 `;
 
-export const AdvertContainer = styled.div<{dark: boolean}>`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    &:hover {
-        opacity: 0.84;
-    }
-    span {
-        text-align: center;
-        font-family: Inter;
-        color: #222222;
-        ${props => props.dark && `color: #ffffff;`}
-    }
+export const AdvertContainer = styled.div<{ dark: boolean }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 0.36rem;
+  padding: 0.42rem;
+  &:hover {
+    opacity: 0.84;
+  }
+  span {
+    text-align: center;
+    font-family: Inter;
+    color: #222222;
+    ${(props) => props.dark && `color: #ffffff;`}
+  }
+  ${BoxShadow}
+  ${(props) => props.dark && `${BoxShadowDark}`}
 `;
 
 export const AdvertImage = styled.img<{dark: boolean;}>`
@@ -93,7 +96,7 @@ export const RPItem = styled.div<{ dark: boolean }>`
   }
 `;
 
-export const SmallMenuContainer = styled.div`
+export const SmallMenuContainer = styled.div<{ dark: boolean }>`
   a {
     all: unset;
   }
@@ -102,5 +105,8 @@ export const SmallMenuContainer = styled.div`
   gap: 1rem;
   align-items: center;
   padding-bottom: 1rem;
-  border-bottom: 0.3rem solid rgb(227, 224, 224);
+  border-radius: 0.36rem;
+  padding: 0.42rem;
+  ${BoxShadow}
+  ${(props) => props.dark && `${BoxShadowDark}`}
 `;

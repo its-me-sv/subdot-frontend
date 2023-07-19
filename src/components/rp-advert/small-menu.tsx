@@ -37,7 +37,7 @@ const SmallMenu: React.FC<SmallMenuProps> = () => {
     };
 
     return (
-      <SmallMenuContainer>
+      <SmallMenuContainer dark={dark}>
         <MenuItem dark={dark} onClick={takeToSubchat}>
           <img src={chatLogo} />
           <span>SUBCHAT</span>
