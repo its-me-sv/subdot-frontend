@@ -10,7 +10,7 @@ import { fileBig } from "../../translations/toast";
 import { Button } from "../../utils/styles";
 import axios from "axios";
 import { REST_API } from "../../utils/constants";
-import { formatTimestamp } from "../../utils/utils";
+import { formatTimestamp, isValidDateRange } from "../../utils/utils";
 import { useUserContext } from "../../contexts/user";
 
 interface PostAdvertProps {
@@ -63,6 +63,7 @@ const PostAdvert: React.FC<PostAdvertProps> = ({ setAdvertId }) => {
     if (!picture) return toast.error("Picture not provided");
     if (startDate.length === 0) return toast.error("Start date not provided");
     if (endDate.length === 0) return toast.error("End date not provided");
+    if (!isValidDateRange(startDate, endDate)) return toast.error("Invalid date range");
 
     setFetching(true);
     const advertPromise = axios.post(`${REST_API}/advert/new`, {
@@ -80,9 +81,7 @@ const PostAdvert: React.FC<PostAdvertProps> = ({ setAdvertId }) => {
     });
 
     advertPromise
-      .then(({ data }) => {
-        setAdvertId(data.created_at);
-      })
+      .then(({ data }) => setAdvertId(data.created_at))
       .finally(() => setFetching(false));
   };
 

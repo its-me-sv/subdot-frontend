@@ -17,3 +17,15 @@ export const formatTimestamp = (timestamp: string): string => {
 
     return `${year}-${month}-${day}T${hours}:${minutes}`;
 };
+
+export const isValidDateRange = (start: string, end: string): boolean => {
+    const startTimestamp = new Date(start);
+    const endTimestamp = new Date(end);
+    const currentTimestamp = new Date();
+    
+    if (startTimestamp <= currentTimestamp) return false;
+    if (endTimestamp <= currentTimestamp) return false;
+    if (startTimestamp >= endTimestamp) return false;
+
+    return true;
+};
