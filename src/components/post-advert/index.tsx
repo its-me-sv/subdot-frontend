@@ -66,23 +66,39 @@ const PostAdvert: React.FC<PostAdvertProps> = ({ setAdvertId }) => {
     if (!isValidDateRange(startDate, endDate)) return toast.error("Invalid date range");
 
     setFetching(true);
-    const advertPromise = axios.post(`${REST_API}/advert/new`, {
-      accountId: account.address,
-      picture: "",
-      link,
-      expires: endDate,
-      startedAt: startDate,
+
+    const formData = new FormData();
+    formData.append("userImage", picture.file);
+
+    const pictPromise = axios.post(`${REST_API}/advert/check-nsfw`, formData);
+
+    toast.promise(pictPromise, {
+      loading: "Checking for NSFW",
+      success: "NSFW check passed",
+      error: "NSFW check failed"
     });
 
-    toast.promise(advertPromise, {
-      loading: "Posting advertisement",
-      success: "Advertisement on air",
-      error: "Unable to post advertisement",
-    });
+    pictPromise
+      .then(({data}) => {
+        const advertPromise = axios.post(`${REST_API}/advert/new`, {
+          accountId: account.address,
+          picture: data.picture,
+          link,
+          expires: endDate,
+          startedAt: startDate,
+        });
 
-    advertPromise
-      .then(({ data }) => setAdvertId(data.created_at))
-      .finally(() => setFetching(false));
+        toast.promise(advertPromise, {
+          loading: "Posting advertisement",
+          success: "Advertisement on air",
+          error: "Unable to post advertisement",
+        });
+
+        advertPromise
+          .then(({ data }) => setAdvertId(data.created_at))
+          .finally(() => setFetching(false));
+      })
+      .catch(() => setFetching(false));
   };
 
   return (

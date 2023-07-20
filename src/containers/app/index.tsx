@@ -42,6 +42,7 @@ const toastOptions: ToastOptions = {
   style: {
     borderRadius: "0.36rem",
   },
+  position: "top-center"
 };
 
 const App: React.FC<AppProps> = () => {
