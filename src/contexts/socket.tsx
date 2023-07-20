@@ -51,14 +51,19 @@ export const SocketContext =
 export const useSocketContext = () => useContext(SocketContext);
 
 export const SocketContextProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
-  const {setAdvert, language} = useAppContext();
+  const {setAdverts, language} = useAppContext();
   const {account, setFollowers, setReputation} = useUserContext();
   const [socket, setSocket] =
     useState<Socket<ServerToClientEvents, ClientToServerEvents>>(defaultState.socket);
 
   useEffect(() => {
     socket.emit("joinRoom", "advert");
-    socket.on("newAdvert", setAdvert);
+    socket.on("newAdvert", newAdvert => {
+      setAdverts!(prev => [...prev, newAdvert]);
+      if (process.env.NODE_ENV === "development") {
+        toast("New advertisement arrived");
+      }
+    });
     socket.on("newTx", (msg) => toast(msg, { icon: "💸", id: msg }));
     socket.on("notify", (msg) => toast(msg, { icon: "🔔", id: msg }));
     socket.on("follow", accId => {

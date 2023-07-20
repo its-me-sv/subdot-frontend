@@ -71,12 +71,11 @@ export interface TransactionInfo {
 }
 
 export interface AdvertInfo {
-    accountId: string;
+    id: string;
+    crtd: string;
     picture: string;
     link: string;
     expires: string;
-    _id: string;
-    __v: number;
 }
 
 export interface MessageContent {

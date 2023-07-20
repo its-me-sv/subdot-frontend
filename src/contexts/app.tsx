@@ -19,7 +19,6 @@ interface AppContextInterface {
   settingsOpen: boolean;
   language: number;
   dark: boolean;
-  advertMenuOpen: boolean;
   explore: string;
   peek: string;
   comments: Array<PostComment>;
@@ -31,7 +30,7 @@ interface AppContextInterface {
   newAccount: WalletAccount | null;
   lowBalance: boolean;
   overlap: boolean;
-  advert: AdvertInfo | null;
+  adverts: Array<AdvertInfo>;
   showCreate: boolean;
   resetAppContext?: () => void;
   setLoggedIn?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -40,7 +39,6 @@ interface AppContextInterface {
   setSettingsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   setLanguage?: React.Dispatch<React.SetStateAction<number>>;
   setDark?: React.Dispatch<React.SetStateAction<boolean>>;
-  setAdvertMenuOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   setExplore?: React.Dispatch<React.SetStateAction<string>>;
   setPeek?: React.Dispatch<React.SetStateAction<string>>;
   setComments?: React.Dispatch<React.SetStateAction<Array<PostComment>>>;
@@ -52,7 +50,7 @@ interface AppContextInterface {
   setCmtOpen?: React.Dispatch<React.SetStateAction<PostOpen | null>>;
   setLowBalance?: React.Dispatch<React.SetStateAction<boolean>>;
   setOverlap?: React.Dispatch<React.SetStateAction<boolean>>;
-  setAdvert?: React.Dispatch<React.SetStateAction<AdvertInfo | null>>;
+  setAdverts?: React.Dispatch<React.SetStateAction<Array<AdvertInfo>>>;
   setShowCreate?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -63,7 +61,6 @@ const defaultState: AppContextInterface = {
     settingsOpen: false,
     language: 0,
     dark: false,
-    advertMenuOpen: false,
     explore: "",
     peek: "",
     comments: [],
@@ -75,7 +72,7 @@ const defaultState: AppContextInterface = {
     cmtOpen: null,
     lowBalance: false,
     overlap: false,
-    advert: null,
+    adverts: [],
     showCreate: false
 };
 
@@ -90,7 +87,6 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
     const [settingsOpen, setSettingsOpen] = useState<boolean>(defaultState.settingsOpen);
     const [language, setLanguage] = useState<number>(defaultState.language);
     const [dark, setDark] = useState<boolean>(defaultState.dark);
-    const [advertMenuOpen, setAdvertMenuOpen] = useState<boolean>(defaultState.advertMenuOpen);
     const [explore, setExplore] = useState<string>(defaultState.explore);
     const [peek, setPeek] = useState<string>(defaultState.peek);
     const [comments, setComments] = useState<Array<PostComment>>(defaultState.comments);
@@ -102,14 +98,13 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
     const [cmtOpen, setCmtOpen] = useState<PostOpen | null>(null);
     const [lowBalance, setLowBalance] = useState<boolean>(defaultState.lowBalance);
     const [overlap, setOverlap] = useState<boolean>(defaultState.overlap);
-    const [advert, setAdvert] = useState<AdvertInfo | null>(defaultState.advert);
+    const [adverts, setAdverts] = useState<Array<AdvertInfo>>(defaultState.adverts);
     const [showCreate, setShowCreate] = useState<boolean>(defaultState.showCreate);
 
     const resetAppContext = () => {
         setShowTerms!(false);
         setMenuOpen!(false);
         setSettingsOpen!(false);
-        setAdvertMenuOpen!(false);
         setExplore!("");
         setPeek!("");
         setComments!([]);
@@ -125,7 +120,7 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
     // fetching advertisement
     useEffect(() => {
         axios.get(`${REST_API}/advert/`).then(({ data }) => {
-          setAdvert(data);
+          setAdverts(data.adverts || []);
         });
         const connectionReq = axios.get(`${REST_API.slice(0, -3)}`);
         toast.promise(connectionReq, {
@@ -145,7 +140,6 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
             settingsOpen, setSettingsOpen,
             language, setLanguage,
             dark, setDark,
-            advertMenuOpen, setAdvertMenuOpen,
             explore, setExplore,
             peek, setPeek,
             comments, setComments,
@@ -157,7 +151,7 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
             cmtOpen, setCmtOpen,
             lowBalance, setLowBalance,
             overlap, setOverlap,
-            advert, setAdvert,
+            adverts, setAdverts,
             showCreate, setShowCreate,
             resetAppContext
         }}>

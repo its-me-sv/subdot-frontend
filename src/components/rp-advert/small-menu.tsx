@@ -16,7 +16,6 @@ const SmallMenu: React.FC<SmallMenuProps> = () => {
     const navigate = useNavigate();
     const {
         dark, language,
-        advert, setAdvertMenuOpen,
         setTxOpen
     } = useAppContext();
 

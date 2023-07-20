@@ -48,7 +48,7 @@ const toastOptions: ToastOptions = {
 const App: React.FC<AppProps> = () => {
   const {
     loggedIn, showTerms, 
-    settingsOpen, advertMenuOpen, 
+    settingsOpen, 
     explore, peek, 
     transferId,
     postMenuOpen, txOpen,
@@ -85,7 +85,6 @@ const App: React.FC<AppProps> = () => {
         {loggedIn && (
           <>
             {menuOpen && <Menu />}
-            {advertMenuOpen && <Advertise />}
             {peek.length > 0 && <Peek id={peek} />}
             {cmtOpen !== null && <Comments dark={dark} postOpen={cmtOpen} />}
             {transferId.length > 0 && <Transfer accountId={transferId} />}

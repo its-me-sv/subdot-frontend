@@ -12,6 +12,8 @@ import axios from "axios";
 import { REST_API } from "../../utils/constants";
 import { formatTimestamp, isValidDateRange } from "../../utils/utils";
 import { useUserContext } from "../../contexts/user";
+import { useSocketContext } from "../../contexts/socket";
+import { AdvertInfo } from "../../utils/types";
 
 interface PostAdvertProps {
   setAdvertId: React.Dispatch<React.SetStateAction<string>>;
@@ -19,6 +21,7 @@ interface PostAdvertProps {
 
 const PostAdvert: React.FC<PostAdvertProps> = ({ setAdvertId }) => {
   const { dark, language } = useAppContext();
+  const {socket} = useSocketContext();
   const { account } = useUserContext();
   const [picture, setPicture] = useState<{
     file: File;
@@ -95,7 +98,17 @@ const PostAdvert: React.FC<PostAdvertProps> = ({ setAdvertId }) => {
         });
 
         advertPromise
-          .then(({ data }) => setAdvertId(data.created_at))
+          .then(({ data }) => {
+            const newAdvertData: AdvertInfo = {
+              id: data.created_at,
+              crtd: startDate,
+              picture: data.picture,
+              link: data.link,
+              expires: data.expires,
+            };
+            socket.emit("newAdvert", newAdvertData);
+            setAdvertId(data.created_at);
+          })
           .finally(() => setFetching(false));
       })
       .catch(() => setFetching(false));

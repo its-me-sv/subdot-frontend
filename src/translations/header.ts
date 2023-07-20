@@ -1,9 +1,9 @@
 export const explr: Array<string> = [
-    "Explore (Address, username, name)",
-    "探索（地址、用户名、姓名）",
-    "अन्वेषण करें (पता, उपयोगकर्ता नाम, नाम)",
-    "Explorar (Dirección, nombre de usuario, nombre)",
-    "Explorer (Adresse, nom d'utilisateur, nom)"
+    "Explore (Wallet address, username, name)",
+    "探索（钱包地址、用户名、姓名）",
+    "अन्वेषण करें (बटुआ पता, उपयोगकर्ता नाम, नाम)",
+    "Explorar (Billetera dirección, nombre de usuario, nombre)",
+    "Explorer (Portefeuille Adresse, nom d'utilisateur, nom)"
 ];
 
 export const menu = {
