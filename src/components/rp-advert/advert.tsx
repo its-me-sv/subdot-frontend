@@ -4,19 +4,14 @@ import {AdvertContainer, AdvertImage} from "./styles";
 import {noAdvertText} from "../../translations/advert";
 
 import {useAppContext} from "../../contexts/app";
+import { AdvertInfo } from "../../utils/types";
 
-interface AdvertProps {}
+interface AdvertProps {
+    advert: AdvertInfo
+}
 
-const Advert: React.FC<AdvertProps> = () => {
-    const {dark, advert, setAdvert, language} = useAppContext();
-
-    useEffect(() => {
-        if (!advert) return;
-        setTimeout(
-            () => setAdvert!(null),
-            new Date(advert.expires).getTime() - Date.now()
-        );
-    }, [advert]);
+const Advert: React.FC<AdvertProps> = ({advert}) => {
+    const {dark, language} = useAppContext();
 
     return (
         <AdvertContainer dark={dark}>

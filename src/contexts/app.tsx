@@ -32,6 +32,7 @@ interface AppContextInterface {
   overlap: boolean;
   adverts: Array<AdvertInfo>;
   showCreate: boolean;
+  advertId: string;
   resetAppContext?: () => void;
   setLoggedIn?: React.Dispatch<React.SetStateAction<boolean>>;
   setShowTerms?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -52,6 +53,7 @@ interface AppContextInterface {
   setOverlap?: React.Dispatch<React.SetStateAction<boolean>>;
   setAdverts?: React.Dispatch<React.SetStateAction<Array<AdvertInfo>>>;
   setShowCreate?: React.Dispatch<React.SetStateAction<boolean>>;
+  setAdvertId?: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const defaultState: AppContextInterface = {
@@ -73,7 +75,8 @@ const defaultState: AppContextInterface = {
     lowBalance: false,
     overlap: false,
     adverts: [],
-    showCreate: false
+    showCreate: false,
+    advertId: ""
 };
 
 export const AppContext = createContext<AppContextInterface>(defaultState);
@@ -100,6 +103,7 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
     const [overlap, setOverlap] = useState<boolean>(defaultState.overlap);
     const [adverts, setAdverts] = useState<Array<AdvertInfo>>(defaultState.adverts);
     const [showCreate, setShowCreate] = useState<boolean>(defaultState.showCreate);
+    const [advertId, setAdvertId] = useState<string>(defaultState.advertId);
 
     const resetAppContext = () => {
         setShowTerms!(false);
@@ -119,9 +123,20 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
 
     // fetching advertisement
     useEffect(() => {
-        axios.get(`${REST_API}/advert/`).then(({ data }) => {
-          setAdverts(data.adverts || []);
-        });
+        axios
+          .get(`${REST_API}/advert/`)
+          .then(({ data }: { data: {adverts: Array<AdvertInfo>} }) => {
+            setAdverts(data.adverts || []);
+            data.adverts.forEach(v => {
+                const ttl = new Date(v.expires).getTime() - Date.now();
+                if (ttl <= 0) return;
+                setTimeout(() => {
+                  setAdverts!((prev) => [
+                    ...prev.filter((v1) => v1.id !== v.id),
+                  ]);
+                }, ttl);
+            });
+          });
         const connectionReq = axios.get(`${REST_API.slice(0, -3)}`);
         toast.promise(connectionReq, {
             loading: sdConnect.loading[language],
@@ -153,7 +168,8 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
             overlap, setOverlap,
             adverts, setAdverts,
             showCreate, setShowCreate,
-            resetAppContext
+            resetAppContext,
+            advertId, setAdvertId
         }}>
             {children}
         </AppContext.Provider>

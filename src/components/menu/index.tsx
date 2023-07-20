@@ -32,6 +32,7 @@ const Menu: React.FC<MenuProps> = () => {
         setSettingsOpen,
         setTxOpen,
         language, dark,
+        setAdvertId
     } = useAppContext();
     const {logoutUser, user, account} = useUserContext();
     const {resetChat} = useChatContext();
@@ -52,6 +53,7 @@ const Menu: React.FC<MenuProps> = () => {
       logoutUser!();
       resetChat!();
       closeMenu();
+      setAdvertId!("");
     };
 
     const takeToSubchat = () => {

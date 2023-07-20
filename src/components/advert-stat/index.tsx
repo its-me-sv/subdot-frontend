@@ -11,11 +11,10 @@ import { toast } from "react-hot-toast";
 
 interface AdvertStatProps {
   advertId: string;
-  setAdvertId: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const AdvertStat: React.FC<AdvertStatProps> = ({advertId, setAdvertId}) => {
-    const {dark, language} = useAppContext();
+const AdvertStat: React.FC<AdvertStatProps> = ({advertId}) => {
+    const {dark, language, setAdvertId} = useAppContext();
     const [advertStat, setAdvertStat] = useState<AdvertStats>(defaultAdvertStats);
     const [fetching, setFetching] = useState<boolean>(false);
 
@@ -27,7 +26,7 @@ const AdvertStat: React.FC<AdvertStatProps> = ({advertId, setAdvertId}) => {
         setAdvertStat(data);
         setTimeout(() => {
           toast("Advertisement expired", { icon: "ℹ️", id: "add exp" });
-          setAdvertId("");
+          setAdvertId!("");
         }, new Date(data.expires).getTime() - Date.now());
       })
       .finally(() => setFetching(false));

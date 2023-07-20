@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 
 import { Container } from "./styles";
@@ -15,14 +15,13 @@ import { REST_API } from "../../utils/constants";
 interface AdvertisePageProps {}
 
 const AdvertisePage: React.FC<AdvertisePageProps> = () => {
-    const {language, dark} = useAppContext();
+    const {language, dark, advertId, setAdvertId} = useAppContext();
     const {account} = useUserContext();
-    const [advertId, setAdvertId] = useState<string>("");
 
     const fetchData = () => {
       if (!account?.address) return;
       axios.get(`${REST_API}/advert/user/${account.address}`)
-      .then(({data}) => setAdvertId(data || ""));
+      .then(({data}) => setAdvertId!(data || ""));
     };
 
     useEffect(() => {
@@ -38,10 +37,10 @@ const AdvertisePage: React.FC<AdvertisePageProps> = () => {
         {advertId.length > 0 ? (
           <>
             <UserAdvert advertId={advertId} />
-            <AdvertStat advertId={advertId} setAdvertId={setAdvertId} />
+            <AdvertStat advertId={advertId} />
           </>
         ) : (
-          <PostAdvert setAdvertId={setAdvertId} />
+          <PostAdvert />
         )}
       </Container>
     );

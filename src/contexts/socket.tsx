@@ -51,7 +51,7 @@ export const SocketContext =
 export const useSocketContext = () => useContext(SocketContext);
 
 export const SocketContextProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
-  const {setAdverts, language} = useAppContext();
+  const {setAdverts, language, adverts} = useAppContext();
   const {account, setFollowers, setReputation} = useUserContext();
   const [socket, setSocket] =
     useState<Socket<ServerToClientEvents, ClientToServerEvents>>(defaultState.socket);
@@ -59,7 +59,13 @@ export const SocketContextProvider: React.FC<{children: React.ReactNode}> = ({ c
   useEffect(() => {
     socket.emit("joinRoom", "advert");
     socket.on("newAdvert", newAdvert => {
+      if (adverts.find(v => v.id === newAdvert.id)) return;
+      const ttl = new Date(newAdvert.expires).getTime() - Date.now();
+      if (ttl <= 0) return;
       setAdverts!(prev => [...prev, newAdvert]);
+      setTimeout(() => {
+        setAdverts!(prev => [...prev.filter(v => v.id !== newAdvert.id)]);
+      }, ttl);
       if (process.env.NODE_ENV === "development") {
         toast("New advertisement arrived");
       }

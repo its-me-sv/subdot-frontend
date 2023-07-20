@@ -16,11 +16,10 @@ import { useSocketContext } from "../../contexts/socket";
 import { AdvertInfo } from "../../utils/types";
 
 interface PostAdvertProps {
-  setAdvertId: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const PostAdvert: React.FC<PostAdvertProps> = ({ setAdvertId }) => {
-  const { dark, language } = useAppContext();
+const PostAdvert: React.FC<PostAdvertProps> = () => {
+  const { dark, language, setAdvertId } = useAppContext();
   const {socket} = useSocketContext();
   const { account } = useUserContext();
   const [picture, setPicture] = useState<{
@@ -107,7 +106,7 @@ const PostAdvert: React.FC<PostAdvertProps> = ({ setAdvertId }) => {
               expires: data.expires,
             };
             socket.emit("newAdvert", newAdvertData);
-            setAdvertId(data.created_at);
+            setAdvertId!(data.created_at);
           })
           .finally(() => setFetching(false));
       })
