@@ -1,4 +1,4 @@
-import React, {createContext, useContext, ReactNode, useState} from "react";
+import React, {createContext, useContext, ReactNode, useState, useEffect} from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
 import {encodeAddress} from "@polkadot/util-crypto";
@@ -53,7 +53,7 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
     const {
       language, setNewAccount, 
       setLoggedIn, setLowBalance, 
-      setOverlap
+      setOverlap, setAdvertId,
     } = useAppContext();
 
     const loginUser = async (acc: WalletAccount, cb: () => void) => {
@@ -185,6 +185,13 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
           cb();
         });
     };
+
+    useEffect(() => {
+      if (!account?.address) return;
+      axios
+        .get(`${REST_API}/advert/user/${account.address}`)
+        .then(({ data }) => setAdvertId!(data || ""));
+    }, [account]);
 
     return (
         <UserContext.Provider value={{
