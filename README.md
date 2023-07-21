@@ -6,10 +6,10 @@
 
 ## APAC Roadmap: Latest Enhancements in the "APAC Edition"
 1. User-to-user communication via chat [implemented]
-5. Public sharing of posts [implemented]
-2. Advertisement posting dashboard with filtering for adult content [implemented]
-4. Extra statistical information on the reputation page [implemented]
-3. Rewarding top users with fund transfers based on RP score [pending implementation]
+2. Advertisement posting dashboard with scheduling and filtering for adult content [implemented]
+3. Extra statistical information on the reputation page [implemented]
+4. Public sharing of posts [implemented]
+5. Rewarding top users with fund transfers based on RP score [pending implementation]
 
 Project link - https://subdot.netlify.app
 
