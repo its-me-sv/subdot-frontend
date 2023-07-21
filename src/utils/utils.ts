@@ -36,3 +36,10 @@ export const isUnderGivenDuration = (start: string, end: string, duration: numbe
 
     return (endTimestamp - startTimestamp) <= duration * 60 * 1000;
 };
+
+export const isStartAvailable = (start: string, avail: string): boolean => {
+    const startTimestamp = new Date(start).getTime();
+    const availTimestamp = new Date(avail).getTime();
+
+    return startTimestamp > availTimestamp;
+};
