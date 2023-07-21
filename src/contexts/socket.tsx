@@ -20,6 +20,8 @@ interface ServerToClientEvents {
   newMessage?: (msg: DBMessage) => void;
   verifyMessage?: (roomId: string) => void;
   newMessageNotification?: (msg: string) => void;
+  newView?: (roomId: string) => void;
+  newClick?: (roomId: string) => void;
 }
 
 interface ClientToServerEvents {
@@ -34,6 +36,8 @@ interface ClientToServerEvents {
   newMessage?: (roomId: string, msg: DBMessage) => void;
   verifyMessage?: (roomId: string) => void;
   newMessageNotification?: (roomId: string, msg: string) => void;
+  newView?: (roomId: string) => void;
+  newClick?: (roomId: string) => void;
 }
 
 interface SocketContextInterface {

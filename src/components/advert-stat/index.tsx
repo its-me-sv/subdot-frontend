@@ -8,6 +8,7 @@ import { defaultAdvertStats } from "../../data/advert";
 import axios from "axios";
 import { REST_API } from "../../utils/constants";
 import { toast } from "react-hot-toast";
+import { useSocketContext } from "../../contexts/socket";
 
 interface AdvertStatProps {
   advertId: string;
@@ -15,6 +16,7 @@ interface AdvertStatProps {
 
 const AdvertStat: React.FC<AdvertStatProps> = ({advertId}) => {
     const {dark, language, setAdvertId} = useAppContext();
+    const {socket} = useSocketContext();
     const [advertStat, setAdvertStat] = useState<AdvertStats>(defaultAdvertStats);
     const [fetching, setFetching] = useState<boolean>(false);
 
@@ -35,6 +37,22 @@ const AdvertStat: React.FC<AdvertStatProps> = ({advertId}) => {
     useEffect(() => {
         if (!advertId) return;
         fetchData();
+        socket.emit("joinRoom", advertId);
+        socket.on("newView", rId => {
+          if (rId !== advertId) return;
+          setAdvertStat(prev => ({
+            ...prev,
+            views: Number(prev.views) + 1
+          }));
+        });
+        socket.on("newClick", rId => {
+          if (rId !== advertId) return;
+          setAdvertStat((prev) => ({
+            ...prev,
+            engagement: Number(prev.engagement) + 1,
+          }));
+        });
+        () => {socket.emit("leaveRoom", advertId)};
     }, [advertId]);
 
     return (
