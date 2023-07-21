@@ -25,7 +25,7 @@ const AdvertStat: React.FC<AdvertStatProps> = ({advertId}) => {
       .then(({data}) => {
         setAdvertStat(data);
         setTimeout(() => {
-          toast("Advertisement expired", { icon: "ℹ️", id: "add exp" });
+          toast("Your advertisement has expired", { icon: "ℹ️", id: "add exp" });
           setAdvertId!("");
         }, new Date(data.expires).getTime() - Date.now());
       })
