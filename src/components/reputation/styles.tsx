@@ -2,14 +2,17 @@ import styled from "styled-components";
 import {BoxShadow, BoxShadowDark, FadeAnim} from "../../utils/styles";
 
 export const Container = styled.div<{ dark: boolean }>`
-  display: grid;
-  grid-template-columns: 5fr 1fr;
-  background-color: #ffffff;
+  display: flex;
+  background-color: #f8fafc;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  gap: 1rem;
   ${(props) =>
     props.dark &&
     `
-        background-color: #222222;
-    `}
+    background-color: #222222;
+  `}
 `;
 
 export const InfoBox = styled.div<{ dark: boolean }>`
@@ -18,8 +21,9 @@ export const InfoBox = styled.div<{ dark: boolean }>`
   align-items: center;
   justify-content: center;
   gap: 0.42rem;
-  margin: 0.42rem;
+  margin: 1rem 0rem;
   border-radius: 0.36rem;
+  padding: 1rem;
   ${BoxShadow}
   ${(props) => props.dark && `${BoxShadowDark}`}
 `;
@@ -65,7 +69,7 @@ export const BoardContainer = styled.div`
     gap: 1.2rem;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    max-height: 92vh;
+    max-height: 88vh;
     overflow-y: auto;
     padding: 1rem;
 `;

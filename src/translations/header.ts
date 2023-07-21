@@ -64,11 +64,11 @@ export const menu = {
         "SE DÉCONNECTER"
     ],
     feedback: [
-        "FEEDBACK",
-        "反馈",
-        "प्रतिक्रिया",
-        "COMENTARIO",
-        "RETOUR"
+        "ROADMAP",
+        "路线图",
+        "रोडमैप",
+        "MAPA VIAL",
+        "FEUILLE DE ROUTE"
     ]
 };
 
