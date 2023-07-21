@@ -53,3 +53,11 @@ export const settings: Array<string> = [
     "Ajustes",
     "Paramètres"
 ];
+
+export const tinyInfo: Array<string> = [
+    "What's new in Subdot(APAC)?",
+    "Subdot(APAC) 有什么新变化？",
+    "सबडॉट (एपीएसी) में नया क्या है?",
+    "¿Qué hay de nuevo en Subdot (APAC)?",
+    "Quoi de neuf dans Subdot (APAC) ?"
+];

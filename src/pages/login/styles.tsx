@@ -160,3 +160,23 @@ export const RightSide = styled.div`
   padding: 0rem 2.1rem;
   border-left: 0.3rem solid rgb(227, 224, 224);
 `;
+
+export const TinyInfo = styled.div<{ dark: boolean }>`
+  font-family: Inter;
+  color: #222222;
+  margin: 0.36rem 0rem 0rem 0rem;
+  cursor: pointer;
+  padding: 0.14rem;
+  border-radius: 0.36rem;
+  &:hover {
+    opacity: 0.84;
+  }
+  text-align: center;
+  ${BoxShadow}
+  ${(props) =>
+    props.dark &&
+    `
+    ${BoxShadowDark}
+    color: #ffffff;
+  `}
+`;

@@ -13,7 +13,8 @@ import {
   Account,
   Caption2,
   LeftSide,
-  RightSide
+  RightSide,
+  TinyInfo
 } from "./styles";
 import {Button} from "../../utils/styles";
 
@@ -21,7 +22,8 @@ import {
   title, caption, 
   button, footer, 
   settings, noAcc,
-  caption2
+  caption2,
+  tinyInfo
 } from "../../translations/login";
 import {loginPage} from "../../translations/page-titles";
 
@@ -42,7 +44,7 @@ const LoginPage: React.FC<LoginPageProps> = () => {
   const {
     setLoggedIn, setShowTerms, 
     setSettingsOpen, language,
-    dark
+    dark, setShowCreate
   } = useAppContext();
   const {loginUser} = useUserContext();
   const [accounts, setAccounts] = useState<Array<WalletAccount>>([]);
@@ -120,6 +122,9 @@ const LoginPage: React.FC<LoginPageProps> = () => {
             )}
           </RightSide>
         </LoginForm>
+        <TinyInfo dark={dark} onClick={() => setShowCreate!(true)}>
+          {tinyInfo[language]}
+        </TinyInfo>
       </div>
       <Footer1 onClick={() => setShowTerms!(true)} dark={dark}>
         {footer[language]}
