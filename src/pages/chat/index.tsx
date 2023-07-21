@@ -34,7 +34,7 @@ const ChatPage: React.FC<ChatPageProps> = () => {
       <Container dark={dark}>
         <FriendsCommunites accountId={account?.address} fromChat />
         {currChat.length > 0 ? (
-          <Chat address={currChat} />
+          <Chat key={currChat} address={currChat} />
         ) : (
           <DefaultContainer dark={dark}>
             <span>{chooseAcc[language]}</span>
