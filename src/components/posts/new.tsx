@@ -92,6 +92,7 @@ const NewPost: React.FC<NewPostProps> = () => {
           await postTx.signAsync(account.address, {signer});
           await getTxEventIds(postTx);
           axios.put(`${REST_API}/user/incr-rp/${account.address}/1`);
+          axios.put(`${REST_API}/user/all-time-stats/${account.address}/ac/1`);
           const {partialFee} = await postTx.paymentInfo(account.address);
           axios.post(`${REST_API}/transaction/new`, {
             accountId: account.address,

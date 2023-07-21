@@ -58,11 +58,11 @@ export const info = {
         "Pour 10 abonnés"
     ],
     accCrt: [
-        "Account creation",
-        "创建帐户",
-        "खाता निर्माण",
-        "Creación de cuenta",
-        "Création de compte"
+        "Miscellaneous",
+        "各种各样的",
+        "मिश्रित",
+        "Misceláne",
+        "Divers"
     ]
 };
 

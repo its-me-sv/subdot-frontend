@@ -128,6 +128,7 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
                 });
                 toast.success("Account has been follwed");
                 axios.put(`${REST_API}/user/incr-rp/${id}/1`);
+                axios.put(`${REST_API}/user/all-time-stats/${id}/ac/1`);
                 resolve(true);
             } catch (err) {
                 if ((err = "INSUFFICIENT BALANCE")) {

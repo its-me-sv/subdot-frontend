@@ -172,6 +172,7 @@ const PostPage: React.FC<PostPageProps> = () => {
             if (!likeTxIds) return reject();
             setLikeId(likeTxIds[1]);
             axios.put(`${REST_API}/user/incr-rp/${onwerId}/1`);
+            axios.put(`${REST_API}/user/all-time-stats/${onwerId}/ac/1`);
             socket.emit(
               "notify",
               onwerId,

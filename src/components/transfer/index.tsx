@@ -48,6 +48,7 @@ const Transfer: React.FC<TransferProps> = ({accountId}) => {
           await transferTx.signAsync(account.address, {signer});
           getTxEventIds(transferTx);
           axios.put(`${REST_API}/user/incr-rp/${account.address}/1`);
+          axios.put(`${REST_API}/user/all-time-stats/${account.address}/ptg/1`);
           const {partialFee} = await transferTx.paymentInfo(account.address);
           axios.post(`${REST_API}/transaction/new`, {
             accountId: account.address,

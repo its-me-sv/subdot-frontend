@@ -179,7 +179,7 @@ const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
         <InfoContent>
           <InfoItem dark={dark}>
             <span>{info.action[language]}</span>
-            <span>RP</span>
+            <span>Total</span>
           </InfoItem>
           <InfoItem dark={dark}>
             <span>{info.post[language]}</span>
