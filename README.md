@@ -1,6 +1,6 @@
 # Subdot - Bringing power back to the people
 
-[![wakatime](https://wakatime.com/badge/user/77078a50-96cc-4da2-b32c-08e468259a40/project/e42f2e90-715e-440e-a242-876e1e5affaf.svg)](https://wakatime.com/badge/user/77078a50-96cc-4da2-b32c-08e468259a40/project/e42f2e90-715e-440e-a242-876e1e5affaf)
+[![wakatime](https://wakatime.com/badge/user/77078a50-96cc-4da2-b32c-08e468259a40/project/e42f2e90-715e-440e-a242-876e1e5affaf.svg)](https://wakatime.com/@DarkKnight7/projects/fxruavcaqm) + [![wakatime](https://wakatime.com/badge/user/77078a50-96cc-4da2-b32c-08e468259a40/project/0c3150ef-2822-4442-8782-f95a03750efe.svg)](https://wakatime.com/@DarkKnight7/projects/ifwjteehbc)
 
 #### `Note`: This is the front end code of Subdot and the back end code can be found in this repository - https://github.com/its-me-sv/subdot-backend
 
@@ -13,9 +13,9 @@
 
 Project link - https://subdot.netlify.app
 
-Demo video (Europe edition) - https://youtu.be/JVkSsFW-gHE
-
 Demo video (APAC edition) - https://youtu.be/JVkSsFW-gHE
+
+Demo video (Europe edition) - https://youtu.be/JVkSsFW-gHE
 
 ## Setup:
 Update the `REST_API` and `ADVERT_BENEFICIAR` values in the `src/utils/constants.ts`
@@ -45,4 +45,4 @@ On a monthly basis, we utilize the reputation system (mentioned below) to identi
 ## Tech stack
 Front end - ReactJs, Vite, TypeScript, GraphQl, Polkadot and Subsocial SDKs
 
-Back end - NodeJs, ExpressJS, JavaScript, Mongoose (MongoDB)
+Back end - NodeJs, ExpressJS, JavaScript, Mongoose (MongoDB), Cassandra (AstraDB), Google App Engine, Google Vision AI, Cloudinary
