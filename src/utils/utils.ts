@@ -29,3 +29,10 @@ export const isValidDateRange = (start: string, end: string): boolean => {
 
     return true;
 };
+
+export const isUnderGivenDuration = (start: string, end: string, duration: number): boolean => {
+    const startTimestamp = new Date(start).getTime();
+    const endTimestamp = new Date(end).getTime();
+
+    return (endTimestamp - startTimestamp) <= duration * 60 * 1000;
+};

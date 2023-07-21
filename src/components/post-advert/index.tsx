@@ -10,7 +10,7 @@ import { fileBig } from "../../translations/toast";
 import { Button } from "../../utils/styles";
 import axios from "axios";
 import { REST_API } from "../../utils/constants";
-import { formatTimestamp, isValidDateRange } from "../../utils/utils";
+import { formatTimestamp, isValidDateRange, isUnderGivenDuration } from "../../utils/utils";
 import { useUserContext } from "../../contexts/user";
 import { useSocketContext } from "../../contexts/socket";
 import { AdvertInfo } from "../../utils/types";
@@ -66,6 +66,7 @@ const PostAdvert: React.FC<PostAdvertProps> = () => {
     if (startDate.length === 0) return toast.error("Start date not provided");
     if (endDate.length === 0) return toast.error("End date not provided");
     if (!isValidDateRange(startDate, endDate)) return toast.error("Invalid date range");
+    if (!isUnderGivenDuration(startDate, endDate, 30)) return toast.error("Duration can't be more than 30 minutes");
 
     setFetching(true);
 

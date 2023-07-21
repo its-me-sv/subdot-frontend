@@ -129,7 +129,15 @@ export const AppContextProvider: React.FC<{children: ReactNode}> = ({children}) 
             setAdverts(data.adverts || []);
             data.adverts.forEach(v => {
                 const ttl = new Date(v.expires).getTime() - Date.now();
+                const ttp = new Date(v.crtd).getTime() - Date.now();
                 if (ttl <= 0) return;
+                setTimeout(() => {
+                  if (adverts.find((v1) => v1.id === v.id)) return;
+                  setAdverts!((prev) => [
+                    ...prev.filter((v1) => v1.id !== v.id),
+                    v,
+                  ]);
+                }, Math.max(ttp, 0));
                 setTimeout(() => {
                   setAdverts!((prev) => [
                     ...prev.filter((v1) => v1.id !== v.id),

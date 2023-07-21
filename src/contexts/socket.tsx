@@ -61,8 +61,15 @@ export const SocketContextProvider: React.FC<{children: React.ReactNode}> = ({ c
     socket.on("newAdvert", newAdvert => {
       if (adverts.find(v => v.id === newAdvert.id)) return;
       const ttl = new Date(newAdvert.expires).getTime() - Date.now();
+      const ttp = new Date(newAdvert.crtd).getTime() - Date.now();
       if (ttl <= 0) return;
-      setAdverts!(prev => [...prev, newAdvert]);
+      setTimeout(() => {
+        if (adverts.find((v) => v.id === newAdvert.id)) return;
+        setAdverts!((prev) => [
+          ...prev.filter((v) => v.id !== newAdvert.id),
+          newAdvert,
+        ]);
+      }, Math.max(ttp, 0));
       setTimeout(() => {
         setAdverts!(prev => [...prev.filter(v => v.id !== newAdvert.id)]);
       }, ttl);
