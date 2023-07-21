@@ -16,7 +16,7 @@ import { chooseAcc } from "../../translations/chat";
 interface ChatPageProps {}
 
 const ChatPage: React.FC<ChatPageProps> = () => {
-    const {dark, language} = useAppContext();
+    const {dark, language, adverts} = useAppContext();
     const {account} = useUserContext();
     const location = useLocation();
     const {setCurrChat, currChat} = useChatContext();
@@ -40,7 +40,7 @@ const ChatPage: React.FC<ChatPageProps> = () => {
             <span>{chooseAcc[language]}</span>
           </DefaultContainer>
         )}
-        <Advert />
+        {adverts.length > 0 && <Advert advert={adverts[0]} />}
       </Container>
     );
 };
