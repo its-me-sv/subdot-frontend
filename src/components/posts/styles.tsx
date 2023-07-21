@@ -5,7 +5,7 @@ export const Container = styled.div<{dark: boolean}>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 90vh;
+  height: 85vh;
   overflow-y: auto;
   padding: 1rem;
   padding-bottom: 2.4rem;

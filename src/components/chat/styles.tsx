@@ -4,13 +4,15 @@ import {BoxShadow, BoxShadowDark} from "../../utils/styles";
 export const Container = styled.div<{ dark: boolean }>`
   display: flex;
   flex-direction: column;
-  height: 92vh;
+  height: 91vh;
   padding: 0.42rem 0rem;
   margin: 0.14rem;
+  margin-bottom: 0rem;
+  margin-top: 0rem;
 `;
 
 export const DefaultContainer = styled.div<{ dark: boolean }>`
-  height: 92vh;
+  height: 91vh;
   padding: 0.42rem 0rem;
   color: #222222;
   font-family: Inter;

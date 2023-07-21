@@ -89,7 +89,7 @@ const Posts: React.FC<PostsProps> = ({
     return (
       <Container dark={dark}>
         <StickyButton abs>
-          {(account?.address === accountId) && (
+          {account?.address === accountId && (
             <Button
               bgColor={dark ? "#ffffff" : "#222222"}
               dark={dark}
@@ -101,10 +101,7 @@ const Posts: React.FC<PostsProps> = ({
         </StickyButton>
         {userPosts.length === 0 && <span>No posts to show.</span>}
         {[...userPosts].reverse().map((pId) => (
-          <Post 
-            key={pId} 
-            postId={pId}
-          />
+          <Post key={pId} postId={pId} />
         ))}
       </Container>
     );

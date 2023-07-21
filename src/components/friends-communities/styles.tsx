@@ -2,9 +2,11 @@ import styled from "styled-components";
 import {BoxShadow, BoxShadowDark, FadeAnim} from "../../utils/styles";
 
 export const Container = styled.div<{ dark: boolean }>`
-  display: grid;
+  display: flex;
+  flex-direction: column;
   padding: 0.5rem;
   margin: 0.14rem;
+  margin-bottom: 0rem;
   gap: 0.42rem;
 `;
 
@@ -32,7 +34,7 @@ export const SectionTitle = styled.span<{ dark: boolean }>`
 export const SectionProfiles = styled.div<{ dark: boolean }>`
   display: flex;
   flex-direction: column;
-  height: 40vh;
+  height: 38vh;
   padding-top: 0.42rem;
   gap: 0.42rem;
   overflow-y: auto;
