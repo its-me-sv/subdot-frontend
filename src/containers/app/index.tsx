@@ -1,6 +1,8 @@
 import React, {useEffect, lazy, Suspense} from "react";
 import {HashRouter, Route, Routes, Navigate} from "react-router-dom";
 import {toast, Toaster, ToastOptions} from "react-hot-toast";
+import { ThemeProvider } from "styled-components";
+import { GlobalStyle } from "../../utils/styles";
 
 import '../../index.css';
 
@@ -17,7 +19,6 @@ const AdvertisePage = lazy(() => import("../../pages/advertise"));
 // components
 import TermsPolicies from "../../components/terms-privacy";
 import Settings from "../../components/settings";
-import Advertise from "../../components/advertise";
 import Results from "../../components/results";
 import Peek from "../../components/peek";
 import Transfer from "../../components/transfer";
@@ -35,6 +36,7 @@ import CreateAccPopUp from "../../components/create-acc-pop-up";
 // providers
 import {useAppContext} from "../../contexts/app";
 import { useSocketContext } from "../../contexts/socket";
+import { darkTheme, lightTheme } from "../../utils/themes";
 
 interface AppProps {}
 
@@ -72,63 +74,63 @@ const App: React.FC<AppProps> = () => {
   }, [socket]);
 
   return (
-    <div className={loggedIn ? "app-container" : ""}>
-      <Toaster position="top-right" toastOptions={toastOptions} />
-      {loading && <Loader />}
-      {showTerms && <TermsPolicies />}
-      {settingsOpen && <Settings />}
-      {lowBalance && <LowBalance />}
-      <HashRouter>
-        {explore.length > 0 && <Results />}
-        {showCreate && <CreateAccPopUp />}
-        <Header />
-        {loggedIn && (
-          <>
-            {menuOpen && <Menu />}
-            {peek.length > 0 && <Peek id={peek} />}
-            {cmtOpen !== null && <Comments dark={dark} postOpen={cmtOpen} />}
-            {transferId.length > 0 && <Transfer accountId={transferId} />}
-            {postMenuOpen && <NewPost />}
-            {txOpen && <Transactions />}
-          </>
-        )}
-        {newAccount !== null && <NewAccount account={newAccount} />}
-        {overlap && <Overlap />}
-        <Suspense fallback={<Loader />}>
-          <Routes>
-            <Route
-              path="/"
-              element={!loggedIn ? <LoginPage /> : <Navigate to="/home" />}
-            />
-            <Route
-              path="/home"
-              element={loggedIn ? <HomePage /> : <Navigate to="/" />}
-            />
-            <Route
-              path="/profile/:id"
-              element={loggedIn ? <ProfilePage /> : <Navigate to="/" />}
-            />
-            <Route
-              path="/subchat"
-              element={loggedIn ? <ChatPage /> : <Navigate to="/" />}
-            />
-            <Route
-              path="/rp"
-              element={loggedIn ? <ReputationPage /> : <Navigate to="/" />}
-            />
-            <Route
-              path="/advertise"
-              element={loggedIn ? <AdvertisePage /> : <Navigate to="/" />}
-            />
-            <Route 
-              path="/post/:id"
-              element={<PostPage />}
-            />
-            <Route path="/*" element={<ErrorPage />} />
-          </Routes>
-        </Suspense>
-      </HashRouter>
-    </div>
+    <ThemeProvider theme={dark ? darkTheme : lightTheme}>
+      <GlobalStyle />
+      <div className={loggedIn ? "app-container" : ""}>
+        <Toaster position="top-right" toastOptions={toastOptions} />
+        {loading && <Loader />}
+        {showTerms && <TermsPolicies />}
+        {settingsOpen && <Settings />}
+        {lowBalance && <LowBalance />}
+        <HashRouter>
+          {explore.length > 0 && <Results />}
+          {showCreate && <CreateAccPopUp />}
+          <Header />
+          {loggedIn && (
+            <>
+              {menuOpen && <Menu />}
+              {peek.length > 0 && <Peek id={peek} />}
+              {cmtOpen !== null && <Comments dark={dark} postOpen={cmtOpen} />}
+              {transferId.length > 0 && <Transfer accountId={transferId} />}
+              {postMenuOpen && <NewPost />}
+              {txOpen && <Transactions />}
+            </>
+          )}
+          {newAccount !== null && <NewAccount account={newAccount} />}
+          {overlap && <Overlap />}
+          <Suspense fallback={<Loader />}>
+            <Routes>
+              <Route
+                path="/"
+                element={!loggedIn ? <LoginPage /> : <Navigate to="/home" />}
+              />
+              <Route
+                path="/home"
+                element={loggedIn ? <HomePage /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/profile/:id"
+                element={loggedIn ? <ProfilePage /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/subchat"
+                element={loggedIn ? <ChatPage /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/rp"
+                element={loggedIn ? <ReputationPage /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/advertise"
+                element={loggedIn ? <AdvertisePage /> : <Navigate to="/" />}
+              />
+              <Route path="/post/:id" element={<PostPage />} />
+              <Route path="/*" element={<ErrorPage />} />
+            </Routes>
+          </Suspense>
+        </HashRouter>
+      </div>
+    </ThemeProvider>
   );
 }
 
