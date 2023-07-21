@@ -338,6 +338,15 @@ const PostPage: React.FC<PostPageProps> = () => {
         fetchData();
     }, [api, postId]);
 
+    useEffect(() => {
+      setTimeout(() => {
+        if (!loggedIn) {
+          setShowCreate!(true);
+          return;
+        }
+      }, 5000);
+    }, []);
+
     if (notFound) {
         return (
             <Container dark={dark}>
