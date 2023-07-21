@@ -49,12 +49,19 @@ const LoginPage: React.FC<LoginPageProps> = () => {
   const {resetChat} = useChatContext();
   
   const onWalletConnect = useCallback(async () => {
-    const accounts = await getAllAccounts();
-    if (!accounts.length) {
-      toast.error(noAcc[language]);
-      return;
-    }
-    setAccounts(accounts);
+    const accountsPromise = getAllAccounts();
+    toast.promise(accountsPromise, {
+      loading: "Fetching accounts (kindly try refreshing the page if it takes more time)",
+      success: "Accounts fetched",
+      error: "Couldn't fetch accounts (try refreshing the page)",
+    });
+    accountsPromise.then(accountsFetched => {
+      if (!accountsFetched.length) {
+        toast.error(noAcc[language]);
+        return;
+      }
+      setAccounts(accountsFetched);
+    });
   }, [language]);
   
   const onAccountChoose = (account: WalletAccount) => {
