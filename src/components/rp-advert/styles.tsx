@@ -28,6 +28,7 @@ export const AdvertContainer = styled.div<{ dark: boolean }>`
   }
   ${BoxShadow}
   ${(props) => props.dark && `${BoxShadowDark}`}
+  margin: 0.42rem 0rem;
 `;
 
 export const AdvertImage = styled.img<{dark: boolean;}>`

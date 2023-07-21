@@ -10,7 +10,7 @@ export const BoxShadowDark = css`
   background-color: #222222;
 `;
 
-export const Button = styled.span<{bgColor: string; dark?: boolean;}>`
+export const Button = styled.span<{bgColor: string; dark?: boolean; fixed?: boolean}>`
   font-family: Inter;
   color: #ffffff;
   ${BoxShadow}
@@ -24,6 +24,9 @@ export const Button = styled.span<{bgColor: string; dark?: boolean;}>`
   }
   ${props => props.dark && `
     color: #222222;
+  `}
+  ${props => props.fixed && `
+    position: absolute;
   `}
 `;
 

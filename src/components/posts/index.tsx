@@ -88,17 +88,18 @@ const Posts: React.FC<PostsProps> = ({
     
     return (
       <Container dark={dark}>
-        <StickyButton abs>
-          {account?.address === accountId && (
-            <Button
-              bgColor={dark ? "#ffffff" : "#222222"}
-              dark={dark}
-              onClick={() => setPostMenuOpen!(true)}
-            >
-              {share[language]}
-            </Button>
-          )}
-        </StickyButton>
+        {/* <StickyButton abs> */}
+        {account?.address === accountId && (
+          <Button
+            bgColor={dark ? "#ffffff" : "#222222"}
+            dark={dark}
+            onClick={() => setPostMenuOpen!(true)}
+            fixed
+          >
+            {share[language]}
+          </Button>
+        )}
+        {/* </StickyButton> */}
         {userPosts.length === 0 && <span>No posts to show.</span>}
         {[...userPosts].reverse().map((pId) => (
           <Post key={pId} postId={pId} />

@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 export const Container = styled.div<{ dark: boolean }>`
-  display: grid;
-  grid-template-columns: 2fr 8fr 2fr;
-  grid-template-rows: 1fr;
+  display: flex;
   background-color: #f8fafc;
+  margin-left: auto;
+  margin-right: auto;
   ${props => props.dark && `
     background-color: #222222;
   `}

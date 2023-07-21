@@ -9,11 +9,12 @@ export const Container = styled.div<{ dark: boolean }>`
   margin: 0.14rem;
   margin-bottom: 0rem;
   margin-top: 0rem;
+  width: 42vw;
 `;
 
 export const DefaultContainer = styled.div<{ dark: boolean }>`
   height: 91vh;
-  padding: 0.42rem 0rem;
+  padding: 0.42rem;
   color: #222222;
   font-family: Inter;
   display: flex;
@@ -21,7 +22,7 @@ export const DefaultContainer = styled.div<{ dark: boolean }>`
   justify-content: center;
   font-size: 4.2rem;
   span {
-    width: 42vw;
+    width: 41vw;
     text-align: justify;
     opacity: 0.7;
   }

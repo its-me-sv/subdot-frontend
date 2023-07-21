@@ -18,7 +18,9 @@ export const StickyButton = styled.div<{ abs?: boolean }>`
   align-self: flex-end;
   padding-top: 0.42rem;
   animation: ${FadeAnim} 1s;
-  ${(props) => props.abs && `position: absolute;`}
+  position: fixed;
+  bottom: 0;
+  /* ${(props) => props.abs && `position: absolute;`} */
 `;
 
 export const PostContainer = styled.div<{ dark: boolean }>`
