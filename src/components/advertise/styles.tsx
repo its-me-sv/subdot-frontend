@@ -16,8 +16,12 @@ export const InputsForm = styled.div`
 export const InputContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  /* justify-content: space-between; */
+  gap: 0.14rem;
+  img {
+    width: 1rem;
+    height: 1rem;
+  }
 `;
 
 export const InputLabel = styled.span<{dark: boolean;}>`

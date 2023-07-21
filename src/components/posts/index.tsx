@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import toast from "react-hot-toast";
 
-import {Container, StickyButton} from "./styles";
+import {Container} from "./styles";
 import {postFetch} from "../../translations/toast";
 import {Button} from "../../utils/styles";
 import {share} from "../../translations/posts";
@@ -13,6 +13,7 @@ import {useAppContext} from "../../contexts/app";
 import { useUserContext } from "../../contexts/user";
 import { useSubsocial } from "../../subsocial";
 import { AnySpaceId } from "@subsocial/api/types";
+import PostInput from "./input";
 
 interface PostsProps {
   accountId?: string | undefined;
@@ -88,24 +89,11 @@ const Posts: React.FC<PostsProps> = ({
     
     return (
       <Container dark={dark}>
-        {/* <StickyButton abs> */}
-        {account?.address === accountId && (
-          <Button
-            bgColor={dark ? "#ffffff" : "#222222"}
-            dark={dark}
-            onClick={() => setPostMenuOpen!(true)}
-            fixed
-          >
-            {share[language]}
-          </Button>
-        )}
-        {/* </StickyButton> */}
+        {account?.address === accountId && <PostInput />}
         {userPosts.length === 0 && <span>No posts to show.</span>}
-        {[...userPosts]
-          .reverse()
-          .map((pId) => (
-            <Post key={pId} postId={pId} />
-          ))}
+        {[...userPosts].reverse().map((pId) => (
+          <Post key={pId} postId={pId} />
+        ))}
       </Container>
     );
 };

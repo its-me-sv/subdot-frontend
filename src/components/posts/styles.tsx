@@ -5,9 +5,9 @@ export const Container = styled.div<{ dark: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 85vh;
+  height: 86vh;
   overflow-y: auto;
-  padding: 1rem 0rem;
+  margin-top: 0.5rem;
   padding-bottom: 2.4rem;
   font-family: Inter;
   color: #222222;
@@ -106,6 +106,7 @@ export const PostImage = styled.img`
 
 export const PostFooter = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
   margin: 0.14rem 0;
 `;
@@ -136,18 +137,19 @@ export const FooterItem = styled.div<{dark: boolean;}>`
   }
 `;
 
-export const PostDescription = styled.textarea<{dark: boolean;}>`
+export const PostDescription = styled.textarea<{ dark: boolean }>`
   font-family: Inter;
+  font-size: 1.2rem;
+  max-height: 14rem;
+  overflow-y: auto;
   outline: none;
   border: none;
-  font-size: 1.2rem;
-  border-radius: 0.14rem;
   resize: none;
   color: #222222;
-  ${BoxShadow}
-  ${props => props.dark && `
+  ${(props) =>
+    props.dark &&
+    `
     color: #ffffff;
-    ${BoxShadowDark}
   `}
 `;
 
@@ -160,4 +162,11 @@ export const FetchButton = styled.span<{dark: boolean;}>`
   &:hover {
     opacity: 0.5;
   }
+`;
+
+export const ImageInputContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.3rem;
 `;

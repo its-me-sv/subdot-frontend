@@ -39,7 +39,7 @@ export const Detail = styled.input<{dark: boolean;}>`
   text-align: center;
   border-radius: 0.14rem;
   opacity: 0.9;
-  padding: 0.42rem 0;
+  padding: 0.36rem;
   color: #222222;
   ${BoxShadow}
   ${props => props.dark && `

@@ -5,9 +5,10 @@ import logoSmall from "../../assets/logo_small.png";
 export const Container = styled.div<{dark: boolean;}>`
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0.2rem;
+    justify-content: center;
+    padding: 0.14rem;
     z-index: 900;
+    gap: 7vw;
     ${BoxShadow}
     ${props => props.dark && `
       ${BoxShadowDark}

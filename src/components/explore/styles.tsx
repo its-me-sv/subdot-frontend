@@ -14,6 +14,7 @@ export const Container = styled.div<{ dark: boolean }>`
     `
     ${BoxShadowDark}
   `}
+  width: 36vw;
 `;
 
 export const SearchIcon = styled.img.attrs({
@@ -33,7 +34,7 @@ export const Input = styled.input<{ dark: boolean }>`
   text-align: center;
   font-family: Inter;
   font-size: 1.4rem;
-  width: 30vw;
+  width: 36vw;
   background-color: #ffffff;
   color: #222222;
   ${(props) =>
