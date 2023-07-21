@@ -113,3 +113,11 @@ export interface UserAdvertDetails {
     picture: string;
     link: string;
 }
+
+export interface UserAllTimeStats {
+    total_rp: number,
+    e5p: number,
+    p10f: number,
+    ptg: number,
+    ac: number,
+}

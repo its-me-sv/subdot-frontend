@@ -1,4 +1,4 @@
-import {User, ProfileMeta} from "../../utils/types";
+import {User, ProfileMeta, UserAllTimeStats} from "../../utils/types";
 import { DICE_BEAR } from "../../utils/constants";
 
 export const defaultUser: User = {
@@ -13,4 +13,12 @@ export const defaultMeta: ProfileMeta = {
     followers: 0,
     following: 0,
     posts: 0,
+};
+
+export const defaultRPStats: UserAllTimeStats = {
+    total_rp: 0,
+    e5p: 0,
+    p10f: 0,
+    ptg: 0,
+    ac: 0
 };

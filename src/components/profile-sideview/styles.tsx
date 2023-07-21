@@ -5,12 +5,14 @@ export const Container = styled.div<{ dark: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   gap: 1.4rem;
+  max-height: 89vh;
+  overflow-y: auto;
   font-family: Inter;
   border-radius: 0.36rem;
   padding: 0.5rem;
-  margin: 0.42rem;
+  padding-bottom: 0rem;
+  margin: 0.5rem;
   img {
     width: 14vw;
     height: 3vh;
@@ -87,7 +89,6 @@ export const ProfileEditContainer = styled.div<{dark: boolean}>`
   width: 21%;
   position: fixed;
   z-index: 800;
-  right: 1rem;
   input {
     max-width: 60%;
   }

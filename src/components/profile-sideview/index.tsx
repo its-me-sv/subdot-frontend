@@ -16,12 +16,14 @@ import {useAppContext} from "../../contexts/app";
 import {useUserContext} from "../../contexts/user";
 import ProfileEdit from "./edit";
 
-import {User, ProfileMeta} from "../../utils/types";
+import {User, ProfileMeta, UserAllTimeStats} from "../../utils/types";
 import { useSubsocial } from "../../subsocial";
 import { DICE_BEAR, REST_API } from "../../utils/constants";
 import { getImage } from "../../utils/utils";
-import { defaultUser, defaultMeta } from "./data";
+import { defaultUser, defaultMeta, defaultRPStats } from "./data";
 import skeleton from "../../assets/loader.gif";
+import { InfoBox, InfoBoxTitle, InfoContent, InfoItem } from "../reputation/styles";
+import { info } from "../../translations/rp";
 
 interface ProfileSideViewProps {
   accountId: string | undefined;
@@ -33,6 +35,7 @@ const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
   const {account: currAccount, following, followUser, unFollowUser} = useUserContext();
   const {api} = useSubsocial();
   const [userMeta, setUserMeta] = useState<ProfileMeta>(defaultMeta);
+  const [userRPStats, setUserRPStats] = useState<UserAllTimeStats>(defaultRPStats);
   const [reputation, setReputation] = useState<number>(0);
   const [user, setUser] = useState<User>(defaultUser);
   const [editOpen, setEditOpen] = useState<boolean>(false);
@@ -45,6 +48,9 @@ const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
     axios
       .get(`${REST_API}/user/user-rp/${accountId}`)
       .then(({ data }) => setReputation(data));
+    axios
+      .get(`${REST_API}/user/all-time-stats/${accountId}`)
+      .then(({ data }) => setUserRPStats(data));
     setUser(userData);
     const substrateApi = await api.substrateApi;
     const followers = await substrateApi.query.accountFollows.accountFollowers(accountId);
@@ -106,9 +112,11 @@ const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
       <Joined>
         {memSce[language]} {new Date(user.created).toDateString()}
       </Joined>
-      {user.username === "--------" 
-      ? <img src={skeleton} alt="skeleton loading" />
-      : <Status>{user.status}</Status>}
+      {user.username === "--------" ? (
+        <img src={skeleton} alt="skeleton loading" />
+      ) : (
+        <Status>{user.status}</Status>
+      )}
       <Meta>
         <MetaItem dark={dark}>
           <span>{reputation || "--"}</span>
@@ -166,6 +174,31 @@ const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
           </Button>
         </Footer>
       )}
+      <InfoBox dark={dark} frmPrf>
+        <InfoBoxTitle dark={dark}>REPUTATION BREAKDOWN</InfoBoxTitle>
+        <InfoContent>
+          <InfoItem dark={dark}>
+            <span>{info.action[language]}</span>
+            <span>RP</span>
+          </InfoItem>
+          <InfoItem dark={dark}>
+            <span>{info.post[language]}</span>
+            <span>{userRPStats.e5p || "--"}</span>
+          </InfoItem>
+          <InfoItem dark={dark}>
+            <span>{info.followers[language]}</span>
+            <span>{userRPStats.p10f || "--"}</span>
+          </InfoItem>
+          <InfoItem dark={dark}>
+            <span>{info.tip[language]}</span>
+            <span>{userRPStats.ptg || "--"}</span>
+          </InfoItem>
+          <InfoItem dark={dark}>
+            <span>{info.accCrt[language]}</span>
+            <span>{userRPStats.ac || "--"}</span>
+          </InfoItem>
+        </InfoContent>
+      </InfoBox>
     </Container>
   );
 };

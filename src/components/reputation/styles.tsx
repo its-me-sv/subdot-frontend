@@ -15,17 +15,16 @@ export const Container = styled.div<{ dark: boolean }>`
   `}
 `;
 
-export const InfoBox = styled.div<{ dark: boolean }>`
+export const InfoBox = styled.div<{ dark: boolean; frmPrf?: boolean; }>`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 0.42rem;
-  margin: 1rem 0rem;
   border-radius: 0.36rem;
   padding: 1rem;
-  ${BoxShadow}
-  ${(props) => props.dark && `${BoxShadowDark}`}
+  ${(props) => !props.frmPrf && `${BoxShadow}`}
+  ${(props) => (props.dark && !props.frmPrf) && `${BoxShadowDark}`}
 `;
 
 export const InfoBoxTitle = styled.span<{ dark: boolean }>`
