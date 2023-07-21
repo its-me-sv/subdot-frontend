@@ -101,9 +101,11 @@ const Posts: React.FC<PostsProps> = ({
         )}
         {/* </StickyButton> */}
         {userPosts.length === 0 && <span>No posts to show.</span>}
-        {[...userPosts].reverse().map((pId) => (
-          <Post key={pId} postId={pId} />
-        ))}
+        {[...userPosts]
+          .reverse()
+          .map((pId) => (
+            <Post key={pId} postId={pId} />
+          ))}
       </Container>
     );
 };

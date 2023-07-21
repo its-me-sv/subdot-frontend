@@ -46,15 +46,15 @@ const Board: React.FC<BoardProps> = () => {
           <User key={v.accountId} {...v} />
         ))}
         {!over && (
-            <FetchButton>
-                <Button 
-                    bgColor={dark ? "#ffffff" : "#222222"} 
-                    dark={dark}
-                    onClick={fetchData}
-                >
-                {loadMore[language]}
-                </Button>
-            </FetchButton>
+          <FetchButton>
+            <Button
+              bgColor={dark ? "#ffffff" : "#222222"}
+              dark={dark}
+              onClick={fetchData}
+            >
+              {loadMore[language]}
+            </Button>
+          </FetchButton>
         )}
       </BoardContainer>
     );
