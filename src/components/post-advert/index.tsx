@@ -89,8 +89,8 @@ const PostAdvert: React.FC<PostAdvertProps> = () => {
           accountId: account.address,
           picture: data.picture,
           link,
-          expires: endDate,
-          startedAt: startDate,
+          expires: new Date(endDate).toISOString(),
+          startedAt: new Date(startDate).toISOString(),
         });
 
         toast.promise(advertPromise, {
@@ -103,7 +103,7 @@ const PostAdvert: React.FC<PostAdvertProps> = () => {
           .then(({ data }) => {
             const newAdvertData: AdvertInfo = {
               id: data.created_at,
-              crtd: startDate,
+              crtd: new Date(startDate).toISOString(),
               picture: data.picture,
               link: data.link,
               expires: data.expires,
