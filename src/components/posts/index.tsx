@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from "react";
 import toast from "react-hot-toast";
 
-import {Container} from "./styles";
+import {Container, FeedEmptyText} from "./styles";
 import {postFetch} from "../../translations/toast";
 import {Button} from "../../utils/styles";
-import {share} from "../../translations/posts";
+import {feedEmptyTxt, share} from "../../translations/posts";
 import { gqlClient, getFeedQuery } from "../../utils/graphql";
 
 import Post from "./post";
@@ -90,7 +90,9 @@ const Posts: React.FC<PostsProps> = ({
     return (
       <Container dark={dark}>
         {account?.address === accountId && <PostInput />}
-        {userPosts.length === 0 && <span>No posts to show.</span>}
+        {userPosts.length === 0 && (
+          <FeedEmptyText dark={dark}>{feedEmptyTxt[language]}</FeedEmptyText>
+        )}
         {[...userPosts].reverse().map((pId) => (
           <Post key={pId} postId={pId} />
         ))}

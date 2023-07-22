@@ -170,3 +170,20 @@ export const ImageInputContainer = styled.div`
   justify-content: space-between;
   gap: 0.3rem;
 `;
+
+export const FeedEmptyText = styled.span<{ dark: boolean }>`
+  font-family: Inter;
+  width: 36vw;
+  text-align: justify;
+  padding: 0.84rem;
+  padding-bottom: 0.42rem;
+  margin-bottom: 0.42rem;
+  color: #222222;
+  font-size: 1.4rem;
+  opacity: 0.84;
+  ${(props) =>
+    props.dark &&
+    `
+    color: #ffffff;
+  `}
+`;

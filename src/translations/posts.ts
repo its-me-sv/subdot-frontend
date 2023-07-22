@@ -100,3 +100,11 @@ export const copyUrl: Array<string> = [
     "Publicar enlace copiado al portapapeles",
     "Publier le lien copié dans le presse-papiers"
 ];
+
+export const feedEmptyTxt: Array<string> = [
+    "Is your feed empty? Try following the top-reputated users from the RP Board who are active on the platform and make posts often.",
+    "你的饲料是空的吗？尝试关注 RP Board 中活跃于平台并经常发帖的知名用户。",
+    "क्या आपका फ़ीड खाली है? आरपी बोर्ड के शीर्ष-प्रतिष्ठित उपयोगकर्ताओं का अनुसरण करने का प्रयास करें जो प्लेटफ़ॉर्म पर सक्रिय हैं और अक्सर पोस्ट करते हैं।",
+    "¿Tu feed está vacío? Intente seguir a los usuarios de mayor reputación de la Junta RP que están activos en la plataforma y hacen publicaciones con frecuencia.",
+    "Votre flux est-il vide ? Essayez de suivre les utilisateurs les plus réputés du RP Board qui sont actifs sur la plate-forme et publient souvent."
+];
