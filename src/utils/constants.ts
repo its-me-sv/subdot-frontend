@@ -1,5 +1,5 @@
 export const REST_API: string = process.env.NODE_ENV === "development" 
-? "localhost:6000/api"
+? "http://localhost:5001/api"
 : "https://civil-cab-393407.el.r.appspot.com/api";
 
 export const SOCKET: string = REST_API.slice(0, -4);
