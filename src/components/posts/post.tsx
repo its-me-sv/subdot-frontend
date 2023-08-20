@@ -211,19 +211,19 @@ const Post: React.FC<PostProps> = ({postId}) => {
         ) : (
           <>
             <PostHeader>
-              <div onClick={() => navigate(`/profile/${owner.username}`)}>
+              <div onClick={() => navigate(`/profile/${owner?.username}`)}>
                 <img
-                  alt={`pp of ${owner.username}`}
-                  src={getImage(owner.picture)}
+                  alt={`pp of ${owner?.username || ""}`}
+                  src={getImage(owner?.picture || "")}
                 />
                 <PostHeaderRight dark={dark}>
-                  {owner.username === "--------" ? (
+                  {owner?.username === "--------" ? (
                     <img src={skeleton} alt="skeleton loading" />
                   ) : (
-                    <PostUsername>{owner.username}</PostUsername>
+                    <PostUsername>{owner?.username}</PostUsername>
                   )}
-                  <PostTime title={new Date(postMeta.createdAt).toString()}>
-                    {posted[language]} {format(new Date(postMeta.createdAt))}
+                  <PostTime title={new Date(postMeta?.createdAt || Date.now()).toString()}>
+                    {posted[language]} {format(new Date(postMeta?.createdAt || Date.now()))}
                   </PostTime>
                 </PostHeaderRight>
               </div>
@@ -231,9 +231,12 @@ const Post: React.FC<PostProps> = ({postId}) => {
                 {fetching ? "⏱️" : "↺"}
               </FetchButton>
             </PostHeader>
-            <PostContent dark={dark}>{post.description}</PostContent>
-            {post.picture.length > 0 && (
-              <PostImage alt="content" src={getImage(post.picture)} />
+            <PostContent dark={dark}>{
+              post?.description 
+              || post?.summary
+              }</PostContent>
+            {post?.picture?.length > 0 && (
+              <PostImage alt="content" src={getImage(post?.picture)} />
             )}
             <PostFooter>
               <FooterItem dark={dark} title={ftrBtns.like[language]}>
@@ -242,7 +245,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
                   src={likedId === "0" ? likeIcon : likedIcon}
                   onClick={toggleLike}
                 />
-                {postMeta.likes > 0 && <span>{postMeta.likes}</span>}
+                {postMeta?.likes > 0 && <span>{postMeta?.likes}</span>}
               </FooterItem>
               <FooterItem
                 title={ftrBtns.comment[language]}
