@@ -64,6 +64,7 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
             const {presence} = (await axios.get(`${REST_API}/user/account/${address}`))
               .data;
             const profile = await api.base.findProfileSpace(address);
+            console.log(profile);
             if (!presence) {
               setNewAccount!(acc);
               setReputation(1);
