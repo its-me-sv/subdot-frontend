@@ -63,19 +63,17 @@ export const UserContextProvider: React.FC<{children: ReactNode}> = ({children})
         const loginPromise = new Promise(async (resolve, reject) => {
             const {presence} = (await axios.get(`${REST_API}/user/account/${address}`))
               .data;
-            const profile = await api.base.findProfileSpace(address);
-            console.log(profile);
             if (!presence) {
               setNewAccount!(acc);
               setReputation(1);
-              if (profile?.content || profile) {
-                setOverlap!(true);
-              }
               toast.error(accNotFnd[language]);
               return reject();
             }
+            const profile = await api.base.findProfileSpace(address);
             if (!profile?.content) {
-                toast.error(userTrans.loginErr[language]);
+                setNewAccount!(acc);
+                setReputation(1);
+                toast.error(accNotFnd[language]);
                 return reject();
             }
             setSpaceId(+profile.struct.id.toString());
