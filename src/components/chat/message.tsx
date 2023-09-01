@@ -78,12 +78,14 @@ const Message: React.FC<MessageProps> = ({message}) => {
       >
         <span className="msg" >{ipfsMessage.message}</span>
         <div className="footer">
-          <span 
-            className="timing" 
-            title={new Date(message.created_at).toString()}
-          >
-            {format(new Date(message.created_at))}
-          </span>
+          {verified && (
+            <span 
+              className="timing" 
+              title={new Date(message.created_at).toString()}
+            >
+              {format(new Date(message.created_at))}
+            </span>
+          )}
           {!verified && <img 
             src={UnverifiedLogo} 
             title={unverified[language]} 
