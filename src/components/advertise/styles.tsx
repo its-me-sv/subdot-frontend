@@ -18,6 +18,7 @@ export const InputContainer = styled.div`
   align-items: center;
   /* justify-content: space-between; */
   gap: 0.14rem;
+  max-width: 24vw;
   img {
     width: 1rem;
     height: 1rem;
@@ -41,6 +42,7 @@ export const Input = styled.input<{dark: boolean;}>`
   text-align: center;
   border-radius: 0.14rem;
   color: #222222;
+  max-width: 14vw;
   ${BoxShadow}
   ${props => props.dark && `
     color: #ffffff;

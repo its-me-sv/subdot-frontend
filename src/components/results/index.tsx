@@ -11,7 +11,7 @@ import ResultCard from "./card";
 interface ResultsProps {}
 
 const Results: React.FC<ResultsProps> = () => {
-    const {dark, explore} = useAppContext();
+    const {dark, explore, setExplore} = useAppContext();
     const [results, setResults] = useState<Array<ExploreResult>>([]);
 
     useEffect(() => {
@@ -22,7 +22,9 @@ const Results: React.FC<ResultsProps> = () => {
     }, [explore]);
 
     return (
-        <Container dark={dark}>
+        <Container dark={dark} onClick={() => {
+            setExplore!("");
+        }}>
             <ItemsContainer>
                 {results.map(props => 
                     <ResultCard key={props.accountId} {...props} />

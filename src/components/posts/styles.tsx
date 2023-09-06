@@ -109,6 +109,7 @@ export const PostFooter = styled.div`
   align-items: center;
   justify-content: space-between;
   margin: 0.14rem 0;
+  overflow: auto;
 `;
 
 export const FooterItem = styled.div<{dark: boolean;}>`

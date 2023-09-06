@@ -119,19 +119,19 @@ const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
       )}
       <Meta>
         <MetaItem dark={dark}>
-          <span>{reputation || "--"}</span>
+          <span>{reputation || "-"}</span>
           <span>{meta.reputation[language]}</span>
         </MetaItem>
         <MetaItem dark={dark}>
-          <span>{userMeta.posts || "--"}</span>
+          <span>{userMeta.posts || "-"}</span>
           <span>{meta.posts[language]}</span>
         </MetaItem>
         <MetaItem dark={dark}>
-          <span>{userMeta.followers || "--"}</span>
+          <span>{userMeta.followers || "-"}</span>
           <span>{meta.followers[language]}</span>
         </MetaItem>
         <MetaItem dark={dark}>
-          <span>{userMeta.following || "--"}</span>
+          <span>{userMeta.following || "-"}</span>
           <span>{meta.following[language]}</span>
         </MetaItem>
       </Meta>
@@ -183,19 +183,19 @@ const ProfileSideView: React.FC<ProfileSideViewProps> = ({accountId}) => {
           </InfoItem>
           <InfoItem dark={dark}>
             <span>{info.post[language]}</span>
-            <span>{userRPStats.e5p || "--"}</span>
+            <span>{userRPStats.e5p || "-"}</span>
           </InfoItem>
           <InfoItem dark={dark}>
             <span>{info.followers[language]}</span>
-            <span>{userRPStats.p10f || "--"}</span>
+            <span>{userRPStats.p10f || "-"}</span>
           </InfoItem>
           <InfoItem dark={dark}>
             <span>{info.tip[language]}</span>
-            <span>{userRPStats.ptg || "--"}</span>
+            <span>{userRPStats.ptg || "-"}</span>
           </InfoItem>
           <InfoItem dark={dark}>
             <span>{info.accCrt[language]}</span>
-            <span>{userRPStats.ac || "--"}</span>
+            <span>{userRPStats.ac || "-"}</span>
           </InfoItem>
         </InfoContent>
       </InfoBox>

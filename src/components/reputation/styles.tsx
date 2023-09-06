@@ -88,7 +88,7 @@ export const UserContainer = styled.div<{ dark: boolean }>`
   cursor: pointer;
   animation: ${FadeAnim} 1s;
   font-family: Inter;
-  width: 15vw;
+  max-width: 18vw;
   ${BoxShadow}
   ${(props) => props.dark && `${BoxShadowDark}`}
   color: #222222;

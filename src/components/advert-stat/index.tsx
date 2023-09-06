@@ -80,17 +80,17 @@ const AdvertStat: React.FC<AdvertStatProps> = ({advertId}) => {
           <Seperator />
           <StatItem dark={dark}>
             <span>{statsBox.invst[language]}</span>
-            <span>{advertStat.investment || "--"} SOON</span>
+            <span>{advertStat.investment || "-"} SOON</span>
           </StatItem>
           <Seperator />
           <StatItem dark={dark}>
             <span>{statsBox.vws[language]}</span>
-            <span>{advertStat.views || "--"}</span>
+            <span>{advertStat.views || "-"}</span>
           </StatItem>
           <Seperator />
           <StatItem dark={dark}>
             <span>{statsBox.engmnt[language]}</span>
-            <span>{advertStat.engagement || "--"}</span>
+            <span>{advertStat.engagement || "-"}</span>
           </StatItem>
         </StatsContainer>
       </AdvertStatsContainer>

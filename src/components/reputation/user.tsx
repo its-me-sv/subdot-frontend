@@ -44,7 +44,7 @@ const User: React.FC<UserProps> = ({
           <img alt="pp" src={getImage(picture)} />
           <UserHeaderRight>
             <span>{username}</span>
-            <span>{rpStats.total_rp || "--"} RP</span>
+            <span>{reputation || "-"} RP</span>
           </UserHeaderRight>
         </UserHeader>
         <InfoBox dark={dark} frmPrf frmUsr>
@@ -55,19 +55,19 @@ const User: React.FC<UserProps> = ({
             </InfoItem>
             <InfoItem dark={dark}>
               <span>{info.post[language]}</span>
-              <span>{rpStats.e5p || "--"}</span>
+              <span>{rpStats.e5p || "-"}</span>
             </InfoItem>
             <InfoItem dark={dark}>
               <span>{info.followers[language]}</span>
-              <span>{rpStats.p10f || "--"}</span>
+              <span>{rpStats.p10f || "-"}</span>
             </InfoItem>
             <InfoItem dark={dark}>
               <span>{info.tip[language]}</span>
-              <span>{rpStats.ptg || "--"}</span>
+              <span>{rpStats.ptg || "-"}</span>
             </InfoItem>
             <InfoItem dark={dark}>
               <span>{info.accCrt[language]}</span>
-              <span>{rpStats.ac || "--"}</span>
+              <span>{rpStats.ac || "-"}</span>
             </InfoItem>
           </InfoContent>
         </InfoBox>

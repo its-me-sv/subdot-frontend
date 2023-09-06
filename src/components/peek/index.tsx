@@ -85,19 +85,19 @@ const Peek: React.FC<PeekProps> = ({id}) => {
           </Details>
           <MetaDetails>
             <MetaInfo>
-              <Content dark={dark}>{reputation || "--"}</Content>
+              <Content dark={dark}>{reputation || "-"}</Content>
               <Section dark={dark}>RP</Section>
             </MetaInfo>
             <MetaInfo>
-              <Content dark={dark}>{userMeta.followers || "--"}</Content>
+              <Content dark={dark}>{userMeta.followers || "-"}</Content>
               <Section dark={dark}>{meta.followers[language]}</Section>
             </MetaInfo>
             <MetaInfo>
-              <Content dark={dark}>{userMeta.following || "--"}</Content>
+              <Content dark={dark}>{userMeta.following || "-"}</Content>
               <Section dark={dark}>{meta.following[language]}</Section>
             </MetaInfo>
             <MetaInfo>
-              <Content dark={dark}>{userMeta.posts || "--"}</Content>
+              <Content dark={dark}>{userMeta.posts || "-"}</Content>
               <Section dark={dark}>{meta.posts[language]}</Section>
             </MetaInfo>
           </MetaDetails>

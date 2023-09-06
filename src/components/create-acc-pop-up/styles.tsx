@@ -58,7 +58,7 @@ export const Feature = styled.span<{ dark: boolean }>`
     color: #d7d7d7;
     opacity: unset;
   `}
-  width: 30rem;
+  width: 29vw;
   direction: ltr;
 `;
 
